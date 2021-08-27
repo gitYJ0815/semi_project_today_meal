@@ -8,7 +8,6 @@
 </head>
 <body>
 	<h1>hello</h1>
-	<h1>유혜원</h1>
-	<h3>황세빈</h3>
+	<h1>유혜원rhw</h1>
 </body>
 </html>
