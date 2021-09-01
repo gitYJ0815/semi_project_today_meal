@@ -4,9 +4,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Today_meal</title>
+<title>Insert title here</title>
+<link href="<%= request.getContextPath() %>/resources/css/common/reset.css" rel="stylesheet">
 </head>
 <body>
-<jsp:include page="/WEB-INF/views/common/header.jsp" />
+	<h1>hello</h1>
 </body>
 </html>
