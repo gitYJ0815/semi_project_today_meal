@@ -1,0 +1,20 @@
+@charset "UTF-8";
+
+.paging {
+	padding-top : 85px;
+}
+.paging > ul {
+	font-size: 0;
+	max-width: 300px;
+	margin : 0 auto;
+}
+
+.paging > ul > li {
+	display: inline-block;
+	width : 25px;
+	height : 25px;
+	box-sizing: border-box;
+	border:1px solid #c4c4c4;
+	font-size: 14px;
+	text-align: center;
+}
