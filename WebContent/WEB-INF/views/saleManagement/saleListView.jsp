@@ -8,7 +8,7 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
-<div id="container">
+	<div id="container">
 		<nav class="snb">
 			<div class="snb_inner">
 				<h2>관리자 페이지</h2>
