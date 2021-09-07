@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>판매관리</title>
+<link href="<%= request.getContextPath() %>/resources/css/saleManagement/saleListView.css" rel="stylesheet">
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
@@ -95,8 +96,8 @@
 								<option value="29">29</option>
 								<option value="30">30</option>
 							</select>
-							<span>일</span>
-							<span>~</span>
+							<span class="except_margin">일</span>
+							<span class="except_margin">~</span>
 							<select name="endYear" class="year">
 								<option value="2021">2021</option>
 								<option value="2021">2020</option>
@@ -151,7 +152,7 @@
 								<option value="29">29</option>
 								<option value="30">30</option>
 							</select>
-							<span>일</span>
+							<span class="except_margin">일</span>
 						</div>
 						<div>
 							<div>
