@@ -181,13 +181,13 @@
 								<th scope="col">주문상품 목록</th>
 								<th scope="col">결제내역</th>
 								<th scope="col">
-									<select id="order_status">
-										<option value="주문 상태">주문 상태</option>
-										<option value="주문 완료">주문 완료</option>
-										<option value="배송 대기">배송 대기</option>
-										<option value="배송중">배송중</option>
-										<option value="배송 완료">배송 완료</option>
-										<option value="취소/환불">취소/환불</option>
+									<select name="orderStatus">
+										<option value="default" selected>주문 상태</option>
+										<option value="processing">주문 완료</option>
+										<option value="pickup">배송 대기</option>
+										<option value="transit">배송중</option>
+										<option value="delivered">배송 완료</option>
+										<option value="cancelled">취소/환불</option>
 									</select>
 								</th>
 								<th scope="col">상세 보기</th>
@@ -195,264 +195,204 @@
 						</thead>
 						<tbody>
 							<tr>
-								<td>
-									<label for="select_row" class="blind">해당 행 선택하기</label>
-									<input type="checkbox" name="select_row" id="select_row">
-								</td>
+								<td><input type="checkbox" name="select_row" class="active"></td>
 								<td>2021-08-31</td>
-								<td>20210800555</td>
+								<td>2108270099</td>
 								<td>abcdef123456</td>
 								<td>불낙지 3종 세트 외 2건</td>
 								<td>350,000,000</td>
 								<td>주문 완료</td>
-								<td><button type="button">상세보기</button></td>
+								<td><button type="button" class="green_btn learn_more_btn">상세 보기</button></td>
 							</tr>
 							<tr>
-								<td>
-									<label for="select_row" class="blind">해당 행 선택하기</label>
-									<input type="checkbox" name="select_row" id="select_row">
-								</td>
+								<td><input type="checkbox" name="select_row"></td>
 								<td>2021-08-31</td>
-								<td>20210800555</td>
+								<td>2108270099</td>
 								<td>abcdef123456</td>
 								<td>불낙지 3종 세트 외 2건</td>
 								<td>350,000,000</td>
 								<td>주문 완료</td>
-								<td><button type="button">상세보기</button></td>
+								<td><button type="button" class="green_btn learn_more_btn">상세 보기</button></td>
 							</tr>
 							<tr>
-								<td>
-									<label for="select_row" class="blind">해당 행 선택하기</label>
-									<input type="checkbox" name="select_row" id="select_row">
-								</td>
+								<td><input type="checkbox" name="select_row"></td>
 								<td>2021-08-31</td>
-								<td>20210800555</td>
+								<td>2108270099</td>
 								<td>abcdef123456</td>
 								<td>불낙지 3종 세트 외 2건</td>
 								<td>350,000,000</td>
 								<td>주문 완료</td>
-								<td><button type="button">상세보기</button></td>
+								<td><button type="button" class="green_btn learn_more_btn">상세 보기</button></td>
 							</tr>
 							<tr>
-								<td>
-									<label for="select_row" class="blind">해당 행 선택하기</label>
-									<input type="checkbox" name="select_row" id="select_row">
-								</td>
+								<td><input type="checkbox" name="select_row"></td>
 								<td>2021-08-31</td>
-								<td>20210800555</td>
+								<td>2108270099</td>
 								<td>abcdef123456</td>
 								<td>불낙지 3종 세트 외 2건</td>
 								<td>350,000,000</td>
 								<td>주문 완료</td>
-								<td><button type="button">상세보기</button></td>
+								<td><button type="button" class="green_btn learn_more_btn">상세 보기</button></td>
 							</tr>
 							<tr>
-								<td>
-									<label for="select_row" class="blind">해당 행 선택하기</label>
-									<input type="checkbox" name="select_row" id="select_row">
-								</td>
+								<td><input type="checkbox" name="select_row"></td>
 								<td>2021-08-31</td>
-								<td>20210800555</td>
+								<td>2108270099</td>
 								<td>abcdef123456</td>
 								<td>불낙지 3종 세트 외 2건</td>
 								<td>350,000,000</td>
 								<td>주문 완료</td>
-								<td><button type="button">상세보기</button></td>
+								<td><button type="button" class="green_btn learn_more_btn">상세 보기</button></td>
 							</tr>
 							<tr>
-								<td>
-									<label for="select_row" class="blind">해당 행 선택하기</label>
-									<input type="checkbox" name="select_row" id="select_row">
-								</td>
+								<td><input type="checkbox" name="select_row"></td>
 								<td>2021-08-31</td>
-								<td>20210800555</td>
+								<td>2108270099</td>
 								<td>abcdef123456</td>
 								<td>불낙지 3종 세트 외 2건</td>
 								<td>350,000,000</td>
 								<td>주문 완료</td>
-								<td><button type="button">상세보기</button></td>
+								<td><button type="button" class="green_btn learn_more_btn">상세 보기</button></td>
 							</tr>
 							<tr>
-								<td>
-									<label for="select_row" class="blind">해당 행 선택하기</label>
-									<input type="checkbox" name="select_row" id="select_row">
-								</td>
+								<td><input type="checkbox" name="select_row"></td>
 								<td>2021-08-31</td>
-								<td>20210800555</td>
+								<td>2108270099</td>
 								<td>abcdef123456</td>
 								<td>불낙지 3종 세트 외 2건</td>
 								<td>350,000,000</td>
 								<td>주문 완료</td>
-								<td><button type="button">상세보기</button></td>
+								<td><button type="button" class="green_btn learn_more_btn">상세 보기</button></td>
 							</tr>
 							<tr>
-								<td>
-									<label for="select_row" class="blind">해당 행 선택하기</label>
-									<input type="checkbox" name="select_row" id="select_row">
-								</td>
+								<td><input type="checkbox" name="select_row"></td>
 								<td>2021-08-31</td>
-								<td>20210800555</td>
+								<td>2108270099</td>
 								<td>abcdef123456</td>
 								<td>불낙지 3종 세트 외 2건</td>
 								<td>350,000,000</td>
 								<td>주문 완료</td>
-								<td><button type="button">상세보기</button></td>
+								<td><button type="button" class="green_btn learn_more_btn">상세 보기</button></td>
 							</tr>
 							<tr>
-								<td>
-									<label for="select_row" class="blind">해당 행 선택하기</label>
-									<input type="checkbox" name="select_row" id="select_row">
-								</td>
+								<td><input type="checkbox" name="select_row"></td>
 								<td>2021-08-31</td>
-								<td>20210800555</td>
+								<td>2108270099</td>
 								<td>abcdef123456</td>
 								<td>불낙지 3종 세트 외 2건</td>
 								<td>350,000,000</td>
 								<td>주문 완료</td>
-								<td><button type="button">상세보기</button></td>
+								<td><button type="button" class="green_btn learn_more_btn">상세 보기</button></td>
 							</tr>
 							<tr>
-								<td>
-									<label for="select_row" class="blind">해당 행 선택하기</label>
-									<input type="checkbox" name="select_row" id="select_row">
-								</td>
+								<td><input type="checkbox" name="select_row"></td>
 								<td>2021-08-31</td>
-								<td>20210800555</td>
+								<td>2108270099</td>
 								<td>abcdef123456</td>
 								<td>불낙지 3종 세트 외 2건</td>
 								<td>350,000,000</td>
 								<td>주문 완료</td>
-								<td><button type="button">상세보기</button></td>
+								<td><button type="button" class="green_btn learn_more_btn">상세 보기</button></td>
 							</tr>
 							<tr>
-								<td>
-									<label for="select_row" class="blind">해당 행 선택하기</label>
-									<input type="checkbox" name="select_row" id="select_row">
-								</td>
+								<td><input type="checkbox" name="select_row"></td>
 								<td>2021-08-31</td>
-								<td>20210800555</td>
+								<td>2108270099</td>
 								<td>abcdef123456</td>
 								<td>불낙지 3종 세트 외 2건</td>
 								<td>350,000,000</td>
 								<td>주문 완료</td>
-								<td><button type="button">상세보기</button></td>
+								<td><button type="button" class="green_btn learn_more_btn">상세 보기</button></td>
 							</tr>
 							<tr>
-								<td>
-									<label for="select_row" class="blind">해당 행 선택하기</label>
-									<input type="checkbox" name="select_row" id="select_row">
-								</td>
+								<td><input type="checkbox" name="select_row"></td>
 								<td>2021-08-31</td>
-								<td>20210800555</td>
+								<td>2108270099</td>
 								<td>abcdef123456</td>
 								<td>불낙지 3종 세트 외 2건</td>
 								<td>350,000,000</td>
 								<td>주문 완료</td>
-								<td><button type="button">상세보기</button></td>
+								<td><button type="button" class="green_btn learn_more_btn">상세 보기</button></td>
 							</tr>
 							<tr>
-								<td>
-									<label for="select_row" class="blind">해당 행 선택하기</label>
-									<input type="checkbox" name="select_row" id="select_row">
-								</td>
+								<td><input type="checkbox" name="select_row"></td>
 								<td>2021-08-31</td>
-								<td>20210800555</td>
+								<td>2108270099</td>
 								<td>abcdef123456</td>
 								<td>불낙지 3종 세트 외 2건</td>
 								<td>350,000,000</td>
 								<td>주문 완료</td>
-								<td><button type="button">상세보기</button></td>
+								<td><button type="button" class="green_btn learn_more_btn">상세 보기</button></td>
 							</tr>
 							<tr>
-								<td>
-									<label for="select_row" class="blind">해당 행 선택하기</label>
-									<input type="checkbox" name="select_row" id="select_row">
-								</td>
+								<td><input type="checkbox" name="select_row"></td>
 								<td>2021-08-31</td>
-								<td>20210800555</td>
+								<td>2108270099</td>
 								<td>abcdef123456</td>
 								<td>불낙지 3종 세트 외 2건</td>
 								<td>350,000,000</td>
 								<td>주문 완료</td>
-								<td><button type="button">상세보기</button></td>
+								<td><button type="button" class="green_btn learn_more_btn">상세 보기</button></td>
 							</tr>
 							<tr>
-								<td>
-									<label for="select_row" class="blind">해당 행 선택하기</label>
-									<input type="checkbox" name="select_row" id="select_row">
-								</td>
+								<td><input type="checkbox" name="select_row"></td>
 								<td>2021-08-31</td>
-								<td>20210800555</td>
+								<td>2108270099</td>
 								<td>abcdef123456</td>
 								<td>불낙지 3종 세트 외 2건</td>
 								<td>350,000,000</td>
 								<td>주문 완료</td>
-								<td><button type="button">상세보기</button></td>
+								<td><button type="button" class="green_btn learn_more_btn">상세 보기</button></td>
 							</tr>
 							<tr>
-								<td>
-									<label for="select_row" class="blind">해당 행 선택하기</label>
-									<input type="checkbox" name="select_row" id="select_row">
-								</td>
+								<td><input type="checkbox" name="select_row"></td>
 								<td>2021-08-31</td>
-								<td>20210800555</td>
+								<td>2108270099</td>
 								<td>abcdef123456</td>
 								<td>불낙지 3종 세트 외 2건</td>
 								<td>350,000,000</td>
 								<td>주문 완료</td>
-								<td><button type="button">상세보기</button></td>
+								<td><button type="button" class="green_btn learn_more_btn">상세 보기</button></td>
 							</tr>
 							<tr>
-								<td>
-									<label for="select_row" class="blind">해당 행 선택하기</label>
-									<input type="checkbox" name="select_row" id="select_row">
-								</td>
+								<td><input type="checkbox" name="select_row"></td>
 								<td>2021-08-31</td>
-								<td>20210800555</td>
+								<td>2108270099</td>
 								<td>abcdef123456</td>
 								<td>불낙지 3종 세트 외 2건</td>
 								<td>350,000,000</td>
 								<td>주문 완료</td>
-								<td><button type="button">상세보기</button></td>
+								<td><button type="button" class="green_btn learn_more_btn">상세 보기</button></td>
 							</tr>
 							<tr>
-								<td>
-									<label for="select_row" class="blind">해당 행 선택하기</label>
-									<input type="checkbox" name="select_row" id="select_row">
-								</td>
+								<td><input type="checkbox" name="select_row"></td>
 								<td>2021-08-31</td>
-								<td>20210800555</td>
+								<td>2108270099</td>
 								<td>abcdef123456</td>
 								<td>불낙지 3종 세트 외 2건</td>
 								<td>350,000,000</td>
 								<td>주문 완료</td>
-								<td><button type="button">상세보기</button></td>
+								<td><button type="button" class="green_btn learn_more_btn">상세 보기</button></td>
 							</tr>
 							<tr>
-								<td>
-									<label for="select_row" class="blind">해당 행 선택하기</label>
-									<input type="checkbox" name="select_row" id="select_row">
-								</td>
+								<td><input type="checkbox" name="select_row"></td>
 								<td>2021-08-31</td>
-								<td>20210800555</td>
+								<td>2108270099</td>
 								<td>abcdef123456</td>
 								<td>불낙지 3종 세트 외 2건</td>
 								<td>350,000,000</td>
 								<td>주문 완료</td>
-								<td><button type="button">상세보기</button></td>
+								<td><button type="button" class="green_btn learn_more_btn">상세 보기</button></td>
 							</tr>
 							<tr>
-								<td>
-									<label for="select_row" class="blind">해당 행 선택하기</label>
-									<input type="checkbox" name="select_row" id="select_row">
-								</td>
+								<td><input type="checkbox" name="select_row"></td>
 								<td>2021-08-31</td>
-								<td>20210800555</td>
+								<td>2108270099</td>
 								<td>abcdef123456</td>
 								<td>불낙지 3종 세트 외 2건</td>
 								<td>350,000,000</td>
 								<td>주문 완료</td>
-								<td><button type="button">상세보기</button></td>
+								<td><button type="button" class="green_btn learn_more_btn">상세 보기</button></td>
 							</tr>
 						</tbody>
 					</table>
