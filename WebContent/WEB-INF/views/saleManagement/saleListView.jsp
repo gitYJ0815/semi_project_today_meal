@@ -8,10 +8,10 @@
 <link href="<%= request.getContextPath() %>/resources/css/saleManagement/saleListView.css" rel="stylesheet">
 </head>
 <body>
-<jsp:include page="/WEB-INF/views/common/header.jsp" />
+<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div id="container">
 		<nav class="snb">
-			<jsp:include page="/WEB-INF/views/common/adminPage/subMenu.jsp" />
+			<jsp:include page="/WEB-INF/views/common/adminPage/subMenu.jsp"/>
 		</nav>
 		<div class="contents">
 			<div class="contents_inner">
