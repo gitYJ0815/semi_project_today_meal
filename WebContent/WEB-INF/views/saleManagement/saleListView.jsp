@@ -13,24 +13,24 @@
 			<div class="snb_inner">
 				<h2>관리자 페이지</h2>
 				<ul>
-					<li><a href="#"><img alt="판매 관리 아이콘" src="${ contextPath }/resources/images/common/adminPage/menubar/delivery_icon.png" class="menu_icon delevery_management"><span class="depth_1">판매 관리</span></a></li>
-					<li><a href="#"><img alt="매출 관리 아이콘" src="${ contextPath }/resources/images/common/adminPage/menubar/sale_icon.png" class="menu_icon sale_management"><span class="depth_1">매출 관리</span></a></li>
+					<li><a href="#"><span>판매 관리</span></a></li>
+					<li><a href="#"><span>매출 관리</span></a></li>
 					<li>
-						<img alt="상품 관리 아이콘" src="${ contextPath }/resources/images/common/adminPage/menubar/product_icon.png" class="menu_icon product_management"><span class="depth_1">상품 관리</span>
+						<span>상품 관리</span>
 						<ul class="depth_2">
 							<li><a href="#">상품 등록</a></li>
 							<li><a href="#">상품 조회/수정</a></li>
 						</ul>
 					</li>
-					<li><a href="#"><img alt="재고 관리 아이콘" src="${ contextPath }/resources/images/common/adminPage/menubar/inventory_icon.png" class="menu_icon inventory_management"><span class="depth_1">재고 관리</span></a></li>
+					<li><a href="#"><span>재고 관리</span></a></li>
 					<li>
-						<img alt="문의 관리 아이콘" src="${ contextPath }/resources/images/common/adminPage/menubar/question_icon.png" class="menu_icon question_management"><span class="depth_1">문의 관리</span>
+						<span>문의 관리</span>
 						<ul class="depth_2">
 							<li><a href="#">FAQ 관리</a></li>
 							<li><a href="#">1:1 문의 관리</a></li>
 						</ul>
 					</li>
-					<li><a href="#"><img alt="이벤트 게시판 관리" src="${ contextPath }/resources/images/common/adminPage/menubar/event_icon.png" class="menu_icon event_management"><span class="depth_1">이벤트 게시판 관리</span></a></li>
+					<li><a href="#"><span>이벤트 게시판 관리</span></a></li>
 				</ul>
 			</div>
 		</nav>
@@ -167,9 +167,10 @@
 					<button type="button" class="green_btn search_button">검색</button>
 				</form>
 				<div class="result_area">
-					<div class="result_change_status">
-						<input type="checkbox" name="select_all" id="select_all"><label for="select_all">전체 선택</label>
-						<button type="button">주문상태 변경</button>
+					<div class="result_option">
+						<input type="checkbox" name="selectAll" id="selectAll">
+						<label for="selectAll">전체 선택</label>
+						<button type="button" class="green_btn">주문상태 변경</button>
 					</div>
 					<table summary="20개 주문 데이터 노출">
 						<thead>
