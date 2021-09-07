@@ -11,29 +11,7 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<div id="container">
 		<nav class="snb">
-			<div class="snb_inner">
-				<h2>관리자 페이지</h2>
-				<ul>
-					<li><a href="#"><span>판매 관리</span></a></li>
-					<li><a href="#"><span>매출 관리</span></a></li>
-					<li>
-						<span>상품 관리</span>
-						<ul class="depth_2">
-							<li><a href="#">상품 등록</a></li>
-							<li><a href="#">상품 조회/수정</a></li>
-						</ul>
-					</li>
-					<li><a href="#"><span>재고 관리</span></a></li>
-					<li>
-						<span>문의 관리</span>
-						<ul class="depth_2">
-							<li><a href="#">FAQ 관리</a></li>
-							<li><a href="#">1:1 문의 관리</a></li>
-						</ul>
-					</li>
-					<li><a href="#"><span>이벤트 게시판 관리</span></a></li>
-				</ul>
-			</div>
+			<jsp:include page="/WEB-INF/views/common/adminPage/subMenu.jsp" />
 		</nav>
 		<div class="contents">
 			<div class="contents_inner">
