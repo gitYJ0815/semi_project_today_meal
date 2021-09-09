@@ -5,8 +5,7 @@
 }
 .paging > ul {
 	font-size: 0;
-	max-width: 300px;
-	margin : 0 auto;
+	text-align: center;
 }
 
 .paging > ul > li {
