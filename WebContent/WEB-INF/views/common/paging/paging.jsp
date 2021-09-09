@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>페이징 영역</title>
+<link href="<%= request.getContextPath() %>/resources/css/common/paging/paging.css" rel="stylesheet">
 </head>
 <body>
 <ul>
