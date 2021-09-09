@@ -143,15 +143,16 @@
 							</div>
 						</div>
 					</div>
-					<button type="button" class="green_btn search_button">검색</button>
+					<button type="button" class="green_button search_button">검색</button>
 				</form>
 				<div class="result_area">
 					<div class="result_option">
 						<input type="checkbox" name="selectAll" id="selectAll">
 						<label for="selectAll">전체 선택</label>
-						<button type="button" class="green_btn">주문상태 변경</button>
+						<button type="button" class="green_button">주문상태 변경</button>
 					</div>
-					<table summary="20개 주문 데이터 노출">
+					<table>
+						<caption class="blind">주문 데이터</caption>
 						<thead>
 							<tr>
 								<th scope="col">선택</th>
@@ -182,7 +183,7 @@
 								<td>불낙지 3종 세트 외 2건</td>
 								<td>350,000,000</td>
 								<td>주문 완료</td>
-								<td><button type="button" class="green_btn learn_more_btn">상세 보기</button></td>
+								<td><button type="button" class="green_button learn_more_button">상세 보기</button></td>
 							</tr>
 							<tr>
 								<td><input type="checkbox" name="select_row"></td>
@@ -192,7 +193,7 @@
 								<td>불낙지 3종 세트 외 2건</td>
 								<td>350,000,000</td>
 								<td>주문 완료</td>
-								<td><button type="button" class="green_btn learn_more_btn">상세 보기</button></td>
+								<td><button type="button" class="green_button learn_more_button">상세 보기</button></td>
 							</tr>
 							<tr>
 								<td><input type="checkbox" name="select_row"></td>
@@ -202,7 +203,7 @@
 								<td>불낙지 3종 세트 외 2건</td>
 								<td>350,000,000</td>
 								<td>주문 완료</td>
-								<td><button type="button" class="green_btn learn_more_btn">상세 보기</button></td>
+								<td><button type="button" class="green_button learn_more_button">상세 보기</button></td>
 							</tr>
 							<tr>
 								<td><input type="checkbox" name="select_row"></td>
@@ -212,7 +213,7 @@
 								<td>불낙지 3종 세트 외 2건</td>
 								<td>350,000,000</td>
 								<td>주문 완료</td>
-								<td><button type="button" class="green_btn learn_more_btn">상세 보기</button></td>
+								<td><button type="button" class="green_button learn_more_button">상세 보기</button></td>
 							</tr>
 							<tr>
 								<td><input type="checkbox" name="select_row"></td>
@@ -222,7 +223,7 @@
 								<td>불낙지 3종 세트 외 2건</td>
 								<td>350,000,000</td>
 								<td>주문 완료</td>
-								<td><button type="button" class="green_btn learn_more_btn">상세 보기</button></td>
+								<td><button type="button" class="green_button learn_more_button">상세 보기</button></td>
 							</tr>
 							<tr>
 								<td><input type="checkbox" name="select_row"></td>
@@ -232,7 +233,7 @@
 								<td>불낙지 3종 세트 외 2건</td>
 								<td>350,000,000</td>
 								<td>주문 완료</td>
-								<td><button type="button" class="green_btn learn_more_btn">상세 보기</button></td>
+								<td><button type="button" class="green_button learn_more_button">상세 보기</button></td>
 							</tr>
 							<tr>
 								<td><input type="checkbox" name="select_row"></td>
@@ -242,7 +243,7 @@
 								<td>불낙지 3종 세트 외 2건</td>
 								<td>350,000,000</td>
 								<td>주문 완료</td>
-								<td><button type="button" class="green_btn learn_more_btn">상세 보기</button></td>
+								<td><button type="button" class="green_button learn_more_button">상세 보기</button></td>
 							</tr>
 							<tr>
 								<td><input type="checkbox" name="select_row"></td>
@@ -252,7 +253,7 @@
 								<td>불낙지 3종 세트 외 2건</td>
 								<td>350,000,000</td>
 								<td>주문 완료</td>
-								<td><button type="button" class="green_btn learn_more_btn">상세 보기</button></td>
+								<td><button type="button" class="green_button learn_more_button">상세 보기</button></td>
 							</tr>
 							<tr>
 								<td><input type="checkbox" name="select_row"></td>
@@ -262,7 +263,7 @@
 								<td>불낙지 3종 세트 외 2건</td>
 								<td>350,000,000</td>
 								<td>주문 완료</td>
-								<td><button type="button" class="green_btn learn_more_btn">상세 보기</button></td>
+								<td><button type="button" class="green_button learn_more_button">상세 보기</button></td>
 							</tr>
 							<tr>
 								<td><input type="checkbox" name="select_row"></td>
@@ -272,7 +273,7 @@
 								<td>불낙지 3종 세트 외 2건</td>
 								<td>350,000,000</td>
 								<td>주문 완료</td>
-								<td><button type="button" class="green_btn learn_more_btn">상세 보기</button></td>
+								<td><button type="button" class="green_button learn_more_button">상세 보기</button></td>
 							</tr>
 							<tr>
 								<td><input type="checkbox" name="select_row"></td>
@@ -282,7 +283,7 @@
 								<td>불낙지 3종 세트 외 2건</td>
 								<td>350,000,000</td>
 								<td>주문 완료</td>
-								<td><button type="button" class="green_btn learn_more_btn">상세 보기</button></td>
+								<td><button type="button" class="green_button learn_more_button">상세 보기</button></td>
 							</tr>
 							<tr>
 								<td><input type="checkbox" name="select_row"></td>
@@ -292,7 +293,7 @@
 								<td>불낙지 3종 세트 외 2건</td>
 								<td>350,000,000</td>
 								<td>주문 완료</td>
-								<td><button type="button" class="green_btn learn_more_btn">상세 보기</button></td>
+								<td><button type="button" class="green_button learn_more_button">상세 보기</button></td>
 							</tr>
 							<tr>
 								<td><input type="checkbox" name="select_row"></td>
@@ -302,7 +303,7 @@
 								<td>불낙지 3종 세트 외 2건</td>
 								<td>350,000,000</td>
 								<td>주문 완료</td>
-								<td><button type="button" class="green_btn learn_more_btn">상세 보기</button></td>
+								<td><button type="button" class="green_button learn_more_button">상세 보기</button></td>
 							</tr>
 							<tr>
 								<td><input type="checkbox" name="select_row"></td>
@@ -312,7 +313,7 @@
 								<td>불낙지 3종 세트 외 2건</td>
 								<td>350,000,000</td>
 								<td>주문 완료</td>
-								<td><button type="button" class="green_btn learn_more_btn">상세 보기</button></td>
+								<td><button type="button" class="green_button learn_more_button">상세 보기</button></td>
 							</tr>
 							<tr>
 								<td><input type="checkbox" name="select_row"></td>
@@ -322,7 +323,7 @@
 								<td>불낙지 3종 세트 외 2건</td>
 								<td>350,000,000</td>
 								<td>주문 완료</td>
-								<td><button type="button" class="green_btn learn_more_btn">상세 보기</button></td>
+								<td><button type="button" class="green_button learn_more_button">상세 보기</button></td>
 							</tr>
 							<tr>
 								<td><input type="checkbox" name="select_row"></td>
@@ -332,7 +333,7 @@
 								<td>불낙지 3종 세트 외 2건</td>
 								<td>350,000,000</td>
 								<td>주문 완료</td>
-								<td><button type="button" class="green_btn learn_more_btn">상세 보기</button></td>
+								<td><button type="button" class="green_button learn_more_button">상세 보기</button></td>
 							</tr>
 							<tr>
 								<td><input type="checkbox" name="select_row"></td>
@@ -342,7 +343,7 @@
 								<td>불낙지 3종 세트 외 2건</td>
 								<td>350,000,000</td>
 								<td>주문 완료</td>
-								<td><button type="button" class="green_btn learn_more_btn">상세 보기</button></td>
+								<td><button type="button" class="green_button learn_more_button">상세 보기</button></td>
 							</tr>
 							<tr>
 								<td><input type="checkbox" name="select_row"></td>
@@ -352,7 +353,7 @@
 								<td>불낙지 3종 세트 외 2건</td>
 								<td>350,000,000</td>
 								<td>주문 완료</td>
-								<td><button type="button" class="green_btn learn_more_btn">상세 보기</button></td>
+								<td><button type="button" class="green_button learn_more_button">상세 보기</button></td>
 							</tr>
 							<tr>
 								<td><input type="checkbox" name="select_row"></td>
@@ -362,7 +363,7 @@
 								<td>불낙지 3종 세트 외 2건</td>
 								<td>350,000,000</td>
 								<td>주문 완료</td>
-								<td><button type="button" class="green_btn learn_more_btn">상세 보기</button></td>
+								<td><button type="button" class="green_button learn_more_button">상세 보기</button></td>
 							</tr>
 							<tr>
 								<td><input type="checkbox" name="select_row"></td>
