@@ -189,6 +189,14 @@ body.modal_open {
 	text-align: center;
 }
 
+.result_area > table > tbody > tr:last-of-type {
+	border: none;
+}
+
+.result_area > table > tbody {
+	border-bottom: 1px solid #C4C4C4;
+}
+
 .result_area > table > tbody > tr > td:first-of-type {
 	padding-right : 8px;
 }
@@ -197,6 +205,14 @@ body.modal_open {
 	width : 85px;
 	height : 31px;
 	text-align: center;
+}
+
+.result_area.empty_result > table > tbody > tr td{
+	padding : 62px 0; 
+}
+
+.result_area.empty_result .paging {
+	display: none;
 }
 
 .result_area input {
