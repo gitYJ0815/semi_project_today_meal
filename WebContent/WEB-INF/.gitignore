@@ -96,11 +96,7 @@ hs_err_pid*
 *.asp
 *.cer
 *.csr
-*.css
 *.htm
-*.html
-*.js
-*.jsp
 *.php
 *.rss
 *.wasm
@@ -134,4 +130,3 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.toptal.com/developers/gitignore/api/windows,eclipse,java,web
-/classes/
