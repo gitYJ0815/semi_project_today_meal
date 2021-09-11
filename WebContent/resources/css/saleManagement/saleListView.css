@@ -130,6 +130,12 @@ body.modal_open {
 	font-size : 14px;
 }
 
+.result_option button:disabled {
+	opacity: 30%;
+	cursor : not-allowed;
+	pointer-events: none;
+}
+
 .result_area > table {
 	width : 100%;
 }

@@ -147,9 +147,9 @@
 				</form>
 				<div class="result_area empty_result">
 					<div class="result_option">
-						<input type="checkbox" name="selectAll" id="selectAll">
-						<label for="selectAll">전체 선택</label>
-						<button type="button" class="green_button">주문상태 변경</button>
+						<input type="checkbox" name="select_all" id="select_all">
+						<label for="select_all">전체 선택</label>
+						<button type="button" class="green_button" disabled>주문상태 변경</button>
 					</div>
 					<table>
 						<caption class="blind">주문 데이터</caption>
