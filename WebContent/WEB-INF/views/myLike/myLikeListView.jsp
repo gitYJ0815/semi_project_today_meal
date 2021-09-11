@@ -21,8 +21,8 @@
 				<div class="like_list">
 					<div class="list_header">
 						<div>
-							<input type="checkbox" name="selectAll" id="selectAll">
-							<label for="selectAll">전체 선택</label>
+							<input type="checkbox" name="select_all" id="select_all">
+							<label for="select_all">전체 선택</label>
 						</div>
 						<button type="button" class="green_button" disabled>선택 삭제</button>
 					</div>
@@ -39,8 +39,8 @@
 							</div>
 							<div class="button_area">
 								<div>
-									<button type="button" class="green_button" disabled>장바구니</button>
-									<button type="button" class="green_button">삭제하기</button>
+									<button type="button" class="green_button cart" disabled>장바구니</button>
+									<button type="button" class="green_button delete">삭제하기</button>
 								</div>
 							</div>
 						</div>
@@ -51,7 +51,7 @@
 								<h4>오뎅탕 세트</h4>
 								<p>본품 수량 : <span>5</span>개</p>
 								<div class="option_area">
-									<button type="button" class="green_button">옵션 전체 보기</button>
+									<button type="button" class="green_button option">옵션 전체 보기</button>
 									<div class="option_layer">
 										<div>
 											<dl>
@@ -79,8 +79,8 @@
 							</div>
 							<div class="button_area">
 								<div>
-									<button type="button" class="green_button">장바구니</button>
-									<button type="button" class="green_button">삭제하기</button>
+									<button type="button" class="green_button cart">장바구니</button>
+									<button type="button" class="green_button delete">삭제하기</button>
 								</div>
 							</div>
 						</div>
@@ -90,8 +90,8 @@
 							<div class="description_area">
 								<h4>오뎅탕 세트</h4>
 								<p>본품 수량 : <span>5</span>개</p>
-								<div>
-									<button type="button" class="green_button">옵션 전체 보기</button>
+								<div class="option_area">
+									<button type="button" class="green_button option">옵션 전체 보기</button>
 									<div class="option_layer">
 										<div>
 											<dl>
@@ -119,8 +119,8 @@
 							</div>
 							<div class="button_area">
 								<div>
-									<button type="button" class="green_button">장바구니</button>
-									<button type="button" class="green_button">삭제하기</button>
+									<button type="button" class="green_button cart">장바구니</button>
+									<button type="button" class="green_button delete">삭제하기</button>
 								</div>
 							</div>
 						</div>
@@ -130,8 +130,8 @@
 							<div class="description_area">
 								<h4>오뎅탕 세트</h4>
 								<p>본품 수량 : <span>5</span>개</p>
-								<div>
-									<button type="button" class="green_button">옵션 전체 보기</button>
+								<div class="option_area">
+									<button type="button" class="green_button option">옵션 전체 보기</button>
 									<div class="option_layer">
 										<div>
 											<dl>
@@ -159,8 +159,8 @@
 							</div>
 							<div class="button_area">
 								<div>
-									<button type="button" class="green_button">장바구니</button>
-									<button type="button" class="green_button">삭제하기</button>
+									<button type="button" class="green_button cart">장바구니</button>
+									<button type="button" class="green_button delete">삭제하기</button>
 								</div>
 							</div>
 						</div>
@@ -170,8 +170,8 @@
 							<div class="description_area">
 								<h4>오뎅탕 세트</h4>
 								<p>본품 수량 : <span>5</span>개</p>
-								<div>
-									<button type="button" class="green_button">옵션 전체 보기</button>
+								<div class="option_area">
+									<button type="button" class="green_button option">옵션 전체 보기</button>
 									<div class="option_layer">
 										<div>
 											<dl>
@@ -199,8 +199,8 @@
 							</div>
 							<div class="button_area">
 								<div>
-									<button type="button" class="green_button">장바구니</button>
-									<button type="button" class="green_button">삭제하기</button>
+									<button type="button" class="green_button cart">장바구니</button>
+									<button type="button" class="green_button delete">삭제하기</button>
 								</div>
 							</div>
 						</div>
@@ -210,8 +210,8 @@
 							<div class="description_area">
 								<h4>오뎅탕 세트</h4>
 								<p>본품 수량 : <span>5</span>개</p>
-								<div>
-									<button type="button" class="green_button">옵션 전체 보기</button>
+								<div class="option_area">
+									<button type="button" class="green_button option">옵션 전체 보기</button>
 									<div class="option_layer">
 										<div>
 											<dl>
@@ -239,8 +239,8 @@
 							</div>
 							<div class="button_area">
 								<div>
-									<button type="button" class="green_button">장바구니</button>
-									<button type="button" class="green_button">삭제하기</button>
+									<button type="button" class="green_button cart">장바구니</button>
+									<button type="button" class="green_button delete">삭제하기</button>
 								</div>
 							</div>
 						</div>
@@ -250,8 +250,8 @@
 							<div class="description_area">
 								<h4>오뎅탕 세트</h4>
 								<p>본품 수량 : <span>5</span>개</p>
-								<div>
-									<button type="button" class="green_button">옵션 전체 보기</button>
+								<div class="option_area">
+									<button type="button" class="green_button option">옵션 전체 보기</button>
 									<div class="option_layer">
 										<div>
 											<dl>
@@ -279,8 +279,8 @@
 							</div>
 							<div class="button_area">
 								<div>
-									<button type="button" class="green_button">장바구니</button>
-									<button type="button" class="green_button">삭제하기</button>
+									<button type="button" class="green_button cart">장바구니</button>
+									<button type="button" class="green_button delete">삭제하기</button>
 								</div>
 							</div>
 						</div>
@@ -290,8 +290,8 @@
 							<div class="description_area">
 								<h4>오뎅탕 세트</h4>
 								<p>본품 수량 : <span>5</span>개</p>
-								<div>
-									<button type="button" class="green_button">옵션 전체 보기</button>
+								<div class="option_area">
+									<button type="button" class="green_button option">옵션 전체 보기</button>
 									<div class="option_layer">
 										<div>
 											<dl>
@@ -319,8 +319,8 @@
 							</div>
 							<div class="button_area">
 								<div>
-									<button type="button" class="green_button">장바구니</button>
-									<button type="button" class="green_button">삭제하기</button>
+									<button type="button" class="green_button cart">장바구니</button>
+									<button type="button" class="green_button delete">삭제하기</button>
 								</div>
 							</div>
 						</div>
@@ -330,8 +330,8 @@
 							<div class="description_area">
 								<h4>오뎅탕 세트</h4>
 								<p>본품 수량 : <span>5</span>개</p>
-								<div>
-									<button type="button" class="green_button">옵션 전체 보기</button>
+								<div class="option_area">
+									<button type="button" class="green_button option">옵션 전체 보기</button>
 									<div class="option_layer">
 										<div>
 											<dl>
@@ -359,8 +359,8 @@
 							</div>
 							<div class="button_area">
 								<div>
-									<button type="button" class="green_button">장바구니</button>
-									<button type="button" class="green_button">삭제하기</button>
+									<button type="button" class="green_button cart">장바구니</button>
+									<button type="button" class="green_button delete">삭제하기</button>
 								</div>
 							</div>
 						</div>
@@ -370,8 +370,8 @@
 							<div class="description_area">
 								<h4>오뎅탕 세트</h4>
 								<p>본품 수량 : <span>5</span>개</p>
-								<div>
-									<button type="button" class="green_button">옵션 전체 보기</button>
+								<div class="option_area">
+									<button type="button" class="green_button option">옵션 전체 보기</button>
 									<div class="option_layer">
 										<div>
 											<dl>
@@ -395,12 +395,12 @@
 								</div>
 							</div>
 							<div class="price_area">
-								<p>25,000원</p>
+								<p>1,112,252,000원</p>
 							</div>
 							<div class="button_area">
 								<div>
-									<button type="button" class="green_button">장바구니</button>
-									<button type="button" class="green_button">삭제하기</button>
+									<button type="button" class="green_button cart">장바구니</button>
+									<button type="button" class="green_button delete">삭제하기</button>
 								</div>
 							</div>
 						</div>
@@ -414,11 +414,20 @@
 		<div class="dimmed">
 			<div id ="modal">
 				<div class="modal_inner">
-					
+					<div class="text_area">
+						<h3 class="cart">장바구니에 담으시겠습니까?</h3>
+						<h3 class="delete">해당 목록을 삭제하시겠습니까?</h3>
+						<h3 class="delete_all">선택된 목록을 삭제하시겠습니까?</h3>
+					</div>
+					<div class="button_area">
+						<button type="button" class="green_button">취소</button>
+						<button type="button" class="confirm_button">확인</button>
+					</div>
 				</div>
 				<button type="button" class="close_button"></button>
 			</div>
 		</div>
 	</div>
+	<script src="${ contextPath }/resources/js/myLike/myLike.js"></script>
 </body>
 </html>
