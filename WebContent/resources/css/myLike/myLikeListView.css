@@ -296,25 +296,13 @@ body.modal_open {
 	background: url(../../images/common/close_button/close_button.png);
 }
 
-#modal .text_area {
+#modal h3 {
 	margin: 62px 0 30px;
 	text-align: center;
 }
 
-#modal .text_area h3 {
+#modal > .modal_inner > div {
 	display: none;
-}
-
-#modal.cart .text_area .cart {
-	display: block;
-}
-
-#modal.delete .text_area .delete {
-	display: block;
-}
-
-#modal.delete_all .text_area .delete_all {
-	display: block;
 }
 
 #modal > .modal_inner .button_area {
@@ -334,4 +322,16 @@ body.modal_open {
 
 #modal > .modal_inner .button_area .confirm_button {
 	background-color: #294401;
+}
+
+#modal.cart .cart_inner {
+	display: block;
+}
+
+#modal.delete .delete_inner {
+	display: block;
+}
+
+#modal.delete_all .delete_all_inner {
+	display: block;
 }

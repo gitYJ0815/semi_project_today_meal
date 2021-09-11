@@ -38,14 +38,26 @@
 		<div class="dimmed">
 			<div id ="modal">
 				<div class="modal_inner">
-					<div class="text_area">
-						<h3 class="cart">장바구니에 담으시겠습니까?</h3>
-						<h3 class="delete">해당 목록을 삭제하시겠습니까?</h3>
-						<h3 class="delete_all">선택된 목록을 삭제하시겠습니까?</h3>
+					<div class="delete_all_inner">
+						<h3>선택된 목록을 삭제하시겠습니까?</h3>
+						<div class="button_area">
+							<button type="button" class="green_button">취소</button>
+							<button type="button" class="confirm_button">삭제</button>
+						</div>
 					</div>
-					<div class="button_area">
-						<button type="button" class="green_button">취소</button>
-						<button type="button" class="confirm_button">확인</button>
+					<div class="delete_inner">
+						<h3>해당 목록을 삭제하시겠습니까?</h3>
+						<div class="button_area">
+							<button type="button" class="green_button">취소</button>
+							<button type="button" class="confirm_button">삭제</button>
+						</div>
+					</div>
+					<div class="cart_inner">
+						<h3>장바구니에 담으시겠습니까?</h3>
+						<div class="button_area">
+							<button type="button" class="green_button">취소</button>
+							<button type="button" class="confirm_button">바로구매</button>
+						</div>
 					</div>
 				</div>
 				<button type="button" class="close_button"></button>
