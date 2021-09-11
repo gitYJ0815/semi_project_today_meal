@@ -85,7 +85,6 @@ body.modal_open {
 	justify-content: space-between;
 	padding: 3px 0 11px;
 	box-sizing: border-box;
-	border-bottom: 1px solid black;
 }
 
 .like_list > .list_header label {
@@ -99,6 +98,12 @@ body.modal_open {
 	line-height: 31px;
 }
 
+.like_list > .list_body {
+	box-sizing: border-box;
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+}
+
 .like_list > .list_body > .item {
 	width: 100%;
 	height: 155px;
@@ -108,6 +113,9 @@ body.modal_open {
 	display: flex;
 	flex-wrap : nowrap;
 	border-bottom: 1px solid #EBEBEB;
+}
+.like_list > .list_body > .item:last-of-type {
+	border-bottom: none;
 }
 
 .like_list > .list_body > .item  > div {
@@ -236,6 +244,22 @@ body.modal_open {
 
 .like_list > .list_body > .item > .button_area  button:last-of-type {
 	margin-bottom: 0;
+}
+
+.like_list.empty_result > .list_header > div {
+	opacity: 30%;
+}
+
+.like_list.empty_result > .list_body {
+	width : 100%;
+	height : 221px;
+	text-align: center;
+	font-size: 16px;
+	line-height: 221px;
+}
+
+.like_list.empty_result > .paging {
+	display: none;
 }
 
 .dimmed {
