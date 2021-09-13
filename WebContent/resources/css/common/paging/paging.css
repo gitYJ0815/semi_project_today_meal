@@ -1,0 +1,24 @@
+@charset "UTF-8";
+
+a {
+	text-decoration: none;
+	color: #000;
+}
+
+.paging {
+	padding-top : 85px;
+}
+.paging > ul {
+	font-size: 0;
+	text-align: center;
+}
+
+.paging > ul > li {
+	display: inline-block;
+	width : 25px;
+	height : 25px;
+	box-sizing: border-box;
+	border:1px solid #c4c4c4;
+	font-size: 14px;
+	text-align: center;
+}
