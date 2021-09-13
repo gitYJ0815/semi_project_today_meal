@@ -74,10 +74,7 @@
 				<ul class="result_list">
 					<li class="card">
 						<div class="like_area">
-							<button class="active">
-								<img src="${ contextPath }/resources/images/totalReview/like_icon.png" alt="좋아요 버튼">
-								<img src="${ contextPath }/resources/images/totalReview/like_icon_active.png" alt="좋아요 해제 버튼">
-							</button>
+							<button class="active">좋아요 해제 버튼</button>
 						</div>
 						<div class="image_area">
 							<img src="https://via.placeholder.com/220" alt="리뷰 대표 이미지">
@@ -116,12 +113,10 @@
 							<button type="button" class="green_button buy_button">이 구성 구매하기</button>
 						</div>
 					</li>
+					
 					<li class="card">
 						<div class="like_area">
-							<button>
-								<img src="${ contextPath }/resources/images/totalReview/like_icon.png" alt="좋아요 버튼">
-								<img src="${ contextPath }/resources/images/totalReview/like_icon_active.png" alt="좋아요 해제 버튼">
-							</button>
+							<button>좋아요 버튼</button>
 						</div>
 						<div class="image_area">
 							<img src="https://via.placeholder.com/220" alt="리뷰 대표 이미지">
@@ -160,10 +155,7 @@
 					</li>
 					<li class="card">
 						<div class="like_area">
-							<button>
-								<img src="${ contextPath }/resources/images/totalReview/like_icon.png" alt="좋아요 버튼">
-								<img src="${ contextPath }/resources/images/totalReview/like_icon_active.png" alt="좋아요 해제 버튼">
-							</button>
+							<button>좋아요 버튼</button>
 						</div>
 						<div class="image_area">
 							<img src="https://via.placeholder.com/220" alt="리뷰 대표 이미지">
@@ -204,10 +196,7 @@
 					</li>
 					<li class="card">
 						<div class="like_area">
-							<button>
-								<img src="${ contextPath }/resources/images/totalReview/like_icon.png" alt="좋아요 버튼">
-								<img src="${ contextPath }/resources/images/totalReview/like_icon_active.png" alt="좋아요 해제 버튼">
-							</button>
+							<button>좋아요 버튼</button>
 						</div>
 						<div class="image_area">
 							<img src="https://via.placeholder.com/220" alt="리뷰 대표 이미지">
@@ -248,10 +237,7 @@
 					</li>
 					<li class="card">
 						<div class="like_area">
-							<button>
-								<img src="${ contextPath }/resources/images/totalReview/like_icon.png" alt="좋아요 버튼">
-								<img src="${ contextPath }/resources/images/totalReview/like_icon_active.png" alt="좋아요 해제 버튼">
-							</button>
+							<button>좋아요 버튼</button>
 						</div>
 						<div class="image_area">
 							<img src="https://via.placeholder.com/220" alt="리뷰 대표 이미지">
@@ -290,10 +276,7 @@
 					</li>
 					<li class="card">
 						<div class="like_area">
-							<button>
-								<img src="${ contextPath }/resources/images/totalReview/like_icon.png" alt="좋아요 버튼">
-								<img src="${ contextPath }/resources/images/totalReview/like_icon_active.png" alt="좋아요 해제 버튼">
-							</button>
+							<button>좋아요 버튼</button>
 						</div>
 						<div class="image_area">
 							<img src="https://via.placeholder.com/220" alt="리뷰 대표 이미지">
@@ -334,10 +317,7 @@
 					</li>
 					<li class="card">
 						<div class="like_area">
-							<button>
-								<img src="${ contextPath }/resources/images/totalReview/like_icon.png" alt="좋아요 버튼">
-								<img src="${ contextPath }/resources/images/totalReview/like_icon_active.png" alt="좋아요 해제 버튼">
-							</button>
+							<button>좋아요 버튼</button>
 						</div>
 						<div class="image_area">
 							<img src="https://via.placeholder.com/220" alt="리뷰 대표 이미지">
@@ -378,10 +358,7 @@
 					</li>
 					<li class="card">
 						<div class="like_area">
-							<button>
-								<img src="${ contextPath }/resources/images/totalReview/like_icon.png" alt="좋아요 버튼">
-								<img src="${ contextPath }/resources/images/totalReview/like_icon_active.png" alt="좋아요 해제 버튼">
-							</button>
+							<button>좋아요 버튼</button>
 						</div>
 						<div class="image_area">
 							<img src="https://via.placeholder.com/220" alt="리뷰 대표 이미지">
@@ -422,10 +399,7 @@
 					</li>
 					<li class="card">
 						<div class="like_area">
-							<button>
-								<img src="${ contextPath }/resources/images/totalReview/like_icon.png" alt="좋아요 버튼">
-								<img src="${ contextPath }/resources/images/totalReview/like_icon_active.png" alt="좋아요 해제 버튼">
-							</button>
+							<button>좋아요 버튼</button>
 						</div>
 						<div class="image_area">
 							<img src="https://via.placeholder.com/220" alt="리뷰 대표 이미지">

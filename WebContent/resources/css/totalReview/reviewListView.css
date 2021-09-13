@@ -170,29 +170,19 @@ body.modal_open {
 
 .result_area > .result > .result_list > .card .like_area {
 	text-align: right;
-	margin-bottom: 16px;
+	margin-bottom: 14px;
 }
 
 .result_area > .result > .result_list > .card .like_area button {
 	display: inline-block;
-	width : 20px;
-	height : 18px;
+	width : 22px;
+	height : 20px;
+	text-indent: -9999px;
+	background: url(../../images/totalReview/like_icon.png) no-repeat center center;
 }
 
-.result_area > .result > .result_list > .card .like_area button img:first-of-type {
-	display: block;
-}
-
-.result_area > .result > .result_list > .card .like_area button img:last-of-type {
-	display: none;
-}
-
-.result_area > .result > .result_list > .card .like_area button.active img:first-of-type {
-	display: none;
-}
-
-.result_area > .result > .result_list > .card .like_area button.active img:last-of-type {
-	display: block;
+.result_area > .result > .result_list > .card .like_area button.active {
+	background-image: url(../../images/totalReview/like_icon_active.png);
 }
 
 .result_area > .result > .result_list > .card .info_area {
