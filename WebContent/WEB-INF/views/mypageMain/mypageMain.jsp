@@ -13,7 +13,7 @@
 <div class="myPageFrame">
         <div class="myPageWrapper">
             <div class="mpTitle">
-                <span><h2 class="mpH2 welcomeName">   님 반갑습니다.</h2></span>
+                <span><h2 class="mpH2 welcomeName">아무개님 반갑습니다.</h2></span>
                 <span><h2 class="mpH2 welcomeCoin">적립금 : 0원</h2></span>
             </div>
             <div class="mpContent">
