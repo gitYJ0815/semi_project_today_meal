@@ -20,6 +20,6 @@
 <body>
 	<div class="fixed-area">
         <a href="#top"><img src="../resources/images/btn_forward.png" alt="top" width="40px" height="40px"></a>
-     </div>
+    </div>
 </body>
 </html>
