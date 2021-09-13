@@ -27,7 +27,7 @@
 				</div>
 			</div>
 		</div>
-				<div class="result_area">
+<div class="result_area">
 			<div class="filter">
 				<div class="filter_inner">
 					<h2 class="blind">리뷰 검색</h2>
@@ -74,7 +74,7 @@
 				<ul class="result_list">
 					<li class="card">
 						<div class="like_area">
-							<button class="active">좋아요 해제 버튼</button>
+							<button>좋아요 버튼</button>
 						</div>
 						<div class="image_area">
 							<img src="https://via.placeholder.com/220" alt="리뷰 대표 이미지">
@@ -109,7 +109,7 @@
 							</div>
 						</div>
 						<div class="button_area">
-							<button type="button detail_button">자세히 보기</button>
+							<button type="button" class="detail_button">자세히 보기</button>
 							<button type="button" class="green_button buy_button">이 구성 구매하기</button>
 						</div>
 					</li>
@@ -149,7 +149,7 @@
 							</div>
 						</div>
 						<div class="button_area">
-							<button type="button detail_button">자세히 보기</button>
+							<button type="button" class="detail_button">자세히 보기</button>
 							<button type="button" class="green_button buy_button" disabled>이 구성 구매하기</button>
 						</div>
 					</li>
@@ -190,7 +190,7 @@
 							</div>
 						</div>
 						<div class="button_area">
-							<button type="button detail_button">자세히 보기</button>
+							<button type="button" class="detail_button">자세히 보기</button>
 							<button type="button" class="green_button buy_button">이 구성 구매하기</button>
 						</div>
 					</li>
@@ -231,7 +231,7 @@
 							</div>
 						</div>
 						<div class="button_area">
-							<button type="button detail_button">자세히 보기</button>
+							<button type="button" class="detail_button">자세히 보기</button>
 							<button type="button" class="green_button buy_button">이 구성 구매하기</button>
 						</div>
 					</li>
@@ -270,7 +270,7 @@
 							</div>
 						</div>
 						<div class="button_area">
-							<button type="button detail_button">자세히 보기</button>
+							<button type="button" class="detail_button">자세히 보기</button>
 							<button type="button" class="green_button buy_button" disabled>이 구성 구매하기</button>
 						</div>
 					</li>
@@ -311,7 +311,7 @@
 							</div>
 						</div>
 						<div class="button_area">
-							<button type="button detail_button">자세히 보기</button>
+							<button type="button" class="detail_button">자세히 보기</button>
 							<button type="button" class="green_button buy_button">이 구성 구매하기</button>
 						</div>
 					</li>
@@ -352,7 +352,7 @@
 							</div>
 						</div>
 						<div class="button_area">
-							<button type="button detail_button">자세히 보기</button>
+							<button type="button" class="detail_button">자세히 보기</button>
 							<button type="button" class="green_button buy_button">이 구성 구매하기</button>
 						</div>
 					</li>
@@ -393,7 +393,7 @@
 							</div>
 						</div>
 						<div class="button_area">
-							<button type="button detail_button">자세히 보기</button>
+							<button type="button" class="detail_button">자세히 보기</button>
 							<button type="button" class="green_button buy_button">이 구성 구매하기</button>
 						</div>
 					</li>
@@ -434,7 +434,7 @@
 							</div>
 						</div>
 						<div class="button_area">
-							<button type="button detail_button">자세히 보기</button>
+							<button type="button" class="detail_button">자세히 보기</button>
 							<button type="button" class="green_button buy_button">이 구성 구매하기</button>
 						</div>
 					</li>
