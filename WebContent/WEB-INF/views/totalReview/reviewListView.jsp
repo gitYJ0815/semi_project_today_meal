@@ -27,44 +27,44 @@
 				</div>
 			</div>
 		</div>
-		<div class="result_area">
+				<div class="result_area">
 			<div class="filter">
 				<div class="filter_inner">
 					<h2 class="blind">리뷰 검색</h2>
 					<div>
-						<input type="text" placeholder="상품명, 내용">
+						<input type="text" placeholder="상품명, 내용" class="search_input">
 						<button type="button">검색</button>
 					</div>
 					<div>
 						<h3>카테고리</h3>
-						<ul>
+						<ul class="category">
 							<li>
-								<input type="checkbox" name="" id="" class="active">
+								<input type="checkbox" name="korean_food" id="korean_food">
 								<label for="korean_food">한식<span></span></label>
 							</li>
 							<li>
-								<input type="checkbox" name="" id="">
-								<label for="korean_food">양식<span></span></label>
+								<input type="checkbox" name="american_food" id="american_food">
+								<label for="american_food">양식<span></span></label>
 							</li>
 							<li>
-								<input type="checkbox" name="" id="">
-								<label for="">중식<span></span></label>
+								<input type="checkbox" name="chinese_food" id="chinese_food">
+								<label for="chinese_food">중식<span></span></label>
 							</li>
 							<li>
-								<input type="checkbox" name="" id="">
-								<label for="">일식<span></span></label>
+								<input type="checkbox" name="japanese_food" id="japanese_food">
+								<label for="japanese_food">일식<span></span></label>
 							</li>
 							<li>
-								<input type="checkbox" name="" id="">
-								<label for="">분식<span></span></label>
+								<input type="checkbox" name="snack" id="snack">
+								<label for="snack">분식<span></span></label>
 							</li>
 							<li>
-								<input type="checkbox" name="" id="">
-								<label for="">야식<span></span></label>
+								<input type="checkbox" name="midnight_snack" id="midnight_snack">
+								<label for="midnight_snack">야식<span></span></label>
 							</li>
 							<li>
-								<input type="checkbox" name="" id="">
-								<label for="">샐러드<span></span></label>
+								<input type="checkbox" name="salad" id="salad">
+								<label for="salad">샐러드<span></span></label>
 							</li>
 						</ul>
 					</div>
