@@ -30,7 +30,7 @@
 						<p>좋아요한 리뷰가 없습니다.</p>
 					</div>
 					<div class="paging">
-						<%-- <jsp:include page="/WEB-INF/views/common/paging/paging.jsp"/> --%>
+						<jsp:include page="/WEB-INF/views/common/paging/paging.jsp"/>
 					</div>
 				</div>
 			</div>
