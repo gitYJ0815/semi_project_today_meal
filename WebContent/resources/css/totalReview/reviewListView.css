@@ -310,31 +310,38 @@ body.modal_open {
 
 #modal {
 	position: absolute;
+	background-color: white;
+}
+
+#modal > .modal_inner > div {
+	display: none;
+}
+
+#modal.detail_review {
 	top : calc(50% - 301px);
 	left : calc(50% - 460px);
 	width : 920px;
 	height : 602px;
-	background-color: white;
 }
 
-#modal > .modal_inner {
+#modal.detail_review > .modal_inner > .detail_review_inner {
 	height : 100%;
 	display: flex;
 	flex-wrap: nowrap;
 	justify-content: space-between;
 }
 
-#modal > .modal_inner > .image_area {
+#modal > .modal_inner > .detail_review_inner > .image_area {
 	width : 540px;
 	background: #F7F7F7;
 }
 
-#modal > .modal_inner > .image_area img {
+#modal > .modal_inner > .detail_review_inner > .image_area img {
 	display: block;
 	margin : 87px auto;
 }
 
-#modal > .modal_inner > .info_area {
+#modal > .modal_inner > .detail_review_inner > .info_area {
 	width : 380px;
 	box-sizing: border-box;
 	padding-left: 25px;
@@ -342,25 +349,25 @@ body.modal_open {
 	margin-top: 62px;
 }
 
-#modal > .modal_inner > .info_area .star_info {
+#modal > .modal_inner > .detail_review_inner > .info_area .star_info {
 	position: relative;
 }
 
-#modal > .modal_inner > .info_area .star_info .star_base {
+#modal > .modal_inner > .detail_review_inner > .info_area .star_info .star_base {
 	width : 142px;
 	display: flex;
 	flex-wrap: nowrap;
 	justify-content: space-between;
 }
 
-#modal > .modal_inner > .info_area .star_info .star_base .star { 
+#modal > .modal_inner > .detail_review_inner > .info_area .star_info .star_base .star { 
 	display: block;
 	width : 24px;
 	height : 23px;
 	background: url(../../images/totalReview/star_empty.png) no-repeat 0 0;
 }
 
-#modal > .modal_inner > .info_area .star_info .star_rating_warpper {
+#modal > .modal_inner > .detail_review_inner > .info_area .star_info .star_rating_warpper {
 	position: absolute;
 	top : 0;
 	left : 0;
@@ -368,22 +375,22 @@ body.modal_open {
 	overflow: hidden;
 }
 
-#modal > .modal_inner > .info_area .star_info .star_rating {
+#modal > .modal_inner > .detail_review_inner > .info_area .star_info .star_rating {
 	width : 142px;
 	display: flex;
 	flex-wrap: nowrap;
 	justify-content: space-between;
 }
 
-#modal > .modal_inner > .info_area .star_info .star_rating .star {
+#modal > .modal_inner > .detail_review_inner > .info_area .star_info .star_rating .star {
 	display: block;
 	width : 24px;
 	height : 23px;
 	background: url(../../images/totalReview/star_full.png) no-repeat 0 0;
 }
 
-#modal > .modal_inner > .info_area > .write_info {
-	margin : 5px 0 32px;
+#modal > .modal_inner > .detail_review_inner > .info_area > .write_info {
+	margin : 5px 0 28px;
 	width : 126px;
 	display: flex;
 	flex-wrap: nowrap;
@@ -392,33 +399,33 @@ body.modal_open {
 	color : #999;
 }
 
-#modal > .modal_inner > .info_area > .menu_info {
+#modal > .modal_inner > .detail_review_inner > .info_area > .menu_info {
 	position: relative;
 }
 
-#modal > .modal_inner > .info_area > .menu_info h4 {
-	font-size: 16px;
+#modal > .modal_inner > .detail_review_inner > .info_area > .menu_info h4 {
+	font-weight: bold;
+	font-size: 18px;
 	margin-bottom: 8px;
 }
 
-#modal > .modal_inner > .info_area > .menu_info button {
+#modal > .modal_inner > .detail_review_inner > .info_area > .menu_info button {
 	width : 120px;
 	height : 25px;
-	margin-top : 3px;
 	font-size: 14px;
 	text-align: left;
 	text-indent: 6px;
-	background-image: url(../../images/myLike/downArrow.png);
+	background-image: url(../../images/totalReview/downArrow.png);
 	background-repeat: no-repeat;
 	background-position-x: 102px;
 	background-position-y: center;
 }
 
-#modal > .modal_inner > .info_area > .menu_info .option_area.layer_open button {
-	background-image: url(../../images/myLike/upArrow.png);
+#modal > .modal_inner > .detail_review_inner > .info_area > .menu_info .option_area.layer_open button {
+	background-image: url(../../images/totalReview/upArrow.png);
 }
 
-#modal > .modal_inner > .info_area > .menu_info .option_area .option_layer {
+#modal > .modal_inner > .detail_review_inner > .info_area > .menu_info .option_area .option_layer {
 	display: none;
 	width : 278px;
 	height : 114px;
@@ -430,11 +437,37 @@ body.modal_open {
 	overflow: hidden;
 }
 
-#modal > .modal_inner > .info_area > .menu_info .option_area.layer_oepn .option_layer {
+#modal > .modal_inner > .detail_review_inner > .info_area > .menu_info > .option_area.layer_open > .option_layer {
 	display: block;
 }
 
-#modal > .modal_inner > .info_area > .text_review {
+#modal > .modal_inner > .detail_review_inner > .info_area > .menu_info .option_area .option_layer div {
+	margin: 10px auto;
+	width : 258px;
+	height : 94px;
+	font-size: 12px;
+	overflow-y: auto;
+}
+
+#modal > .modal_inner > .detail_review_inner > .info_area > .menu_info .option_area .option_layer div > dl {
+	display: flex;
+	margin-bottom: 10px;
+}
+
+#modal > .modal_inner > .detail_review_inner > .info_area > .menu_info .option_area .option_layer div > dl:last-of-type {
+	margin-bottom: 0;
+}
+
+#modal > .modal_inner > .detail_review_inner > .info_area > .menu_info .option_area .option_layer div dt {
+	width: 213px;
+}
+
+#modal > .modal_inner > .detail_review_inner > .info_area > .menu_info .option_area .option_layer div dd {
+	text-indent: 6px;
+}
+
+
+#modal > .modal_inner > .detail_review_inner > .info_area > .text_review {
 	margin : 12px 0;
 	padding-right: 17px;
 	box-sizing: border-box;
@@ -442,58 +475,83 @@ body.modal_open {
 	overflow-y: auto;
 }
 
-#modal > .modal_inner > .info_area > .button_area {
+#modal > .modal_inner > .detail_review_inner > .info_area > .button_area {
 	text-align: center;
 }
 
-#modal > .modal_inner > .info_area > .button_area  > div {
-	width : 190px;
+#modal > .modal_inner > .detail_review_inner > .info_area > .button_area  > div {
+	width : 200px;
 	display: flex;
 	flex-wrap: nowrap;
 	justify-content: space-between;
 	line-height: 19px;
-	font-size: 13px;
-	margin: 0 auto 14px;
+	font-size: 14px;
+	margin: 0 auto 10px;
 }
 
-#modal > .modal_inner > .info_area > .button_area  > div > p {
-	width : 135px;
+#modal > .modal_inner > .detail_review_inner > .info_area > .button_area  > div > p {
+	width : 145px;
 }
 
-#modal > .modal_inner > .info_area > .button_area  > div > .like_area {
+#modal > .modal_inner > .detail_review_inner > .info_area > .button_area  > div > .like_area {
 	width : 41px;
 	display: flex;
 	flex-wrap: nowrap;
 	justify-content: space-between;
 }
 
-#modal > .modal_inner > .info_area > .button_area > div button > img {
-	width: 18px;
-	height : 16px;
+#modal > .modal_inner > .detail_review_inner > .info_area > .button_area > div button {
+	width : 22px;
+	height : 20px;
+	text-indent: -9999px;
+	background: url(../../images/totalReview/like_icon.png) no-repeat center center;
 }
 
-#modal > .modal_inner > .info_area > .button_area > div button > img:first-of-type {
-	display: block;
+#modal > .modal_inner > .detail_review_inner > .info_area > .button_area > div button.active {
+	background-image: url(../../images/totalReview/like_icon_active.png);
 }
 
-#modal > .modal_inner > .info_area > .button_area > div button > img:last-of-type {
-	display: none;
-}
-
-#modal > .modal_inner > .info_area > .button_area > div button.active > img:first-of-type {
-	display: none;
-}
-
-#modal > .modal_inner > .info_area > .button_area > div button.active > img:last-of-type {
-	display: block;
-}
-
-#modal > .modal_inner > .info_area > .button_area > button {
+#modal > .modal_inner > .detail_review_inner > .info_area > .button_area > button {
 	width : 220px;
 	height : 28px;
 	border-radius: 20px;
+	font-size: 14px;
 }
 
+#modal.cart {
+	top : calc(50% - 92.5px);
+	left : calc(50% - 170px);
+	width : 340px;
+	height : 185px;
+}
+
+#modal.cart > .modal_inner > .cart_inner {
+	display: block;
+}
+
+#modal > .modal_inner > .cart_inner > h3 {
+	margin: 62px 0 30px;
+	text-align: center;
+}
+
+#modal > .modal_inner > .cart_inner > .button_area {
+	width : 190px;
+	margin : 0  auto;
+	display: flex;
+	flex-wrap : nowrap;
+	justify-content: space-between;
+}
+
+#modal > .modal_inner > .cart_inner > .button_area button {
+	width : 88px;
+	height : 30px;
+	text-align: center;
+	color: white;
+}
+
+#modal > .modal_inner > .cart_inner > .button_area .confirm_button {
+	background-color: #294401;
+}
 
 #modal > .close_button {
 	position: absolute;
