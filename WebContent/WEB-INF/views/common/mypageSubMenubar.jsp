@@ -5,13 +5,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="<%= request.getContextPath() %>/resources/css/common/mypageSubMenubar.css" rel="stylesheet">
+<link href="<%= request.getContextPath() %>/resources/css/common/mypageSubMenubar.css?ver=1.1" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="yjmainframe">
         <div class="yjwrapper">
-            <h2 class="yjheader2">MY PAGE</h2>
+            <h2 class="yjheader2">My Page</h2>
             <div class="yjcategory">
                 <ul>
                     <li class="yjfirst_li"><a class ="yja" href="#"><img class="yjicon" src="<%= request.getContextPath() %>/resources/images/mypageSubMenubar/food.png">상세주문조회</a></li>
