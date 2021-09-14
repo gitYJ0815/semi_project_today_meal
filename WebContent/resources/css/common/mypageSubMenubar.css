@@ -1,11 +1,8 @@
 @charset "UTF-8";
   
 .yjmainframe {
-    position: absolute;
 	width : 210px;
     height : 517px;
-    left : 170px;
-    top : 175px;
 }
 .yjwrapper{
     position: relative;
@@ -76,7 +73,8 @@
 .yjcategory ul{
     margin-bottom: 20px;
 }
-ul li:not(.yjfirst_li){
+
+.vertical_line li{
     /* margin-top: 15px; */
     margin-top: 0px;
     padding-left: 30px;
