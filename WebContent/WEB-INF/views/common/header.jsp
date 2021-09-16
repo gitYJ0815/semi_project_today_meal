@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +10,7 @@
 <link href="<%= request.getContextPath() %>/resources/css/common/header.css" rel="stylesheet">
 </head>
 <body>
+<c:set var="contextPath" value="${ pageContext.servletContext.contextPath }" scope="application"/>
 <div class="wrapper">
     <header id="header">
         <a href="<%= request.getContextPath() %>">
@@ -18,8 +20,8 @@
         </a>
     
         <div class="search">
-            <input type="text" placeholder="검색어를 입력해주세요.">
-            <button>검색</button>
+            <input id="searchBox" type="text" placeholder="검색어를 입력해주세요.">
+            <button id="searchBtn">검색</button>
         </div>
         <div class="btnArea">
             <a href="<%= request.getContextPath() %>/login">로그인</a>
