@@ -22,19 +22,19 @@
             <h2 style="font-weight:bold; font-size:20px">진행중인 이벤트</h2>
             <div class="notice_content">
                 <div class="subject">
-                    <span>제목 :   </span> 
-                    <span>기간 :   </span>
+                    <span>제목 :  ${event.event_title } </span> 
+                    <span>기간 :  ${event.term } </span>
                 </div>
                 <div id="eventImg_area" style="height: 1600px;">
                     <!-- 이벤트 이미지 영역-->
-                    <img src="">
+                    <img src="../${event.content }">
                 </div>
                 <div class="btn_area">
                     <button type="button" onclick="location.href='${contextPath}/today_meal/event/list'">목록으로</button>
                 </div>
             </div>
             <form name="eventForm" method="post">
-				<input type="hidden" name="eno" value="${ event.eno }">
+				<input type="hidden" name="eno" value="${ e.eventNo }">
 			</form>    
         </div>
 </body>
