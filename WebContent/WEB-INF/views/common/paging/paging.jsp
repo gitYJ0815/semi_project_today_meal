@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,18 +10,31 @@
 </head>
 <body>
 <ul>
-	<li><a href="#"><img src="${ contextPath }/resources/images/common/paging/prev_disabled.png" alt=""></a></li>
-	<li><a href="#">1</a></li>
-	<li><a href="#">2</a></li>
-	<li><a href="#">3</a></li>
-	<li><a href="#">4</a></li>
-	<li><a href="#">5</a></li>
-	<li><a href="#">6</a></li>
-	<li><a href="#">7</a></li>
-	<li><a href="#">8</a></li>
-	<li><a href="#">9</a></li>
-	<li><a href="#">10</a></li>
-	<li><a href="#"><img src="${ contextPath }/resources/images/common/paging/next_active.png" alt=""></a></li>
+	<%-- start page --%>
+	<c:choose>
+		<c:when test="${ pi.startPage < pi.pageLimit }">
+			<c:set var="startPage" value="1"/>
+		</c:when>
+		<c:otherwise>
+			<c:set var="startPage" value="${pi.startPage -  pi.pageLimit}"/>
+		</c:otherwise>
+	</c:choose>
+	<%-- end page --%>
+	<c:choose>
+		<c:when test="${ pi.endPage + 1 <= pi.maxPage }">
+			<c:set var="endPage" value="${ pi.endPage + 1 }"/>
+		</c:when>
+		<c:otherwise>
+			<c:set var="endPage" value="${ pi.maxPage }"/>
+		</c:otherwise>
+	</c:choose>
+
+	
+	<li><a <c:if test="${ pi.page != 1 }">href="${ url }?page=${ startPage }" class="active"</c:if> <c:if test="${ pi.page == 1 }">tabindex = -1</c:if>>앞으로 10페이지 이동</a></li>
+<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+	<li><a href="${ url }?page=${ p }" <c:if test="${ pi.page == p }">class="now"</c:if>>${ p }</a></li>
+</c:forEach>
+	<li><a <c:if test="${ pi.page != pi.maxPage }">href="${ url }?page=${ endPage }" class="active"</c:if> <c:if test="${ pi.page == pi.maxPage }">tabindex = -1</c:if>>뒤로 10페이지 이동</a></li>
 </ul>
 </body>
 </html>
