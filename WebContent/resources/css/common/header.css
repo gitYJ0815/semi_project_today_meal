@@ -46,8 +46,15 @@ outline: none;
 float: right;
 color: #FFFFFF;
 }
-button{
-	outline: none;
+
+button {
+   background: inherit;
+   border:none;
+   box-shadow:none;
+   border-radius:0px;
+   padding:0;
+   overflow:visible;
+   cursor:pointer;
 }
 
 #header .btnArea {

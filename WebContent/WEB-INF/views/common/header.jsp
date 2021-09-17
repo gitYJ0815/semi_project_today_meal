@@ -32,13 +32,13 @@
     </header>
     <nav id="nav">
         <ul>
-           <li><a href="#">한식</a></li>
-           <li><a href="#">양식</a></li>
-           <li><a href="#">중식</a></li>
-           <li><a href="#">일식</a></li>
-           <li><a href="#">분식</a></li>
-           <li><a href="#">양식</a></li>
-           <li><a href="#">샐러드</a></li>
+           <li><a href="${ contextPath }/product/list?cno=1">한식</a></li>
+           <li><a href="${ contextPath }/product/list?cno=2">양식</a></li>
+           <li><a href="${ contextPath }/product/list?cno=3">중식</a></li>
+           <li><a href="${ contextPath }/product/list?cno=4">일식</a></li>
+           <li><a href="${ contextPath }/product/list?cno=5">분식</a></li>
+           <li><a href="${ contextPath }/product/list?cno=6">양식</a></li>
+           <li><a href="${ contextPath }/product/list?cno=7">샐러드</a></li>
            <li><a href="#">리뷰</a></li>
            <li><a href="#">이벤트</a></li>
         </ul>
