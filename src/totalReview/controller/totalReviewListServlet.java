@@ -1,11 +1,17 @@
 package totalReview.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import totalReview.model.service.TotalReviewService;
+import totalReview.model.vo.Review;
 
 /**
  * Servlet implementation class totalReviewListServlet
@@ -26,6 +32,9 @@ public class totalReviewListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		List<Review> reviewList = new TotalReviewService().selectList();
+
+		request.setAttribute("reviewList", reviewList);
 		request.getRequestDispatcher("/WEB-INF/views/totalReview/reviewListView.jsp").forward(request, response);
 	}
 

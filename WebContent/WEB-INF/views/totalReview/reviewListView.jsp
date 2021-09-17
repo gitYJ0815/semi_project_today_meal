@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -70,9 +72,68 @@
 					</div>
 				</div>
 			</div>
-			<div class="result empty_result">
+			<div class="result <c:if test="${ reviewList.size() == 0 }">empty_result</c:if>">
 				<ul class="result_list">
+				<c:choose>
+					<c:when test="${ reviewList.size() == 0 }">
 					<li>아직 등록된 리뷰가 없습니다.</li>
+					</c:when>
+					<c:otherwise>
+					<c:forEach var="r" items="${ reviewList }">
+					<li class="card">
+						<div class="like_area">
+							<button>좋아요 버튼</button>
+						</div>
+						<div class="image_area">
+							<c:choose>
+								<c:when test="${ empty r.reviewImagePath }">
+									<c:set var="imagePath" value="${ r.product.representationImage }"/>
+								</c:when>
+								<c:otherwise>
+									<c:set var="imagePath" value="${ r.reviewImagePath }"/>
+								</c:otherwise>
+							</c:choose>
+							<img src="${ contextPath }${ imagePath }" alt="리뷰 대표 이미지">
+						</div>
+						<div class="info_area">
+							<div class="star_area">
+								<div class="star_base">
+									<span class="star"></span>
+									<span class="star"></span>
+									<span class="star"></span>
+									<span class="star"></span>
+									<span class="star"></span>
+								</div>
+								<div class="star_rating_warpper" style="width:${ 142/5.0 * r.point }px">
+									<div class="star_rating">
+										<span class="star"></span>
+										<span class="star"></span>
+										<span class="star"></span>
+										<span class="star"></span>
+										<span class="star"></span>
+									</div>
+								</div>
+							</div>
+							<div class="name">${ r.product.pname }</div>
+							<div class="price"><fmt:formatNumber value="${ r.sum }" type="number" groupingUsed="true"/></div>
+							<div class="option_list">
+								<ul>
+								<c:forEach var="option" items="${ r.product.optionList }" end="2">
+									<c:if test="${ option.name != 'N' }">
+										<li>${ option.name }</li>
+									</c:if>
+								</c:forEach>
+								</ul>
+							</div>
+						</div>
+						<div class="button_area">
+							<button type="button" class="detail_button">자세히 보기</button>
+							<button type="button" class="green_button buy_button" disabled>이 구성 구매하기</button>
+						</div>
+					</li>
+					</c:forEach>
+					</c:otherwise>
+				</c:choose>
 				</ul>
 				<div class="more">
 					<button class="green_button more_button">더보기</button>
