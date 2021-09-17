@@ -1,15 +1,5 @@
 @charset "UTF-8";
 
-button {
-	background: inherit;
-	border:none;
-	box-shadow:none;
-	border-radius:7px;
-	padding:0;
-	overflow:visible;
-	cursor:pointer
-}
-
 input {
 	-webkit-appearance: none;
 	-moz-appearance: none;
@@ -35,6 +25,14 @@ input[type='number']::-webkit-outer-spin-button {
 
 body.modal_open {
 	overflow: hidden;
+}
+
+#container {
+	margin-top: 61px;
+}
+
+#container button {
+	border-radius:7px;
 }
 
 .result_option {
