@@ -185,6 +185,16 @@ body.modal_open {
 	background-image: url(../../images/totalReview/like_icon_active.png);
 }
 
+.result_area > .result > .result_list > .card .image_area {
+	width : 220px;
+	height : 220px;
+	overflow: hidden;
+}
+
+.result_area > .result > .result_list > .card .image_area img {
+	width: 100%;
+}
+
 .result_area > .result > .result_list > .card .info_area {
 	padding: 15px 0 20px;
 	box-sizing: border-box;
