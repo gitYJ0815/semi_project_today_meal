@@ -17,13 +17,13 @@ import totalReview.model.vo.Review;
  * Servlet implementation class totalReviewListServlet
  */
 @WebServlet("/totalReview/list")
-public class totalReviewListServlet extends HttpServlet {
+public class TotalReviewListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public totalReviewListServlet() {
+    public TotalReviewListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
