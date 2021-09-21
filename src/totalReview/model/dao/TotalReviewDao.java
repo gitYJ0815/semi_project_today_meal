@@ -74,7 +74,10 @@ public class TotalReviewDao {
 									, rset.getInt("OPTION_BUY_QUANTITY")
 									, rset.getInt("OPTION_INVENTORY_QUANTITY")
 						   			);
-				optionList.add(o);
+				
+				if(o.getName() != null) {
+					optionList.add(o);	
+				}
 			}
 
 			if(r != null) {

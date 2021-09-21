@@ -79,7 +79,7 @@
 					<li>아직 등록된 리뷰가 없습니다.</li>
 					</c:when>
 					<c:otherwise>
-					<c:forEach var="r" items="${ reviewList }">
+					<c:forEach var="r" items="${ reviewList }" end="8">
 					<li class="card">
 						<div class="like_area">
 							<button>좋아요 버튼</button>
@@ -118,11 +118,11 @@
 							<div class="price"><fmt:formatNumber value="${ r.sum }" type="number" groupingUsed="true"/></div>
 							<div class="option_list">
 								<ul>
+							<c:if test="${ !empty r.product.optionList }">
 								<c:forEach var="option" items="${ r.product.optionList }" end="2">
-									<c:if test="${ option.name != 'N' }">
-										<li>${ option.name }</li>
-									</c:if>
+									<li>${ option.name }</li>
 								</c:forEach>
+							</c:if>
 								</ul>
 							</div>
 						</div>
