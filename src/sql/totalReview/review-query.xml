@@ -6,6 +6,7 @@
 		 	   REVIEW_NO
 			 , PRODUCT_NAME
 			 , REVIEW_IMAGE
+			 , POINT
 			 , ORDER_SUM
 			 , PRODUCT_IMG
 			 , PRODUCT_BUY_QUANTITY

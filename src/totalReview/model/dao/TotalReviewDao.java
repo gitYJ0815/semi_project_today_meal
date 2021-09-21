@@ -62,6 +62,7 @@ public class TotalReviewDao {
 								  );
 		
 					r = new Review(reviewNo
+							, rset.getFloat("POINT")
 							, rset.getString("REVIEW_IMAGE")
 							, rset.getInt("ORDER_SUM")
 							, p
