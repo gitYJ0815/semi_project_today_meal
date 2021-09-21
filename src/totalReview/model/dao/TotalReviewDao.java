@@ -51,34 +51,28 @@ public class TotalReviewDao {
 					prevReviewNo = reviewNo;
 
 					if(r != null) {
-						p.setOptionList(optionList);
-						r.setProduct(p);
+						r.getProduct().setOptionList(optionList);
 						reviewList.add(r);
 					}
 
-					p = new Product(rset.getInt("PRODUCT_NO")
-								  , rset.getString("PRODUCT_NAME")
+					p = new Product(rset.getString("PRODUCT_NAME")
 								  , rset.getString("PRODUCT_IMG")
-								  , rset.getInt("CATEGORY_NO")
-								  , "Y"
-								  , rset.getInt("PRODUCT_QUANTITY")
+								  , rset.getInt("PRODUCT_BUY_QUANTITY")
+								  , rset.getInt("OPTION_INVENTORY_QUANTITY")
 								  );
 		
 					r = new Review(reviewNo
-							, rset.getInt("ORDER_NO")
-							, rset.getFloat("POINT")
-							, rset.getString("REVIEW_TEXT")
 							, rset.getString("REVIEW_IMAGE")
-							, rset.getDate("REVIEW_REGISTER")
-							, rset.getString("USER_ID")
 							, rset.getInt("ORDER_SUM")
+							, p
 							);
 
 					optionList = new ArrayList<>();
 				}
 				
 				Option o = new Option(rset.getString("OPTION_NAME")
-									, rset.getInt("OPT_QUANTITY")
+									, rset.getInt("OPTION_BUY_QUANTITY")
+									, rset.getInt("OPTION_INVENTORY_QUANTITY")
 						   			);
 				optionList.add(o);
 			}
