@@ -44,6 +44,7 @@ public class TotalReviewDao {
 			Product p = null;
 			Review r = null;
 			List<Option> optionList = null;
+			boolean status = true;
 			while(rset.next()) {
 				int reviewNo = rset.getInt("REVIEW_NO");
 
@@ -52,13 +53,14 @@ public class TotalReviewDao {
 
 					if(r != null) {
 						r.getProduct().setOptionList(optionList);
+						r.setStatus(status);
 						reviewList.add(r);
+						status = true;
 					}
 
 					p = new Product(rset.getString("PRODUCT_NAME")
 								  , rset.getString("PRODUCT_IMG")
 								  , rset.getInt("PRODUCT_BUY_QUANTITY")
-								  , rset.getInt("OPTION_INVENTORY_QUANTITY")
 								  );
 		
 					r = new Review(reviewNo
@@ -69,15 +71,21 @@ public class TotalReviewDao {
 							);
 
 					optionList = new ArrayList<>();
+					if(p.getBuyQuantity() > rset.getInt("PRODUCT_INVENTORY_QUANTITY")) {
+						status = false;
+					}
 				}
 				
 				Option o = new Option(rset.getString("OPTION_NAME")
 									, rset.getInt("OPTION_BUY_QUANTITY")
-									, rset.getInt("OPTION_INVENTORY_QUANTITY")
 						   			);
 				
 				if(o.getName() != null) {
-					optionList.add(o);	
+					optionList.add(o);
+					
+					if(o.getBuyQuantity() > rset.getInt("OPTION_INVENTORY_QUANTITY")) {
+						status = false;
+					}
 				}
 			}
 

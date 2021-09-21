@@ -128,7 +128,7 @@
 						</div>
 						<div class="button_area">
 							<button type="button" class="detail_button">자세히 보기</button>
-							<button type="button" class="green_button buy_button" disabled>이 구성 구매하기</button>
+							<button type="button" class="green_button buy_button" <c:if test="${ r.status == false }">disabled</c:if>>이 구성 구매하기</button>
 						</div>
 					</li>
 					</c:forEach>
