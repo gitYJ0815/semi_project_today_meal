@@ -33,8 +33,11 @@ public class TotalReviewListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int page = 1;
-		List<Review> reviewList = new TotalReviewService().selectList(page);
+		TotalReviewService trs = new TotalReviewService();
+		int listCount = trs.getListCount();
+		List<Review> reviewList = trs.selectList(page);
 
+		request.setAttribute("listCount", listCount);
 		request.setAttribute("reviewList", reviewList);
 		request.getRequestDispatcher("/WEB-INF/views/totalReview/reviewListView.jsp").forward(request, response);
 	}

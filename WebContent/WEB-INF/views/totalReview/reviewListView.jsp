@@ -16,7 +16,7 @@
 			<div class="result_option_inner">
 				<div>
 					<p>전체 리뷰</p>
-					<p>검색 결과 <span>${ reviewList.size() }</span>개</p>
+					<p>검색 결과 <span>${ listCount }</span>개</p>
 				</div>
 				<div>
 					<select>
