@@ -199,40 +199,58 @@ body.modal_open {
 }
 
 .result_area > .result > .result_list > .card .info_area .star_area .star_base {
-	width : 142px;
+	width : 136px;
 	margin: 0 auto;
-	display: flex;
-	flex-wrap: nowrap;
-	justify-content: space-between;
+}
+
+.result_area > .result > .result_list > .card .info_area .star_area .star_base::after {
+	content: "";
+	display: block;
+	clear: both;
 }
 
 .result_area > .result > .result_list > .card .info_area .star_area .star_base .star { 
 	display: block;
+	float: left;
+	margin-right: 4px;
 	width : 24px;
 	height : 23px;
 	background: url(../../images/totalReview/star_empty.png) no-repeat 0 0;
 }
 
+.result_area > .result > .result_list > .card .info_area .star_area .star_base .star:last-of-type {
+	margin-right: 0;
+}
+
 .result_area > .result > .result_list > .card .info_area .star_area .star_rating_warpper {
 	position: absolute;
 	top : 0;
-	left : 39px;
+	left : 42px;
 	width : 90px;
 	overflow: hidden;
 }
 
 .result_area > .result > .result_list > .card .info_area .star_area .star_rating {
-	width : 142px;
-	display: flex;
-	flex-wrap: nowrap;
-	justify-content: space-between;
+	width : 136px;
 }
 
 .result_area > .result > .result_list > .card .info_area .star_area .star_rating .star {
 	display: block;
+	float: left;
+	margin-right: 4px;
 	width : 24px;
 	height : 23px;
 	background: url(../../images/totalReview/star_full.png) no-repeat 0 0;
+}
+
+.result_area > .result > .result_list > .card .info_area .star_area .star_rating .star:last-of-type {
+	margin-right: 0;
+}
+
+.result_area > .result > .result_list > .card .info_area .star_area .star_rating::after {
+	content: "";
+	display: block;
+	clear: both;
 }
 
 .result_area > .result > .result_list > .card .info_area .name {

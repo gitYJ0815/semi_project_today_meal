@@ -104,7 +104,7 @@
 									<span class="star"></span>
 									<span class="star"></span>
 								</div>
-								<div class="star_rating_warpper" style="width:${ 142/5.0 * r.point }px">
+								<div class="star_rating_warpper" style="width:${ 24 * r.point + 4 * (r.point - r.point%1) }px">
 									<div class="star_rating">
 										<span class="star"></span>
 										<span class="star"></span>
