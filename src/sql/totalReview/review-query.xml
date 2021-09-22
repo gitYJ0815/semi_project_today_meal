@@ -2,20 +2,23 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 	<entry key="selectList">
-		SELECT
-		 	   REVIEW_NO
-			 , PRODUCT_NAME
-			 , REVIEW_IMAGE
-			 , POINT
-			 , ORDER_SUM
-			 , PRODUCT_IMG
-			 , PRODUCT_BUY_QUANTITY
-			 , PRODUCT_INVENTORY_QUANTITY
-			 , OPTION_NAME
-			 , OPTION_BUY_QUANTITY
-			 , OPTION_INVENTORY_QUANTITY
-		  FROM REVIEW_INFORMATION
-		  WHERE REVIEW_NO IS NOT NULL
-		  ORDER BY REVIEW_NO DESC
+		SELECT * 
+		  FROM (SELECT ROWNUM RNUM, R.*
+		          FROM (SELECT
+		                       REVIEW_NO
+		                     , PRODUCT_NAME
+		                     , REVIEW_IMAGE
+		                     , POINT
+		                     , ORDER_SUM
+		                     , PRODUCT_IMG
+		                     , PRODUCT_BUY_QUANTITY
+		                     , PRODUCT_INVENTORY_QUANTITY
+		                     , OPTION_NAME
+		                     , OPTION_BUY_QUANTITY
+		                     , OPTION_INVENTORY_QUANTITY
+		                  FROM REVIEW_INFORMATION
+		                 WHERE REVIEW_NO IS NOT NULL
+		                 ORDER BY REVIEW_NO DESC) R)
+		 WHERE RNUM BETWEEN ? AND ?
 	</entry>
 </properties>

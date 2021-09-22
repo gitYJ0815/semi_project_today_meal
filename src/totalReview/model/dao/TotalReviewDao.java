@@ -29,7 +29,7 @@ public class TotalReviewDao {
 		}
 	}
 
-	public List<Review> selectList(Connection conn) {
+	public List<Review> selectList(Connection conn, int page) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		List<Review> reviewList = new ArrayList<>();
@@ -37,6 +37,8 @@ public class TotalReviewDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, (page-1)*9+1);
+			pstmt.setInt(2, page*9);
 			
 			rset = pstmt.executeQuery();
 			

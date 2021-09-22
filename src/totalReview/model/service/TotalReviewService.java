@@ -10,10 +10,12 @@ import static common.JDBCTemplate.*;
 
 public class TotalReviewService {
 	private TotalReviewDao trd = new TotalReviewDao();
+	
+	
 
-	public List<Review> selectList() {
+	public List<Review> selectList(int page) {
 		Connection conn = getConnection();
-		List<Review> reviewList = trd.selectList(conn);
+		List<Review> reviewList = trd.selectList(conn, page);
 		
 		close(conn);
 		

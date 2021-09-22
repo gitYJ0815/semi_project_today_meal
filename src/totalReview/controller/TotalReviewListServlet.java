@@ -32,7 +32,8 @@ public class TotalReviewListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<Review> reviewList = new TotalReviewService().selectList();
+		int page = 1;
+		List<Review> reviewList = new TotalReviewService().selectList(page);
 
 		request.setAttribute("reviewList", reviewList);
 		request.getRequestDispatcher("/WEB-INF/views/totalReview/reviewListView.jsp").forward(request, response);
