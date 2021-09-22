@@ -6,23 +6,26 @@
 		  FROM REVIEW
 	</entry>
 	<entry key="selectList">
-		SELECT * 
-		  FROM (SELECT ROWNUM RNUM, R.*
-		          FROM (SELECT
-		                       REVIEW_NO
-		                     , PRODUCT_NAME
-		                     , REVIEW_IMAGE
-		                     , POINT
-		                     , ORDER_SUM
-		                     , PRODUCT_IMG
-		                     , PRODUCT_BUY_QUANTITY
-		                     , PRODUCT_INVENTORY_QUANTITY
-		                     , OPTION_NAME
-		                     , OPTION_BUY_QUANTITY
-		                     , OPTION_INVENTORY_QUANTITY
-		                  FROM REVIEW_INFORMATION
-		                 WHERE REVIEW_NO IS NOT NULL
-		                 ORDER BY REVIEW_NO DESC) R)
-		 WHERE RNUM BETWEEN ? AND ?
+		SELECT 
+		       REVIEW_NO
+		     , PRODUCT_NAME
+		     , REVIEW_IMAGE
+		     , POINT
+		     , ORDER_SUM
+		     , PRODUCT_IMG
+		     , PRODUCT_BUY_QUANTITY
+		     , PRODUCT_INVENTORY_QUANTITY
+		     , OPTION_NAME
+		     , OPTION_BUY_QUANTITY
+		     , OPTION_INVENTORY_QUANTITY
+		  FROM REVIEW_INFORMATION
+		 WHERE REVIEW_NO IN (SELECT REVIEW_NO
+		                        FROM (SELECT ROWNUM RNUM, R.*
+		                                FROM (SELECT REVIEW_NO
+		                                        FROM REVIEW
+		                                       ORDER BY REVIEW_NO DESC) R)
+		                       WHERE RNUM BETWEEN ? AND ?)
+ 		 ORDER BY REVIEW_NO DESC
+	</entry>
 	</entry>
 </properties>

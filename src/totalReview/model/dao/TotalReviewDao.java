@@ -114,8 +114,8 @@ public class TotalReviewDao {
 			}
 
 			if(r != null) {
-				p.setOptionList(optionList);
-				r.setProduct(p);
+				r.getProduct().setOptionList(optionList);
+				r.setStatus(status);
 				reviewList.add(r);
 			}
 		} catch (SQLException e) {
