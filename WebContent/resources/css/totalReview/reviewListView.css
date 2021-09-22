@@ -314,6 +314,10 @@ body.modal_open {
 	background: #A1AD61 url(../../images/totalReview/downArrow.png) no-repeat 75px 14px;
 }
 
+.result_area > .result > .more button.hidden {
+	display: none;
+}
+
 .result.empty_result > .result_list {
 	display: block;
 	height : 146px;

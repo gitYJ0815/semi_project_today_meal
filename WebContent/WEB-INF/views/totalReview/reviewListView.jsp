@@ -73,6 +73,11 @@
 				</div>
 			</div>
 			<div class="result <c:if test="${ reviewList.size() == 0 }">empty_result</c:if>">
+				<form name="reviewListForm" method="post">
+					<input type="hidden" id="page" value="1">
+					<input type="hidden" id="item_count" value="${ reviewList.size() }">
+					<input type="hidden" id="all_item_count" value="${ listCount }">
+				</form>
 				<ul class="result_list">
 				<c:choose>
 					<c:when test="${ reviewList.size() == 0 }">
@@ -135,7 +140,7 @@
 					</c:otherwise>
 				</c:choose>
 				</ul>
-				<div class="more">
+				<div class="more <c:if test="${ itemCount == listCount }">hidden</c:if>">
 					<button class="green_button more_button">더보기</button>
 				</div>
 			</div>
