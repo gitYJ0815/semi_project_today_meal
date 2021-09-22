@@ -28,6 +28,28 @@ public class TotalReviewDao {
 			e.printStackTrace();
 		}
 	}
+	
+	public int getListCount(Connection conn) {
+		PreparedStatement pstmt = null;
+		String sql = query.getProperty("listCount");
+		ResultSet rset = null;
+		int result = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+
+		return result;
+	}
 
 	public List<Review> selectList(Connection conn, int page) {
 		PreparedStatement pstmt = null;
