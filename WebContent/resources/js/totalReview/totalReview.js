@@ -6,6 +6,8 @@
 	let body = document.querySelector("body"),
 		dimmed = body.querySelector(".dimmed"),
 		modal = dimmed.querySelector("#modal");
+	
+	let detailReviewInner = modal.querySelector(".detail_review_inner");
 
 	let resultArea = body.querySelector(".result_area"),
 		filter = resultArea.querySelector(".filter"),
@@ -37,7 +39,7 @@
 	function resultClickEventHandler(e) {
 		if(e.target.tagName == "BUTTON") {
 			if(e.target.classList.contains("detail_button")) {
-				detailButtonClickEventHandler();
+				detailButtonClickEventHandler(e.target);
 			} else if(e.target.classList.contains("buy_button")) {
 				buyButtonClickEventHandler();
 			} else if(e.target.classList.contains("more_button")) {
@@ -48,9 +50,89 @@
 		}
 	}
 
-	function detailButtonClickEventHandler() {
+	function detailButtonClickEventHandler(detailButton) {
+		detailButton.setAttribute("disabled", true);
+		
+		let xhr = new XMLHttpRequest();
+		
+		xhr.onreadystatechange = function() {
+			if(xhr.readyState == 4) {
+				if((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
+					let responseTextJson = JSON.parse(xhr.responseText);
+					detailReviewInner.innerHTML = "";
+					appendModal(responseTextJson);
+					detailButton.removeAttribute("disabled");
+				} else {
+					console.log("ajax 통신 실패");
+				}
+			}
+		}
+		
+		xhr.open("POST", "detailModal");
+		xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded;");
+		xhr.send("rno="+detailButton.getAttribute("data-review-no"));
+
 		openModal();
 		modal.classList.add("detail_review");
+	}
+	
+	function appendModal(detailData) {
+		let html = "";
+
+		html += '<div class="image_area">';
+		html += 	'<img src="../' + (detailData.reviewImagePath == undefined ? detailData.product.representationImage : detailData.reviewImagePath) + '" alt="리뷰 대표 이미지">';
+		html += '</div>';
+		html += '<div class="info_area">';
+		html +=		'<div class="star_info">';
+		html +=			'<div class="star_base">';
+		html +=				'<span class="star"></span>';
+		html +=				'<span class="star"></span>';
+		html +=				'<span class="star"></span>';
+		html +=				'<span class="star"></span>';
+		html +=				'<span class="star"></span>';
+		html += 		'</div>';
+		html += 	'<div class="star_rating_warpper" style="width:' + (24 * detailData.point + 4 * (detailData.point - detailData.point%1) ) + 'px">';
+		html +=			'<div class="star_rating">';
+		html +=				'<span class="star"></span>';
+		html +=				'<span class="star"></span>';
+		html +=				'<span class="star"></span>';
+		html +=				'<span class="star"></span>';
+		html +=				'<span class="star"></span>';
+		html +=			'</div>';
+		html +=		'</div>';
+		html +=	'</div>';	
+		html += '<div class="write_info">';
+		html +=		'<p>' + detailData.uid + '</p>';
+		html +=		'<p>' + detailData.registerDate + '</p>';
+		html += '</div>';
+		html += '<div class="menu_info">';
+		html += 	'<h4>' + detailData.product.pname + '</h4>';
+		html +=		'<div class="option_area">';
+		html += 		'<button type="button" class="green_button option">옵션 전체 보기</button>';
+		html +=			'<div class="option_layer">';
+		html +=				'<div>';
+		for(let i=0; i<detailData.product.optionList.length; i++) {
+		html +=					'<dl>';
+		html +=						'<dt>' + detailData.product.optionList[i].name + '</dt>';
+		html +=						'<dd>' + detailData.product.optionList[i].buyQuantity + '</dd>';
+		html +=					'</dl>';
+		}
+		html += 			'</div>';
+		html += 		'</div>';
+		html += 	'</div>';
+		html += '</div>';
+		html += '<div class="text_review">' + detailData.reviewText + '</div>';
+		html +=	'<div class="button_area">';
+		html += 	'<div>';
+		html += 		'<p>리뷰가 맘에 드셨나요?</p>';
+		html += 		'<div class="like_area">';
+		html += 		'<button>좋아요 버튼</button>';
+		html +=			'<span>0</span>';
+		html +=		'</div>';
+		html += '</div>';
+		html += '<button class="green_button buy_button"' + (detailData.status == false ? "disabled" : "") + '>이 구성 구매하기</button>';
+
+		detailReviewInner.insertAdjacentHTML("beforeend", html);
 	}
 
 	function buyButtonClickEventHandler() {
@@ -148,7 +230,7 @@
 			cardHtml +=			'</div>';
 			cardHtml +=		'</div>';
 			cardHtml +=		'<div class="button_area">';
-			cardHtml +=			'<button type="button" class="detail_button">자세히 보기</button>';
+			cardHtml +=			'<button type="button" class="detail_button" data-review-no="' + cardInformation.rno + '">자세히 보기</button>';
 			cardHtml +=			'<button type="button" class="green_button buy_button" ' + (cardInformation.status == false ? "disabled" : "") + '>이 구성 구매하기</button>';
 			cardHtml +=		'</div>';
 			cardHtml +=	'</li>';

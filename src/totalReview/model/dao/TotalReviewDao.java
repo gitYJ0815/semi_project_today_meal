@@ -128,4 +128,65 @@ public class TotalReviewDao {
 		
 		return reviewList;
 	}
+
+	public Review selectReview(Connection conn, int rno) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = query.getProperty("selectReview");
+		Review review = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, rno);
+			
+			rset = pstmt.executeQuery();
+			
+			List<Option> optionList = null;
+			boolean status = true;
+			while(rset.next()) {
+				if(review == null) {
+					Product p = new Product(rset.getString("PRODUCT_NAME")
+										  , rset.getString("PRODUCT_IMG")
+										  , rset.getInt("PRODUCT_BUY_QUANTITY")
+										  );
+
+					review = new Review(rset.getInt("REVIEW_NO")
+									  , rset.getFloat("POINT")
+									  , rset.getString("REVIEW_TEXT")
+									  , rset.getString("REVIEW_IMAGE")
+									  , rset.getDate("REVIEW_REGISTER")
+									  , rset.getString("USER_ID")
+									  , rset.getInt("ORDER_SUM")
+									  , p
+									  );
+					
+					optionList = new ArrayList<>();
+
+					if(p.getBuyQuantity() > rset.getInt("PRODUCT_INVENTORY_QUANTITY")) {
+						status = false;
+					}
+				}
+			
+				Option o = new Option(rset.getString("OPTION_NAME")
+									, rset.getInt("OPTION_BUY_QUANTITY")
+									);
+				
+				if(o.getName() != null) {
+					optionList.add(o);
+					if(o.getBuyQuantity() > rset.getInt("OPTION_INVENTORY_QUANTITY")) {
+						status = false;
+					}
+				}
+			}
+			review.getProduct().setOptionList(optionList);
+			review.setStatus(status);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(conn);
+			close(pstmt);
+		}
+
+		return review;
+	}
 }

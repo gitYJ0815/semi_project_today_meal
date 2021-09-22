@@ -28,6 +28,16 @@ public class TotalReviewService {
 		
 		return reviewList;
 	}
+
+	public Review selectReview(int rno) {
+		Connection conn = getConnection();
+
+		Review review = trd.selectReview(conn, rno);
+
+		close(conn);
+		
+		return review;
+	}
 	
 	
 }

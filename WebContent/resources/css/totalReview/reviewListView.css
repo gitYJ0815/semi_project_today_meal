@@ -364,6 +364,11 @@ body.modal_open {
 	height : 602px;
 }
 
+#modal.detail_review .modal_inner {
+	width : 100%;
+	height : 100%;
+}
+
 #modal.detail_review > .modal_inner > .detail_review_inner {
 	height : 100%;
 	display: flex;
@@ -378,6 +383,7 @@ body.modal_open {
 
 #modal > .modal_inner > .detail_review_inner > .image_area img {
 	display: block;
+	width : 428px;
 	margin : 87px auto;
 }
 
@@ -394,17 +400,26 @@ body.modal_open {
 }
 
 #modal > .modal_inner > .detail_review_inner > .info_area .star_info .star_base {
-	width : 142px;
-	display: flex;
-	flex-wrap: nowrap;
-	justify-content: space-between;
+	width : 136px;
+}
+
+#modal > .modal_inner > .detail_review_inner > .info_area .star_info .star_base::after {
+	content : "";
+	display: block;
+	clear: both;
 }
 
 #modal > .modal_inner > .detail_review_inner > .info_area .star_info .star_base .star { 
 	display: block;
+	float: left;
+	margin-right: 4px;
 	width : 24px;
 	height : 23px;
 	background: url(../../images/totalReview/star_empty.png) no-repeat 0 0;
+}
+
+#modal > .modal_inner > .detail_review_inner > .info_area .star_info .star_base .star:last-of-type {
+	margin-right: 0;
 }
 
 #modal > .modal_inner > .detail_review_inner > .info_area .star_info .star_rating_warpper {
@@ -416,17 +431,26 @@ body.modal_open {
 }
 
 #modal > .modal_inner > .detail_review_inner > .info_area .star_info .star_rating {
-	width : 142px;
-	display: flex;
-	flex-wrap: nowrap;
-	justify-content: space-between;
+	width : 136px;
+}
+
+#modal > .modal_inner > .detail_review_inner > .info_area .star_info .star_rating::after {
+	content : "";
+	display: block;
+	clear: both;
 }
 
 #modal > .modal_inner > .detail_review_inner > .info_area .star_info .star_rating .star {
 	display: block;
+	float: left;
+	margin-right: 4px;
 	width : 24px;
 	height : 23px;
 	background: url(../../images/totalReview/star_full.png) no-repeat 0 0;
+}
+
+#modal > .modal_inner > .detail_review_inner > .info_area .star_info .star_rating .star:last-of-type {
+	margin-right: 0;
 }
 
 #modal > .modal_inner > .detail_review_inner > .info_area > .write_info {

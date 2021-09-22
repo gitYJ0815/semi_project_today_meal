@@ -27,5 +27,23 @@
 		                       WHERE RNUM BETWEEN ? AND ?)
  		 ORDER BY REVIEW_NO DESC
 	</entry>
+	<entry key="selectReview">
+		SELECT
+	           REVIEW_NO
+	         , POINT
+ 	         , REVIEW_TEXT
+ 	         , REVIEW_IMAGE
+ 	         , REVIEW_REGISTER
+	         , USER_ID
+	         , PRODUCT_NAME
+	         , ORDER_SUM
+	         , PRODUCT_IMG
+	         , PRODUCT_BUY_QUANTITY
+	         , PRODUCT_INVENTORY_QUANTITY
+	         , OPTION_NAME
+	         , OPTION_BUY_QUANTITY
+	         , OPTION_INVENTORY_QUANTITY
+	      FROM REVIEW_INFORMATION
+	     WHERE REVIEW_NO = ?
 	</entry>
 </properties>
