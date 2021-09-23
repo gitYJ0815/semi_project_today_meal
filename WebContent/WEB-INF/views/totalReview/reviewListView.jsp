@@ -140,8 +140,8 @@
 					</c:otherwise>
 				</c:choose>
 				</ul>
-				<div class="more <c:if test="${ itemCount == listCount }">hidden</c:if>">
-					<button class="green_button more_button">더보기</button>
+				<div class="more">
+					<button class="green_button more_button <c:if test="${ reviewList.size() == listCount }">hidden</c:if>">더보기</button>
 				</div>
 			</div>
 		</div>
