@@ -582,6 +582,10 @@ body.modal_open {
 	font-size: 14px;
 }
 
+#modal > .modal_inner > .detail_review_inner > .info_area > .button_area > button:disabled {
+	opacity: 30%;
+}
+
 #modal.cart {
 	top : calc(50% - 92.5px);
 	left : calc(50% - 170px);

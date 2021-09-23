@@ -111,10 +111,10 @@
 		html += 		'<button type="button" class="green_button option">옵션 전체 보기</button>';
 		html +=			'<div class="option_layer">';
 		html +=				'<div>';
-		for(let i=0; i<detailData.product.optionList.length; i++) {
+		for(let option of detailData.product.optionList) {
 		html +=					'<dl>';
-		html +=						'<dt>' + detailData.product.optionList[i].name + '</dt>';
-		html +=						'<dd>' + detailData.product.optionList[i].buyQuantity + '</dd>';
+		html +=						'<dt>' + option.name + '</dt>';
+		html +=						'<dd>' + option.buyQuantity + '</dd>';
 		html +=					'</dl>';
 		}
 		html += 			'</div>';
@@ -130,7 +130,7 @@
 		html +=			'<span>0</span>';
 		html +=		'</div>';
 		html += '</div>';
-		html += '<button class="green_button buy_button"' + (detailData.status == false ? "disabled" : "") + '>이 구성 구매하기</button>';
+		html += '<button class="green_button buy_button"' + (detailData.status ? "" : "disabled") + '>이 구성 구매하기</button>';
 
 		detailReviewInner.insertAdjacentHTML("beforeend", html);
 	}
@@ -231,7 +231,7 @@
 			cardHtml +=		'</div>';
 			cardHtml +=		'<div class="button_area">';
 			cardHtml +=			'<button type="button" class="detail_button" data-review-no="' + cardInformation.rno + '">자세히 보기</button>';
-			cardHtml +=			'<button type="button" class="green_button buy_button" ' + (cardInformation.status == false ? "disabled" : "") + '>이 구성 구매하기</button>';
+			cardHtml +=			'<button type="button" class="green_button buy_button" ' + (cardInformation.status ? "" : "disabled") + '>이 구성 구매하기</button>';
 			cardHtml +=		'</div>';
 			cardHtml +=	'</li>';
 			
