@@ -28,7 +28,7 @@
 				<c:choose>
 					<c:when test="${ p.soldOutStatus.equals('Y') }">
 					<li class="card sold_out">
-						<a href="#">
+						<a href="${ contextPath }/product/info?pno=${ p.pno }">
 							<img src="${ contextPath }${ p.representationImage }" alt="${ p.pname } 대표 이미지">
 							<div>
 								<em>품절</em>
@@ -40,7 +40,7 @@
 					</c:when>
 					<c:otherwise>
 					<li class="card">
-						<a href="#"><img src="${ contextPath }${ p.representationImage }" alt="${ p.pname } 대표 이미지"></a>
+						<a href="${ contextPath }/product/info?pno=${ p.pno }"><img src="${ contextPath }${ p.representationImage }" alt="${ p.pname } 대표 이미지"></a>
 						<p>${ p.pname }</p>
 						<p><fmt:formatNumber value="${ p.price }" type="number" groupingUsed="true"/></p>
 					</li>
@@ -65,5 +65,6 @@
 			</div>
 		</div>
 	</div>
+	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
 </html>

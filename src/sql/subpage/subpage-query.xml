@@ -33,7 +33,7 @@
 							 , SOLD_OUT
 						  FROM PRODUCT_LIST
 						 WHERE CATEGORY_NO = ?
-						 ORDER BY PRODUCT_DATE DESC) P)
+						 ORDER BY PRODUCT_DATE DESC, PRODUCT_NAME ASC) P)
 		WHERE RNUM BETWEEN ? AND ?
 	</entry>
 	<entry key="selectSatisfactionList">
@@ -56,7 +56,7 @@
 							 , SOLD_OUT
 						  FROM PRODUCT_LIST
 						 WHERE CATEGORY_NO = ?
-						 ORDER BY PRODUCT_DATE DESC) P)
+						 ORDER BY REVIEW_POINT DESC, PRODUCT_NAME ASC) P)
 		WHERE RNUM BETWEEN ? AND ?
 	</entry>
 	<entry key="selectHightpriceList">
@@ -79,7 +79,7 @@
 							 , SOLD_OUT
 						  FROM PRODUCT_LIST
 						 WHERE CATEGORY_NO = ?
-						 ORDER BY PRODUCT_PRICE DESC) P)
+						 ORDER BY PRODUCT_PRICE DESC, PRODUCT_NAME ASC) P)
 		WHERE RNUM BETWEEN ? AND ?
 	</entry>
 	<entry key="selectLowpriceList">
@@ -102,7 +102,7 @@
 							 , SOLD_OUT
 						  FROM PRODUCT_LIST
 						 WHERE CATEGORY_NO = ?
-						 ORDER BY PRODUCT_PRICE ASC) P)
+						 ORDER BY PRODUCT_PRICE ASC, PRODUCT_NAME ASC) P)
 		WHERE RNUM BETWEEN ? AND ?
 	</entry>
 </properties>
