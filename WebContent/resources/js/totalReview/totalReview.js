@@ -83,6 +83,7 @@
 						result.classList.remove("empty_result");
 						appendCard(responseTextJson.reviewList);
 						updateCategoryCount(responseTextJson.categoryCountInfo);
+						moreButton.removeAttribute("disabled");
 						if(itemCount.value == allItemCount.value) {
 							moreButton.classList.add("hidden");
 						} else {
@@ -228,6 +229,8 @@
 		moreButton.setAttribute("disabled", true);
 		page.value = Number(page.value) + 1;
 		let pageValue = page.value;
+		let query = createQuery("", "page", pageValue);
+		query = createQuery(query, "categoryList", categoryURLArray);
 		
 		let xhr = new XMLHttpRequest();
 		
@@ -251,14 +254,14 @@
 		
 		xhr.open("POST", "listMore");
 		xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded;");
-		xhr.send(createQuery("", "page", pageValue));
+		xhr.send(query);
 	}
 	
-	function createQuery(url, key, value) {
-		url += url.indexOf("&") < 0 ? "" : "&";
-		url += key + "=" + value;
+	function createQuery(query, key, value) {
+		query += query.length > 0 ? "&" : "";
+		query += key + "=" + value;
 
-		return url;
+		return query;
 	}
 	
 	function numberFormat(number) {

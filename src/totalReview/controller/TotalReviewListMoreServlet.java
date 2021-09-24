@@ -1,6 +1,7 @@
 package totalReview.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
+import totalReview.common.TotalReviewCommon;
 import totalReview.model.service.TotalReviewService;
 import totalReview.model.vo.Review;
 
@@ -43,9 +45,19 @@ public class TotalReviewListMoreServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		int page = Integer.parseInt(request.getParameter("page"));
+		String categoryParameter = request.getParameter("categoryList");
+		List<Integer> categoryNumberList = new ArrayList<>();
+
+		if(categoryParameter != null && categoryParameter.length() > 0) {
+			String[] categoryList = categoryParameter.split(",");
+			
+			for(String category : categoryList) {
+				categoryNumberList.add(TotalReviewCommon.CATEGORY_MAP.get(category));
+			}
+		}
 		
-		List<Review> reviewList = new TotalReviewService().selectList(page);
-		
+		List<Review> reviewList = new TotalReviewService().selectList(page, categoryNumberList);
+
 		response.setContentType("application/json; charset=utf-8");
 		new Gson().toJson(reviewList, response.getWriter());
 	}
