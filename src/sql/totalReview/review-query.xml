@@ -10,6 +10,7 @@
 		       COUNT(REVIEW_NO)
 		  FROM PRODUCT P
 		  JOIN REVIEW ON(P.PRODUCT_NO = REVIEW.PRODUCT_NO)
+		 WHERE CATEGORY_NO IN (CATEGORY_NO_ARRAY); 
 	</entry>
 	<entry key="categoryListCount">
        SELECT

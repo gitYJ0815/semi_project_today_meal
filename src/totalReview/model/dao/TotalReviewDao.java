@@ -31,6 +31,19 @@ public class TotalReviewDao {
 		}
 	}
 	
+	public String getCategoryNoArrayString(List<Integer> categoryList) {
+		StringBuilder sb = new StringBuilder();
+		
+		for(int i=0; i<categoryList.size(); i++) {
+			if(i != 0) {
+				sb.append(",");
+			}
+			sb.append(categoryList.get(i));
+		}
+		
+		return sb.toString();
+	}
+	
 	public int getListCount(Connection conn, List<Integer> categoryList) {
 		PreparedStatement pstmt = null;
 		String sql = "";
@@ -40,16 +53,7 @@ public class TotalReviewDao {
 		try {
 			if(categoryList.size() > 0) {
 				sql = query.getProperty("categoryListTotalCount");
-				StringBuilder sb = new StringBuilder(" WHERE CATEGORY_NO IN (");
-
-				for(int i=0; i<categoryList.size(); i++) {
-					if(i != 0) {
-						sb.append(",");
-					}
-					sb.append(categoryList.get(i));
-				}
-				sb.append(")");
-				sql += sb.toString();
+				sql = sql.replace("CATEGORY_NO_ARRAY", getCategoryNoArrayString(categoryList));
 			} else {
 				sql = query.getProperty("listCount");
 			}
@@ -77,16 +81,7 @@ public class TotalReviewDao {
 		try {
 			if(categoryList.size() > 0) {
 				sql = query.getProperty("selectCategoryList");
-				StringBuilder sb = new StringBuilder();
-
-				for(int i=0; i<categoryList.size(); i++) {
-					if(i != 0) {
-						sb.append(",");
-					}
-					sb.append(categoryList.get(i));
-				}
-
-				sql = sql.replace("CATEGORY_NO_ARRAY", sb.toString());
+				sql = sql.replace("CATEGORY_NO_ARRAY", getCategoryNoArrayString(categoryList));
 			} else {
 				sql = query.getProperty("selectList");
 			}
@@ -223,27 +218,18 @@ public class TotalReviewDao {
 		return review;
 	}
 
-	public Map<Integer, Integer> getCategoryListCount(Connection conn, List<Integer> categoryNumberList) {
+	public Map<Integer, Integer> getCategoryListCount(Connection conn, List<Integer> categoryList) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		Map<Integer, Integer> result = new HashMap<>();
 		String sql = query.getProperty("categoryListCount");
 		
-		for(int i : categoryNumberList) {
+		for(int i : categoryList) {
 			result.put(i, 0);
 		}
 		
 		try {
-			StringBuilder sb = new StringBuilder();
-
-			for(int i=0; i<categoryNumberList.size(); i++) {
-				if(i != 0) {
-					sb.append(",");
-				}
-				sb.append(categoryNumberList.get(i));
-			}
-
-			sql = sql.replace("CATEGORY_NO_ARRAY", sb.toString());
+			sql = sql.replace("CATEGORY_NO_ARRAY", getCategoryNoArrayString(categoryList));
 
 			pstmt = conn.prepareStatement(sql);
 			
