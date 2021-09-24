@@ -42,8 +42,6 @@
 			let categoryList = url.replace(url.slice(0, url.indexOf("?")+1), "").split(",");
 
 			for(let categoryName of categoryList) {
-				let categoryInput = category.querySelector("#" + categoryName);
-				categoryInput.classList.add("active");
 				categoryURLArray.push(categoryName);
 			}
 		}

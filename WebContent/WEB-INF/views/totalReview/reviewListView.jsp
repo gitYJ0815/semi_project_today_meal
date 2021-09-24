@@ -41,31 +41,31 @@
 						<h3>카테고리</h3>
 						<ul class="category">
 							<li>
-								<input type="checkbox" name="korean_food" id="korean_food">
+								<input type="checkbox" name="korean_food" id="korean_food" <c:if test="${ !empty categoryCountInfo['korean_food'] }">class="active"</c:if>>
 								<label for="korean_food">한식<span><c:if test="${ !empty categoryCountInfo['korean_food'] }">(${ categoryCountInfo["korean_food"] })</c:if></span></label>
 							</li>
 							<li>
-								<input type="checkbox" name="american_food" id="american_food">
+								<input type="checkbox" name="american_food" id="american_food" <c:if test="${ !empty categoryCountInfo['american_food'] }">class="active"</c:if>>
 								<label for="american_food">양식<span><c:if test="${ !empty categoryCountInfo['american_food'] }">(${ categoryCountInfo["american_food"] })</c:if></span></label>
 							</li>
 							<li>
-								<input type="checkbox" name="chinese_food" id="chinese_food">
+								<input type="checkbox" name="chinese_food" id="chinese_food" <c:if test="${ !empty categoryCountInfo['chinese_food'] }">class="active"</c:if>>
 								<label for="chinese_food">중식<span><c:if test="${ !empty categoryCountInfo['chinese_food'] }">(${ categoryCountInfo["chinese_food"] })</c:if></span></label>
 							</li>
 							<li>
-								<input type="checkbox" name="japanese_food" id="japanese_food">
+								<input type="checkbox" name="japanese_food" id="japanese_food" <c:if test="${ !empty categoryCountInfo['japanese_food'] }">class="active"</c:if>>
 								<label for="japanese_food">일식<span><c:if test="${ !empty categoryCountInfo['japanese_food'] }">(${ categoryCountInfo["japanese_food"] })</c:if></span></label>
 							</li>
 							<li>
-								<input type="checkbox" name="snack" id="snack">
+								<input type="checkbox" name="snack" id="snack" <c:if test="${ !empty categoryCountInfo['snack'] }">class="active"</c:if>>
 								<label for="snack">분식<span><c:if test="${ !empty categoryCountInfo['snack'] }">(${ categoryCountInfo["snack"] })</c:if></span></label>
 							</li>
 							<li>
-								<input type="checkbox" name="midnight_snack" id="midnight_snack">
+								<input type="checkbox" name="midnight_snack" id="midnight_snack" <c:if test="${ !empty categoryCountInfo['midnight_snack'] }">class="active"</c:if>>
 								<label for="midnight_snack">야식<span><c:if test="${ !empty categoryCountInfo['midnight_snack'] }">(${ categoryCountInfo["midnight_snack"] })</c:if></span></label>
 							</li>
 							<li>
-								<input type="checkbox" name="salad" id="salad">
+								<input type="checkbox" name="salad" id="salad" <c:if test="${ !empty categoryCountInfo['salad'] }">class="active"</c:if>>
 								<label for="salad">샐러드<span><c:if test="${ !empty categoryCountInfo['salad'] }">(${ categoryCountInfo["salad"] })</c:if></span></label>
 							</li>
 						</ul>
