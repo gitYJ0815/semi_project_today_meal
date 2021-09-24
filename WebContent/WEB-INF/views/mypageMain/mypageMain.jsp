@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <title>Today_meal</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
-<link href="<%= request.getContextPath() %>/resources/css/mypageMain/mypageMain.css?ver=1.5162" rel="stylesheet">
+<link href="<%= request.getContextPath() %>/resources/css/mypageMain/mypageMain.css?ver=1.5163" rel="stylesheet">
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
