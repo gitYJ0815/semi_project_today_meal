@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Today_meal</title>
-<link href="<%= request.getContextPath() %>/resources/css/salesAnalysis/salesAnalysis.css?ver=1.111" rel="stylesheet">
+<link href="<%= request.getContextPath() %>/resources/css/salesAnalysis/salesAnalysis.css?ver=1.112" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"
  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
