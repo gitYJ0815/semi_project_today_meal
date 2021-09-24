@@ -1,5 +1,7 @@
 package totalReview.model.dao;
 
+import static common.JDBCTemplate.close;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
@@ -12,11 +14,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
-import static common.JDBCTemplate.*;
-
-import totalReview.model.vo.Option;
-import totalReview.model.vo.Product;
+import common.model.vo.Option;
+import common.model.vo.Product;
 import totalReview.model.vo.Review;
+
 
 public class TotalReviewDao {
 	private Properties query = new Properties();
