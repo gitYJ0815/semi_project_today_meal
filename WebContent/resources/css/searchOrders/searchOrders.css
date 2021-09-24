@@ -1,6 +1,5 @@
 @charset "UTF-8";
-#container{
-	
+#container{	
     max-width: 1100px;
     margin: 0 auto;
     display: flex;
@@ -9,12 +8,12 @@
 }
 .myPageFrame{
     width: 888px;
-    min-height: 660px;
+    min-height: 850px;
 }
 .myPageWrapper{
     position: relative;
     width: 836px;
-    min-height: 650px;
+    min-height: 840px;
     left: 27px;
     top: 30px;
 }
@@ -37,17 +36,17 @@
 
 }
 .mpH2{
-    font-family: 'Noto Sans KR', sans-serif;
+    font-family: Noto Sans KR;
     font-style: normal;
     font-weight: bold;
     font-size: 20px;
     line-height: 29px;
     /* identical to box height */
 
-    letter-spacing: -0.02em;
+       letter-spacing: -0.02em;
 
-    color: #FFFFFF;
-}
+       color: #FFFFFF;
+   }
 .mpContent{
     width: 836px;
     min-height: 530px;
@@ -59,109 +58,131 @@
     text-align: center;
     padding-top: 13px;
 }
-.mpStatus{
+.mpSearchArea{
+    display: flex;
+    position: relative;
     width: 836px;
-    height: 150px;
-
+    height: 50px;
+    top: 25px;
+    align-items: center;
+    
+}
+.mpSearchArea form{
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    
 }
-.mpImg{
-    width: 80px;
-    height: 80px;
-}
-.mpPoint{
-    width: 50px;
-    height: 50px;
-}
-#mpCount1{
-    position: absolute;
-    left: 130px;
-    top: 145px;
+.yearDropdown{
 
-    box-sizing: border-box;
-    min-width: 29px;
-    padding: 0 5px;
-    height: 29px;
+    text-rendering: auto;
+    color: -internal-light-dark(black, white);
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
 
-    background-color: #A1AD61;
-    color: #ffffff;
-    border-radius: 15px;
+    display: inline-block;
+    width: 100px;
+    height: 32px;
+    padding-left: 16px;
     text-align: center;
-
-    font-family: 'Noto Sans KR', sans-serif;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 20px;
-    line-height: 29px;
-
-    letter-spacing: -0.02em;
-
-    /* white */
-
-    color: #FFFFFF;
-}
-#mpCount2{
-    position: absolute;
-    left: 460px;
-    top: 145px;
-
+    appearance: auto;
     box-sizing: border-box;
-    min-width: 29px;
-    padding: 0 5px;
-    height: 29px;
+    align-items: center;
+    white-space: pre;
+    -webkit-rtl-ordering: logical;
+    background-color: -internal-light-dark(rgb(255, 255, 255), rgb(59, 59, 59));
+    cursor: default;
+    margin: 0em;
+    margin-right: 10px;
 
-    background-color: #A1AD61;
-    color: #ffffff;
-    border-radius: 15px;
-    text-align: center;
+    border-radius: 0px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
+    border-image: initial;
 
-    font-family: 'Noto Sans KR', sans-serif;
+    font-family: Noto Sans KR;
     font-style: normal;
-    font-weight: bold;
-    font-size: 20px;
-    line-height: 29px;
-
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 23px;
     letter-spacing: -0.02em;
-
-    /* white */
-
-    color: #FFFFFF;
 }
-#mpCount3{
-    position: absolute;
-    left: 790px;
-    top: 145px;
+.monthDateDropdown{
 
+    text-rendering: auto;
+    color: -internal-light-dark(black, white);
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+
+    display: inline-block;
+    width: 60px;
+    height: 32px;
+    padding-left: 16px;
+    text-align: center;
+    appearance: auto;
     box-sizing: border-box;
-    min-width: 29px;
-    padding: 0 5px;
-    height: 29px;
+    align-items: center;
+    white-space: pre;
+    -webkit-rtl-ordering: logical;
+    background-color: -internal-light-dark(rgb(255, 255, 255), rgb(59, 59, 59));
+    cursor: default;
+    margin: 0em;
+    margin-left: 10px;
+    margin-right: 10px;
 
-    background-color: #A1AD61;
-    color: #ffffff;
-    border-radius: 15px;
-    text-align: center;
+    border-radius: 0px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
+    border-image: initial;
 
-    font-family: 'Noto Sans KR', sans-serif;
+    font-family: Noto Sans KR;
     font-style: normal;
-    font-weight: bold;
-    font-size: 20px;
-    line-height: 29px;
-
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 23px;
     letter-spacing: -0.02em;
-
-    /* white */
-
-    color: #FFFFFF;
 }
+#sBtn {
+
+    width: 68px;
+    height: 32px;
+    margin-left: 98px;
+    background-color: #A1AD61;
+    color: white;
+    border-width: 0px;
+    border-radius: 7px;
+
+    font-family: Noto Sans KR;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 100%;
+
+    align-items: center;
+    text-align: center;
+    letter-spacing: -0.5px;
+    text-transform: capitalize;
+    
+    cursor: pointer;
+}
+
 .mpTable{
+    position: relative;
     width: 836px;
     min-height: 250px;
+    top: 25px;
+    margin-bottom: 25px;
+
 }
 .mpTable table{
-    font-family: 'Noto Sans KR', sans-serif;
+	font-family: 'Noto Sans KR', sans-serif;
     font-style: normal;
     font-weight: normal;
     font-size: 14px;
@@ -173,8 +194,10 @@
     empty-cells:hide;
     border-collapse: collapse;
     
+    border: 1px solid black;
+    empty-cells:hide;
+    border-collapse: collapse;
 }
-
 .mpTable table thead tr th{
 	text-align: center;
     border: 1px solid black;
@@ -206,6 +229,7 @@
     border: 1px solid black;
     height: 100px;
     vertical-align: middle;
+    text-align: center;
     
 }
 .mpTable table tbody td img{
@@ -218,29 +242,6 @@
     display: flex;
     text-align: left;
     align-items: center;
-}
-.tableBtn{
-    display: block;
-    width: 68px;
-    height: 32px;
-    margin-left: 34px;
-    margin-top: 6px;
-    background-color: #A1AD61;
-    color: white;
-    border-radius: 7px;
-    border-width: 0px;
-    font-family: Noto Sans KR;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 12px;
-    line-height: 100%;
-       
-	cursor: pointer;
-	
-    align-items: center;
-    text-align: center;
-    letter-spacing: -0.5px;
-    text-transform: capitalize;
 }
   
 .board_paging {
@@ -269,33 +270,4 @@
 .board_paging a.current_page {
 	border-bottom: 2px solid #282A35;
 	font-weight: bold;
-}
-.mpTable table tbody td .reviewBox {
-	text-align: center;
-	display : block;
-}
-.mpTable table tbody td .reviewBox > .reviewBtn{
-	
-	display: block;
-    width: 68px;
-    height: 32px;
-	margin: 0 auto;
-    margin-top: 6px;
-    margin-bottom: 6px;
-    background-color: #A1AD61;
-    color: white;
-    border-radius: 7px;
-    border-width: 0px;
-    font-family: Noto Sans KR;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 12px;
-    line-height: 100%;
-       
-	cursor: pointer;
-	
-    align-items: center;
-    text-align: center;
-    letter-spacing: -0.5px;
-    text-transform: capitalize;
 }
