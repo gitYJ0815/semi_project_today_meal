@@ -8,9 +8,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import common.model.vo.Product;
 import common.paging.model.vo.PageInfo;
 import subpage.model.dao.ProductDao;
-import subpage.model.vo.Product;
 
 public class ProductService {
 	private ProductDao pd = new ProductDao();
