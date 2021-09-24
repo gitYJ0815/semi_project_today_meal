@@ -58,7 +58,7 @@
 							</li>
 							<li>
 								<input type="checkbox" name="snack" id="snack">
-								<label for="snack">분식<span></span><c:if test="${ !empty categoryCountInfo['snack'] }">(${ categoryCountInfo["snack"] })</c:if></label>
+								<label for="snack">분식<span><c:if test="${ !empty categoryCountInfo['snack'] }">(${ categoryCountInfo["snack"] })</c:if></span></label>
 							</li>
 							<li>
 								<input type="checkbox" name="midnight_snack" id="midnight_snack">
