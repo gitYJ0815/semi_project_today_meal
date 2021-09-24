@@ -7,7 +7,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import static common.JDBCTemplate.*;
@@ -29,14 +31,29 @@ public class TotalReviewDao {
 		}
 	}
 	
-	public int getListCount(Connection conn) {
+	public int getListCount(Connection conn, List<Integer> categoryList) {
 		PreparedStatement pstmt = null;
-		String sql = query.getProperty("listCount");
+		String sql = "";
 		ResultSet rset = null;
 		int result = 0;
 		
 		try {
-			pstmt = conn.prepareStatement(sql);
+			if(categoryList.size() > 0) {
+				sql = query.getProperty("categoryListTotalCount");
+				StringBuilder sb = new StringBuilder(" WHERE CATEGORY_NO IN (");
+
+				for(int i=0; i<categoryList.size(); i++) {
+					if(i != 0) {
+						sb.append(",");
+					}
+					sb.append(categoryList.get(i));
+				}
+				sb.append(")");
+				sql += sb.toString();
+			} else {
+				sql = query.getProperty("listCount");
+			}
+			pstmt = conn.prepareStatement(sql);	
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
@@ -51,13 +68,29 @@ public class TotalReviewDao {
 		return result;
 	}
 
-	public List<Review> selectList(Connection conn, int page) {
+	public List<Review> selectList(Connection conn, int page, List<Integer> categoryList) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		List<Review> reviewList = new ArrayList<>();
-		String sql = query.getProperty("selectList");
+		String sql = "";
 		
 		try {
+			if(categoryList.size() > 0) {
+				sql = query.getProperty("selectCategoryList");
+				StringBuilder sb = new StringBuilder();
+
+				for(int i=0; i<categoryList.size(); i++) {
+					if(i != 0) {
+						sb.append(",");
+					}
+					sb.append(categoryList.get(i));
+				}
+
+				sql = sql.replace("CATEGORY_NO_ARRAY", sb.toString());
+			} else {
+				sql = query.getProperty("selectList");
+			}
+
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, (page-1)*9+1);
 			pstmt.setInt(2, page*9);
@@ -188,5 +221,44 @@ public class TotalReviewDao {
 		}
 
 		return review;
+	}
+
+	public Map<Integer, Integer> getCategoryListCount(Connection conn, List<Integer> categoryNumberList) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Map<Integer, Integer> result = new HashMap<>();
+		String sql = query.getProperty("categoryListCount");
+		
+		for(int i : categoryNumberList) {
+			result.put(i, 0);
+		}
+		
+		try {
+			StringBuilder sb = new StringBuilder();
+
+			for(int i=0; i<categoryNumberList.size(); i++) {
+				if(i != 0) {
+					sb.append(",");
+				}
+				sb.append(categoryNumberList.get(i));
+			}
+
+			sql = sql.replace("CATEGORY_NO_ARRAY", sb.toString());
+
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				result.put(rset.getInt(1), rset.getInt(2));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return result;
 	}
 }

@@ -5,6 +5,21 @@
         SELECT COUNT(*)
 		  FROM REVIEW
 	</entry>
+	<entry key="categoryListTotalCount">
+        SELECT
+		       COUNT(REVIEW_NO)
+		  FROM PRODUCT P
+		  JOIN REVIEW ON(P.PRODUCT_NO = REVIEW.PRODUCT_NO)
+	</entry>
+	<entry key="categoryListCount">
+       SELECT
+		       CATEGORY_NO
+		     , COUNT(REVIEW_NO)
+		  FROM PRODUCT P
+		  JOIN REVIEW ON(P.PRODUCT_NO = REVIEW.PRODUCT_NO)
+		 WHERE CATEGORY_NO IN (CATEGORY_NO_ARRAY)
+		 GROUP BY CATEGORY_NO
+	</entry>
 	<entry key="selectList">
 		SELECT 
 		       REVIEW_NO
@@ -23,6 +38,30 @@
 		                        FROM (SELECT ROWNUM RNUM, R.*
 		                                FROM (SELECT REVIEW_NO
 		                                        FROM REVIEW
+		                                       ORDER BY REVIEW_NO DESC) R)
+		                       WHERE RNUM BETWEEN ? AND ?)
+ 		 ORDER BY REVIEW_NO DESC
+	</entry>
+	<entry key="selectCategoryList">
+		 SELECT 
+		        REVIEW_NO
+		      , PRODUCT_NAME
+		      , REVIEW_IMAGE
+ 		      , POINT
+		      , ORDER_SUM
+		      , PRODUCT_IMG
+		      , PRODUCT_BUY_QUANTITY
+		      , PRODUCT_INVENTORY_QUANTITY
+		      , OPTION_NAME
+		      , OPTION_BUY_QUANTITY
+		      , OPTION_INVENTORY_QUANTITY
+		   FROM REVIEW_INFORMATION
+		  WHERE REVIEW_NO IN (SELECT REVIEW_NO
+		                        FROM (SELECT ROWNUM RNUM, R.*
+		                                FROM (SELECT REVIEW_NO
+		                                        FROM REVIEW
+		                                        JOIN PRODUCT USING(PRODUCT_NO)
+		                                       WHERE CATEGORY_NO IN (CATEGORY_NO_ARRAY)
 		                                       ORDER BY REVIEW_NO DESC) R)
 		                       WHERE RNUM BETWEEN ? AND ?)
  		 ORDER BY REVIEW_NO DESC

@@ -4,14 +4,19 @@
 
 (function() {
 	let body = document.querySelector("body"),
+		container = body.querySelector("#container"),
 		dimmed = body.querySelector(".dimmed"),
 		modal = dimmed.querySelector("#modal");
 	
 	let detailReviewInner = modal.querySelector(".detail_review_inner");
 
-	let resultArea = body.querySelector(".result_area"),
+	let resultOption = container.querySelector(".result_option"),
+		resultCount = resultOption.querySelector("span");
+
+	let resultArea = container.querySelector(".result_area"),
 		filter = resultArea.querySelector(".filter"),
 		category = filter.querySelector(".category"),
+		categoryCheckBox = category.querySelectorAll("input"),
 		result = resultArea.querySelector(".result"),
 		resultList = result.querySelector(".result_list"),
 		moreButton = resultArea.querySelector(".more_button"),
@@ -19,19 +24,98 @@
 		page = form.querySelector("#page"),
 		allItemCount = form.querySelector("#all_item_count"),
 		itemCount = form.querySelector("#item_count");
+	
+	let categoryURLArray = [];
 
 	function init() {
 		category.addEventListener("change", categoryChangeEventHandler);
 		result.addEventListener("click", resultClickEventHandler);
 		modal.addEventListener("click", modalClickEventListener);
+		categoryInit();
+	}
+	
+	function categoryInit() {
+		let url = window.location.href;
+
+		if(url.indexOf("?") > 0) {
+			url = url.replace("categoryList=", "");
+			let categoryList = url.replace(url.slice(0, url.indexOf("?")+1), "").split(",");
+
+			for(let categoryName of categoryList) {
+				let categoryInput = category.querySelector("#" + categoryName);
+				categoryInput.classList.add("active");
+				categoryURLArray.push(categoryName);
+			}
+		}
 	}
 
 	function categoryChangeEventHandler(e) {
 		if(e.target.tagName == "INPUT") {
 			if(e.target.classList.contains("active")) {
 				e.target.classList.remove("active");
+				
+				let index = categoryURLArray.indexOf(e.target.name);
+				if(index > -1) {
+					categoryURLArray.splice(index, 1);
+				}
 			} else {
+				categoryURLArray.push(e.target.name);
 				e.target.classList.add("active");
+			}
+			updateResultList();
+		}
+	}
+	
+	function updateResultList() {
+		let xhr = new XMLHttpRequest();
+		
+		xhr.onreadystatechange = function() {
+			if(xhr.readyState == 4) {
+				if((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
+					let responseTextJson = JSON.parse(xhr.responseText);
+					resultCount.innerHTML = responseTextJson.listCount;
+					page.value = 1;
+					allItemCount.value = responseTextJson.listCount;
+					itemCount.value = responseTextJson.reviewList.length;
+					
+					resultList.innerHTML = "";
+					if(itemCount.value > 0) {
+						result.classList.remove("empty_result");
+						appendCard(responseTextJson.reviewList);
+						updateCategoryCount(responseTextJson.categoryCountInfo);
+						if(itemCount.value == allItemCount.value) {
+							moreButton.classList.add("hidden");
+						} else {
+							moreButton.classList.remove("hidden");
+						}
+					} else {
+						result.classList.add("empty_result");
+						resultList.insertAdjacentHTML("beforeend", "<li>아직 등록된 리뷰가 없습니다.</li>");
+					}
+				} else {
+					console.log("ajax 통신 실패");
+				}
+			}
+		}
+		
+		if(categoryURLArray.length > 0) {
+			history.replaceState(null, null, "?categoryList=" + categoryURLArray);	
+		} else {
+			let url = window.location.href;
+			history.replaceState(null, null, url.replace(url.slice(url.indexOf("?")), ""));
+		}
+
+		xhr.open("POST", "categoryList");
+		xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded;");
+		xhr.send("categoryList="+categoryURLArray);
+	}
+	
+	function updateCategoryCount(categoryCount) {
+		for(let checkBox of categoryCheckBox) {
+			if(categoryCount[checkBox.name] != undefined) {
+				checkBox.closest("li").querySelector("span").innerHTML = "(" + categoryCount[checkBox.name] + ")"; 
+			} else {
+				checkBox.closest("li").querySelector("span").innerHTML = "";
 			}
 		}
 	}

@@ -42,31 +42,31 @@
 						<ul class="category">
 							<li>
 								<input type="checkbox" name="korean_food" id="korean_food">
-								<label for="korean_food">한식<span></span></label>
+								<label for="korean_food">한식<span><c:if test="${ !empty categoryCountInfo['korean_food'] }">(${ categoryCountInfo["korean_food"] })</c:if></span></label>
 							</li>
 							<li>
 								<input type="checkbox" name="american_food" id="american_food">
-								<label for="american_food">양식<span></span></label>
+								<label for="american_food">양식<span><c:if test="${ !empty categoryCountInfo['american_food'] }">(${ categoryCountInfo["american_food"] })</c:if></span></label>
 							</li>
 							<li>
 								<input type="checkbox" name="chinese_food" id="chinese_food">
-								<label for="chinese_food">중식<span></span></label>
+								<label for="chinese_food">중식<span><c:if test="${ !empty categoryCountInfo['chinese_food'] }">(${ categoryCountInfo["chinese_food"] })</c:if></span></label>
 							</li>
 							<li>
 								<input type="checkbox" name="japanese_food" id="japanese_food">
-								<label for="japanese_food">일식<span></span></label>
+								<label for="japanese_food">일식<span><c:if test="${ !empty categoryCountInfo['japanese_food'] }">(${ categoryCountInfo["japanese_food"] })</c:if></span></label>
 							</li>
 							<li>
 								<input type="checkbox" name="snack" id="snack">
-								<label for="snack">분식<span></span></label>
+								<label for="snack">분식<span></span><c:if test="${ !empty categoryCountInfo['snack'] }">(${ categoryCountInfo["snack"] })</c:if></label>
 							</li>
 							<li>
 								<input type="checkbox" name="midnight_snack" id="midnight_snack">
-								<label for="midnight_snack">야식<span></span></label>
+								<label for="midnight_snack">야식<span><c:if test="${ !empty categoryCountInfo['midnight_snack'] }">(${ categoryCountInfo["midnight_snack"] })</c:if></span></label>
 							</li>
 							<li>
 								<input type="checkbox" name="salad" id="salad">
-								<label for="salad">샐러드<span></span></label>
+								<label for="salad">샐러드<span><c:if test="${ !empty categoryCountInfo['salad'] }">(${ categoryCountInfo["salad"] })</c:if></span></label>
 							</li>
 						</ul>
 					</div>
