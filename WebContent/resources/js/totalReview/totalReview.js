@@ -82,7 +82,6 @@
 					if(itemCount.value > 0) {
 						result.classList.remove("empty_result");
 						appendCard(responseTextJson.reviewList);
-						updateCategoryCount(responseTextJson.categoryCountInfo);
 						moreButton.removeAttribute("disabled");
 						if(itemCount.value == allItemCount.value) {
 							moreButton.classList.add("hidden");
@@ -93,6 +92,7 @@
 						result.classList.add("empty_result");
 						resultList.insertAdjacentHTML("beforeend", "<li>아직 등록된 리뷰가 없습니다.</li>");
 					}
+					updateCategoryCount(responseTextJson.categoryCountInfo);
 				} else {
 					console.log("ajax 통신 실패");
 				}
