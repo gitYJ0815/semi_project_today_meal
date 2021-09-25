@@ -34,8 +34,13 @@
     margin-right: 10px;
     background: white;
 }
-.input_area input {
+/*.input_area input {
     width: 240px;
+    height: 20px;
+    border: 0px;
+}*/
+.inputSearch {
+	 width: 240px;
     height: 20px;
     border: 0px;
 }

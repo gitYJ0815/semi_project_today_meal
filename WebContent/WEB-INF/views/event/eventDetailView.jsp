@@ -19,7 +19,7 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 <jsp:include page="/WEB-INF/views/common/top.jsp" />
 	<div id="container">
-            <h2 style="font-weight:bold; font-size:34px">진행중인 이벤트</h2>
+            <h2 style="font-size:34px; margin-top : 15px; margin-bottom:10px;">진행중인 이벤트</h2>
             <div class="notice_content">
                 <div class="subject">
                     <span>제목 :  ${event.event_title } </span> 
@@ -36,6 +36,7 @@
             <form name="eventForm" method="post">
 				<input type="hidden" name="eno" value="${ e.eventNo }">
 			</form>    
+        <jsp:include page="/WEB-INF/views/common/footer.jsp" />
         </div>
 </body>
 </html>
