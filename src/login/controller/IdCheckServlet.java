@@ -1,27 +1,27 @@
 package login.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
+import login.model.service.MemberService;
 
 /**
- * Servlet implementation class FindIdServlet
+ * Servlet implementation class IdCheckServlet
  */
-@WebServlet("/findId")
-public class FindIdServlet extends HttpServlet {
+@WebServlet("/idCheck")
+public class IdCheckServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FindIdServlet() {
+    public IdCheckServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,8 +30,18 @@ public class FindIdServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/login/findidpage.jsp");
-		view.forward(request, response);
+		String userId = request.getParameter("userId");
+		// 중복 아이디가 있으면 1, 없으면 0 리턴
+		int result = new MemberService().idCheck(userId);
+		
+		PrintWriter out = response.getWriter();
+		
+		if(result > 0) {
+			out.print("fail");
+		} else {
+			out.print("success");
+		}
+	
 	}
 
 	/**
@@ -40,7 +50,6 @@ public class FindIdServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
-	}	
-		
-	
+	}
+
 }
