@@ -27,6 +27,7 @@
                <img id="kakaojoin" src="<%= request.getContextPath() %>/resources/images/login/kakaojoin.png">
            </a>
      </form>
+     <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
 </body>
 </html>

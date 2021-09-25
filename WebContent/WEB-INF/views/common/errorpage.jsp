@@ -25,9 +25,9 @@
 <body>
    <%@ include file="/WEB-INF/views/common/header.jsp" %>
    <div id="imageArea">
-       <img id="errorImage" src="<%= request.getContextPath() %>/resources/images/common/error.png">
+       <img id="errorImage" src="<%= request.getContextPath() %>/resources/images/common/errorPage/error.png">
    </div>
-   <h1 align="center"><%= message %></h1>
+   <h1 align="center" ><%= message %></h1>
 
 </body>
 </html>
