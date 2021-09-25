@@ -1,8 +1,13 @@
 @charset "UTF-8";
 
+#container a {
+	text-decoration: none;
+	color: #000;
+}
+
 #container {
 	width : 1100px;
-	margin : 0 auto;
+	margin : 61px auto 0;
 }
 
 #container h2 {
@@ -48,8 +53,6 @@
 	width : 100%;
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: space-between;
-
 }
 
 .result_list ul > .card {
@@ -57,6 +60,11 @@
 	font-size: 14px;
 	box-sizing: border-box;
 	padding-bottom: 30px;
+	margin-right: 20px;
+}
+
+.result_list ul > .card:nth-child(4n) {
+	margin-right: 0;
 }
 
 .result_list ul > .card a {

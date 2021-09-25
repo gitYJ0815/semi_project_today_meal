@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="login.model.vo.Member"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+    Member loginUser = (Member)session.getAttribute("loginUser");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,21 +27,28 @@
             <button id="searchBtn">검색</button>
         </div>
         <div class="btnArea">
+            <% if(loginUser == null){ %>
             <a href="<%= request.getContextPath() %>/login">로그인</a>
             <a href="<%= request.getContextPath() %>/memberjoin">회원가입</a>
             <a href="#">FAQ</a>
             <a href="#">장바구니</a>
+            <% } else { %>
+            <a href="<%= request.getContextPath() %>/logout">로그아웃</a>
+            <a href="#">마이페이지</a>
+            <a href="#">FAQ</a>
+            <a href="#">장바구니</a>
+            <% } %>
         </div>
     </header>
     <nav id="nav">
         <ul>
-           <li><a href="#">한식</a></li>
-           <li><a href="#">양식</a></li>
-           <li><a href="#">중식</a></li>
-           <li><a href="#">일식</a></li>
-           <li><a href="#">분식</a></li>
-           <li><a href="#">양식</a></li>
-           <li><a href="#">샐러드</a></li>
+           <li><a href="${ contextPath }/product/list?cno=1">한식</a></li>
+           <li><a href="${ contextPath }/product/list?cno=2">양식</a></li>
+           <li><a href="${ contextPath }/product/list?cno=3">중식</a></li>
+           <li><a href="${ contextPath }/product/list?cno=4">일식</a></li>
+           <li><a href="${ contextPath }/product/list?cno=5">분식</a></li>
+           <li><a href="${ contextPath }/product/list?cno=6">양식</a></li>
+           <li><a href="${ contextPath }/product/list?cno=7">샐러드</a></li>
            <li><a href="#">리뷰</a></li>
            <li><a href="#">이벤트</a></li>
         </ul>

@@ -46,8 +46,15 @@ outline: none;
 float: right;
 color: #FFFFFF;
 }
-button{
-	outline: none;
+
+button {
+   background: inherit;
+   border:none;
+   box-shadow:none;
+   border-radius:0px;
+   padding:0;
+   overflow:visible;
+   cursor:pointer;
 }
 
 #header .btnArea {
@@ -64,7 +71,7 @@ button{
 	display:block;
 	margin : 10px;
 	color: #294401;
-	width : 50px;
+	width : 60px;
 	text-align : center;
 	
  line-height: 45px;
