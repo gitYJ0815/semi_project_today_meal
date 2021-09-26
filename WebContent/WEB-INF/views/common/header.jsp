@@ -26,7 +26,7 @@
         <div class="btnArea">
             <a href="<%= request.getContextPath() %>/login">로그인</a>
             <a href="<%= request.getContextPath() %>/memberjoin">회원가입</a>
-            <a href="#">FAQ</a>
+            <a href="<%= request.getContextPath() %>/faq/list">FAQ</a>
             <a href="#">장바구니</a>
         </div>
     </header>
