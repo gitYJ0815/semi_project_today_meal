@@ -44,7 +44,7 @@ public class ProductUpdateViewServlet extends HttpServlet {
 		
 		if(p != null) {
 			request.setAttribute("product", p);
-			request.getRequestDispatcher("/WEB-INF/views/product/productUpdateView.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/views/productUpdate/productUpdateView.jsp").forward(request, response);
 		} else {
 			request.setAttribute("msg", "수정할 상품 정보를 불러오는데 실패하였습니다.");
 			request.getRequestDispatcher("/WEB-INF/views/common/errorpage.jsp").forward(request, response);

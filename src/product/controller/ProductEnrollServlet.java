@@ -41,7 +41,7 @@ public class ProductEnrollServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/views/product/productEnrollView.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/productEnroll/productEnrollView.jsp").forward(request, response);
 	}
 
 	/**
