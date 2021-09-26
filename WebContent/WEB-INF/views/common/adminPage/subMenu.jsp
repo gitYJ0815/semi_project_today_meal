@@ -16,15 +16,15 @@
 		<li>
 			<span>상품 관리</span>
 			<ul class="depth_2">
-				<li><a href="#">상품 등록</a></li>
-				<li><a href="#">상품 조회/수정</a></li>
+				<li><a href="<%= request.getContextPath() %>/product/enroll">상품 등록</a></li>
+				<li><a href="<%= request.getContextPath() %>/product/list">상품 조회/수정</a></li>
 			</ul>
 		</li>
 		<li><a href="#"><span>재고 관리</span></a></li>
 		<li>
 			<span>문의 관리</span>
 			<ul class="depth_2">
-				<li><a href="#">FAQ 관리</a></li>
+				<li><a href="<%= request.getContextPath() %>/faq/insert">FAQ 관리</a></li>
 				<li><a href="#">1:1 문의 관리</a></li>
 			</ul>
 		</li>
