@@ -12,18 +12,18 @@ import static common.JDBCTemplate.*;
 public class TotalReviewService {
 	private TotalReviewDao trd = new TotalReviewDao();
 	
-	public int getListCount(List<Integer> categoryList) {
+	public int getListCount(List<Integer> categoryList, String keyword) {
 		Connection conn = getConnection();
-		int result = trd.getListCount(conn, categoryList);
+		int result = trd.getListCount(conn, categoryList, keyword);
 
 		close(conn);
 		
 		return result;
 	}
 
-	public List<Review> selectList(int page, List<Integer> categoryList, String st) {
+	public List<Review> selectList(int page, List<Integer> categoryList, String st, String keyword) {
 		Connection conn = getConnection();
-		List<Review> reviewList = trd.selectList(conn, page, categoryList, st);
+		List<Review> reviewList = trd.selectList(conn, page, categoryList, st, keyword);
 		
 		close(conn);
 		
@@ -40,10 +40,10 @@ public class TotalReviewService {
 		return review;
 	}
 
-	public Map<Integer, Integer> getCategoryListCount(List<Integer> categoryNumberList) {
+	public Map<Integer, Integer> getCategoryListCount(List<Integer> categoryNumberList, String keyword) {
 		Connection conn = getConnection();
 		
-		Map<Integer, Integer> result = trd.getCategoryListCount(conn, categoryNumberList);
+		Map<Integer, Integer> result = trd.getCategoryListCount(conn, categoryNumberList, keyword);
 
 		close(conn);
 

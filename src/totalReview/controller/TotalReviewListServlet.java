@@ -37,6 +37,7 @@ public class TotalReviewListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int page = 1;
 		int listCount = 0;
+		String keyword = request.getParameter("keyword") == null ? "" : request.getParameter("keyword");
 		TotalReviewService trs = new TotalReviewService();
 		
 		String categoryParameter = request.getParameter("categoryList");
@@ -50,14 +51,14 @@ public class TotalReviewListServlet extends HttpServlet {
 				categoryNumberList.add(TotalReviewCommon.CATEGORY_MAP.get(category));
 			}
 		} else {
-			listCount = trs.getListCount(categoryNumberList);
+			listCount = trs.getListCount(categoryNumberList, keyword);
 		}
 		
-		List<Review> reviewList = trs.selectList(page, categoryNumberList, "recent");
+		List<Review> reviewList = trs.selectList(page, categoryNumberList, "recent", keyword);
 		Map<String, Integer> categoryCountMap = new HashMap<>();
 
 		if(categoryList != null) {
-			Map<Integer, Integer> categoryCountMapTemp = trs.getCategoryListCount(categoryNumberList);
+			Map<Integer, Integer> categoryCountMapTemp = trs.getCategoryListCount(categoryNumberList, keyword);
 
 			for(String category : categoryList) {
 				int count = categoryCountMapTemp.get(TotalReviewCommon.CATEGORY_MAP.get(category));

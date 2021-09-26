@@ -46,6 +46,7 @@ public class TotalReviewListMoreServlet extends HttpServlet {
 		
 		int page = Integer.parseInt(request.getParameter("page"));
 		String st = request.getParameter("st");
+		String keyword = request.getParameter("keyword") == null ? "" : request.getParameter("keyword");
 
 		String categoryParameter = request.getParameter("categoryList");
 		List<Integer> categoryNumberList = new ArrayList<>();
@@ -58,7 +59,7 @@ public class TotalReviewListMoreServlet extends HttpServlet {
 			}
 		}
 		
-		List<Review> reviewList = new TotalReviewService().selectList(page, categoryNumberList, st);
+		List<Review> reviewList = new TotalReviewService().selectList(page, categoryNumberList, st, keyword);
 
 		response.setContentType("application/json; charset=utf-8");
 		new Gson().toJson(reviewList, response.getWriter());

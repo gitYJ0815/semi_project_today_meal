@@ -16,6 +16,9 @@
 
 	let resultArea = container.querySelector(".result_area"),
 		filter = resultArea.querySelector(".filter"),
+		search = filter.querySelector(".search"),
+		searchInput = search.querySelector("input"),
+		searchButton = filter.querySelector("button"),
 		category = filter.querySelector(".category"),
 		categoryCheckBox = category.querySelectorAll("input"),
 		result = resultArea.querySelector(".result"),
@@ -30,22 +33,32 @@
 
 	function init() {
 		category.addEventListener("change", categoryChangeEventHandler);
+		searchButton.addEventListener("click", searchButtonClickEventHandler);
 		result.addEventListener("click", resultClickEventHandler);
 		modal.addEventListener("click", modalClickEventListener);
 		resultOrderSelect.addEventListener("change", resultOrderChangeEventHandler);
 		categoryInit();
+		searchInputInit();
 	}
 	
 	function categoryInit() {
-		let url = window.location.href;
+		let queryString = window.location.href.split("?")[1];
 
-		if(url.indexOf("?") > 0) {
-			url = url.replace("categoryList=", "");
-			let categoryList = url.replace(url.slice(0, url.indexOf("?")+1), "").split(",");
+		if(queryString != undefined && queryString.indexOf("categoryList") >= 0) {
+			queryString = queryString.split("&")[0].replace("categoryList=", "");
+			let categoryList = queryString.split(",");
 
 			for(let categoryName of categoryList) {
 				categoryURLArray.push(categoryName);
 			}
+		}
+	}
+	
+	function searchInputInit() {
+		let queryString = window.location.href.split("keyword=")[1];
+
+		if(queryString != undefined) {
+			searchInput.value = decodeURI(queryString);
 		}
 	}
 
@@ -62,14 +75,37 @@
 				categoryURLArray.push(e.target.name);
 				e.target.classList.add("active");
 			}
-			updateResultList(resultOrderSelect.value);
+			updateResultList(resultOrderSelect.value, searchInput.value);
 		}
 	}
 	
-	function updateResultList(st) {
+	function searchButtonClickEventHandler() {
+		updateResultList();
+	}
+
+	function updateURL() {
+		let originURL = window.location.href.split("?")[0];
+
+		if(categoryURLArray.length > 0 || searchInput.value != "") {
+			let query = createQuery("", "categoryList", categoryURLArray);
+			query = createQuery(query, "keyword", searchInput.value);
+
+			history.replaceState(null, null, originURL + "?" + query);
+		} else {
+			let url = window.location.href;
+
+			if(url.indexOf("?") > 0) {
+				history.replaceState(null, null, originURL);
+			}
+		}
+	}
+	
+	function updateResultList(st, keyword) {
 		let xhr = new XMLHttpRequest();
 		let query = createQuery("", "categoryList", categoryURLArray);
-		query = createQuery(query, "st", st);
+		query = createQuery(query, "st", resultOrderSelect.value);
+		query = createQuery(query, "keyword", searchInput.value);
+		console.log(query);
 
 		xhr.onreadystatechange = function() {
 			if(xhr.readyState == 4) {
@@ -101,14 +137,7 @@
 			}
 		}
 		
-		if(categoryURLArray.length > 0) {
-			history.replaceState(null, null, "?categoryList=" + categoryURLArray);	
-		} else {
-			let url = window.location.href;
-			if(url.indexOf("?") > 0) {
-				history.replaceState(null, null, url.replace(url.slice(url.indexOf("?")), ""));
-			}
-		}
+		updateURL();
 
 		xhr.open("POST", "categoryList");
 		xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded;");
@@ -236,6 +265,7 @@
 		let query = createQuery("", "page", pageValue);
 		query = createQuery(query, "categoryList", categoryURLArray);
 		query = createQuery(query, "st", resultOrderSelect.value);
+		query = createQuery(query, "keyword", searchInput.value);
 		
 		let xhr = new XMLHttpRequest();
 		
@@ -263,8 +293,10 @@
 	}
 	
 	function createQuery(query, key, value) {
-		query += query.length > 0 ? "&" : "";
-		query += key + "=" + value;
+		console.log(value);
+		if(value != "") {
+			query += ((query.length > 0) ? "&" : "") + key + "=" + value;
+		}
 
 		return query;
 	}
@@ -392,7 +424,7 @@
 		}
 		resultOrderSelect.querySelector("option[value=" + e.target.value + "]").setAttribute("selected", true);
 
-		updateResultList(e.target.value);
+		updateResultList(e.target.value, searchInput.value);
 	}
 
 	window.addEventListener("DOMContentLoaded", init);

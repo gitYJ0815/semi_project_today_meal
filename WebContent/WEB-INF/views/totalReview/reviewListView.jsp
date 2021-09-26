@@ -33,8 +33,8 @@
 			<div class="filter">
 				<div class="filter_inner">
 					<h2 class="blind">리뷰 검색</h2>
-					<div>
-						<input type="text" placeholder="상품명, 내용" class="search_input">
+					<div class="search">
+						<input type="text" placeholder="상품명, 내용">
 						<button type="button">검색</button>
 					</div>
 					<div>

@@ -45,7 +45,7 @@ public class TotalReviewDao {
 		return sb.toString();
 	}
 	
-	public int getListCount(Connection conn, List<Integer> categoryList) {
+	public int getListCount(Connection conn, List<Integer> categoryList, String keyword) {
 		PreparedStatement pstmt = null;
 		String sql = "";
 		ResultSet rset = null;
@@ -55,6 +55,11 @@ public class TotalReviewDao {
 			if(categoryList.size() > 0) {
 				sql = query.getProperty("categoryListTotalCount");
 				sql = sql.replace("CATEGORY_NO_ARRAY", getCategoryNoArrayString(categoryList));
+				if(keyword.equals("")) {
+					sql = sql.replace("AND REVIEW_TEXT LIKE '%KEYWORD%' OR PRODUCT_NAME LIKE '%KEYWORD%'", "");
+				} else {
+					sql = sql.replace("KEYWORD", keyword);
+				}
 			} else {
 				sql = query.getProperty("listCount");
 			}
@@ -73,18 +78,22 @@ public class TotalReviewDao {
 		return result;
 	}
 
-	public List<Review> selectList(Connection conn, int page, List<Integer> categoryList, String st) {
+	public List<Review> selectList(Connection conn, int page, List<Integer> categoryList, String st, String keyword) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		List<Review> reviewList = new ArrayList<>();
 		String sql = "";
 		
 		try {
+			String keywordReplaceSql = "";
+
 			if(categoryList.size() > 0) {
 				sql = query.getProperty("selectCategoryList");
 				sql = sql.replace("CATEGORY_NO_ARRAY", getCategoryNoArrayString(categoryList));
+				keywordReplaceSql = "AND REVIEW_TEXT LIKE '%KEYWORD%' OR PRODUCT_NAME LIKE '%KEYWORD%'";
 			} else {
 				sql = query.getProperty("selectList");
+				keywordReplaceSql = "WHERE REVIEW_TEXT LIKE '%KEYWORD%' OR PRODUCT_NAME LIKE '%KEYWORD%'";
 			}
 			
 			String orderStatus = ""; 
@@ -95,12 +104,19 @@ public class TotalReviewDao {
 				case "lowprice" : orderStatus = "ORDER_SUM ASC"; break;
 				default : orderStatus = "REVIEW_NO DESC"; break;
 			}
-			
 			sql = sql.replace("ORDER_STATUS", orderStatus);
+
+			if(keyword.equals("")) {
+				sql = sql.replace(keywordReplaceSql, "");
+			} else {
+				sql = sql.replace("KEYWORD", keyword);
+			}
 
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, (page-1)*9+1);
 			pstmt.setInt(2, page*9);
+			
+			System.out.println(sql);
 			
 			rset = pstmt.executeQuery();
 			
@@ -230,7 +246,7 @@ public class TotalReviewDao {
 		return review;
 	}
 
-	public Map<Integer, Integer> getCategoryListCount(Connection conn, List<Integer> categoryList) {
+	public Map<Integer, Integer> getCategoryListCount(Connection conn, List<Integer> categoryList, String keyword) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		Map<Integer, Integer> result = new HashMap<>();
@@ -242,6 +258,12 @@ public class TotalReviewDao {
 		
 		try {
 			sql = sql.replace("CATEGORY_NO_ARRAY", getCategoryNoArrayString(categoryList));
+
+			if(keyword.equals("")) {
+				sql = sql.replace("AND REVIEW_TEXT LIKE '%KEYWORD%' OR PRODUCT_NAME LIKE '%KEYWORD%'", "");
+			} else {
+				sql = sql.replace("KEYWORD", keyword);
+			}
 
 			pstmt = conn.prepareStatement(sql);
 			
