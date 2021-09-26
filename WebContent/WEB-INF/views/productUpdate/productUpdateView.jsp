@@ -111,7 +111,7 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
                 	<img id="pro_img" src="${ contextPath }/resources/uploadFiles/product/${ product.pDetail }">
               	</div>
 			 	<div class="btn_area">
-					<button type="submit" id="btn1">등록</button>
+					<button type="submit" id="btn1">수정</button>
 					<button type="button" id="btn2">취소</button>
 				</div>
 			</div><!-- inner -->

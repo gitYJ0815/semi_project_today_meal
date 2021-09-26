@@ -110,6 +110,23 @@ public class ProductService {
 		return p;
 	}
 
+	// 상품 수정
+	public int updateProduct(Product p) {
+		Connection conn = getConnection();
+		
+		int result1 = pd.updateProduct(conn, p);
+		int result2 = pd.updateOptionType(conn, p.getOptionTypeList());
+		int result3 = pd.updateOpt(conn, p.getOptionList());
+		
+		if(result1 > 0 && result2 == p.getOptionTypeList().size() && result3 == p.getOptionList().size()) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		return result1 > 0 && result2 == p.getOptionTypeList().size() && result3 == p.getOptionList().size() ? 1 : 0;
+	}
+
 
 
 

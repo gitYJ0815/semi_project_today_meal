@@ -131,4 +131,27 @@
 		   AND O.STATUS = 'Y'
 		 ORDER BY OPTION_TYPE_NO
 	</entry>
+	
+	<entry key="updateProduct">
+		UPDATE PRODUCT
+		   SET PRODUCT_NAME = ?
+		     , PRODUCT_IMG = ?
+		     , PRODUCT_PRICE = ?
+		     , PRODUCT_DETAIL = ?
+		     , CATEGORY_NO = ?
+		 WHERE PRODUCT_NO = ?
+	</entry>
+	
+	<entry key="updateOptionType">
+		UPDATE OPTION_TYPE
+		   SET OPTION_TYPE = ?
+		 WHERE PRODUCT_NO = SEQ_PNO.CURRVAL
+	</entry>
+	
+	<entry key="updateOpt">
+		UPDATE OPT
+		   SET OPTION_NAME = ?
+		     , OPTION_PRICE = ?
+		 WHERE OPTION_TYPE_NO = SEQ_TNO.CURRVAL
+	</entry>
 </properties>

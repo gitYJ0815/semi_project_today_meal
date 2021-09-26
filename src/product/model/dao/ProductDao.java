@@ -302,5 +302,23 @@ public class ProductDao {
 		return p;
 	}
 
+	// 상품 수정
+	public int updateProduct(Connection conn, Product p) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	// 상품 옵션명 수정
+	public int updateOptionType(Connection conn, List<String> optionTypeList) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	// 상품 옵션값, 옵션가격 수정
+	public int updateOpt(Connection conn, List<Option> optionList) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 	
 }
