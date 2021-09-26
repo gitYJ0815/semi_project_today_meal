@@ -20,11 +20,11 @@
 				</div>
 				<div>
 					<select>
-						<option>최신순</option>
-						<option>인기순</option>
-						<option>별점 높은순</option>
-						<option>높은 가격순</option>
-						<option>낮은 가격순</option>
+						<option value="recent" selected>최신순</option>
+						<option value="popular">인기순</option>
+						<option value="satisfaction">별점 높은순</option>
+						<option value="hightprice">높은 가격순</option>
+						<option value="lowprice">낮은 가격순</option>
 					</select>
 				</div>
 			</div>

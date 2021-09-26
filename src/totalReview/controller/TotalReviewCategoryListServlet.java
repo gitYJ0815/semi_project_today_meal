@@ -46,6 +46,7 @@ public class TotalReviewCategoryListServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		int page = 1;
 		int listCount = 0;
+		String st = request.getParameter("st");
 		TotalReviewService trs = new TotalReviewService();
 		
 		String categoryParameter = request.getParameter("categoryList");
@@ -62,7 +63,7 @@ public class TotalReviewCategoryListServlet extends HttpServlet {
 			listCount = trs.getListCount(categoryNumberList);
 		}
 
-		List<Review> reviewList = trs.selectList(page, categoryNumberList);
+		List<Review> reviewList = trs.selectList(page, categoryNumberList, st);
 		Map<String, Integer> categoryCountMap = new HashMap<>();
 
 		if(categoryList != null) {

@@ -45,6 +45,8 @@ public class TotalReviewListMoreServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		int page = Integer.parseInt(request.getParameter("page"));
+		String st = request.getParameter("st");
+
 		String categoryParameter = request.getParameter("categoryList");
 		List<Integer> categoryNumberList = new ArrayList<>();
 
@@ -56,7 +58,7 @@ public class TotalReviewListMoreServlet extends HttpServlet {
 			}
 		}
 		
-		List<Review> reviewList = new TotalReviewService().selectList(page, categoryNumberList);
+		List<Review> reviewList = new TotalReviewService().selectList(page, categoryNumberList, st);
 
 		response.setContentType("application/json; charset=utf-8");
 		new Gson().toJson(reviewList, response.getWriter());

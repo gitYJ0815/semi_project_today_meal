@@ -21,9 +21,9 @@ public class TotalReviewService {
 		return result;
 	}
 
-	public List<Review> selectList(int page, List<Integer> categoryList) {
+	public List<Review> selectList(int page, List<Integer> categoryList, String st) {
 		Connection conn = getConnection();
-		List<Review> reviewList = trd.selectList(conn, page, categoryList);
+		List<Review> reviewList = trd.selectList(conn, page, categoryList, st);
 		
 		close(conn);
 		

@@ -11,7 +11,8 @@
 	let detailReviewInner = modal.querySelector(".detail_review_inner");
 
 	let resultOption = container.querySelector(".result_option"),
-		resultCount = resultOption.querySelector("span");
+		resultCount = resultOption.querySelector("span"),
+		resultOrderSelect = resultOption.querySelector("select");
 
 	let resultArea = container.querySelector(".result_area"),
 		filter = resultArea.querySelector(".filter"),
@@ -31,6 +32,7 @@
 		category.addEventListener("change", categoryChangeEventHandler);
 		result.addEventListener("click", resultClickEventHandler);
 		modal.addEventListener("click", modalClickEventListener);
+		resultOrderSelect.addEventListener("change", resultOrderChangeEventHandler);
 		categoryInit();
 	}
 	
@@ -60,13 +62,15 @@
 				categoryURLArray.push(e.target.name);
 				e.target.classList.add("active");
 			}
-			updateResultList();
+			updateResultList(resultOrderSelect.value);
 		}
 	}
 	
-	function updateResultList() {
+	function updateResultList(st) {
 		let xhr = new XMLHttpRequest();
-		
+		let query = createQuery("", "categoryList", categoryURLArray);
+		query = createQuery(query, "st", st);
+
 		xhr.onreadystatechange = function() {
 			if(xhr.readyState == 4) {
 				if((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
@@ -101,12 +105,14 @@
 			history.replaceState(null, null, "?categoryList=" + categoryURLArray);	
 		} else {
 			let url = window.location.href;
-			history.replaceState(null, null, url.replace(url.slice(url.indexOf("?")), ""));
+			if(url.indexOf("?") > 0) {
+				history.replaceState(null, null, url.replace(url.slice(url.indexOf("?")), ""));
+			}
 		}
 
 		xhr.open("POST", "categoryList");
 		xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded;");
-		xhr.send("categoryList="+categoryURLArray);
+		xhr.send(query);
 	}
 	
 	function updateCategoryCount(categoryCount) {
@@ -229,6 +235,7 @@
 		let pageValue = page.value;
 		let query = createQuery("", "page", pageValue);
 		query = createQuery(query, "categoryList", categoryURLArray);
+		query = createQuery(query, "st", resultOrderSelect.value);
 		
 		let xhr = new XMLHttpRequest();
 		
@@ -377,6 +384,15 @@
 		} else {
 			optionArea.classList.add("layer_open");
 		}
+	}
+	
+	function resultOrderChangeEventHandler(e) {
+		for(let option of resultOrderSelect.querySelectorAll("option")) {
+			option.removeAttribute("selected");
+		}
+		resultOrderSelect.querySelector("option[value=" + e.target.value + "]").setAttribute("selected", true);
+
+		updateResultList(e.target.value);
 	}
 
 	window.addEventListener("DOMContentLoaded", init);

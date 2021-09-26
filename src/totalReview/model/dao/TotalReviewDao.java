@@ -73,7 +73,7 @@ public class TotalReviewDao {
 		return result;
 	}
 
-	public List<Review> selectList(Connection conn, int page, List<Integer> categoryList) {
+	public List<Review> selectList(Connection conn, int page, List<Integer> categoryList, String st) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		List<Review> reviewList = new ArrayList<>();
@@ -86,6 +86,17 @@ public class TotalReviewDao {
 			} else {
 				sql = query.getProperty("selectList");
 			}
+			
+			String orderStatus = ""; 
+			switch(st) {
+				case "popular" : orderStatus = "review_no desc"; break;	// temp
+				case "satisfaction" : orderStatus = "POINT DESC"; break;
+				case "hightprice" : orderStatus = "ORDER_SUM DESC"; break;
+				case "lowprice" : orderStatus = "ORDER_SUM ASC"; break;
+				default : orderStatus = "REVIEW_NO DESC"; break;
+			}
+			
+			sql = sql.replace("ORDER_STATUS", orderStatus);
 
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, (page-1)*9+1);

@@ -53,7 +53,7 @@ public class TotalReviewListServlet extends HttpServlet {
 			listCount = trs.getListCount(categoryNumberList);
 		}
 		
-		List<Review> reviewList = trs.selectList(page, categoryNumberList);
+		List<Review> reviewList = trs.selectList(page, categoryNumberList, "recent");
 		Map<String, Integer> categoryCountMap = new HashMap<>();
 
 		if(categoryList != null) {
