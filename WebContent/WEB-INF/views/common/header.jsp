@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="login.model.vo.Member"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+    Member loginUser = (Member)session.getAttribute("loginUser");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,10 +27,17 @@
             <button id="searchBtn">검색</button>
         </div>
         <div class="btnArea">
+            <% if(loginUser == null){ %>
             <a href="<%= request.getContextPath() %>/login">로그인</a>
             <a href="<%= request.getContextPath() %>/memberjoin">회원가입</a>
             <a href="<%= request.getContextPath() %>/faq/list">FAQ</a>
             <a href="#">장바구니</a>
+            <% } else { %>
+            <a href="<%= request.getContextPath() %>/logout">로그아웃</a>
+            <a href="#">마이페이지</a>
+            <a href="#">FAQ</a>
+            <a href="#">장바구니</a>
+            <% } %>
         </div>
     </header>
     <nav id="nav">

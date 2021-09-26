@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -93,7 +94,7 @@ justify-content: center;
 	align-items: center;
 }
 
-.input_area2 input[type=submit] {
+.input_area2 input[type=button] {
 color:white;
 width: 96px;
 height: 37px;
@@ -104,6 +105,8 @@ background: #A1AD61;
 border-radius: 7px;
 display: block;
 margin-top: 20px;
+
+border: 0px;
 }
 
 .area {
@@ -119,21 +122,41 @@ justify-content: space-between;
     <%@ include file="/WEB-INF/views/common/header.jsp" %>
     <div class="wrapper">
        <div class="outer">
-           <form class="findIdArea" action="<%= request.getContextPath() %>/findid" method="post" onsubmit="return validate();">
+           <form name="findIdArea" action="<%= request.getContextPath() %>/findId" method="post" onsubmit="return validate();">
                <p id="p1">아이디 찾기</p>
                <p id="p2">등록된 휴대폰 번호로 찾기</p>
                <p id="p3">가입 당시 입력한 전화번호를 통해 아이디를 확인해 주세요.</p>
                <div class="area">
                <p id="p4">이름</p>
-               <span class="input_area"><input type="text" name="user_name" id="user_name"></span>
+               <span class="input_area"><input type="text" name="userName" id="userName"></span>
                </div>
                <div class="area">
                <p id="p4">연락처</p>
                <span class="input_area"><input type="text" name="phone" id="phone" placeholder="(-없이)01012345678"></span>
                </div>
-               <span class="input_area2"><input type="submit" value="다음"></span>
+               <span class="input_area2"><input type="button" name="enter" value="다음" onClick="id_search()"></span>
            </form>
         </div>
     </div>
+    <jsp:include page="/WEB-INF/views/common/footer.jsp" />
+    <script>
+    function id_search() { 
+	 	var frm = document.findIdArea;
+
+	 	if (frm.userName.value.length < 1) {
+		  alert("이름을 입력해주세요");
+		  return;
+		 }
+
+		 if (frm.phone.value.length != 11) {
+			  alert("핸드폰번호를 정확하게 입력해주세요");
+			  return;
+		 }
+
+	 frm.method = "post";
+	 frm.action = "findidresult"; //넘어간화면
+	 frm.submit();  
+	 }
+    </script>
 </body>
 </html>

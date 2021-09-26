@@ -37,7 +37,7 @@ width: 417px;
 height: 54px;
 left: calc(50% - 217px/2 - 98.5px);
 top: calc(50% - 44px/2 + 31px);
-
+border:none;
 /* brightest green */
 
 background: #A1AD61;
@@ -47,7 +47,7 @@ border-radius: 10px;
 #startkakao {
     width: 417px;
     height: 54px;
-    margin: 100px auto;
+    margin: 10px auto;
     display: flex;
     justify-content: center;
     align-items:center;
@@ -69,6 +69,7 @@ border-radius: 10px;
     </form>
     </div>
     </div>
+    <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
 </body>
 </html>

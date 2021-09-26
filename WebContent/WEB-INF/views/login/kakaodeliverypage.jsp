@@ -81,11 +81,10 @@ padding : 50px;
 #joineBtn {
 width: 103px;
 height: 37px;
-border : 0px;
 color:white;
 background: #A1AD61;
 border-radius: 7px;
-margin : 5px;
+margin-left: 80px;
 	}
 #postcodify_search_button{
 width: 81px;
@@ -98,6 +97,7 @@ border-radius: 7px;
 color:white;
 
 margin-top: 30px;
+float: right;
 }
 </style>
 </head>
@@ -124,5 +124,6 @@ margin-top: 30px;
            </form>
         </div>
     </div>
+    <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>
