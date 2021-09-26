@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM
+"http://java.sun.com/dtd/properties.dtd">
+<properties>
+<entry key="selectList">
+	SELECT
+		EVNET_NO,
+		EVNET_TITLE,
+		CONTENT,
+		TERM,
+		COUNT,
+		USER_ID,
+		STATUS
+	FROM EVENT_BOARD
+	WHERE STATUS = 'Y'
+	ORDER BY EVNET_NO DESC
+</entry>
+<entry key="selectEvent">
+	SELECT
+		EVNET_NO,
+		EVNET_TITLE,
+		CONTENT,
+		TERM,
+		COUNT,
+		USER_ID,
+		STATUS
+	FROM EVENT_BOARD
+	WHERE STATUS = 'Y'
+	AND EVNET_NO = ?
+</entry>
+<entry key="increaseCount">
+	UPDATE EVENT_BOARD
+		SET COUNT = COUNT + 1
+	WHERE EVNET_NO = ?
+	AND STATUS = 'Y'
+</entry>
+<entry key="insertEvent">
+	INSERT
+		INTO EVENT_BOARD 
+		(
+			EVNET_NO,
+			EVNET_TITLE,
+			CONTENT,
+			TERM,
+			COUNT,
+			USER_ID,
+			STATUS
+		)
+		VALUES
+		(
+			seq_eno.nextval,
+			?,
+			?,
+			?,
+			0,
+			1,
+			DEFAULT
+		)
+</entry>
+<entry key="deleteEvent">
+	UPDATE EVENT_BOARD
+		SET STATUS = 'N'
+		WHERE EVNET_NO = ?
+</entry>
+<entry key="updateEvent">
+	UPDATE EVENT_BOARD
+	SET EVNET_TITLE = ?,
+		CONTENT = ?,
+		TERM = ?
+	WHERE EVNET_NO = ?
+</entry>
+<entry key="selectTitleList">
+	SELECT
+		EVNET_NO,
+		EVNET_TITLE,
+		CONTENT,
+		TERM,
+		COUNT,
+		USER_ID,
+		STATUS
+	FROM EVENT_BOARD
+	WHERE EVNET_TITLE LIKE '%' || ? || '%'
+	AND STATUS = 'Y'
+	ORDER BY EVNET_NO DESC
+</entry>
+</properties>

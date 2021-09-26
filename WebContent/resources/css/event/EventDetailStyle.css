@@ -45,7 +45,15 @@ h2 {
 	padding: 30px;
 }
 #eventImg_area {
-    border : 1px solid lightgray;
-    height: 1600px;
+    height: 1500px;
     margin-top: 30px;
+    text-align : center;
 }
+button {
+   background: inherit;
+   border:none;
+   box-shadow:none;
+   padding:0;
+   overflow:visible;
+   cursor:pointer
+		}
