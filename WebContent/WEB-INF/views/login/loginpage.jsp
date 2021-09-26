@@ -65,7 +65,6 @@ color: #406300;
 
 	width: 200px;
 	height: 37px;
-	border: 0px;
 /* checkbox gray border color */
 
 border: 1px solid #C4C4C4;
@@ -82,6 +81,7 @@ border-radius: 7px;
 color:white;
 width: 108px;
 height: 83px;
+border:none;
 }
 #remember{
 width: 20px;
@@ -108,7 +108,7 @@ top: calc(50% - 44px/2 + 31px);
 
 background: #A1AD61;
 border-radius: 10px;
-
+border:none;
 }
 .find {
 
@@ -117,6 +117,7 @@ width : 416px;
 	display: flex;
 	justify-content: space-between;
 	
+	
 }
 #kakaologin {
 display: block;
@@ -124,6 +125,7 @@ width: 416px;
 height: 48px;
 
 }
+
 </style>
 
 </head>
@@ -157,6 +159,28 @@ height: 48px;
            </form>
        </div>
     </div>
+    <jsp:include page="/WEB-INF/views/common/footer.jsp" />
+    <script>
+    function validate(){
+    	let userId = document.getElementById('userId');
+    	let userPwd = document.getElementById('userPwd');
+    	
+    	if(!userId.value.trim().length){
+    		alert("아이디를 입력하세요.");
+    		userId.focus();
+    		return false;
+    	}
+    	
+    	if(!userPwd.value.trim().length){
+    		alert("비밀번호를 입력하세요.");
+    		userPwd.focus();
+    		return false;
+    	}
+    	
+    	return true;
+    }    
+    </script>
+    <script src="<%= request.getContextPath() %>/resources/js/login/rememberUserId.js"></script>
 
 </body>
 </html>

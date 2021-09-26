@@ -30,11 +30,11 @@
 	</c:choose>
 
 	
-	<li><a <c:if test="${ pi.page != 1 }">href="${ url }?page=${ startPage }" class="active"</c:if> <c:if test="${ pi.page == 1 }">tabindex = -1</c:if>>앞으로 10페이지 이동</a></li>
+	<li><a <c:if test="${ pi.page != 1 }">href="${ param.url }page=${ startPage }${ param.searchParam }" class="active"</c:if> <c:if test="${ pi.page == 1 }">tabindex = -1</c:if>>이전</a></li>
 <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-	<li><a href="${ url }?page=${ p }" <c:if test="${ pi.page == p }">class="now"</c:if>>${ p }</a></li>
+	<li><a href="${ param.url }page=${ p }${ param.searchParam }" <c:if test="${ pi.page == p }">class="now"</c:if>>${ p }</a></li>
 </c:forEach>
-	<li><a <c:if test="${ pi.page != pi.maxPage }">href="${ url }?page=${ endPage }" class="active"</c:if> <c:if test="${ pi.page == pi.maxPage }">tabindex = -1</c:if>>뒤로 10페이지 이동</a></li>
+	<li><a <c:if test="${ pi.page != pi.maxPage }">href="${ param.url }page=${ endPage }${ param.searchParam }" class="active"</c:if> <c:if test="${ pi.page == pi.maxPage }">tabindex = -1</c:if>>다음</a></li>
 </ul>
 </body>
 </html>
