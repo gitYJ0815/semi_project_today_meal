@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,11 +20,11 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 <jsp:include page="/WEB-INF/views/common/top.jsp" />
 	<div id="container">
-                    <h2 style="font-weight : bolder; font-size:32px">진행중인 이벤트</h2>
+                    <h2 style="font-size:32px">진행중인 이벤트</h2>
                     <div class="search_area">
-                        <form action="">
+                        <form method="get" action="${ contextPath }/event/list">
                             <span class="input_area"> 
-                                <input type="search" name="searchValue" value="">
+                                <input class="inputSearch" type="search" name="searchValue" value="${ param.searchValue }">
                             </span>
                             <button type="submit">검색</button>
                         </form>
@@ -34,14 +35,25 @@
                             <li class="term">기간</li>
                             <li class="count">조회수</li>
                         </ul>
-                        <ul class="board_ul" onclick="">
-                            <li class="title"></li>
-                            <li class="term"></li>
-                            <li class="count"></li>
+                       <c:forEach var="e" items="${ eventList }">
+                        <ul class="board_ul" onclick="detailView(${e.eno})">
+                            <li class="title">${ e.event_title }</li>
+                            <li class="term">${ e.term }</li>
+                            <li class="count">${e.count}</li>
                         </ul>
+                        </c:forEach>
                     </div>
                 <!-- </div> -->
             <!-- </div> -->
+            <div class="paging">
+					<jsp:include page="/WEB-INF/views/common/paging/paging.jsp"/>	
+			    </div>
+		<jsp:include page="/WEB-INF/views/common/footer.jsp" />	    
         </div>
+        <script>
+            function detailView(eno){
+               location.href='${contextPath}/event/detail?eno=' + eno; 
+            }
+         </script>
 </body>
 </html>

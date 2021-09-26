@@ -19,7 +19,7 @@
 </head>
 <body>
 	<div class="fixed-area">
-        <a href="#top"><img src="../resources/images/btn_forward.png" alt="top" width="40px" height="40px"></a>
+        <a href="#top"><img src="../resources/images/top/forward.png" alt="top" width="40px" height="40px"></a>
     </div>
 </body>
 </html>
