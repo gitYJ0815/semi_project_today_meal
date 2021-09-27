@@ -16,8 +16,6 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import event.model.service.EventService;
 import event.model.vo.Event;
-import review.model.service.ReviewService;
-import review.model.vo.Review;
 
 /**
  * Servlet implementation class EventUpdateServlet

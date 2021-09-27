@@ -6,7 +6,7 @@ public class Event {
 	private String content;
 	private String term;
 	private int count;
-	private String userId;
+	private int userNo;
 	private String status;
 	/*
 	 * evnet_no	number		NOT NULL,
@@ -41,7 +41,7 @@ public class Event {
 
 
 
-	public Event(int eno, String event_title, String content, String term, int count, String userId,
+	public Event(int eno, String event_title, String content, String term, int count, int userNo,
 			String status) {
 		super();
 		this.eno = eno;
@@ -49,7 +49,7 @@ public class Event {
 		this.content = content;
 		this.term = term;
 		this.count = count;
-		this.userId = userId;
+		this.userNo = userNo;
 		this.status = status;
 	}
 	public int getEno() {
@@ -82,11 +82,11 @@ public class Event {
 	public void setCount(int count) {
 		this.count = count;
 	}
-	public String getUserId() {
-		return userId;
+	public int getUserNo() {
+		return userNo;
 	}
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setUserNo(int userNo) {
+		this.userNo = userNo;
 	}
 	public String getStatus() {
 		return status;
@@ -97,7 +97,7 @@ public class Event {
 	@Override
 	public String toString() {
 		return "Event [eventNo=" + eno + ", event_title=" + event_title + ", content=" + content + ", term=" + term
-				+ ", count=" + count + ", userId=" + userId + ", status=" + status + "]";
+				+ ", count=" + count + ", userNo=" + userNo + ", status=" + status + "]";
 	}
 
 	
