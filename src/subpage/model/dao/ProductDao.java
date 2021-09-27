@@ -12,8 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import common.model.vo.Product;
 import common.paging.model.vo.PageInfo;
+import subpage.model.vo.Product;
+
 
 public class ProductDao {
 	private Properties query = new Properties(); 
