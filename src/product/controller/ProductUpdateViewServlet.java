@@ -38,9 +38,8 @@ public class ProductUpdateViewServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int pNo = Integer.parseInt(request.getParameter("pNo"));
-		// System.out.println(pNo);
+		
 		Product p = new ProductService().selectProduct(pNo);
-		// System.out.println(p);
 		
 		if(p != null) {
 			request.setAttribute("product", p);
