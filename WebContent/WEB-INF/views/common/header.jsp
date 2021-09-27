@@ -11,6 +11,14 @@
 <title>header</title>
 <link href="<%= request.getContextPath() %>/resources/css/common/reset.css" rel="stylesheet">
 <link href="<%= request.getContextPath() %>/resources/css/common/header.css" rel="stylesheet">
+<% if(session.getAttribute("msg") != null) { %>
+<script>
+    alert('<%= session.getAttribute("msg")%>');
+</script>
+<%
+        session.removeAttribute("msg"); 
+    }
+%>
 </head>
 <body>
 <c:set var="contextPath" value="${ pageContext.servletContext.contextPath }" scope="application"/>
@@ -30,7 +38,7 @@
             <% if(loginUser == null){ %>
             <a href="<%= request.getContextPath() %>/login">로그인</a>
             <a href="<%= request.getContextPath() %>/memberjoin">회원가입</a>
-            <a href="#">FAQ</a>
+            <a href="<%= request.getContextPath() %>/faq/list">FAQ</a>
             <a href="#">장바구니</a>
             <% } else { %>
             <a href="<%= request.getContextPath() %>/logout">로그아웃</a>
@@ -49,7 +57,7 @@
            <li><a href="${ contextPath }/product/list?cno=5">분식</a></li>
            <li><a href="${ contextPath }/product/list?cno=6">양식</a></li>
            <li><a href="${ contextPath }/product/list?cno=7">샐러드</a></li>
-           <li><a href="#">리뷰</a></li>
+           <li><a href="${ contextPath }/totalReview/list">리뷰</a></li>
            <li><a href="#">이벤트</a></li>
         </ul>
     </nav>
