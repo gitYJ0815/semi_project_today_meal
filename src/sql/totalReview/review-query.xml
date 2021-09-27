@@ -2,8 +2,12 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 	<entry key="listCount">
-        SELECT COUNT(*)
-		  FROM REVIEW
+        SELECT
+		       COUNT(REVIEW_NO)
+		  FROM PRODUCT P
+		  JOIN REVIEW ON(P.PRODUCT_NO = REVIEW.PRODUCT_NO)
+		 WHERE REVIEW.STATUS = 'Y'
+		   AND REVIEW_TEXT LIKE '%KEYWORD%' OR PRODUCT_NAME LIKE '%KEYWORD%'
 	</entry>
 	<entry key="categoryListTotalCount">
 		SELECT
@@ -11,6 +15,7 @@
 		  FROM PRODUCT P
 		  JOIN REVIEW ON(P.PRODUCT_NO = REVIEW.PRODUCT_NO)
 		 WHERE CATEGORY_NO IN (CATEGORY_NO_ARRAY)
+		   AND REVIEW.STATUS = 'Y'
 		   AND REVIEW_TEXT LIKE '%KEYWORD%' OR PRODUCT_NAME LIKE '%KEYWORD%'
 	</entry>
 	<entry key="categoryListCount">
@@ -20,6 +25,7 @@
 		  FROM PRODUCT P
 		  JOIN REVIEW ON(P.PRODUCT_NO = REVIEW.PRODUCT_NO)
 		 WHERE CATEGORY_NO IN (CATEGORY_NO_ARRAY)
+		   AND REVIEW.STATUS = 'Y'
 		   AND REVIEW_TEXT LIKE '%KEYWORD%' OR PRODUCT_NAME LIKE '%KEYWORD%'
 		 GROUP BY CATEGORY_NO
 	</entry>
@@ -43,7 +49,8 @@
 	                                            FROM REVIEW
 	                                            JOIN PRODUCT USING(PRODUCT_NO)
 	                                            JOIN RECEIPT USING(ORDER_NO)
-	                                           WHERE REVIEW_TEXT LIKE '%KEYWORD%' OR PRODUCT_NAME LIKE '%KEYWORD%'
+	                                           WHERE REVIEW.STATUS = 'Y'
+	                                             AND REVIEW_TEXT LIKE '%KEYWORD%' OR PRODUCT_NAME LIKE '%KEYWORD%'
 	                                           ORDER BY ORDER_STATUS) R)
 	                           WHERE RNUM BETWEEN ? AND ?)
 	     ORDER BY ORDER_STATUS, REVIEW_NO DESC
@@ -69,6 +76,7 @@
 	                                            JOIN PRODUCT USING(PRODUCT_NO)
 	                                            JOIN RECEIPT USING(ORDER_NO)
 	                                           WHERE CATEGORY_NO IN (CATEGORY_NO_ARRAY)
+	                                             AND REVIEW.STATUS = 'Y'
 	                                             AND REVIEW_TEXT LIKE '%KEYWORD%' OR PRODUCT_NAME LIKE '%KEYWORD%'
 	                                           ORDER BY ORDER_STATUS) R)
 	                           WHERE RNUM BETWEEN ? AND ?)
