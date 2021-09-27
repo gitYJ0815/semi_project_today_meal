@@ -1,14 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" 
+  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <title>상품정보페이지</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -120,7 +120,7 @@
 
     .sub_btn {
         width: 1000px;
-        height: 50px;
+        height: 53px;
         margin: 0px auto;
         border: 1px solid lightgray;
         margin-top: 20px;
@@ -128,7 +128,7 @@
     }
 
     #moveDtail {
-        background: #A1AD61;
+        background-color: #A1AD61;
         text-align: center;
         width: 500px;
         margin: 0 auto;
@@ -146,6 +146,7 @@
         margin: 0 auto;
         padding-top: 15px;
         padding-bottom: 15px;
+        background-color : white;
     }
 
     .detail_img {
@@ -203,6 +204,7 @@
     #hide {
         padding-top: 10px;
         height: 500px;
+        width : 1000px;
     }
 
     .box {
@@ -289,7 +291,7 @@
 			display: inline-block;
 			width: 10px;
 			height: 10px;
-			cursor: pointer;
+			
 		}
 		.star_left {
 			background: url(../../images/review/star.PNG) no-repeat 0 0;;
@@ -304,13 +306,35 @@
 		.detail_content {
 			width : 100px;
 		}
+		/* test */
+		.inner-star::before{
+          color: #FF9600;
+        }
+        .outer-star {
+          position: relative;
+          display: inline-block;
+          color: #CCCCCC;
+        }
+        .inner-star {
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 0%;
+          overflow: hidden;
+          white-space: nowrap;
+        }
+        .outer-star::before, .inner-star::before {
+          content: '\f005 \f005 \f005 \f005 \f005';
+          font-family: 'Font Awesome 5 free';
+          font-weight: 900;
+        }
 </style>
 
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 <jsp:include page="/WEB-INF/views/common/top.jsp" />
     <div class="product_view">
-        <h2 name="product_name"> <!-- 상품명 받아오기 --> </h2>
+        <h2 name="product_name"> <!-- 상품명 받아오기 --> ${product.productName} </h2>
         <table>
             <colgroup>
                 <col style="width:173px;">
@@ -319,7 +343,7 @@
             <tbody>
                 <tr>
                     <th>가격</th>
-                    <td class="price" name="price"><!--  가격 받아오기  --></td>
+                    <td class="price" name="price"><!--  가격 받아오기  -->${product.productPrice }</td>
                 </tr>
                 <tr>
                     <th>배송정보</th>
@@ -329,7 +353,7 @@
             </tbody>
         </table>
         <div class="img">
-            <img src="" alt="">
+            <img src="..${product.productImg }" alt="">
 
         </div>
         <div class="btns">
@@ -343,98 +367,190 @@
     </div>
     <!-- 상품 상세 정보 -->
     <div class="detail_img" id="pro_detail">
-        <img src="" alt="">
+        <img src="..${product.productImg }" alt="" style="width:800px; height:900px;">
     </div>
-
     <!-- 리뷰 정렬 영역 -->
     <div class="review_sort" id="reviewsort">
         <ul class="review_sort_list">
-            <li class="selected"><span onclick="">최신순</span> &nbsp; |</li>
-            <li><span onclick="">별점높은순</span></li>
+            <li class="selected"><span class="recentList">최신순</span> &nbsp; |</li>
+            <li><span class="starPointlist">별점높은순</span></li>
         </ul>
-    </div>
-    <!-- 하단 리뷰 영역 -->
-    <div class="review_list">
-        <ul class="review">
-            <li class="review_li">
-                <div class="main">
+    </div><div class="review_list" ><c:forEach var="r" items="${ product.reviewList }"><ul class="review" onclick="review_detail(this);" ><li class="review_li" ><div class="main">
                     <div class="main_1 main_common">
-                        <p class="pcontent">별점
-                        <!--  이미지 테스트 
-                        	<img src="../resources/images/review/star.PNG" style="width:20px; height:20px;">
-                        	<img src="../resources/images/review/star.PNG" style="width:20px; height:20px;">
-                        	<img src="../resources/images/review/star.PNG" style="width:20px; height:20px;">
-                        	<img src="../resources/images/review/star.PNG" style="width:20px; height:20px;">
-                        	<img src="../resources/images/review/star.PNG" style="width:20px; height:20px;">
-                          -->
-                         <br> 작성자 <br> 작성일 </p>
+                        <p class="pcontent"> 별점
+                          <c:choose>
+							 <c:when test="${r.point eq 0.5 }">
+							  <img class="star" src="../resources/images/review/star_half.png" style="width:20px; height:20px;"><br>
+							 </c:when>
+							 <c:when test="${r.point eq 1.5 }">
+							  <img class="star" src="../resources/images/review/1.5.png" style="width:40px; height:20px; margin-left:5px;"><br>
+							 </c:when>
+							 <c:when test="${r.point eq 2 }">
+							  <img class="star" src="../resources/images/review/star_on.png" style="width:20px; height:20px;">
+							  <img class="star" src="../resources/images/review/star_on.png" style="width:20px; height:20px;"><br>
+							 </c:when>
+							 <c:when test="${r.point eq 2.5 }">
+							  <img class="star" src="../resources/images/review/2.5.png" style="width:60px; height:20px;"><br>
+							 </c:when>
+							 <c:when test="${r.point eq 3 }">
+							  <img class="star" src="../resources/images/review/star_on.png" style="width:20px; height:20px;">
+							  <img class="star" src="../resources/images/review/star_on.png" style="width:20px; height:20px;">
+							  <img class="star" src="../resources/images/review/star_on.png" style="width:20px; height:20px;"><br>
+							 </c:when>
+							 <c:when test="${r.point eq 3.5 }">
+							  <img class="star" src="../resources/images/review/3.5.png" style="width:100px; height:20px;"><br>
+							 </c:when>
+							 <c:when test="${r.point eq 4 }">
+							  <img class="star" src="../resources/images/review/star_on.png" style="width:20px; height:20px;">
+							  <img class="star" src="../resources/images/review/star_on.png" style="width:20px; height:20px;">
+							  <img class="star" src="../resources/images/review/star_on.png" style="width:20px; height:20px;">
+							  <img class="star" src="../resources/images/review/star_on.png" style="width:20px; height:20px;"><br>
+							 </c:when>
+							<c:when test="${r.point eq 4.5 }">
+							  <img class="star" src="../resources/images/review/4.5.png" style="width:100px; height:20px;"><br>
+							 </c:when>
+							 <c:otherwise>
+							  <img class="star" src="../resources/images/review/star_on.png" style="width:20px; height:20px;">
+							  <img class="star" src="../resources/images/review/star_on.png" style="width:20px; height:20px;">
+							  <img class="star" src="../resources/images/review/star_on.png" style="width:20px; height:20px;">
+							  <img class="star" src="../resources/images/review/star_on.png" style="width:20px; height:20px;">
+							  <img class="star" src="../resources/images/review/star_on.png" style="width:20px; height:20px;">
+							  <br>
+							 </c:otherwise>
+						</c:choose>
+              <span class="rwriter">작성자 ${r.userNo }</span>            
+                         <br> <span class="register">작성일 ${r.reviewRegister }</span></p>
                     </div>
-                    <div class="main_2 main_common"><p class="pcontent"><a href=#none id="show" onclick="review_detail();">리뷰내용</a></p></div>
+                    <div class="main_2 main_common"><p class="pcontent"><a href=#none >${r.reviewText }</a></p></div>
                     <div class="main_3 main_common">
-                        <img class="img_review" src="" alt=""
+                        <img class="img_review" src="../resources/uploadFiles/review/${r.reviewImage }" alt=""
                         style="width: 100px; height: 100px;">
                     </div>
                 </div>
             </li>
-        </ul>
-        <!-- 리뷰 내용 눌렀을 때 아래로 펼치기 기능 -->
-        <div id="hide" style="display: none;">
-            <div>
+        </ul><div id="hide" style="display: none; background-color:#F5F5F5;" class="hide">
+              <div>
                 <div class="detail">
                     <div class="main_common main_1">
-                        <!-- <p class="pcontent">
-                        	별점 <br> 작성자
-                        </p>
-                        -->
                         <div class="pcontent">
                         	<p>별점 
-                        	<!--  이미지 테스트
-                        	<img src="../resources/images/review/star.PNG" style="width:20px; height:20px;">
-                        	<img src="../resources/images/review/star.PNG" style="width:20px; height:20px;">
-                        	<img src="../resources/images/review/star.PNG" style="width:20px; height:20px;">
-                        	<img src="../resources/images/review/star.PNG" style="width:20px; height:20px;">
-                        	<img src="../resources/images/review/star.PNG" style="width:20px; height:20px;">
-                        	  -->
+                        	<c:choose>
+							 <c:when test="${r.point eq 0.5 }">
+							  <img class="star" src="../resources/images/review/star_half.png" style="width:20px; height:20px;"><br>
+							 </c:when>
+							 <c:when test="${r.point eq 1.5 }">
+							  <img class="star" src="../resources/images/review/1.5.png" style="width:40px; height:20px; margin-left:5px;"><br>
+							 </c:when>
+							 <c:when test="${r.point eq 2 }">
+							  <img class="star" src="../resources/images/review/star_on.png" style="width:20px; height:20px;">
+							  <img class="star" src="../resources/images/review/star_on.png" style="width:20px; height:20px;"><br>
+							 </c:when>
+							 <c:when test="${r.point eq 2.5 }">
+							  <img class="star" src="../resources/images/review/2.5.png" style="width:60px; height:20px;"><br>
+							 </c:when>
+							 <c:when test="${r.point eq 3 }">
+							  <img class="star" src="../resources/images/review/star_on.png" style="width:20px; height:20px;">
+							  <img class="star" src="../resources/images/review/star_on.png" style="width:20px; height:20px;">
+							  <img class="star" src="../resources/images/review/star_on.png" style="width:20px; height:20px;"><br>
+							 </c:when>
+							 <c:when test="${r.point eq 3.5 }">
+							  <img class="star" src="../resources/images/review/3.5.png" style="width:100px; height:20px; margin-left:20px;"><br>
+							 </c:when>
+							 <c:when test="${r.point eq 4 }">
+							  <img class="star" src="../resources/images/review/star_on.png" style="width:20px; height:20px;">
+							  <img class="star" src="../resources/images/review/star_on.png" style="width:20px; height:20px;">
+							  <img class="star" src="../resources/images/review/star_on.png" style="width:20px; height:20px;">
+							  <img class="star" src="../resources/images/review/star_on.png" style="width:20px; height:20px;"><br>
+							 </c:when>
+							<c:when test="${r.point eq 4.5 }">
+							  <img class="star" src="../resources/images/review/4.5.png" style="width:100px; height:20px;"><br>
+							 </c:when>
+							 <c:otherwise>
+							  <img class="star" src="../resources/images/review/star_on.png" style="width:20px; height:20px;">
+							  <img class="star" src="../resources/images/review/star_on.png" style="width:20px; height:20px;">
+							  <img class="star" src="../resources/images/review/star_on.png" style="width:20px; height:20px;">
+							  <img class="star" src="../resources/images/review/star_on.png" style="width:20px; height:20px;">
+							  <img class="star" src="../resources/images/review/star_on.png" style="width:20px; height:20px;">
+							  <br>
+							 </c:otherwise>
+						</c:choose>
                         	</p>
-                        	<p>작성자</p>
+                        	<p>작성자 ${r.userNo }</p>
                         </div>
                     </div>
                     <div class="main_common main_2">
-                        <p class="pcontent">리뷰 내용</p>
+                        <p class="pcontent">${r.reviewText }</p>
                     </div>
                 </div>
                 <div class="detail_review_img">
-                    <img style="width: 300px; height: 300px;" src="" alt="">
+                    <img style="width: 300px; height: 300px;" src="../resources/uploadFiles/review/${r.reviewImage }" alt="">
                 </div>
-                <div><p class="fold_review" id="fold" onclick="folding();">▲ 리뷰 접기</p></div>
-            </div>
-        </div>
-    </div>
-    <form role="form" method="post">
-        <input type="hidden" name="" value="" />
+                <div><p class="fold_review" id="fold" onclick="folding(this);">▲ 리뷰 접기</p></div></div></div></c:forEach></div>
+    
+    <form method="post">
+       <!--  <input type="hidden" name="pno" value="${ product.productNo }" />
+        <input type="hidden" name="rno" value="${ review.rno }">  -->
     </form>
 
     <script>
-        function review_detail() {
-            var main = document.querySelector('.main');
-            var thumnail = document.getElementById('thumbnail');
-            if (hide.style.display == 'none') {
-                hide.style.display = '';
-                main.style.display = 'none';
-            } else {
-                hide.style.display = 'none';
-            }
+    function review_detail(elem) {
+		console.log(elem);
+		var test1 = elem.nextSibling; 
+    	console.log(test1); //hide
+		
+    	var test2 = elem.firstChild;
+    	console.log(test2);
+    	
+    	var test3 = test2.firstChild;
+    	console.log(test3); //.main
+		
+		// main : 리뷰 프리뷰 / hide : 리뷰를 자세히 볼 수 있는 div영역
+        var main = document.querySelector('.main');
+        let hide = document.querySelector('.hide');
+        
+		if (test1.style.display == 'none') {
+			test1.style.display = '';
+			test3.style.display = 'none';
+        } else {
+        	test1.style.display = 'none';
+        	test3.style.display = '';
         }
-
-        function folding() {
-            var fold = document.getElementById('fold');
-            var main = document.querySelector('.main');
-            if (main.style.display == 'none') {
-                main.style.display = '';
-                hide.style.display = 'none';
-            }
+        elem.style.display = '';
+        
+    }
+    function folding(elem) {
+    	console.log(elem);
+    	var test1 = elem.parentNode;
+    	//console.log(test1);
+    	
+    	var test2 = test1.parentNode;
+    	//console.log(test2);
+    	
+    	var hideDiv = test2.parentNode;
+    	//console.log(hideDiv); //#hide
+    	
+    	var test4 = hideDiv.parentNode.firstChild;
+    	//console.log(test4);
+        
+        var test8 = test4.firstChild.firstChild.firstChild;
+        //console.log(test8); // 최상위 div > > > mian
+    	
+        //ul다음의li다음의 main찾기??
+        var test9 = hideDiv.previousSibling;
+        //console.log(test9);
+        
+        var mainDiv = test9.firstChild.firstChild;
+        //console.log(mainDiv);
+        
+        //let hide = document.querySelector(".hide");
+        //var main = document.querySelector('.main');
+        if (mainDiv.style.display == 'none') {
+        	mainDiv.style.display = '';
+        	hideDiv.style.display = 'none';
         }
+    }
     </script>
+
     <!--  sub_btn 특정 위치에서 따라다니는 메뉴바 스크립트 -->
     <script>
     $(window).scroll(function() {
@@ -446,7 +562,55 @@
     });
     </script>
     
+	 <!-- 별점 순 정렬 ajax -->
+	 
+	 <script>
+	 $(function(){
+		 $(".starPointlist").click(function(){
+				$.ajax({
+					type: 'post',
+					contentType:"application/json; charset=UTF-8",
+					url : "${ contextPath }/productDetail/starPointlist",
+					// data : 요청 시 전달할 파라미터 설정
+					data: "",
+					success: function(result) {
+						$('.review_list').html(result);
+					},
+					// error : ajax 통신 실패 시 처리할 함수를 지정하는 속성
+					error : function(){
+						console.log('ajax 통신 실패!');
+					}
+				});
+			});
+		})
+	 </script>
+	 
+	 <script>
+	 $(function(){
+		 $(".recentList").click(function(){
+				$.ajax({ //매개변수로 객체 전달
+					type: 'post',
+					// url : 데이터를 전송할 url(필수)
+					contentType:"application/json; charset=UTF-8",
+					url : "${ contextPath }/productDetail/recentList",
+					// data : 요청 시 전달할 파라미터 설정
+					data: "",
+					success: function(data) {
+						$('.review_list').html(data);
+					},
+					// error : ajax 통신 실패 시 처리할 함수를 지정하는 속성
+					error : function(){
+						console.log('ajax 통신 실패!');
+					}
+				});
+			});
+		})
+	 </script>
     <jsp:include page="/WEB-INF/views/common/top.jsp" />
+	<div class="paging">
+		<jsp:include page="/WEB-INF/views/common/paging/paging.jsp"/>	
+    </div>
+	<jsp:include page="/WEB-INF/views/common/footer.jsp" />    
 </body>
 
 </html>
