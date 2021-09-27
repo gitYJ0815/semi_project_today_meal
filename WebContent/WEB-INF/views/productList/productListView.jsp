@@ -12,7 +12,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" 
 integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100&display=swap" rel="stylesheet">
-<link href="<%= request.getContextPath() %>/resources/css/productList/productListView.css?ver=1.3" rel="stylesheet">
+<link href="<%= request.getContextPath() %>/resources/css/productList/productListView.css" rel="stylesheet">
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
@@ -40,7 +40,7 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
  					</select>			
 			 	</div> 
 			 	</form>	
-				<form method="get" action="${ contextPath }/product/list">
+				<form method="get" action="${ contextPath }/product/listView">
 				<div class="product_search">
 					<div class="search_div">검색 항목</div>
 					<div>	
@@ -89,11 +89,11 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
 			</div> <!-- inner div -->
 		</div>
 	</div>
-	
+	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 	<script>
 		// 카테고리 선택 시 list 재호출
 		$("#category").change(function(){
-			document.forms.categoryForm.action = '${contextPath}/product/list';
+			document.forms.categoryForm.action = '${contextPath}/product/listView';
 			document.forms.categoryForm.submit();
 		})
 

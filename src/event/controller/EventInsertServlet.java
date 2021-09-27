@@ -14,7 +14,6 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
-import common.MyFileRenamePolicy;
 import event.model.service.EventService;
 import event.model.vo.Event;
 

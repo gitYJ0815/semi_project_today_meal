@@ -40,7 +40,7 @@ public class ProductCheckDeleteServlet extends HttpServlet {
 		int results = new ProductService().checkDeleteProduct(checkArr);
 		
 		if(checkArr.length == results) {
-			response.sendRedirect(request.getContextPath() + "/product/list");
+			response.sendRedirect(request.getContextPath() + "/product/listView");
 		} else {
 			request.setAttribute("msg", "상품 삭제에 실패하였습니다.");
 			request.getRequestDispatcher("WEB-INF/views/common/errorpage.jsp").forward(request, response);

@@ -41,7 +41,7 @@ public class ProductDeleteServlet extends HttpServlet {
 		
 		if(result > 0) {
 			request.getSession().setAttribute("msg", "상품이 삭제 되었습니다.");
-			response.sendRedirect(request.getContextPath() + "/product/list");
+			response.sendRedirect(request.getContextPath() + "/product/listView");
 		} else {
 			request.setAttribute("msg", "상품 삭제에 실패하였습니다.");
 			request.getRequestDispatcher("/WEB-INF/views/common/errorpage.jsp").forward(request, response);

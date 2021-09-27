@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>상품 등록</title>
+<title>상품 수정</title>
 <link href="<%= request.getContextPath() %>/resources/css/productUpdate/productUpdateView.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100&display=swap" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" 
@@ -19,7 +19,7 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
 		</nav>
 		<div class="contents">
 			
-			<form method="post" action="${ contextPath }/product/enroll"
+			<form name="updateForm" method="post" action="${ contextPath }/product/enroll"
 			 enctype="multipart/form-data">
 			<input type="hidden" name="cNo" value="${ product.cNo }">
 			
@@ -112,12 +112,13 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
               	</div>
 			 	<div class="btn_area">
 					<button type="submit" id="btn1">수정</button>
-					<button type="button" id="btn2">취소</button>
+					<button type="button" id="btn2" onclick="cancel()">취소</button>
 				</div>
 			</div><!-- inner -->
 			</form>
 		</div>
 	</div>
+	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 	
 	
 	<script>
@@ -209,6 +210,13 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
        		}
        	}
        
+       	// 취소 버튼
+       	function cancel(){
+       		if(confirm('내용이 저장되지 않습니다. 그래도 취소하시겠습니까?')) {
+				document.forms.updateForm.action = "${contextPath}/product/listView";
+				document.forms.updateForm.submit();
+			}
+       	}
     </script>
 </body>
 </html>

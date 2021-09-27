@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>상품 등록</title>
-<link href="<%= request.getContextPath() %>/resources/css/productEnroll/productEnrollView.css?ver=1.3" rel="stylesheet">
+<link href="<%= request.getContextPath() %>/resources/css/productEnroll/productEnrollView.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100&display=swap" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" 
 integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
@@ -102,7 +102,7 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
 			</form>
 		</div>
 	</div>
-	
+	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 	
 	<script>
 		// 상품 대표이미지 담는 div

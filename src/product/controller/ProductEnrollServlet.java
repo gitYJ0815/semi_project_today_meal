@@ -121,7 +121,7 @@ public class ProductEnrollServlet extends HttpServlet {
 	      System.out.println(result);
 	      System.out.println(p);
 	      if(result > 0) {
-	    	  response.sendRedirect(request.getContextPath() + "/product/list");
+	    	  response.sendRedirect(request.getContextPath() + "/product/listView");
 	      } else {
 	    	  request.setAttribute("msg", "상품 등록에 실패하였습니다.");
 	    	  request.getRequestDispatcher("WEB/INF/views/common/errorpage.jsp").forward(request, response);
