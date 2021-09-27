@@ -22,6 +22,16 @@ public class Event {
 	
 	
 	
+	public Event(String event_title, String content, String term, int userNo) {
+		super();
+		this.event_title = event_title;
+		this.content = content;
+		this.term = term;
+		this.userNo = userNo;
+	}
+
+
+
 	public Event(int eno, String event_title, String term, String content) {
 		super();
 		this.eno = eno;
