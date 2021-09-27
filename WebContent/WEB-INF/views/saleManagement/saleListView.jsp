@@ -362,7 +362,7 @@
 			</div>
 		</div>
 	</div>
-	
+	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 	<script src="${ contextPath }/resources/js/saleManagement/saleListView.js"></script>
 </body>
 </html>
