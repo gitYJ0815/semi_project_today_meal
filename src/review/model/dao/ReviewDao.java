@@ -40,7 +40,7 @@ private Properties query = new Properties();
 			pstmt.setDouble(1, r.getPoint());
 			pstmt.setString(2, r.getReviewText());
 			pstmt.setString(3, r.getReviewImage());
-			//pstmt.setString(4, r.getUserId());
+			pstmt.setInt(4, r.getUserNo());
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

@@ -123,7 +123,7 @@ public class EventDao {
 			pstmt.setString(1, ev.getEvent_title());
 			pstmt.setString(2, ev.getContent());
 			pstmt.setString(3, ev.getTerm());
-			//pstmt.setInt(4, ev.getUserId());
+			pstmt.setInt(4, ev.getUserNo());
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {

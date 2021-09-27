@@ -15,6 +15,7 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import common.MyFileRenamePolicy;
+import login.model.vo.Member;
 import review.model.service.ReviewService;
 import review.model.vo.Review;
 
@@ -69,11 +70,11 @@ public class ReviewInsertServlet extends HttpServlet {
 		//String img = multi.getParameter("review_img");
 		String content = multi.getParameter("content");
 		// 로그인한 사용자 아이디 추가하기
-		//String writer = request.getSession().getId();
+		int userNo = ((Member)request.getSession().getAttribute("loginUser")).getUserNo();
 		double point = Double.parseDouble(multi.getParameter("point"));
 		
-		//Review r = new Review(point, content, fileName, writer);
-		Review r = new Review(point, content, img);
+		Review r = new Review(point, content, img, userNo);
+		//Review r = new Review(point, content, img);
 		
 		int result = new ReviewService().insertReview(r);
 		
@@ -83,8 +84,8 @@ public class ReviewInsertServlet extends HttpServlet {
 			//request.getSession().setAttribute("msg", "리뷰가 성공적으로 등록되었습니다.");
 			response.sendRedirect(request.getContextPath() + "/product/info");
 		} else {
-			//request.setAttribute("msg", "리뷰 등록에 실패하였습니다.");
-			request.getRequestDispatcher("/WEB-INF/views/productInformation.ProductInformation.jsp").forward(request, response);
+			request.setAttribute("msg", "리뷰 등록에 실패하였습니다.");
+			request.getRequestDispatcher("/WEB-INF/views/common/errorpage.jsp").forward(request, response);
 		}
 	}
 

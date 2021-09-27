@@ -353,7 +353,7 @@
             </tbody>
         </table>
         <div class="img">
-            <img src="..${product.productImg }" alt="">
+            <img src="../resources/uploadFiles/product/${product.productImg }" alt="">
 
         </div>
         <div class="btns">
@@ -367,7 +367,7 @@
     </div>
     <!-- 상품 상세 정보 -->
     <div class="detail_img" id="pro_detail">
-        <img src="..${product.productImg }" alt="" style="width:800px; height:900px;">
+        <img src="../resources/uploadFiles/product/${product.productImg }" alt="" style="width:800px; height:900px;">
     </div>
     <!-- 리뷰 정렬 영역 -->
     <div class="review_sort" id="reviewsort">

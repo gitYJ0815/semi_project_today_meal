@@ -16,6 +16,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import event.model.service.EventService;
 import event.model.vo.Event;
+import login.model.vo.Member;
 
 /**
  * Servlet implementation class EventInsetServlet
@@ -67,11 +68,11 @@ public class EventInsertServlet extends HttpServlet {
 		
 		String title = multi.getParameter("title");
 		String term = multi.getParameter("term");
-		//int writer = Integer.parseInt(request.getSession().getId());
+		int userNo = ((Member)request.getSession().getAttribute("loginUser")).getUserNo();
 		
 		
-		//Event e = new Event(title, img, term, writer);
-		Event e = new Event(title, img, term);
+		Event e = new Event(title, img, term, userNo);
+		//Event e = new Event(title, img, term);
 		//db쪽으로 insert해야함
 		int result = new EventService().insertEvent(e);
 		
