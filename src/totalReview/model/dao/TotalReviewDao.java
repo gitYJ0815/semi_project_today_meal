@@ -14,8 +14,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
-import common.model.vo.Option;
-import common.model.vo.Product;
+import totalReview.model.vo.Option;
+import totalReview.model.vo.Product;
 import totalReview.model.vo.Review;
 
 
