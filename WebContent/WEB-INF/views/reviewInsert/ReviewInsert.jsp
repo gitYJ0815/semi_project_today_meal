@@ -65,7 +65,6 @@
 			<p class="sub_title">
 				어떤 점이 좋았는지 다른 사용자를 위해 후기를 남겨주세요 <br> (이미지는 1장만 첨부 가능합니다.)
 			</p>
-
 			<div class="review_contents">
 				<div class="warning_msg">10자 이상의 리뷰 내용을 작성해 주세요.</div>
 				<textarea rows="10" class="review_textarea" name="content"
