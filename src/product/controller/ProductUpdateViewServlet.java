@@ -40,7 +40,6 @@ public class ProductUpdateViewServlet extends HttpServlet {
 		int pNo = Integer.parseInt(request.getParameter("pNo"));
 		
 		Product p = new ProductService().selectProduct(pNo);
-		// System.out.println(p);
 		
 		if(p != null) {
 			request.setAttribute("product", p);
