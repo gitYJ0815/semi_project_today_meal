@@ -10,7 +10,7 @@
 <meta charset="UTF-8">
 <title>header</title>
 <link href="<%= request.getContextPath() %>/resources/css/common/reset.css" rel="stylesheet">
-<link href="<%= request.getContextPath() %>/resources/css/common/header.css" rel="stylesheet">
+<link href="<%= request.getContextPath() %>/resources/css/common/header.css?ver=1.7" rel="stylesheet">
 <% if(session.getAttribute("msg") != null) { %>
 <script>
     alert('<%= session.getAttribute("msg")%>');
@@ -19,6 +19,7 @@
         session.removeAttribute("msg"); 
     }
 %>
+
 </head>
 <body>
 <c:set var="contextPath" value="${ pageContext.servletContext.contextPath }" scope="application"/>
