@@ -30,6 +30,7 @@
 		itemCount = form.querySelector("#item_count");
 	
 	let categoryURLArray = [];
+	let userNo = null;
 
 	function init() {
 		category.addEventListener("change", categoryChangeEventHandler);
@@ -37,8 +38,30 @@
 		result.addEventListener("click", resultClickEventHandler);
 		modal.addEventListener("click", modalClickEventListener);
 		resultOrderSelect.addEventListener("change", resultOrderChangeEventHandler);
+		loginUserInit();
 		categoryInit();
 		searchInputInit();
+	}
+	
+	function loginUserInit() {
+		let xhr = new XMLHttpRequest();
+
+		xhr.onreadystatechange = function() {
+			if(xhr.readyState == 4) {
+				if((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
+					let responseTextJson = JSON.parse(xhr.responseText);
+					if(responseTextJson != null) {
+						userNo = responseTextJson.userNo;	
+					}
+				} else {
+					console.log("ajax 통신 실패");
+				}
+			}
+		}
+
+		xhr.open("POST","/today_meal/login/Infomation");
+		xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded;");
+		xhr.send();
 	}
 	
 	function categoryInit() {
@@ -105,7 +128,6 @@
 		let query = createQuery("", "categoryList", categoryURLArray);
 		query = createQuery(query, "st", resultOrderSelect.value);
 		query = createQuery(query, "keyword", searchInput.value);
-		console.log(query);
 
 		xhr.onreadystatechange = function() {
 			if(xhr.readyState == 4) {
@@ -293,7 +315,6 @@
 	}
 	
 	function createQuery(query, key, value) {
-		console.log(value);
 		if(value != "") {
 			query += ((query.length > 0) ? "&" : "") + key + "=" + value;
 		}
@@ -365,15 +386,46 @@
 	}
 
 	function likeButtonToggleEventHandler(likeButton) {
-		if(likeButton.getAttribute("data-user-no") == null) {
-			location.href = window.location.href.split("/today_meal")[0] + "/today_meal/login";
+		if(userNo == null) {
+			location.href = window.location.href.split("/totalReview")[0] + "/login";
 		} else {
+			let xhr = new XMLHttpRequest();
+			let query = createQuery("", "userNo", userNo);
+			query = createQuery(query, "reviewNo", likeButton.getAttribute("data-review-no"));
+			likeButton.setAttribute("disabled", true);
+
 			if(likeButton.classList.contains("active")) {
-				likeButton.classList.remove("active");
-				likeButton.innerHTML = "좋아요 버튼";
+				xhr.onreadystatechange = function() {
+					if(xhr.readyState == 4) {
+						if((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
+							likeButton.classList.remove("active");
+							likeButton.innerHTML = "좋아요 버튼";
+							likeButton.removeAttribute("disabled");
+						} else {
+							console.log("ajax 통신 실패");
+						}
+					}
+				}
+
+				xhr.open("POST", "/today_meal/like/delete");
+				xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded;");
+				xhr.send(query);
 			} else {
-				likeButton.classList.add("active");
-				likeButton.innerHTML = "좋아요 해제 버튼";
+				xhr.onreadystatechange = function() {
+					if(xhr.readyState == 4) {
+						if((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
+							likeButton.classList.add("active");
+							likeButton.innerHTML = "좋아요 해제 버튼";
+							likeButton.removeAttribute("disabled");
+						} else {
+							console.log("ajax 통신 실패");
+						}
+					}
+				}
+
+				xhr.open("POST", "/today_meal/like/delete");
+				xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded;");
+				xhr.send(query);
 			}	
 		}
 	}
