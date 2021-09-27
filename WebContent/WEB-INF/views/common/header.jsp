@@ -58,7 +58,7 @@
            <li><a href="${ contextPath }/product/list?cno=6">양식</a></li>
            <li><a href="${ contextPath }/product/list?cno=7">샐러드</a></li>
            <li><a href="${ contextPath }/totalReview/list">리뷰</a></li>
-           <li><a href="#">이벤트</a></li>
+           <li><a href="${ contextPath }/event/list">이벤트</a></li>
         </ul>
     </nav>
 </div>
