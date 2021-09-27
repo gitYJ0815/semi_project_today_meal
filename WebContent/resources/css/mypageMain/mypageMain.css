@@ -275,7 +275,7 @@
 	text-align: center;
 	display : block;
 }
-.mpTable table tbody td .reviewBox > .reviewBtn{
+.mpTable table tbody td .reviewBox > form > .reviewBtn{
 	
 	display: block;
     width: 68px;

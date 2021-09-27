@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <title>Today_meal</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
-<link href="<%= request.getContextPath() %>/resources/css/mypageMain/mypageMain.css?ver=1.5163" rel="stylesheet">
+<link href="<%= request.getContextPath() %>/resources/css/mypageMain/mypageMain.css?ver=1.5164" rel="stylesheet">
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
@@ -90,7 +90,13 @@
                                              </p>
                                              
                                         </div>
-                                        <div class="reviewBox"><button class="reviewBtn" type="button" onclick="">리뷰작성</button></div>
+                                        <div class="reviewBox">
+                                        <form method="get">
+                                        	<input type="hidden" name="receipt" value="${ receipt.productList }">
+                                        	<button class="reviewBtn" type="button" onclick="reviewInsert();">리뷰작성</button>
+                                        </form>
+                                        <!-- <button class="reviewBtn" type="button" onclick="reviewInsert();">리뷰작성</button> -->
+                                        </div>
                                     </td>
                                     
                                     <td rowspan="${ receipt.orderCount }"><fmt:formatNumber value="${ receipt.orderSum }" groupingUsed="true"/>원</td>
@@ -137,7 +143,14 @@
 			                                                                   수량 : <c:out value="${ product.productQty }"/>개
                                              </p>
                                          </div>
-                                         <div class="reviewBox"><button class="reviewBtn" type="button" onclick="">리뷰작성</button></div>
+                                         
+                                         <div class="reviewBox">
+                                         <form method="get">
+                                        	<input type="hidden" name="receipt" value="${ receipt.productList }">
+                                        	<button class="reviewBtn" type="button" onclick="reviewInsert();">리뷰작성</button>
+                                        </form>
+                                         <!-- <button class="reviewBtn" type="button" onclick="reviewInsert();">리뷰작성</button> -->
+                                         </div>
                                      </td>
                                      
                                  </tr>
@@ -199,5 +212,12 @@
  </div>
 </div>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
+
+<script>
+   function reviewInsert(){
+	   
+       window.open("${contextPath}/review/insert", "popup1", "width=1000, height=800");
+   }
+</script> 
 </body>
 </html>
