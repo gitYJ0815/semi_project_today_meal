@@ -46,6 +46,7 @@
 	      WHERE REVIEW_NO IN (SELECT REVIEW_NO
 	                            FROM (SELECT ROWNUM RNUM, R.*
 	                                    FROM (SELECT REVIEW.REVIEW_NO
+	                                    		   , NVL(REVIEW_COUNT, 0) REVIEW_COUNT
 	                                            FROM REVIEW
 	                                            JOIN PRODUCT USING(PRODUCT_NO)
 	                                            JOIN RECEIPT USING(ORDER_NO)
@@ -77,6 +78,7 @@
 	         , OPTION_NAME
 	         , OPTION_BUY_QUANTITY
 	         , OPTION_INVENTORY_QUANTITY
+	         , REVIEW_COUNT
 	      FROM REVIEW_INFORMATION
 	     WHERE REVIEW_NO = ?
 	</entry>

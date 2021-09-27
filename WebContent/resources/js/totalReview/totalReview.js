@@ -267,7 +267,7 @@
 		html += 		'<p>리뷰가 맘에 드셨나요?</p>';
 		html += 		'<div class="like_area">';
 		html += 		'<button>좋아요 버튼</button>';
-		html +=			'<span>0</span>';
+		html +=			'<span>' + detailData.likeCount + '</span>';
 		html +=		'</div>';
 		html += '</div>';
 		html += '<button class="green_button buy_button"' + (detailData.status ? "" : "disabled") + '>이 구성 구매하기</button>';

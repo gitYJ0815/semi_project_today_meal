@@ -209,8 +209,9 @@ public class TotalReviewDao {
 									  , rset.getString("USER_ID")
 									  , rset.getInt("ORDER_SUM")
 									  , p
+									  , rset.getInt("REVIEW_COUNT")
 									  );
-					
+
 					optionList = new ArrayList<>();
 
 					if(p.getBuyQuantity() > rset.getInt("PRODUCT_INVENTORY_QUANTITY")) {

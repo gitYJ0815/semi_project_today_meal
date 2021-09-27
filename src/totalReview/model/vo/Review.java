@@ -13,11 +13,12 @@ public class Review {
 	private int sum;
 	private Product product;
 	private boolean status;
+	private int  likeCount;
 	
 	public Review() {}
 
 	public Review(int rno, int ono, float point, String reviewText, String reviewImagePath, Date registerDate,
-			String uid, int sum, Product product) {
+			String uid, int sum, Product product, boolean status, int likeCount) {
 		super();
 		this.rno = rno;
 		this.ono = ono;
@@ -28,8 +29,10 @@ public class Review {
 		this.uid = uid;
 		this.sum = sum;
 		this.product = product;
+		this.status = status;
+		this.likeCount = likeCount;
 	}
-	
+
 	public Review(int rno, float point, String reviewImagePath, int sum, Product product) {
 		super();
 		this.rno = rno;
@@ -40,7 +43,7 @@ public class Review {
 	}
 	
 	public Review(int rno, float point, String reviewText, String reviewImagePath, Date registerDate, String uid,
-			int sum, Product product) {
+			int sum, Product product, int likeCount) {
 		super();
 		this.rno = rno;
 		this.point = point;
@@ -50,6 +53,7 @@ public class Review {
 		this.uid = uid;
 		this.sum = sum;
 		this.product = product;
+		this.likeCount = likeCount;
 	}
 
 	public int getRno() {
@@ -132,11 +136,19 @@ public class Review {
 		this.status = status;
 	}
 
+	public int getLikeCount() {
+		return likeCount;
+	}
+
+	public void setLikeCount(int likeCount) {
+		this.likeCount = likeCount;
+	}
+
 	@Override
 	public String toString() {
 		return "Review [rno=" + rno + ", ono=" + ono + ", point=" + point + ", reviewText=" + reviewText
 				+ ", reviewImagePath=" + reviewImagePath + ", registerDate=" + registerDate + ", uid=" + uid + ", sum="
-				+ sum + ", product=" + product + ", status=" + status + "]";
+				+ sum + ", product=" + product + ", status=" + status + ", likeCount=" + likeCount + "]";
 	}
-	
+
 }
