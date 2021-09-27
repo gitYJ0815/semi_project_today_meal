@@ -12,7 +12,7 @@
 	<h2>관리자 페이지</h2>
 	<ul>
 		<li><a href="${ contextPath }/sale/list"><span>판매 관리</span></a></li>
-		<li><a href="#"><span>매출 관리</span></a></li>
+		<li><a href="${ contextPath }/admin/sales/analysis"><span>매출 관리</span></a></li>
 		<li>
 			<span>상품 관리</span>
 			<ul class="depth_2">
