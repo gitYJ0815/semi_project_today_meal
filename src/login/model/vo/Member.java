@@ -35,6 +35,17 @@ public class Member {
 
 
 
+	public Member(int userNo, String phone, String questionNo, String questionAnswer, String address1, String address2,
+			String address3) {
+		super();
+		this.userNo = userNo;
+		this.phone = phone;
+		this.questionNo = questionNo;
+		this.questionAnswer = questionAnswer;
+		this.address1 = address1;
+		this.address2 = address2;
+		this.address3 = address3;
+	}
 
 
 
