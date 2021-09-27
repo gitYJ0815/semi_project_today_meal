@@ -365,12 +365,16 @@
 	}
 
 	function likeButtonToggleEventHandler(likeButton) {
-		if(likeButton.classList.contains("active")) {
-			likeButton.classList.remove("active");
-			likeButton.innerHTML = "좋아요 버튼";
+		if(likeButton.getAttribute("data-user-no") == null) {
+			location.href = window.location.href.split("/today_meal")[0] + "/today_meal/login";
 		} else {
-			likeButton.classList.add("active");
-			likeButton.innerHTML = "좋아요 해제 버튼";
+			if(likeButton.classList.contains("active")) {
+				likeButton.classList.remove("active");
+				likeButton.innerHTML = "좋아요 버튼";
+			} else {
+				likeButton.classList.add("active");
+				likeButton.innerHTML = "좋아요 해제 버튼";
+			}	
 		}
 	}
 
