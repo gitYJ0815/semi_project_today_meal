@@ -99,7 +99,7 @@ h3 {
 	text-align: center;
 }
 
-.cmd input[type="button"] {
+#save {
 	padding: 10px 20px;
 	border-radius: 7px;
 	background-color: #A1AD61;

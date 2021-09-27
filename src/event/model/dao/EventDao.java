@@ -44,7 +44,7 @@ public class EventDao {
 										  rset.getString("content"),
 										  rset.getString("term"),
 										  rset.getInt("count"),
-										  rset.getString("USER_ID"),
+										  rset.getInt("user_no"),
 										  rset.getString("status")));
 			}
 			
@@ -97,7 +97,7 @@ public class EventDao {
 							  rset.getString("content"),
 							  rset.getString("term"),
 							  rset.getInt("count"),
-							  rset.getString("USER_ID"),
+							  rset.getInt("user_no"),
 							  rset.getString("status"));
 			}
 			
@@ -123,7 +123,7 @@ public class EventDao {
 			pstmt.setString(1, ev.getEvent_title());
 			pstmt.setString(2, ev.getContent());
 			pstmt.setString(3, ev.getTerm());
-			//pstmt.setString(4, ev.getUserId());
+			//pstmt.setInt(4, ev.getUserId());
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -209,7 +209,7 @@ public class EventDao {
 										  rset.getString("content"),
 										  rset.getString("term"),
 										  rset.getInt("count"),
-										  rset.getString("user_id"),
+										  rset.getInt("user_no"),
 										  rset.getString("status")));
 			}
 			
