@@ -43,7 +43,7 @@
             <a href="#">장바구니</a>
             <% } else { %>
             <a href="<%= request.getContextPath() %>/logout">로그아웃</a>
-            <a href="<%= request.getContextPath() %>/memberModify">마이페이지</a>
+            <a href="<%= request.getContextPath() %>/user/mypage">마이페이지</a>
             <a href="<%= request.getContextPath() %>/faq/list">FAQ</a>
             <a href="#">장바구니</a>
             <% } %>
