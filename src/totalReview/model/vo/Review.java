@@ -13,12 +13,13 @@ public class Review {
 	private int sum;
 	private Product product;
 	private boolean status;
-	private int  likeCount;
+	private boolean liked;
+	private int likeCount;
 	
 	public Review() {}
 
 	public Review(int rno, int ono, float point, String reviewText, String reviewImagePath, Date registerDate,
-			String uid, int sum, Product product, boolean status, int likeCount) {
+			String uid, int sum, Product product, boolean status, boolean liked, int likeCount) {
 		super();
 		this.rno = rno;
 		this.ono = ono;
@@ -30,6 +31,7 @@ public class Review {
 		this.sum = sum;
 		this.product = product;
 		this.status = status;
+		this.liked = liked;
 		this.likeCount = likeCount;
 	}
 
@@ -135,6 +137,14 @@ public class Review {
 	public void setStatus(boolean status) {
 		this.status = status;
 	}
+	
+	public boolean isLiked() {
+		return liked;
+	}
+
+	public void setLiked(boolean liked) {
+		this.liked = liked;
+	}
 
 	public int getLikeCount() {
 		return likeCount;
@@ -148,7 +158,8 @@ public class Review {
 	public String toString() {
 		return "Review [rno=" + rno + ", ono=" + ono + ", point=" + point + ", reviewText=" + reviewText
 				+ ", reviewImagePath=" + reviewImagePath + ", registerDate=" + registerDate + ", uid=" + uid + ", sum="
-				+ sum + ", product=" + product + ", status=" + status + ", likeCount=" + likeCount + "]";
+				+ sum + ", product=" + product + ", status=" + status + ", liked=" + liked + ", likeCount=" + likeCount
+				+ "]";
 	}
 
 }

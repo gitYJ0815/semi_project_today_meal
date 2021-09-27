@@ -87,7 +87,12 @@
 					<c:forEach var="r" items="${ reviewList }" end="8">
 					<li class="card">
 						<div class="like_area">
-							<button data-review-no="${ r.rno }">좋아요 버튼</button>
+							<button data-review-no="${ r.rno }" <c:if test="${ (!empty loginUser) and r.liked }">class="active"</c:if>>
+							<c:choose>
+								<c:when test="${ (!empty loginUser) and r.liked }">좋아요 해제 버튼</c:when>
+								<c:otherwise>좋아요 버튼</c:otherwise>
+							</c:choose>
+							</button>
 						</div>
 						<div class="image_area">
 							<c:choose>

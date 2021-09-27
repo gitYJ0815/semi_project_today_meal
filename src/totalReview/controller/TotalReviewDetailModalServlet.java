@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import login.model.vo.Member;
 import totalReview.model.service.TotalReviewService;
 import totalReview.model.vo.Review;
 
@@ -39,10 +40,10 @@ public class TotalReviewDetailModalServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
 		int rno = Integer.parseInt(request.getParameter("rno"));
+		int userNo = request.getSession().getAttribute("loginUser") != null ? ((Member)request.getSession().getAttribute("loginUser")).getUserNo() : 0;
 		
-		Review r = new TotalReviewService().selectReview(rno);
+		Review r = new TotalReviewService().selectReview(rno, userNo);
 		
 		response.setContentType("application/json; charset=utf-8");
 		Gson gson = new GsonBuilder().setDateFormat("yyyy.MM.dd").create();

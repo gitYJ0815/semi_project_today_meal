@@ -80,13 +80,19 @@ public class TotalReviewDao {
 		return result;
 	}
 
-	public List<Review> selectList(Connection conn, int page, List<Integer> categoryList, String st, String keyword) {
+	public List<Review> selectList(Connection conn, int page, List<Integer> categoryList, String st, String keyword, int userNo) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		List<Review> reviewList = new ArrayList<>();
 		String sql = query.getProperty("selectList");
 		
 		try {
+			int parameterIndex = 1;
+
+			if(userNo > 0) {
+				sql = query.getProperty("selectListJoinLikeManagement");
+			}
+
 			if(categoryList.size() > 0) {
 				sql = sql.replace("CATEGORY_NO_ARRAY", getCategoryNoArrayString(categoryList));
 			} else {
@@ -110,8 +116,12 @@ public class TotalReviewDao {
 			}
 
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, (page-1)*9+1);
-			pstmt.setInt(2, page*9);
+			if(userNo > 0) {
+				pstmt.setInt(parameterIndex++, userNo);
+			}
+
+			pstmt.setInt(parameterIndex++, (page-1)*9+1);
+			pstmt.setInt(parameterIndex++, page*9);
 			
 			rset = pstmt.executeQuery();
 			
@@ -120,6 +130,7 @@ public class TotalReviewDao {
 			Review r = null;
 			List<Option> optionList = null;
 			boolean status = true;
+			boolean liked = false;
 			while(rset.next()) {
 				int reviewNo = rset.getInt("REVIEW_NO");
 
@@ -129,6 +140,9 @@ public class TotalReviewDao {
 					if(r != null) {
 						r.getProduct().setOptionList(optionList);
 						r.setStatus(status);
+						if(userNo > 0) {
+							r.setLiked(liked);	
+						}
 						reviewList.add(r);
 						status = true;
 					}
@@ -149,6 +163,10 @@ public class TotalReviewDao {
 					if(p.getBuyQuantity() > rset.getInt("PRODUCT_INVENTORY_QUANTITY")) {
 						status = false;
 					}
+					
+					if(userNo > 0) {
+						liked = rset.getString("LIKED").equals("Y") ? true : false;
+					}
 				}
 				
 				Option o = new Option(rset.getString("OPTION_NAME")
@@ -167,8 +185,12 @@ public class TotalReviewDao {
 			if(r != null) {
 				r.getProduct().setOptionList(optionList);
 				r.setStatus(status);
+				if(userNo > 0) {
+					r.setLiked(liked);	
+				}
 				reviewList.add(r);
 			}
+
 		} catch (SQLException e) {
 
 			e.printStackTrace();
@@ -180,15 +202,25 @@ public class TotalReviewDao {
 		return reviewList;
 	}
 
-	public Review selectReview(Connection conn, int rno) {
+	public Review selectReview(Connection conn, int rno, int userNo) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = query.getProperty("selectReview");
 		Review review = null;
 		
 		try {
+			int parameterIndex = 1;
+
+			if(userNo > 0) {
+				sql = query.getProperty("selectReviewJoinLikeManagement");
+			}
+
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, rno);
+			
+			if(userNo > 0) {
+				pstmt.setInt(parameterIndex++, userNo);
+			}
+			pstmt.setInt(parameterIndex++, rno);
 			
 			rset = pstmt.executeQuery();
 			
@@ -216,6 +248,10 @@ public class TotalReviewDao {
 
 					if(p.getBuyQuantity() > rset.getInt("PRODUCT_INVENTORY_QUANTITY")) {
 						status = false;
+					}
+					
+					if(userNo > 0) {
+						review.setLiked(rset.getString("LIKED").equals("Y") ? true : false);
 					}
 				}
 			

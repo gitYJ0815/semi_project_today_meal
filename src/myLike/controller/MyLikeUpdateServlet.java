@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+
 import myLike.model.service.MyLikeService;
 
 /**
@@ -38,13 +41,23 @@ public class MyLikeUpdateServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int userNo = Integer.parseInt(request.getParameter("userNo")),
 			reviewNo = Integer.parseInt(request.getParameter("reviewNo"));
+		MyLikeService mls = new MyLikeService();
 		
-		int result = new MyLikeService().insertLike(userNo, reviewNo);
+		int result = mls.insertLike(userNo, reviewNo);
 		
-		if(result  <= 0) {
+		if(result  > 0) {
+			int count = mls.getLikeCount(reviewNo); 
+
+			response.setContentType("application/json; charset=utf-8");
+			JsonObject jsonObject = new JsonObject();
+			jsonObject.addProperty("count", count);
+
+			new Gson().toJson(jsonObject, response.getWriter());
+		} else {
 			request.setAttribute("msg", "error가 발생했습니다.");
 			request.getRequestDispatcher("/WEB-INF/views/common.errpage.jsp").forward(request, response);
 		}
+		
 	}
 
 }

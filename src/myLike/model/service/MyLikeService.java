@@ -39,5 +39,14 @@ public class MyLikeService {
 		return result;
 	}
 
+	public int getLikeCount(int reviewNo) {
+		Connection conn = getConnection();
+		int result = md.getLikeCount(conn, reviewNo);
+		
+		close(conn);
+
+		return result;
+	}
+
 
 }

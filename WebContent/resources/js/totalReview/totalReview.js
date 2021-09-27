@@ -103,7 +103,7 @@
 	}
 	
 	function searchButtonClickEventHandler() {
-		updateResultList();
+		updateResultList(resultOrderSelect.value, searchInput.value);
 	}
 
 	function updateURL() {
@@ -126,8 +126,9 @@
 	function updateResultList(st, keyword) {
 		let xhr = new XMLHttpRequest();
 		let query = createQuery("", "categoryList", categoryURLArray);
-		query = createQuery(query, "st", resultOrderSelect.value);
-		query = createQuery(query, "keyword", searchInput.value);
+		query = createQuery(query, "st", st);
+		query = createQuery(query, "keyword", keyword);
+		query = createQuery(query, "userNo", userNo);
 
 		xhr.onreadystatechange = function() {
 			if(xhr.readyState == 4) {
@@ -192,6 +193,8 @@
 
 	function detailButtonClickEventHandler(detailButton) {
 		detailButton.setAttribute("disabled", true);
+		let query = createQuery("", "rno", detailButton.getAttribute("data-review-no"));
+		query = createQuery(query, "userNo", userNo);
 		
 		let xhr = new XMLHttpRequest();
 		
@@ -210,7 +213,7 @@
 		
 		xhr.open("POST", "detailModal");
 		xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded;");
-		xhr.send("rno="+detailButton.getAttribute("data-review-no"));
+		xhr.send(query);
 
 		openModal();
 		modal.classList.add("detail_review");
@@ -266,7 +269,7 @@
 		html += 	'<div>';
 		html += 		'<p>리뷰가 맘에 드셨나요?</p>';
 		html += 		'<div class="like_area">';
-		html += 		'<button>좋아요 버튼</button>';
+		html += 		'<button data-review-no="' + detailData.rno + '" ' + (userNo > 0 && detailData.liked ? 'class="active"' : "")  + '>' + (userNo > 0 && detailData.liked ? '좋아요 해제 버튼' : '좋아요 버튼') + '</button>';
 		html +=			'<span>' + detailData.likeCount + '</span>';
 		html +=		'</div>';
 		html += '</div>';
@@ -288,6 +291,8 @@
 		query = createQuery(query, "categoryList", categoryURLArray);
 		query = createQuery(query, "st", resultOrderSelect.value);
 		query = createQuery(query, "keyword", searchInput.value);
+		query = createQuery(query, "userNo", userNo);
+		console.log(userNo)
 		
 		let xhr = new XMLHttpRequest();
 		
@@ -336,9 +341,9 @@
 			let cardHtml = "";
 
 			cardHtml += '<li class="card">';
-			cardHtml +=		'<div class="like_area">'
-			cardHtml += 		'<button>좋아요 버튼</button>'
-			cardHtml += 	'</div>'
+			cardHtml +=		'<div class="like_area">';
+			cardHtml += 		'<button data-review-no="' + cardInformation.rno + '" ' + (userNo > 0 && cardInformation.liked ? 'class="active"' : "") + '>' + (userNo > 0 && cardInformation.liked ? '좋아요 해제 버튼' : '좋아요 버튼') + '</button>';
+			cardHtml += 	'</div>';
 			cardHtml +=		'<div class="image_area">';
 			cardHtml += 		'<img src="../' + (cardInformation.reviewImagePath == undefined ? cardInformation.product.representationImage : cardInformation.reviewImagePath) + '" alt="리뷰 대표 이미지">';
 			cardHtml +=		'</div>';
@@ -385,6 +390,18 @@
 		resultList.insertAdjacentHTML("beforeend", html);
 	}
 
+	function activeLikeButton(likeButton) {
+		likeButton.classList.add("active");
+		likeButton.innerHTML = "좋아요 해제 버튼";
+		likeButton.removeAttribute("disabled");
+	}
+
+	function deactiveLikeButton(likeButton) {
+		likeButton.classList.remove("active");
+		likeButton.innerHTML = "좋아요 버튼";
+		likeButton.removeAttribute("disabled");
+	}
+
 	function likeButtonToggleEventHandler(likeButton) {
 		if(userNo == null) {
 			location.href = window.location.href.split("/totalReview")[0] + "/login";
@@ -398,9 +415,7 @@
 				xhr.onreadystatechange = function() {
 					if(xhr.readyState == 4) {
 						if((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
-							likeButton.classList.remove("active");
-							likeButton.innerHTML = "좋아요 버튼";
-							likeButton.removeAttribute("disabled");
+							deactiveLikeButton(likeButton);
 						} else {
 							console.log("ajax 통신 실패");
 						}
@@ -414,16 +429,14 @@
 				xhr.onreadystatechange = function() {
 					if(xhr.readyState == 4) {
 						if((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
-							likeButton.classList.add("active");
-							likeButton.innerHTML = "좋아요 해제 버튼";
-							likeButton.removeAttribute("disabled");
+							activeLikeButton(likeButton);
 						} else {
 							console.log("ajax 통신 실패");
 						}
 					}
 				}
 
-				xhr.open("POST", "/today_meal/like/delete");
+				xhr.open("POST", "/today_meal/like/update");
 				xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded;");
 				xhr.send(query);
 			}	
@@ -440,7 +453,7 @@
 				} else if(e.target.classList.contains("option")) {
 					optionButtonToggleEventHandler(e.target);
 				} else if(e.target.closest(".like_area")){
-					likeButtonToggleEventHandler(e.target);
+					modalLikeButtonToggleEventHandler(e.target);
 				}
 			} else if(e.target.closest(".cart_inner")) {
 				if(e.target.classList.contains("confirm_button")) {
@@ -448,6 +461,59 @@
 				} else {
 					closeModal();
 				}
+			}
+		}
+	}
+
+	function modalLikeButtonToggleEventHandler(likeButton) {
+		if(userNo == null) {
+			location.href = window.location.href.split("/totalReview")[0] + "/login";
+		} else {
+			let xhr = new XMLHttpRequest();
+			let query = createQuery("", "userNo", userNo);
+			query = createQuery(query, "reviewNo", likeButton.getAttribute("data-review-no"));
+			let likeButtons = container.querySelectorAll('button[data-review-no="' + likeButton.getAttribute("data-review-no") + '"]:not(.detail_button)');
+			likeButton.setAttribute("disabled", true);
+
+			if(likeButton.classList.contains("active")) {
+					xhr.onreadystatechange = function() {
+						if(xhr.readyState == 4) {
+							if((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
+								let responseTextJson = JSON.parse(xhr.responseText);
+
+								for(let likeButton of likeButtons) {
+									deactiveLikeButton(likeButton);
+								}
+
+								likeButton.nextElementSibling.innerHTML = responseTextJson.count;
+							} else {
+								console.log("ajax 통신 실패");
+							}
+						}
+					}
+	
+					xhr.open("POST", "/today_meal/like/delete");
+					xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded;");
+					xhr.send(query);
+			} else {
+				xhr.onreadystatechange = function() {
+					if(xhr.readyState == 4) {
+						if((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
+							let responseTextJson = JSON.parse(xhr.responseText);
+
+							for(let likeButton of likeButtons) {
+								activeLikeButton(likeButton);
+							}
+							likeButton.nextElementSibling.innerHTML = responseTextJson.count;
+						} else {
+							console.log("ajax 통신 실패");
+						}
+					}
+				}
+
+				xhr.open("POST", "/today_meal/like/update");
+				xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded;");
+				xhr.send(query);
 			}
 		}
 	}
