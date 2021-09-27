@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,12 +18,13 @@
 <title>리뷰 작성</title>
 </head>
 <body>
+<c:set var="contextPath" value="${ pageContext.servletContext.contextPath }" scope="application"/>
 	<div class="wrap">
 		<header id="header_review">
 			<h3>상품 리뷰 작성하기</h3>
 		</header>
 		<h3>상품을 사용해 보셨나요?</h3>
-		<form name="reviewform" class="reviewform" method="post"
+		<form name="reviewform" class="reviewform" method="post" enctype="multipart/form-data"
 		action="${ contextPath }/review/insert">
 		<!-- 별점 코드 -->
 		<div class="star-box">
@@ -32,22 +34,30 @@
 			<span class="star star_right">
 				<input type="hidden" name="star" value="1" />
 			</span> 
-			<span class="star star_left" value="1.5"></span> 
-			<span class="star star_right" value="2"></span>
+			<span class="star star_left" value="1.5">
+				<span style="display:none;">1.5</span>  
+			</span> 
+			<span class="star star_right" data-value="2"></span>
 			<span class="star star_left" value="2.5"></span> 
 			<span class="star star_right" value="3"></span>
 			<span class="star star_left" value="3.5"></span> 
 			<span class="star star_right" value="4"></span>
 			<span class="star star_left" value="4.5"></span> 
 			<span class="star star_right" value="5"></span>
+			
+			<input name= "point" type="hidden" id="sum">
 		</div>
 		<script>
               $(".star").on('click',function(){
-                var idx = $(this).index();
-                $(".star").removeClass("on");
-                  for(var i=0; i<=idx; i++){
-                      $(".star").eq(i).addClass("on");
-               }
+            	  var result = 1;
+	                var idx = $(this).index();
+	                $(".star").removeClass("on");
+	                  for(var i=0; i<=idx; i++){
+	                      $(".star").eq(i).addClass("on");
+	                      result = i;
+	               }
+	                  console.log(result+1);
+	                  document.getElementById('sum').value = (result+1)/2;
               });
         </script>
 		
@@ -84,7 +94,7 @@
 
 			<!-- 이미지 첨부 -->
 			<div class="file_area">
-			<input type="file" name="review_img" id="imgfile">
+			<input type="file" name="review_img" id="imgfile" accept="image/gif,image/jpeg,image/png">
 			</div>
 			
 			<!-- 이미지 담는 영역 -->
@@ -105,7 +115,7 @@
             </script>
 
 			<div class="cmd">
-				<input type="button" name="save" id="save" value="등록">
+				<input type="submit" name="save" id="save" value="등록">
 			</div>
 
 			<script>
