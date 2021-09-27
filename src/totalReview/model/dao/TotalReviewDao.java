@@ -84,19 +84,18 @@ public class TotalReviewDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		List<Review> reviewList = new ArrayList<>();
-		String sql = "";
+		String sql = query.getProperty("selectList");
 		
 		try {
 			if(categoryList.size() > 0) {
-				sql = query.getProperty("selectCategoryList");
 				sql = sql.replace("CATEGORY_NO_ARRAY", getCategoryNoArrayString(categoryList));
 			} else {
-				sql = query.getProperty("selectList");
+				sql = sql.replace("AND CATEGORY_NO IN (CATEGORY_NO_ARRAY)", "");
 			}
 			
 			String orderStatus = ""; 
 			switch(st) {
-				case "popular" : orderStatus = "review_no desc"; break;	// temp
+				case "popular" : orderStatus = "REVIEW_COUNT DESC"; break;
 				case "satisfaction" : orderStatus = "POINT DESC"; break;
 				case "hightprice" : orderStatus = "ORDER_SUM DESC"; break;
 				case "lowprice" : orderStatus = "ORDER_SUM ASC"; break;
