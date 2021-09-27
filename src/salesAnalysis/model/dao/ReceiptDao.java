@@ -81,12 +81,12 @@ private Properties query = new Properties();
 		ResultSet rset = null;
 		List<Receipt> receiptList = new ArrayList<>();
 		//String sql = query.getProperty("selectRecentReceiptList");
-		String sql = query.getProperty("selectRecentReceiptList2"); // TEST
+		String sql = query.getProperty("selectRecentReceiptList3"); // TEST
 		
 		// 검색 조건과 값이 잘 넘어왔을때
 		if(searchStart != null && searchEnd != null) {
 			if(searchStart.length() == 8 && searchEnd.length() == 8) {
-				sql = query.getProperty("selectDailyReceiptList2");	// Daily sales searching...
+				sql = query.getProperty("selectDailyReceiptList3");	// Daily sales searching...
 			} else if(searchStart.length() == 6 && searchEnd.length() == 6) {
 				sql = query.getProperty("selectMonthlyReceiptList");	// Monthly sales searching...
 			}
@@ -262,7 +262,7 @@ private Properties query = new Properties();
 	public List<Ranking> selectRankingTop5(Connection conn) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String sql = query.getProperty("selectRankingTop5Ver2");
+		String sql = query.getProperty("selectRankingTop5Ver3");
 		List<Ranking> rankingList = new ArrayList<>();
 		
 		try {
