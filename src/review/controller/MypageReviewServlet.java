@@ -36,7 +36,7 @@ public class MypageReviewServlet extends HttpServlet {
 		// 매개변수로 로그인한 사용자 아이디 보내기
 		//List<Review> reviewList = new ReviewService().selectMyReviewList();
 		Product product = new ProductService().selectMyProduct();
-		//System.out.println(product);
+		
 		request.setAttribute("product", product);
 		//System.out.println(product);
 		request.getRequestDispatcher("/WEB-INF/views/review_management/review_management.jsp").forward(request, response);

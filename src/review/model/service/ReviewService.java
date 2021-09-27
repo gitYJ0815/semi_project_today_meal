@@ -35,7 +35,6 @@ public class ReviewService {
 	// 특정 리뷰 조회하기
 	public Review selectReview(int rno) {
 		Connection conn = getConnection();
-		
 		Review r = new ReviewDao().selectReview(conn, rno);
 		
 		close(conn);

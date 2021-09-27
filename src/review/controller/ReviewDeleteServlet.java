@@ -52,7 +52,7 @@ public class ReviewDeleteServlet extends HttpServlet {
 		int maxSize = 1024*1024*10;
 		
 		String root = request.getSession().getServletContext().getRealPath("/");
-		//System.out.println(root);
+		
 		
 		// 3. 파일 실제 저장 경로
 		String savePath = root + "resources\\uploadFiles\\review\\";

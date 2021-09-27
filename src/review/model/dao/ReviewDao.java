@@ -41,7 +41,6 @@ private Properties query = new Properties();
 			pstmt.setString(2, r.getReviewText());
 			pstmt.setString(3, r.getReviewImage());
 			//pstmt.setString(4, r.getUserId());
-			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

@@ -88,7 +88,6 @@ public class Review {
 	}
 
 
-
 	public Review(double point, String reviewText, String reviewImage, int userNo) {
 		super();
 		this.point = point;
