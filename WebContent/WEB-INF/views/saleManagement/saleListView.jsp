@@ -20,14 +20,14 @@
 					<div>
 						<div>
 							<label for="startYear">기간 : </label>
-							<select id="startYear" name="startYear" class="year">
+							<select id="start_year" name="start_year" class="year">
 								<option value="2021">2021</option>
-								<option value="2021">2020</option>
-								<option value="2021">2019</option>
-								<option value="2021">2018</option>
+								<option value="2020">2020</option>
+								<option value="2019">2019</option>
+								<option value="2018">2018</option>
 							</select>
 							<span>년</span>
-							<select name="startMonth">
+							<select id="start_month" name="start_month" class="month">
 								<option value="1">1</option>
 								<option value="2">2</option>
 								<option value="3">3</option>
@@ -42,7 +42,7 @@
 								<option value="12">12</option>
 							</select>
 							<span>월</span>
-							<select name="startDay">
+							<select id="start_day" name="start_day">
 								<option value="1">1</option>
 								<option value="2">2</option>
 								<option value="3">3</option>
@@ -76,14 +76,14 @@
 							</select>
 							<span class="except_margin">일</span>
 							<span class="except_margin">~</span>
-							<select name="endYear" class="year">
+							<select id="end_year" name="end_year" class="year">
 								<option value="2021">2021</option>
-								<option value="2021">2020</option>
-								<option value="2021">2019</option>
-								<option value="2021">2018</option>
+								<option value="2020">2020</option>
+								<option value="2019">2019</option>
+								<option value="2018">2018</option>
 							</select>
 							<span>년</span>
-							<select name="endMonth">
+							<select id="end_month" name="end_month" class="month">
 								<option value="1">1</option>
 								<option value="2">2</option>
 								<option value="3">3</option>
@@ -98,7 +98,7 @@
 								<option value="12">12</option>
 							</select>
 							<span>월</span>
-							<select id="endDay">
+							<select id="end_day" name="end_day">
 								<option value="1">1</option>
 								<option value="2">2</option>
 								<option value="3">3</option>
@@ -363,6 +363,6 @@
 		</div>
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
-	<script src="${ contextPath }/resources/js/saleManagement/saleListView.js"></script>
+	<script src="${ contextPath }/resources/js/saleManagement/saleManagement.js"></script>
 </body>
 </html>
