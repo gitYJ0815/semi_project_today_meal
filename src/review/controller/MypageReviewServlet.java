@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import login.model.vo.Member;
 import productInfo.model.service.ProductService;
 import productInfo.model.vo.Product;
 import review.model.service.ReviewService;
@@ -35,7 +36,8 @@ public class MypageReviewServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 매개변수로 로그인한 사용자 아이디 보내기
 		//List<Review> reviewList = new ReviewService().selectMyReviewList();
-		Product product = new ProductService().selectMyProduct();
+		int userNo = ((Member)request.getSession().getAttribute("loginUser")).getUserNo();
+		Product product = new ProductService().selectMyProduct(userNo);
 		
 		request.setAttribute("product", product);
 		//System.out.println(product);
