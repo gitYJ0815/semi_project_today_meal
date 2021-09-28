@@ -16,14 +16,14 @@ public class EventService {
 	private EventDao ed = new EventDao();
 	
 	// 검색한 결과 목록 조회 (출력)
-	public List<Event> selectList(String searchCondition, String searchValue) {
+	public List<Event> selectList(String searchValue) {
 		Connection conn = getConnection();
 		
-		List<Event> noticeList = ed.selectList(conn, searchCondition, searchValue);
+		List<Event> eventList = ed.selectList(conn, searchValue);
 		
 		close(conn);
 		
-		return noticeList;
+		return eventList;
 	}
 
 	// 전체 목록 조회
