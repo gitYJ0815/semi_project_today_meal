@@ -92,7 +92,8 @@
                                         </div>
                                         <div class="reviewBox">
                                         <form method="get">
-                                        	<input type="hidden" name="receipt" value="${ receipt.productList }">
+                                        	<input type="hidden" name="orderNo" value="${ receipt.orderNo }">
+                                        	<input type="hidden" name="pNo" value="${ receipt.productList[0].pNo }">
                                         	<button class="reviewBtn" type="button" onclick="reviewInsert();">리뷰작성</button>
                                         </form>
                                         <!-- <button class="reviewBtn" type="button" onclick="reviewInsert();">리뷰작성</button> -->
@@ -143,10 +144,10 @@
 			                                                                   수량 : <c:out value="${ product.productQty }"/>개
                                              </p>
                                          </div>
-                                         
                                          <div class="reviewBox">
                                          <form method="get">
-                                        	<input type="hidden" name="receipt" value="${ receipt.productList }">
+                                        	<input type="hidden" name="orderNo" value="${ receipt.orderNo }">
+                                        	<input type="hidden" name="productName" value="${ product.pNo }">
                                         	<button class="reviewBtn" type="button" onclick="reviewInsert();">리뷰작성</button>
                                         </form>
                                          <!-- <button class="reviewBtn" type="button" onclick="reviewInsert();">리뷰작성</button> -->

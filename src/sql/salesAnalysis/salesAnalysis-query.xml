@@ -223,6 +223,70 @@
   JOIN RECEIPT AG ON(AA.ORDER_NO = AG.ORDER_NO)) RLIST)
  WHERE RANK BETWEEN ? AND ?
 	</entry>
+	<entry key="selectRecentReceiptList4">
+		SELECT
+		       RANK
+		     , ROWNUM
+		     , ORDER_COUNT
+		     , OPTION_YN
+		     , OPT_COUNT
+		     , ORDER_NO
+		     , SALE_DATE
+		     , ORDER_SUM
+		     , PRODUCT_NO
+		     , ORDER_STATE_NO
+		     , CATEGORY_NAME
+		     , P_NO
+		     , PRODUCT_NAME
+		     , PRODUCT_IMG
+		     , PRODUCT_QTY
+		     , OPTION_NAME
+		     , OPTION_QTY
+		  FROM(SELECT
+		       DENSE_RANK() OVER (ORDER BY RLIST.ORDER_NO DESC) RANK
+		     , RLIST.*
+		  FROM (SELECT
+		     
+		       AB.ORDER_COUNT
+		     , AA.OPTION_YN
+		     , NVL(OC.OPT_COUNT, 0) OPT_COUNT
+		     , AA.ORDER_NO
+		     , AG.SALE_DATE
+		     , AG.ORDER_SUM
+		     , AG.PRODUCT_NO
+		     , AG.ORDER_STATE_NO
+		     , AD.CATEGORY_NAME
+		     , AC.PRODUCT_NAME
+		     , AC.PRODUCT_IMG
+		     , AA.QUANTITY PRODUCT_QTY
+		     , AA.PRODUCT_NO P_NO
+		     , AF.OPTION_NAME
+		     , NVL(AE.QUANTITY, 0) OPTION_QTY
+		  FROM PRODUCT_BUY AA
+		  JOIN(SELECT
+		              PB.ORDER_NO
+		            , COUNT(PB.ORDER_NO) ORDER_COUNT
+		         FROM RECEIPT R
+		         JOIN PRODUCT_BUY PB ON(R.ORDER_NO = PB.ORDER_NO)
+		        WHERE USER_NO = ?
+		          AND SALE_DATE BETWEEN ADD_MONTHS(SYSDATE,-1) AND SYSDATE
+		        GROUP BY PB.ORDER_NO) AB ON(AB.ORDER_NO = AA.ORDER_NO)
+		  LEFT JOIN (SELECT
+		                    ORDER_NO
+		                  , PRODUCT_NO
+		                  , COUNT(PRODUCT_NO) OPT_COUNT
+		               FROM OPTION_BUY
+		              GROUP BY ORDER_NO, PRODUCT_NO
+		              ORDER BY ORDER_NO DESC) OC ON(OC.ORDER_NO = AA.ORDER_NO)
+		         AND (OC.PRODUCT_NO = AA.PRODUCT_NO)
+		  JOIN PRODUCT AC ON(AC.PRODUCT_NO = AA.PRODUCT_NO)
+		  JOIN PRODUCT_CATEGORY AD ON(AC.CATEGORY_NO = AD.CATEGORY_NO)
+		  LEFT JOIN OPTION_BUY AE ON(AE.ORDER_NO = AA.ORDER_NO)
+		   AND (AE.PRODUCT_NO = AA.PRODUCT_NO)
+		  LEFT JOIN OPT AF ON(AF.OPTION_NO = AE.OPTION_NO)
+		  JOIN RECEIPT AG ON(AA.ORDER_NO = AG.ORDER_NO)) RLIST)
+		 WHERE RANK BETWEEN ? AND ?
+	</entry>
 	<entry key="selectDailyReceiptList">
 		SELECT
 		       RANK
@@ -369,6 +433,7 @@
      , PRODUCT_NO
      , ORDER_STATE_NO
      , CATEGORY_NAME
+     , P_NO
      , PRODUCT_NAME
      , PRODUCT_IMG
      , PRODUCT_QTY
@@ -391,6 +456,7 @@
      , AC.PRODUCT_NAME
      , AC.PRODUCT_IMG
      , AA.QUANTITY PRODUCT_QTY
+     , AA.PRODUCT_NO P_NO
      , AF.OPTION_NAME
      , NVL(AE.QUANTITY, 0) OPTION_QTY
   FROM PRODUCT_BUY AA
