@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
+import login.model.vo.Member;
 import totalReview.common.TotalReviewCommon;
 import totalReview.model.service.TotalReviewService;
 import totalReview.model.vo.Review;
@@ -43,11 +44,11 @@ public class TotalReviewCategoryListServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
 		int page = 1;
 		int listCount = 0;
 		String st = request.getParameter("st");
 		String keyword = request.getParameter("keyword") == null ? "" : request.getParameter("keyword");
+		int userNo = request.getSession().getAttribute("loginUser") != null ? ((Member)request.getSession().getAttribute("loginUser")).getUserNo() : 0;
 		TotalReviewService trs = new TotalReviewService();
 		
 		String categoryParameter = request.getParameter("categoryList");
@@ -56,7 +57,7 @@ public class TotalReviewCategoryListServlet extends HttpServlet {
 
 		if(categoryParameter != null && categoryParameter.length() > 0) {
 			categoryList = categoryParameter.split(",");
-			
+
 			for(String category : categoryList) {
 				categoryNumberList.add(TotalReviewCommon.CATEGORY_MAP.get(category));
 			}
@@ -64,7 +65,7 @@ public class TotalReviewCategoryListServlet extends HttpServlet {
 			listCount = trs.getListCount(categoryNumberList, keyword);
 		}
 
-		List<Review> reviewList = trs.selectList(page, categoryNumberList, st, keyword);
+		List<Review> reviewList = trs.selectList(page, categoryNumberList, st, keyword, userNo);
 		Map<String, Integer> categoryCountMap = new HashMap<>();
 
 		if(categoryList != null) {

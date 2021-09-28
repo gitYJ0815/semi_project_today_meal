@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
+import login.model.vo.Member;
 import totalReview.common.TotalReviewCommon;
 import totalReview.model.service.TotalReviewService;
 import totalReview.model.vo.Review;
@@ -42,11 +43,10 @@ public class TotalReviewListMoreServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		
 		int page = Integer.parseInt(request.getParameter("page"));
 		String st = request.getParameter("st");
 		String keyword = request.getParameter("keyword") == null ? "" : request.getParameter("keyword");
+		int userNo = request.getSession().getAttribute("loginUser") != null ? ((Member)request.getSession().getAttribute("loginUser")).getUserNo() : 0;
 
 		String categoryParameter = request.getParameter("categoryList");
 		List<Integer> categoryNumberList = new ArrayList<>();
@@ -59,7 +59,7 @@ public class TotalReviewListMoreServlet extends HttpServlet {
 			}
 		}
 		
-		List<Review> reviewList = new TotalReviewService().selectList(page, categoryNumberList, st, keyword);
+		List<Review> reviewList = new TotalReviewService().selectList(page, categoryNumberList, st, keyword, userNo);
 
 		response.setContentType("application/json; charset=utf-8");
 		new Gson().toJson(reviewList, response.getWriter());
