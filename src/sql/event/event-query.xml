@@ -28,6 +28,7 @@
 	WHERE STATUS = 'Y'
 	AND EVNET_NO = ?
 </entry>
+<!-- 조회수 증가 -->
 <entry key="increaseCount">
 	UPDATE EVENT_BOARD
 		SET COUNT = COUNT + 1
