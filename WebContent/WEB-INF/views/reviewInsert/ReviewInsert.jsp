@@ -46,6 +46,8 @@
 			<span class="star star_right" value="5"></span>
 			
 			<input name= "point" type="hidden" id="sum">
+			<input name= "pNo" type="hidden" value="${ param.pno }">
+			<input name= "orderNo" type="hidden" value="${ param.ono }">
 		</div>
 		<script>
               $(".star").on('click',function(){
@@ -126,6 +128,9 @@
                     });
             </script>
 
+			<script>
+				
+			</script>
 		</form>
 	</div>
 </body>

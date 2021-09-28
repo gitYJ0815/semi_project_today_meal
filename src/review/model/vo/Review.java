@@ -12,7 +12,7 @@ public class Review {
 	private int productNo;
 	private int orderNo;
 	private String status;
-	private String product_name;
+	private String productName;
 	private String userName;
 	
 	/*
@@ -29,8 +29,44 @@ public class Review {
 	
 	public Review() {}
 	
-	
-	
+	public Review(int reviewNo, double point, String reviewText, String reviewImage, Date reviewRegister, int userNo,
+			int productNo, int orderNo, String status, String userName) {
+		super();
+		this.reviewNo = reviewNo;
+		this.point = point;
+		this.reviewText = reviewText;
+		this.reviewImage = reviewImage;
+		this.reviewRegister = reviewRegister;
+		this.userNo = userNo;
+		this.productNo = productNo;
+		this.orderNo = orderNo;
+		this.status = status;
+		this.userName = userName;
+	}
+
+
+
+	public Review(double point, String reviewText, String reviewImage, int userNo, int orderNo) {
+		super();
+		this.point = point;
+		this.reviewText = reviewText;
+		this.reviewImage = reviewImage;
+		this.userNo = userNo;
+		this.orderNo = orderNo;
+	}
+
+	public Review(double point, String reviewText, String reviewImage, int userNo, int productNo, int orderNo) {
+		super();
+		this.point = point;
+		this.reviewText = reviewText;
+		this.reviewImage = reviewImage;
+		this.userNo = userNo;
+		this.productNo = productNo;
+		this.orderNo = orderNo;
+	}
+
+
+
 	public Review(int reviewNo, double point, String reviewText, String reviewImage, Date reviewRegister, int userNo,
 			int productNo, String status) {
 		super();
@@ -42,23 +78,6 @@ public class Review {
 		this.userNo = userNo;
 		this.productNo = productNo;
 		this.status = status;
-	}
-
-
-
-	public Review(int reviewNo, double point, String reviewText, String reviewImage, Date reviewRegister, int userNo,
-			int productNo, int orderNo, String status, String product_name) {
-		super();
-		this.reviewNo = reviewNo;
-		this.point = point;
-		this.reviewText = reviewText;
-		this.reviewImage = reviewImage;
-		this.reviewRegister = reviewRegister;
-		this.userNo = userNo;
-		this.productNo = productNo;
-		this.orderNo = orderNo;
-		this.status = status;
-		this.product_name = product_name;
 	}
 
 
@@ -182,12 +201,30 @@ public class Review {
 		this.status = status;
 	}
 
+	
+	
+	public String getUserName() {
+		return userName;
+	}
+
+
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+
+
 	@Override
 	public String toString() {
 		return "Review [reviewNo=" + reviewNo + ", point=" + point + ", reviewText=" + reviewText + ", reviewImage="
 				+ reviewImage + ", reviewRegister=" + reviewRegister + ", userNo=" + userNo + ", productNo=" + productNo
-				+ ", orderNo=" + orderNo + ", status=" + status + "]";
+				+ ", orderNo=" + orderNo + ", status=" + status + ", productName=" + productName + ", userName="
+				+ userName + "]";
 	}
+
+
+
 	
 	
 }

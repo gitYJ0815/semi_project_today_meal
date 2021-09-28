@@ -1,6 +1,7 @@
 package review.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Enumeration;
 
 import javax.servlet.ServletException;
@@ -73,16 +74,34 @@ public class ReviewInsertServlet extends HttpServlet {
 		int userNo = ((Member)request.getSession().getAttribute("loginUser")).getUserNo();
 		double point = Double.parseDouble(multi.getParameter("point"));
 		
-		Review r = new Review(point, content, img, userNo);
-		//Review r = new Review(point, content, img);
+		int pNo = Integer.parseInt(multi.getParameter("pNo"));
+		int orderNo = Integer.parseInt(multi.getParameter("orderNo"));
+		
+
+		Review r = new Review(point, content, img, userNo, pNo, orderNo);
+		
+		System.out.println(r);
 		
 		int result = new ReviewService().insertReview(r);
+		
+		System.out.println(result);
+		
+		PrintWriter out = response.getWriter();
+		
+		
+		
 		
 		if(result > 0) {
 			// 등록을 마친 뒤 (마이페이지 화면)을 응답하고자 할때
 			// 새로 갱신 된 목록을 불러오는 요청을 해야하므로 다시 마이페이지 재호출
-			//request.getSession().setAttribute("msg", "리뷰가 성공적으로 등록되었습니다.");
-			response.sendRedirect(request.getContextPath() + "/product/info");
+			request.getSession().setAttribute("msg", "리뷰가 성공적으로 등록되었습니다.");
+			String str="";
+			   str = "<script language='javascript'>";
+			   str += "opener.window.location.reload();";  //오프너 새로고침
+			   str += "self.close();";   // 창닫기
+			    str += "</script>";
+			   out.print(str);
+			//response.sendRedirect(request.getContextPath() + "/user/mypage");
 		} else {
 			request.setAttribute("msg", "리뷰 등록에 실패하였습니다.");
 			request.getRequestDispatcher("/WEB-INF/views/common/errorpage.jsp").forward(request, response);

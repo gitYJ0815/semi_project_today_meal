@@ -84,7 +84,8 @@ public class ProductDao {
 											rset.getInt("user_no"),
 											rset.getInt("product_no"),
 											rset.getInt("order_no"),
-											rset.getString("status")));
+											rset.getString("status"),
+											rset.getString("user_name")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -96,7 +97,7 @@ public class ProductDao {
 		return reviewList;
 	}
 
-	public List<Review> selectMyReviewList(Connection conn) {
+	public List<Review> selectMyReviewList(Connection conn,int userNo) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		List<Review> reviewList = new ArrayList<>();
@@ -104,7 +105,7 @@ public class ProductDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			//pstmt.setInt(1, pno);
+			pstmt.setInt(1, userNo);
 			
 			rset = pstmt.executeQuery();
 			

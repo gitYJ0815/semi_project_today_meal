@@ -18,7 +18,7 @@
 		)
 		VALUES
 		(
-			seq_rno.nextval,
+			SEQ_RNO.NEXTVAL,
 			?,
 			?,
 			?,
@@ -54,7 +54,7 @@
 		status
 	FROM review
 	WHERE STATUS = 'Y'
-	AND user_no = 1
+	AND user_no = 21
 	ORDER BY review_register DESC
 	</entry>
 	<entry key="updateReview">
