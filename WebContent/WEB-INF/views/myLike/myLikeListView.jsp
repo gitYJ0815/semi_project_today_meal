@@ -59,7 +59,7 @@
 							<div class="button_area">
 								<div>
 									<button type="button" class="green_button cart" <c:if test="${ !like.review.status }">disabled</c:if>>구매하기</button>
-									<button type="button" class="green_button delete">삭제하기</button>
+									<button type="button" class="green_button delete" data-like-no=${ like.lno }>삭제하기</button>
 								</div>
 							</div>
 						</div>
@@ -95,6 +95,7 @@
 					</div>
 				</div>
 				<button type="button" class="close_button"></button>
+				<form name="deleteForm" method="post"></form>
 			</div>
 		</div>
 	</div>

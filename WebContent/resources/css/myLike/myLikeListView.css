@@ -312,6 +312,7 @@ body.modal_open {
 
 #modal > .modal_inner .button_area .confirm_button {
 	background-color: #294401;
+	border-radius: 7px;
 }
 
 #modal.delete .delete_inner {

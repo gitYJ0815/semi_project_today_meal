@@ -69,5 +69,19 @@ public class MyLikeService {
 		return map;
 	}
 
+	public int deleteLikeList(int userNo, String[] likeNos) {
+		Connection conn = getConnection();
+		int result = md.deleteLikeList(conn, userNo, likeNos);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+
+		return result;
+	}
+
 
 }

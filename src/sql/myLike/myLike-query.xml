@@ -53,4 +53,10 @@
 		  FROM LIKE_MANAGEMENT
 		 WHERE USER_NO = ?
 	</entry>
+	<entry key="deleteLikeList">
+		DELETE
+		  FROM LIKE_MANAGEMENT
+		 WHERE USER_NO = ?
+		   AND LIKE_NO IN (LIKE_NO_ARRAY)
+	</entry>
 </properties>

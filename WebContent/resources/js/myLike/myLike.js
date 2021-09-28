@@ -11,8 +11,11 @@
 		listBody = likeList.querySelector(".list_body"),
 		itemCount = listBody.querySelectorAll(".item").length,
 		checkBoxes = listBody.querySelectorAll("input[type=checkbox]");
+	
+	let modalForm = modal.querySelector("form");
 
 	let checkCount = 0;
+	let selectItem = [];
 
 	function init() {
 		selectAllInput.addEventListener("change", selectAllChangeEventHandler);
@@ -36,6 +39,11 @@
 
 		for(let checkBox of checkBoxes) {
 			checkBox.classList.add("active");
+			
+			let likeNo = checkBox.getAttribute("data-like-no");
+			if(selectItem.indexOf(likeNo) < 0) {
+				selectItem.push(likeNo);
+			}
 		}
 	}
 
@@ -47,10 +55,14 @@
 		for(let checkBox of checkBoxes) {
 			checkBox.classList.remove("active");
 		}
+		selectItem.length = 0;
 	}
 
 	function selectDeleteButtonClickEventHandler() {
 		openModal();
+		for(let select of selectItem) {
+			modalForm.insertAdjacentHTML("beforeend", "<input type='hidden' name='lno' value='" + select + "'>");
+		}
 		modal.classList.add("delete_all");
 	}
 
@@ -70,9 +82,9 @@
 	function listBodyClickEventHandler(e) {
 		if(e.target.tagName == "INPUT") {
 			if(e.target.classList.contains("active")) {
-				selectRow(e.target);
-			} else {
 				deselectRow(e.target);
+			} else {
+				selectRow(e.target);
 			}
 		}
 
@@ -88,23 +100,28 @@
 	}
 
 	function selectRow(input) {
+		input.classList.add("active");
+		selectDeleteButton.removeAttribute("disabled");
+
+		selectItem.push(input.getAttribute("data-like-no"));
+		console.log(selectItem)
+
+		if(++checkCount == itemCount) {
+			selectAllInput.classList.add("active");
+		}
+	}
+
+	function deselectRow(input) {
 		input.classList.remove("active");
 
 		if(--checkCount != itemCount) {
 			selectAllInput.classList.remove("active");
 		}
 
+		selectItem.splice(selectItem.indexOf(input.getAttribute("data-like-no")), 1);
+
 		if(checkCount == 0) {
 			selectDeleteButton.setAttribute("disabled", true);
-		}
-	}
-
-	function deselectRow(input) {
-		input.classList.add("active");
-		selectDeleteButton.removeAttribute("disabled");
-
-		if(++checkCount == itemCount) {
-			selectAllInput.classList.add("active");
 		}
 	}
 
@@ -120,11 +137,24 @@
 
 	function deleteButtonClickEventHandler(deleteButton) {
 		openModal();
+		modalForm.insertAdjacentHTML("beforeend", "<input type='hidden' name='lno' value='" + deleteButton.getAttribute("data-like-no") + "'>");
 		modal.classList.add("delete");
 	}
 
 	function modalClickEventHandler(e) {
-		if(e.target.tagName == "BUTTON") {
+		let button = e.target;
+
+		if(button.tagName == "BUTTON") {
+			if(button.classList.contains("confirm_button")) {
+				if(modal.classList.contains("delete_all")) {
+					modalForm.action = "/today_meal/like/updateList";
+					modalForm.submit();
+				} else {
+					modalForm.action = "/today_meal/like/updateList";
+					modalForm.submit();
+				}
+			}
+			modalForm.innerHTML = "";
 			closeModal();
 		}
 	}

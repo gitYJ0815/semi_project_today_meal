@@ -32,6 +32,19 @@ public class MyLikeDao {
 			e.printStackTrace();
 		}
 	}
+	
+	public String getLikeNoArrayString(String[] likeNos) {
+		StringBuilder sb = new StringBuilder();
+		
+		for(int i=0; i<likeNos.length; i++) {
+			if(i != 0) {
+				sb.append(",");
+			}
+			sb.append(Integer.parseInt(likeNos[i]));
+		}
+		
+		return sb.toString();
+	}
 
 	public int insertLike(Connection conn, int userNo, int reviewNo) {
 		PreparedStatement pstmt = null;
@@ -212,6 +225,26 @@ public class MyLikeDao {
 		}
 		
 		return myLikeList;
+	}
+
+	public int deleteLikeList(Connection conn, int userNo, String[] likeNos) {
+		PreparedStatement pstmt = null;
+		String sql = query.getProperty("deleteLikeList");
+		int result = 0;
+		
+		try {
+			sql = sql.replace("LIKE_NO_ARRAY", getLikeNoArrayString(likeNos));
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, userNo);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+
+		return result;
 	}
 
 }
