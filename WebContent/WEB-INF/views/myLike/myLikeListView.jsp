@@ -58,7 +58,7 @@
 							</div>
 							<div class="button_area">
 								<div>
-									<button type="button" class="green_button cart" <c:if test="${ !like.review.status }">disabled</c:if>>장바구니</button>
+									<button type="button" class="green_button cart" <c:if test="${ !like.review.status }">disabled</c:if>>구매하기</button>
 									<button type="button" class="green_button delete">삭제하기</button>
 								</div>
 							</div>
@@ -91,13 +91,6 @@
 						<div class="button_area">
 							<button type="button" class="green_button">취소</button>
 							<button type="button" class="confirm_button">삭제</button>
-						</div>
-					</div>
-					<div class="cart_inner">
-						<h3>장바구니에 담으시겠습니까?</h3>
-						<div class="button_area">
-							<button type="button" class="green_button">취소</button>
-							<button type="button" class="confirm_button">바로구매</button>
 						</div>
 					</div>
 				</div>

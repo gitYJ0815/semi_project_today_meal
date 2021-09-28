@@ -314,10 +314,6 @@ body.modal_open {
 	background-color: #294401;
 }
 
-#modal.cart .cart_inner {
-	display: block;
-}
-
 #modal.delete .delete_inner {
 	display: block;
 }
