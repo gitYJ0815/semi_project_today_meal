@@ -19,7 +19,7 @@
 				<div class="like_list <c:if test="${ myLikeList.size() == 0 }">empty_result</c:if>">
 					<div class="list_header">
 						<div>
-							<input type="checkbox" name="select_all" id="select_all" disabled>
+							<input type="checkbox" name="select_all" id="select_all" <c:if test="${ myLikeList.size() == 0 }">disabled</c:if>>
 							<label for="select_all">전체 선택</label>
 						</div>
 						<button type="button" class="green_button" disabled>선택 삭제</button>
