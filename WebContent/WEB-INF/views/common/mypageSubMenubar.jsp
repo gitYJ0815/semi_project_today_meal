@@ -25,7 +25,7 @@
                     <li class="yjfirst_li"><img class="yjicon" src="<%= request.getContextPath() %>/resources/images/mypageSubMenubar/chat.png">나의 활동</li>
                     <div class="vertical_line">
                         <li class="yjhiddenLi"><a class ="yja" href="#">나의 1:1 문의</a></li>
-                        <li class="yjhiddenLi"><a class ="yja" href="#">나의 좋아요 목록</a></li>
+                        <li class="yjhiddenLi"><a class ="yja" href="${ pageContext.servletContext.contextPath}/myLike/list">나의 좋아요 목록</a></li>
                         <li class="yjhiddenLi"><a class ="yja" href="${ pageContext.servletContext.contextPath}/mypage/review">리뷰 관리</a></li>
                     </div>
                 </ul>
