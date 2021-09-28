@@ -10,11 +10,7 @@
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<div id="container">
-		<nav class="snb">
-			<div class="snb_inner">
-				
-			</div>
-		</nav>
+		<jsp:include page="/WEB-INF/views/common/mypageSubMenubar.jsp"/>
 		<div class="contents">
 			<div class="contents_inner">
 				<h2>나의 좋아요 목록</h2>
@@ -30,7 +26,10 @@
 						<p>좋아요한 리뷰가 없습니다.</p>
 					</div>
 					<div class="paging">
-						<jsp:include page="/WEB-INF/views/common/paging/paging.jsp"/>
+						<jsp:include page="/WEB-INF/views/common/paging/paging.jsp">
+							<jsp:param name="url" value="${ contextPath }/myLike/list?"/>
+							<jsp:param name="searchParam" value=""/>
+						</jsp:include>
 					</div>
 				</div>
 			</div>
