@@ -205,6 +205,7 @@
         padding-top: 10px;
         height: 500px;
         width : 1000px;
+        margin-bottom : 20px;
     }
 
     .box {
@@ -372,8 +373,8 @@
     <!-- 리뷰 정렬 영역 -->
     <div class="review_sort" id="reviewsort">
         <ul class="review_sort_list">
-            <li class="selected"><span class="recentList">최신순</span> &nbsp; |</li>
-            <li><span class="starPointlist">별점높은순</span></li>
+            <li class="selected"><span class="recentList">최신순</span> &nbsp; | &nbsp;</li>
+            <li class="starPointlist" name="reviewPointDesc">별점높은순</li>
         </ul>
     </div><div class="review_list" ><c:forEach var="r" items="${ product.reviewList }"><ul class="review" onclick="review_detail(this);" ><li class="review_li" ><div class="main">
                     <div class="main_1 main_common">
@@ -418,7 +419,7 @@
 							  <br>
 							 </c:otherwise>
 						</c:choose>
-              <span class="rwriter">작성자 ${r.userNo }</span>            
+              <span class="rwriter">작성자 ${r.userName }</span>            
                          <br> <span class="register">작성일 ${r.reviewRegister }</span></p>
                     </div>
                     <div class="main_2 main_common"><p class="pcontent"><a href=#none >${r.reviewText }</a></p></div>
@@ -475,7 +476,7 @@
 							 </c:otherwise>
 						</c:choose>
                         	</p>
-                        	<p>작성자 ${r.userNo }</p>
+                        	<p>작성자 ${r.userName }</p>
                         </div>
                     </div>
                     <div class="main_common main_2">
@@ -610,7 +611,7 @@
 	<div class="paging">
 		<jsp:include page="/WEB-INF/views/common/paging/paging.jsp"/>	
     </div>
-	<jsp:include page="/WEB-INF/views/common/footer.jsp" />    
+	
 </body>
-
+   
 </html>
