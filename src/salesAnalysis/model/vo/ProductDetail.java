@@ -5,6 +5,7 @@ import java.util.List;
 public class ProductDetail {
 	
 	private String catagoryName;
+	private int pNo;
 	private String productName;
 	private String productImg;
 	private int productQty;
@@ -15,6 +16,29 @@ public class ProductDetail {
 	}
 	
 	
+	public ProductDetail(String catagoryName, int pNo, String productName, String productImg, int productQty,
+			List<ProductOption> optionList) {
+		super();
+		this.catagoryName = catagoryName;
+		this.pNo = pNo;
+		this.productName = productName;
+		this.productImg = productImg;
+		this.productQty = productQty;
+		this.optionList = optionList;
+	}
+	
+	
+
+	public ProductDetail(String catagoryName, int pNo, String productName, String productImg, int productQty) {
+		super();
+		this.catagoryName = catagoryName;
+		this.pNo = pNo;
+		this.productName = productName;
+		this.productImg = productImg;
+		this.productQty = productQty;
+	}
+
+
 	public ProductDetail(String catagoryName, String productName, String productImg, int productQty) {
 		super();
 		this.catagoryName = catagoryName;
@@ -33,7 +57,9 @@ public class ProductDetail {
 		this.productQty = productQty;
 		this.optionList = optionList;
 	}
-
+	
+	
+	
 	public String getCatagoryName() {
 		return catagoryName;
 	}
@@ -41,6 +67,16 @@ public class ProductDetail {
 	public void setCatagoryName(String catagoryName) {
 		this.catagoryName = catagoryName;
 	}
+	
+	public int getpNo() {
+		return pNo;
+	}
+
+
+	public void setpNo(int pNo) {
+		this.pNo = pNo;
+	}
+
 
 	public String getProductName() {
 		return productName;
@@ -77,10 +113,12 @@ public class ProductDetail {
 
 	@Override
 	public String toString() {
-		return "ProductDetail [catagoryName=" + catagoryName + ", productName=" + productName + ", productImg="
-				+ productImg + ", productQty=" + productQty + ", optionList=" + optionList + "]";
+		return "ProductDetail [catagoryName=" + catagoryName + ", pNo=" + pNo + ", productName=" + productName
+				+ ", productImg=" + productImg + ", productQty=" + productQty + ", optionList=" + optionList + "]";
 	}
 
+
+	
 	
 	
 }

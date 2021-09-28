@@ -81,7 +81,7 @@ private Properties query = new Properties();
 		ResultSet rset = null;
 		List<Receipt> receiptList = new ArrayList<>();
 		//String sql = query.getProperty("selectRecentReceiptList");
-		String sql = query.getProperty("selectRecentReceiptList3"); // TEST
+		String sql = query.getProperty("selectRecentReceiptList4"); // TEST
 		
 		// 검색 조건과 값이 잘 넘어왔을때
 		if(searchStart != null && searchEnd != null) {
@@ -138,7 +138,7 @@ private Properties query = new Properties();
 							copyOptList.add(new ProductOption(opt.getOptionName(), opt.getOptionQty()));
 						}
 						
-						ProductDetail pd = new ProductDetail(rset.getString("category_name"), rset.getString("product_name"),
+						ProductDetail pd = new ProductDetail(rset.getString("category_name"), rset.getInt("p_no"), rset.getString("product_name"),
 	 							 							 rset.getString("product_img"), rset.getInt("product_qty"), copyOptList);
 						productList.add(pd);
 						optList.clear();
@@ -148,7 +148,7 @@ private Properties query = new Properties();
 					}
 				} else {
 					
-					ProductDetail pd = new ProductDetail(rset.getString("category_name"), rset.getString("product_name"),
+					ProductDetail pd = new ProductDetail(rset.getString("category_name"), rset.getInt("p_no"), rset.getString("product_name"),
  							 rset.getString("product_img"), rset.getInt("product_qty"));
 					productList.add(pd);
 					psetCnt++;
