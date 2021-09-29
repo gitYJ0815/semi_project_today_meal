@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="listCount">
+		SELECT
+		       COUNT(*)
+		  FROM RECEIPT
+		  JOIN ORDER_STATE USING(ORDER_STATE_NO)
+		  LEFT OUTER JOIN MEMBER USING(USER_NO)
+		  LEFT OUTER JOIN PRODUCT_BUY USING(ORDER_NO)
+		  LEFT OUTER JOIN PRODUCT ON(PRODUCT_BUY.PRODUCT_NO = PRODUCT.PRODUCT_NO)
+		 WHERE SALE_DATE BETWEEN TO_DATE(?) AND TO_DATE(?)+0.9999
+		 ORDER BY SALE_DATE
+	</entry>
+	<entry key="selectList">
+		SELECT
+		       ORDER_NO
+		     , SALE_DATE
+		     , USER_ID
+		     , PRODUCT_NAME
+		     , ORDER_SUM
+		     , ORDER_STATE_NAME
+		  FROM (SELECT ROWNUM RUNM, S.*
+		          FROM (SELECT
+		                       ORDER_NO
+		                     , SALE_DATE
+		                     , USER_ID
+		                     , PRODUCT_NAME
+		                     , ORDER_SUM
+		                     , ORDER_STATE_NAME
+		                  FROM RECEIPT
+		                  JOIN ORDER_STATE USING(ORDER_STATE_NO)
+		                  LEFT OUTER JOIN MEMBER USING(USER_NO)
+		                  LEFT OUTER JOIN PRODUCT_BUY USING(ORDER_NO)
+		                  LEFT OUTER JOIN PRODUCT ON(PRODUCT_BUY.PRODUCT_NO = PRODUCT.PRODUCT_NO)
+		                 WHERE SALE_DATE BETWEEN TO_DATE(?) AND TO_DATE(?)+0.9999
+		                 ORDER BY ORDER_NO DESC) S)
+		 WHERE RUNM BETWEEN ? AND ?
+	</entry>
+</properties>

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import = "java.util.Calendar" %>
-<%@page import="java.util.GregorianCalendar"%>
+<%@ page import="java.util.GregorianCalendar"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -82,7 +82,7 @@
 					</div>
 					<button type="button" class="green_button search_button">검색</button>
 				</form>
-				<div class="result_area empty_result">
+				<div class="result_area <c:if test="${ receiptList.size() == 0 }">empty_result</c:if>">
 					<div class="result_option">
 						<input type="checkbox" name="select_all" id="select_all">
 						<label for="select_all">전체 선택</label>
@@ -112,13 +112,34 @@
 							</tr>
 						</thead>
 						<tbody>
+						<c:choose>
+							<c:when test="${ receiptList.size() == 0 }">
 							<tr>
 								<td colspan="8">주문 내역이 없습니다.</td>
 							</tr>
+							</c:when>
+							<c:otherwise>
+							<c:forEach var="receipt" items="${ receiptList }">
+							<tr>
+								<td><input type="checkbox" name="select_row" data-receipt-no="${ receipt.ono }"></td>
+								<td><fmt:formatDate value="${ receipt.saleDate }" pattern="yyyy-MM-dd"/></td>
+								<td>${ receipt.ono }</td>
+								<td>${ receipt.userId }</td>
+								<td>${ receipt.product.pname }</td>
+								<td><fmt:formatNumber value="${ receipt.orderSum }" type="number" groupingUsed="true"/></td>
+								<td>${ receipt.orderState }</td>
+								<td><button type="button" class="green_button learn_more_button" data-receipt-no="${ receipt.ono }">상세 보기</button></td>
+							</tr>
+							</c:forEach>
+							</c:otherwise>
+						</c:choose>
 						</tbody>
 					</table>
 					<div class="paging">
-						<jsp:include page="/WEB-INF/views/common/paging/paging.jsp"/>
+						<jsp:include page="/WEB-INF/views/common/paging/paging.jsp">
+							<jsp:param name="url" value="${ contextPath }/sale/list?"/>
+							<jsp:param name="searchParam" value=""/>
+						</jsp:include>
 					</div>
 				</div>
 			</div>

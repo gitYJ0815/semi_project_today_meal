@@ -47,11 +47,11 @@
 		if(startDate.getTime() > endDate.getTime()) {
 			status = false;
 			alert("입력하신 기간이 유효하지 않습니다.");
-		} else if(!(/^[a-z][a-z\d]{5,11}$/.test(id))) {
+		} else if(id.length > 0 && !(/^[a-z][a-z\d]{5,11}$/.test(id))) {
 			idInput.focus();
 			alert("입력하신 아이디가 유효하지 않습니다.");
 			status = false;
-		} else if( orderNumber.length <= 0 || orderNumber.length > 10) {
+		} else if(orderNumber.length > 0 && orderNumber.length != 10) {
 			status = false;
 			alert("입력하신 주문번호가 유효하지 않습니다.");
 			orderNumberInput.focus();
