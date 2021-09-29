@@ -23,6 +23,11 @@
     margin-top: 42px;
 }
 
+.productImage img{
+	width: 390px;
+    height: 390px;
+}
+
 .productWrapper1 {
     margin-top: -520px;
     margin-left: 52.77%;
