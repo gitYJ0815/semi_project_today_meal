@@ -3,14 +3,13 @@ package event.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-
 import event.model.service.EventService;
 import event.model.vo.Event;
 
@@ -34,6 +33,14 @@ public class EventListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int page = 1;
+		
+		// 하지만 페이지 전환 시 전달 받은 현재 페이지가 있을 경우 해당 값을 page로 적용
+		if(request.getParameter("page") != null) {
+			page = Integer.parseInt(request.getParameter("page"));
+		}
+		
+		
 		request.setCharacterEncoding("utf-8");
 		String searchValue = request.getParameter("searchValue");
 		List<Event> eventList;
@@ -42,11 +49,8 @@ public class EventListServlet extends HttpServlet {
 			// 검색 된 리스트 조회
 			eventList = new EventService().selectList(searchValue);
 		} else {
-			// 공지사항 게시글에 대한 목록 요청(넘어온 값 없으므로 파라미터 없이 바로 요청)
 			eventList = new EventService().selectList();
 		}
-		
-		//System.out.println("공지사항 목록 : " + noticeList);
 		request.setAttribute("eventList", eventList);
 		
 		request.getRequestDispatcher("/WEB-INF/views/event/eventListView.jsp").forward(request, response);

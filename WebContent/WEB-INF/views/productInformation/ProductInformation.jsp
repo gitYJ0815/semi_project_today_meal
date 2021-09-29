@@ -15,9 +15,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100&display=swap" rel="stylesheet">
 </head>
 <style>
-	a {
-		color : black;
-	}
     body {
         padding: 50px;
     }
@@ -72,28 +69,14 @@
         margin-left: 150px;
     }
 
-    /* .product_view table td.price {
-        font-size: 22px;
-    } */
-
     .product_view .btns {
         padding: 45px 0 0;
         text-align: center;
     }
 
-    .product_view .btns>a {
-        display: inline-block;
-        width: 136px;
-        height: 42px;
-        border-radius: 2px;
-        font-size: 16px;
-        color: #fff;
-        line-height: 42px;
-    }
-
     .product_view .btns>a.btn2 {
         background: #294401;
-        border-radius : 7px
+        border-radius : 7px;
     }
 
     a {
@@ -232,9 +215,6 @@
             text-align: center;
             word-break:break-all;
         }
-/*          
-        .main_1, .main_3 { font-size: 30px; }
-        .main_2 { font-size: 40px; } */
 
         .main_1 {
             width: 200px;
@@ -307,27 +287,14 @@
 		.detail_content {
 			width : 100px;
 		}
-		/* test */
-		.inner-star::before{
-          color: #FF9600;
-        }
-        .outer-star {
-          position: relative;
-          display: inline-block;
-          color: #CCCCCC;
-        }
-        .inner-star {
-          position: absolute;
-          left: 0;
-          top: 0;
-          width: 0%;
-          overflow: hidden;
-          white-space: nowrap;
-        }
-        .outer-star::before, .inner-star::before {
-          content: '\f005 \f005 \f005 \f005 \f005';
-          font-family: 'Font Awesome 5 free';
-          font-weight: 900;
+		
+        .orderBtn {
+        	background: #294401;
+        	border-radius : 7px;
+        	color : white;
+        	width: 136px;
+        	height: 42px;
+        	font-size : 16px;
         }
 </style>
 
@@ -358,7 +325,10 @@
 
         </div>
         <div class="btns">
-            <a href="#" class="btn2">재료변경/주문하기</a>
+        	<form method="post" action="${contextPath}/product/select">
+        	<button class="orderBtn" type="button" onclick="pSelect(${product.productNo});">재료변경/주문하기</button>
+        	</form>
+        	
         </div>
     </div>
     <!-- 내부이동 버튼 영역-->
@@ -486,14 +456,14 @@
                 <div class="detail_review_img">
                     <img style="width: 300px; height: 300px;" src="../resources/uploadFiles/review/${r.reviewImage }" alt="">
                 </div>
-                <div><p class="fold_review" id="fold" onclick="folding(this);">▲ 리뷰 접기</p></div></div></div></c:forEach></div>
-    
-    <form method="post">
-       <!--  <input type="hidden" name="pno" value="${ product.productNo }" />
-        <input type="hidden" name="rno" value="${ review.rno }">  -->
-    </form>
-
-    <script>
+                <div><p class="fold_review" id="fold" onclick="folding(this);">▲ 리뷰 접기</p></div></div></div></c:forEach>
+                <div class="paging">
+		<jsp:include page="/WEB-INF/views/common/paging/paging.jsp"/>	
+    </div><jsp:include page="/WEB-INF/views/common/footer.jsp"/></div>
+    <jsp:include page="/WEB-INF/views/common/top.jsp" />
+	
+   
+	<script>
     function review_detail(elem) {
 		console.log(elem);
 		var test1 = elem.nextSibling; 
@@ -562,7 +532,6 @@
     	}
     });
     </script>
-    
 	 <!-- 별점 순 정렬 ajax -->
 	 
 	 <script>
@@ -585,33 +554,10 @@
 			});
 		})
 	 </script>
-	 
 	 <script>
-	 $(function(){
-		 $(".recentList").click(function(){
-				$.ajax({ //매개변수로 객체 전달
-					type: 'post',
-					// url : 데이터를 전송할 url(필수)
-					contentType:"application/json; charset=UTF-8",
-					url : "${ contextPath }/productDetail/recentList",
-					// data : 요청 시 전달할 파라미터 설정
-					data: "",
-					success: function(data) {
-						$('.review_list').html(data);
-					},
-					// error : ajax 통신 실패 시 처리할 함수를 지정하는 속성
-					error : function(){
-						console.log('ajax 통신 실패!');
-					}
-				});
-			});
-		})
+	 function pSelect(pno){
+		 location.href='${contextPath}/product/select?pno=' + pno;
+	 }
 	 </script>
-    <jsp:include page="/WEB-INF/views/common/top.jsp" />
-	<div class="paging">
-		<jsp:include page="/WEB-INF/views/common/paging/paging.jsp"/>	
-    </div>
-	
 </body>
-   
 </html>

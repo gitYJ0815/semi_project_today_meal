@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import common.paging.model.vo.PageInfo;
 import event.model.vo.Event;
 
 public class EventDao {
@@ -216,4 +217,91 @@ public class EventDao {
 		return eventList;
 	}
 
+	// 페이징 처리할 검색에 대한 목록 수
+	public int getListCountPage(Connection conn, String searchValue) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int listCount = 0;
+		String sql = query.getProperty("getListCountPage");
+		
+		// 검색 조건과 값이 잘 넘어 왔을 때
+		if(searchValue != null) {
+			if(searchValue.equals("title")) { // 제목 검색
+				sql = query.getProperty("getTitleListCount");
+			}
+		}
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			if(searchValue != null) {
+				pstmt.setString(1, searchValue);
+			}
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return listCount;
+	}
+
+	// 페이징 처리 된
+	public List<Event> selectListPage(Connection conn, PageInfo pi, String searchValue) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<Event> eventlist = new ArrayList<>();
+		String sql = query.getProperty("selectList");
+		
+		// 검색 조건과 검색 값이 넘어왔을 경우
+		if(searchValue != null) {
+			if(searchValue.equals("title")) { // 제목 검색
+				sql = query.getProperty("selectTitleList");
+			}
+		}
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getPage() - 1) * pi.getItemCount() + 1;
+			int endRow = startRow + pi.getItemCount() - 1;
+			int paramIndex = 1;
+			
+			// 검색 조건과 검색 값이 넘어온 경우
+			if(searchValue!= null) {
+				pstmt.setString(paramIndex++, searchValue);
+			}
+			
+			pstmt.setInt(paramIndex++, startRow);
+			pstmt.setInt(paramIndex++, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				eventlist.add(new Event(rset.getInt("EVNET_NO"),
+										rset.getString("EVNET_TITLE"),
+										rset.getString("content"),
+										rset.getString("TERM"),
+										rset.getInt("count"),
+										rset.getInt("user_no"),
+										rset.getString("status")));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return eventlist;
+	}
+	
 }

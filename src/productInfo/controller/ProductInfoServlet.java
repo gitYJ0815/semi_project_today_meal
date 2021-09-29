@@ -37,8 +37,8 @@ public class ProductInfoServlet extends HttpServlet {
 //		request.setCharacterEncoding("UTF-8");
 //		request.getRequestDispatcher("/WEB-INF/views/productInformation/ProductInformation.jsp").forward(request, response);
 //		
-//		int pno = Integer.parseInt(request.getParameter("pno"));
-		Product product = new ProductService().selectProduct();
+		int pno = Integer.parseInt(request.getParameter("pno"));
+		Product product = new ProductService().selectProduct(pno);
 		Review review = new Review();
 		System.out.println(product);
 		String page = "";

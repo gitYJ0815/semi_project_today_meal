@@ -42,12 +42,15 @@
                             <li class="count">${e.count}</li>
                         </ul>
                         </c:forEach>
+                        
+                        
                     </div>
                 <!-- </div> -->
             <!-- </div> -->
+            
             <div class="paging">
-					<jsp:include page="/WEB-INF/views/common/paging/paging.jsp"/>	
-			    </div>
+				<jsp:include page="/WEB-INF/views/common/paging/paging.jsp"/>
+			</div>
 		<jsp:include page="/WEB-INF/views/common/footer.jsp" />	    
         </div>
         <script>

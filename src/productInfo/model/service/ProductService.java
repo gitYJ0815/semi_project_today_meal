@@ -13,13 +13,13 @@ public class ProductService {
 	private ProductDao pd = new ProductDao();
 
 	// 상품 상세 조회
-	public Product selectProduct() {
+	public Product selectProduct(int pno) {
 		Connection conn = getConnection();
 		
-		productInfo.model.vo.Product p = pd.selectProduct(conn);
+		productInfo.model.vo.Product p = pd.selectProductDetail(conn, pno);
 		
 		// 해당 상품페이지에 대한 리뷰 리스트 조회 추가
-		 p.setReviewList(pd.selectReviewList(conn));
+		 p.setReviewList(pd.selectReviewList(conn, pno));
 		
 		close(conn);
 		
@@ -40,7 +40,7 @@ public class ProductService {
 			return p;
 		}
 
-		// 상품상세 페이지에서 리뷰 별점순 정렬
+		// 상품상세 페이지에서 리뷰 별점순 정렬  x
 		public productInfo.model.vo.Product selectReviewPoint() {
 			Connection conn = getConnection();
 			
@@ -53,25 +53,33 @@ public class ProductService {
 			
 			return p1;
 		}
-
-		// 마이페이지 리뷰 상품명 내림차순 정렬
-		public Product selectMyReviewDescSort() {
+		
+		// 마이페이지 상품명 내림차순 정렬
+		public Product selectMyProductDesc(int userNo) {
 			Connection conn = getConnection();
 			
 			Product p = pd.selectProduct(conn);
 			
 			// 해당 상품페이지에 대한 리뷰 리스트 조회 추가
-			 p.setReviewList(pd.selectReviewNameDesc(conn));
+			 p.setReviewList(pd.selectReviewNameDesc(conn, userNo));
 			
 			close(conn);
 			
 			return p;
 		}
 
-		
-
-		
-	
-	
+		// 마이페이지 리뷰 오름차순 정렬
+		public Product selectMyProductAsc(int userNo) {
+			Connection conn = getConnection();
+			
+			Product p = pd.selectProduct(conn);
+			
+			// 해당 상품페이지에 대한 리뷰 리스트 조회 추가
+			 p.setReviewList(pd.selectReviewNameAsc(conn, userNo));
+			
+			close(conn);
+			
+			return p;
+		}
 
 }
