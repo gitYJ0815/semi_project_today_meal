@@ -72,7 +72,6 @@ public class ProductSelectServlet extends HttpServlet {
 			return;
 			
 		} else {
-			
 			OrderBasket obPost = null;
 			List<OptionBasket> optListPost = new ArrayList<>();
 			
