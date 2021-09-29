@@ -20,13 +20,13 @@ import saleManagement.model.service.SaleManagementService;
  * Servlet implementation class saleListServlet
  */
 @WebServlet("/sale/list")
-public class saleListServlet extends HttpServlet {
+public class SaleListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public saleListServlet() {
+    public SaleListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
