@@ -4,7 +4,6 @@ public class Option {
 	private int optionNo;
 	private String optionName;
 	private int optionPrice;
-	private String stauts;
 	private int optionTypeNo;
 	/* 	OPTION_NO	NUMBER
 		OPTION_NAME	VARCHAR2(30 BYTE)
@@ -14,12 +13,11 @@ public class Option {
 
 	public Option() {}
 	
-	public Option(int optionNo, String optionName, int optionPrice, String stauts, int optionTypeNo) {
+	public Option(int optionNo, String optionName, int optionPrice, int optionTypeNo) {
 		super();
 		this.optionNo = optionNo;
 		this.optionName = optionName;
 		this.optionPrice = optionPrice;
-		this.stauts = stauts;
 		this.optionTypeNo = optionTypeNo;
 	}
 	public int getOptionNo() {
@@ -40,12 +38,7 @@ public class Option {
 	public void setOptionPrice(int optionPrice) {
 		this.optionPrice = optionPrice;
 	}
-	public String getStauts() {
-		return stauts;
-	}
-	public void setStauts(String stauts) {
-		this.stauts = stauts;
-	}
+	
 	public int getOptionTypeNo() {
 		return optionTypeNo;
 	}
@@ -55,7 +48,7 @@ public class Option {
 	@Override
 	public String toString() {
 		return "Option [optionNo=" + optionNo + ", optionName=" + optionName + ", optionPrice=" + optionPrice
-				+ ", stauts=" + stauts + ", optionTypeNo=" + optionTypeNo + "]";
+				+ ", optionTypeNo=" + optionTypeNo + "]";
 	}
 	
 }

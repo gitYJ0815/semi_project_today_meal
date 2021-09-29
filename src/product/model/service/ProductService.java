@@ -1,11 +1,14 @@
 package product.model.service;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.List;
 
 import static common.JDBCTemplate.*;
 
 import product.model.dao.ProductDao;
+import product.model.vo.Option;
+import product.model.vo.OptionType;
 import product.model.vo.Product;
 
 public class ProductService {
@@ -85,18 +88,21 @@ public class ProductService {
 	// 상품 등록
 	public int insertProduct(Product p) {
 		Connection conn = getConnection();
-		
+		System.out.println("p : " + p);
 		int result1 = pd.insertProduct(conn, p);
-		int result2 = pd.insertOptionType(conn, p.getOptionTypeList());
-		int result3 = pd.insertOpt(conn, p.getOptionList());
-		
-		if(result1 > 0 && result2 == p.getOptionTypeList().size() && result3 == p.getOptionList().size()) {
+		System.out.println(result1);
+		int result2 = pd.insertOption(conn, p.getOptionTypeList());
+		int optionCnt = 0;
+		for(OptionType ot : p.getOptionTypeList()) {
+			optionCnt += ot.getOptionList().size() + 1;
+		}
+		if(result1 > 0 && result2 == optionCnt) {
 			commit(conn);
 		} else {
 			rollback(conn);
 		}
-		
-		return result1 > 0 && result2 == p.getOptionTypeList().size() && result3 == p.getOptionList().size() ? 1 : 0;
+		close(conn);
+		return result1 > 0 && result2 == optionCnt ? 1 : 0;
 	}
 
 	// 상품 1개 조회
@@ -111,20 +117,31 @@ public class ProductService {
 	}
 
 	// 상품 수정
-	public int updateProduct(Product p) {
+	public int updateProduct(Product p, String[] deleteOtarr) {
 		Connection conn = getConnection();
 		
 		int result1 = pd.updateProduct(conn, p);
-		int result2 = pd.updateOptionType(conn, p.getOptionTypeList());
-		int result3 = pd.updateOpt(conn, p.getOptionList());
+		int result2 = pd.deleteOpt(conn, deleteOtarr);
+		int result3 = pd.deleteOptionType(conn, deleteOtarr);
+		int result4 = pd.insertAddedOption(conn, p, p.getOptionTypeList());
+		int optionCnt = 0;
+		for(OptionType ot : p.getOptionTypeList()) {
+			optionCnt += ot.getOptionList().size() + 1;
+		}
+
+		int result = 0;
 		
-		if(result1 > 0 && result2 == p.getOptionTypeList().size() && result3 == p.getOptionList().size()) {
+		if(result1 > 0 && result2 > 0 && result3 > 0 && result4 == optionCnt) {
 			commit(conn);
+			result = 1;
 		} else {
 			rollback(conn);
 		}
-		
-		return result1 > 0 && result2 == p.getOptionTypeList().size() && result3 == p.getOptionList().size() ? 1 : 0;
+		// commit(conn);
+		close(conn);
+		System.out.println("result2 : " + result2);
+		System.out.println("result3 : " + result3);
+		return result;
 	}
 
 

@@ -161,7 +161,7 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
        							+ "<td class='option_td opType' name='opType'>" + op_type[i].value + "</td>"
        							+ "<input type='hidden' name='opType' value='" + op_type[i].value + "'>"
        							+ "<td class='option_td opName' name='opName'>" + nameArr[j] + "</td>"
-       							+ "<input type='hidden' name='opName' value='" + nameArr[j] + "'>"
+       							+ "<input type='hidden' name='opName"+ i +"' value='" + nameArr[j] + "'>"
        							+ "<td class='option_td'><input type='text' id='op_price' name='opPrice'></td>" 
        							+ "<td class='option_td'><button type='button' id='del_btn' onclick='rowDelete(this)'>삭제</button></td></tr>";
        			}
