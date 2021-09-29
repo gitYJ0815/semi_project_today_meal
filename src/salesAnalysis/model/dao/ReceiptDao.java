@@ -287,5 +287,26 @@ private Properties query = new Properties();
 		
 		return rankingList;
 	}
+	public int cancelProduct(Connection conn, int orderNo) {
+		
+		PreparedStatement pstmt = null;
+		String sql = query.getProperty("cancelProduct");
+		int result = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, orderNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 	
 }

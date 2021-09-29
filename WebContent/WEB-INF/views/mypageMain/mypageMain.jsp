@@ -2,6 +2,14 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+	String cancelMsg = (String)request.getAttribute("cancelMsg");
+	if(cancelMsg != null){
+%>
+<script>
+	alert('주문번호 : ' + <%= cancelMsg %> + ', 취소 신청이 정상적으로 접수되었습니다.');
+</script>
+<% } %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -104,20 +112,23 @@
                                         <c:if test="${ receipt.orderStateNo == 1 }">
                                             	결제완료
                                             <c:if test="${ receipt.productNo == 1 }">
-                                                <button class="tableBtn" type="button" onclick="">취소하기</button>
+                                                <button class="tableBtn" type="button" onclick="productStatusModify(${ receipt.orderNo });">취소하기</button>
                                             </c:if>
+                                            <c:if test="${ receipt.productNo == 2 }"><span style="color:red;">[취소처리중]</span></c:if>
                                         </c:if>
                                         <c:if test="${ receipt.orderStateNo == 2 }">
                                             	배송중
                                             <c:if test="${ receipt.productNo == 1 }">
-                                                <button class="tableBtn" type="button" onclick="">반품하기</button>
+                                                <button class="tableBtn" type="button" onclick="productStatusModify(${ receipt.orderNo });">반품하기</button>
                                             </c:if>
+                                            <c:if test="${ receipt.productNo == 2 }"><span style="color:red;">[취소처리중]</span></c:if>
                                         </c:if>
                                         <c:if test="${ receipt.orderStateNo == 3 }">
                                             	배송완료
                                             <c:if test="${ receipt.productNo == 1 }">
-                                                <button class="tableBtn" type="button" onclick="">반품하기</button>
+                                                <button class="tableBtn" type="button" onclick="productStatusModify(${ receipt.orderNo });">반품하기</button>
                                             </c:if>
+                                            <c:if test="${ receipt.productNo == 2 }"><span style="color:red;">[취소처리중]</span></c:if>
                                         </c:if>
                                     </td>
                                 </tr>
@@ -218,6 +229,11 @@
 function reviewInsert(ono,pno){
     window.open("${contextPath}/review/insert?ono="+ono+"&pno="+pno, "popup1", "width=1000, height=800");
 }
+
+function productStatusModify(orderNo){
+	location.href="${contextPath}/user/mypage?orderNo="+orderNo;
+}
+
 
 </script> 
 </body>
