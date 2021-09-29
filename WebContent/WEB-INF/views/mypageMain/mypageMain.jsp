@@ -63,7 +63,6 @@
                                 <td colspan="4">최근 주문/배송 조회 내역이 없습니다.</td>
                             </tr>
                         </c:if>
-                        
                         <c:if test="${ receiptList.size() != 0 }">
                             <c:forEach var="receipt" items="${ receiptList }">
                                 <tr>
@@ -72,7 +71,7 @@
                                     </td>
                                     <td>
                                         <div>
-                                            <img src="${ receipt.productList[0].productImg }">
+                                            <img src="<%= request.getContextPath() %>/resources/uploadFiles/product/${ receipt.productList[0].productImg }">
                                              <p>
                                                  [<c:out value="${ receipt.productList[0].catagoryName }"/>]
                                                  <c:out value="${ receipt.productList[0].productName }"/><br>
@@ -94,7 +93,7 @@
                                         <form method="get">
                                         	<input type="hidden" name="orderNo" value="${ receipt.orderNo }">
                                         	<input type="hidden" name="pNo" value="${ receipt.productList[0].pNo }">
-                                        	<button class="reviewBtn" type="button" onclick="reviewInsert();">리뷰작성</button>
+                                        	<button class="reviewBtn" type="button" onclick="reviewInsert(${ receipt.orderNo },${ receipt.productList[0].pNo });">리뷰작성</button>
                                         </form>
                                         <!-- <button class="reviewBtn" type="button" onclick="reviewInsert();">리뷰작성</button> -->
                                         </div>
@@ -128,7 +127,7 @@
                                 		<tr>
                                      <td>
                                          <div>
-                                             <img src="${ product.productImg }">
+                                             <img src="<%= request.getContextPath() %>/resources/uploadFiles/product/${ product.productImg }">
                                              <p>
                                                  [<c:out value="${ product.catagoryName }"/>]
                                                  <c:out value="${ product.productName }"/><br>
@@ -148,7 +147,7 @@
                                          <form method="get">
                                         	<input type="hidden" name="orderNo" value="${ receipt.orderNo }">
                                         	<input type="hidden" name="productName" value="${ product.pNo }">
-                                        	<button class="reviewBtn" type="button" onclick="reviewInsert();">리뷰작성</button>
+                                        	<button class="reviewBtn" type="button" onclick="reviewInsert(${ receipt.orderNo },${ product.pNo });">리뷰작성</button>
                                         </form>
                                          <!-- <button class="reviewBtn" type="button" onclick="reviewInsert();">리뷰작성</button> -->
                                          </div>
@@ -215,10 +214,11 @@
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
 <script>
-   function reviewInsert(){
-	   
-       window.open("${contextPath}/review/insert", "popup1", "width=1000, height=800");
-   }
+
+function reviewInsert(ono,pno){
+    window.open("${contextPath}/review/insert?ono="+ono+"&pno="+pno, "popup1", "width=1000, height=800");
+}
+
 </script> 
 </body>
 </html>

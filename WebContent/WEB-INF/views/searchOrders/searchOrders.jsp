@@ -182,7 +182,7 @@
                                     </td>
                                     <td>
                                         <div>
-                                            <img src="${ receipt.productList[0].productImg }">
+                                            <img src="<%= request.getContextPath() %>/resources/uploadFiles/product/${ receipt.productList[0].productImg }">
                                              <p>
                                                  [<c:out value="${ receipt.productList[0].catagoryName }"/>]
                                                  <c:out value="${ receipt.productList[0].productName }"/><br>
@@ -221,7 +221,7 @@
                                 		<tr>
                                      <td>
                                          <div>
-                                             <img src="${ product.productImg }">
+                                             <img src="<%= request.getContextPath() %>/resources/uploadFiles/product/${ product.productImg }">
                                              <p>
                                                  [<c:out value="${ product.catagoryName }"/>]
                                                  <c:out value="${ product.productName }"/><br>
