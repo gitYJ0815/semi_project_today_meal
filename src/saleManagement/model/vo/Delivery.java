@@ -3,16 +3,25 @@ package saleManagement.model.vo;
 public class Delivery {
 	private int dno;
 	private String name;
-	private int phone;
+	private String phone;
 	private String address;
 	private String request;
 	private String delivery_fee;
 	
 	public Delivery() {}
 	
-	public Delivery(int dno, String name, int phone, String address, String request, String delivery_fee) {
+	public Delivery(int dno, String name, String phone, String address, String request, String delivery_fee) {
 		super();
 		this.dno = dno;
+		this.name = name;
+		this.phone = phone;
+		this.address = address;
+		this.request = request;
+		this.delivery_fee = delivery_fee;
+	}
+
+	public Delivery(String name, String phone, String address, String request, String delivery_fee) {
+		super();
 		this.name = name;
 		this.phone = phone;
 		this.address = address;
@@ -36,11 +45,11 @@ public class Delivery {
 		this.name = name;
 	}
 
-	public int getPhone() {
+	public String getPhone() {
 		return phone;
 	}
 
-	public void setPhone(int phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 

@@ -41,6 +41,20 @@ public class Receipt {
 		this.orderState = orderState;
 	}
 
+	public Receipt(int ono, Date saleDate, int coin, Date deliveryDate, int orderSum, Product product,
+			String orderState, Delivery delivery, Payment payment) {
+		super();
+		this.ono = ono;
+		this.saleDate = saleDate;
+		this.coin = coin;
+		this.deliveryDate = deliveryDate;
+		this.orderSum = orderSum;
+		this.product = product;
+		this.orderState = orderState;
+		this.delivery = delivery;
+		this.payment = payment;
+	}
+
 	public int getOno() {
 		return ono;
 	}

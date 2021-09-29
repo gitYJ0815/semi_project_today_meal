@@ -9,14 +9,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 
 import common.paging.model.vo.PageInfo;
+import saleManagement.model.vo.Delivery;
+import saleManagement.model.vo.Payment;
 import saleManagement.model.vo.Product;
 import saleManagement.model.vo.Receipt;
+import saleManagement.model.vo.Option;
 
 public class SaleManagementDao {
 	private Properties query = new Properties();
@@ -134,6 +136,70 @@ public class SaleManagementDao {
 		}
 
 		return receiptList;
+	}
+
+	public Receipt selectReceipt(Connection conn, int rno) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = query.getProperty("selectReceipt");
+		Receipt receipt = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, rno);
+			
+			rset = pstmt.executeQuery();
+
+			while(rset.next()) {
+				if(receipt == null) {
+					Product product = new Product(rset.getString("PRODUCT_NAME")
+												, rset.getInt("PRODUCT_BUY_QUANTITY")
+												, rset.getInt("PRODUCT_PRICE")
+												, new ArrayList<>()
+												);
+
+					Delivery delivery = new Delivery(rset.getString("DELIVERY_NAME")
+												   , rset.getString("PHONE")
+												   , rset.getString("ADDRESS")
+												   , rset.getString("DREQUEST")
+												   , rset.getString("DELIVERY_FEE")
+												   );
+					Payment payment = new Payment(rset.getString("IMP_UID")
+												, rset.getString("PAY_METHOD")
+												, rset.getInt("PAID_AMOUNT")
+												, rset.getTimestamp("PAID_AT")
+												, rset.getString("STATUS")
+												);
+					
+					receipt = new Receipt(rset.getInt("ORDER_NO")
+										, rset.getDate("SALE_DATE")
+										, rset.getInt("COIN")
+										, rset.getDate("DELIVERY_DATE")
+										, rset.getInt("ORDER_SUM")
+										, product
+										, rset.getString("ORDER_STATE_NAME")
+										, delivery
+										, payment
+										);
+				}
+				
+				Option option = new Option(rset.getString("OPTION_NAME")
+										 , rset.getInt("OPTION_BUY_QUANTITY")
+										 , rset.getInt("OPTION_PRICE")
+										);
+				
+				if(option.getName() != null) {
+					receipt.getProduct().getOptionList().add(option);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return receipt;
 	}
 
 }

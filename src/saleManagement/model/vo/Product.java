@@ -3,8 +3,6 @@ package saleManagement.model.vo;
 import java.sql.Date;
 import java.util.List;
 
-import totalReview.model.vo.Option;
-
 public class Product {
 	private int pno;
 	private String pname;
@@ -48,7 +46,14 @@ public class Product {
 		this.representationImage = representationImage;
 		this.buyQuantity = buyQuantity;
 	}
-	
+
+	public Product(String pname, int price, int buyQuantity, List<Option> optionList) {
+		super();
+		this.pname = pname;
+		this.price = price;
+		this.buyQuantity = buyQuantity;
+		this.optionList = optionList;
+	}
 
 	public Product(String pname) {
 		super();

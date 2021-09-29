@@ -4,6 +4,8 @@
 		dimmed = body.querySelector(".dimmed"),
 		modal = dimmed.querySelector("#modal"),
 		closeButton = modal.querySelector(".close_button");
+	
+	let payMentInner = modal.querySelector(".payment_inner").querySelector("div");
 
 	let searchArea = container.querySelector(".search_area"),
 		startYear = searchArea.querySelector("#start_year"),
@@ -113,7 +115,7 @@
 
 	function resultTableClickEventHandler(e) {
 		if(e.target.classList.contains("learn_more_button")) {
-			learnMoreButtonClickEventHandler();
+			learnMoreButtonClickEventHandler(e.target);
 		}
 
 		if(e.target.tagName == "INPUT") {
@@ -124,12 +126,159 @@
 			}
 		}
 	}
+	
+	function createQuery(query, key, value) {
+		if(value != "") {
+			query += ((query.length > 0) ? "&" : "") + key + "=" + value;
+		}
 
-	function learnMoreButtonClickEventHandler() {
+		return query;
+	}
+
+	function learnMoreButtonClickEventHandler(learnMoreButton) {
+		learnMoreButton.setAttribute("disabled", true);
+		let query = createQuery("", "rno", learnMoreButton.getAttribute("data-receipt-no"));
+		
+		let xhr = new XMLHttpRequest();
+		
+		xhr.onreadystatechange = function() {
+			if(xhr.readyState == 4) {
+				if((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
+					let responseTextJson = JSON.parse(xhr.responseText);
+					payMentInner.innerHTML = "";
+					appendModal(responseTextJson);
+					learnMoreButton.removeAttribute("disabled");
+				} else {
+					console.log("ajax 통신 실패");
+				}
+			}
+		}
+		
+		xhr.open("POST", "/today_meal/sale/detail");
+		xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded;");
+		console.log(query);
+		xhr.send(query);
+
 		openModal();
 		modal.classList.add("payment");
 
 		modal.querySelector(".check_button").addEventListener("click", closeModal);
+	}
+	
+	function numberFormat(number) {
+		let regexp = /\B(?=(\d{3})+(?!\d))/g;
+		return number.toString().replace(regexp, ',');
+	}
+	
+	function phoneFormat(phone) {
+		return phone.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3');
+	}
+	
+	function appendModal(detailData) {
+		let html = "";
+		html += "<div class='status_area'>";
+		html += 	"<ul>";
+		html += 		"<li>" + detailData.ono + "</li>"
+		html += 		"<li>" + detailData.saleDate.substring(0, 10) + "</li>"
+		html += 	"</ul>";
+		html +=		"<div>";
+		html +=			"<p>" + detailData.orderState + " 상태</p>";
+		html +=		"</div>";
+		html +=	"</div>";
+		html +=	"<div class='product_area'>";
+		html +=		"<h4>- 상품내역</h4>";
+		html +=		"<table>";
+		html +=			"<thead>";
+		html +=				"<tr>";
+		html +=					"<th scope='col'>제품명</th>";
+		html +=					"<th scope='col'>제품 수량</th>";
+		html +=					"<th scope='col'>가격</th>";
+		html +=				"</tr>";
+		html +=			"</thead>";
+		html +=			"<tbody>";
+		html +=				"<tr class='depth_1'>";
+		html +=					"<td>" + detailData.product.pname + "</td>";
+		html +=					"<td class='center'>" + numberFormat(detailData.product.buyQuantity) + "</td>";
+		html +=					"<td class='center'>" + numberFormat(detailData.product.price * detailData.product.buyQuantity) + "</td>";
+		html +=				"</tr>";
+		for(let option of detailData.product.optionList) {
+		html +=				"<tr class='depth_2'>";
+		html +=					"<td>+ " + option.name + "</td>";
+		html +=					"<td class='center'>" + numberFormat(option.buyQuantity) + "</td>";
+		html +=					"<td class='center'>" + numberFormat(option.price * option.buyQuantity) + "</td>";
+		html +=				"</tr>";
+		}
+		html +=			"</tbody>";
+		html +=			"<tbody>"
+		html +=				"<tr>";
+		html +=					"<td>배송료</td>";
+		html +=					"<td class='center'>1</td>";
+		html +=					"<td class='center'>" + numberFormat(detailData.delivery.delivery_fee) + "</td>";
+		html +=				"</tr>";
+		html +=			"</tbody>";
+		html +=			"<tbody>"
+		html +=				"<tr>";
+		html +=					"<td>적립금 사용</td>";
+		html +=					"<td class='center'>1</td>";
+		html +=					"<td class='center'>" + numberFormat(detailData.coin) + "</td>";
+		html +=				"</tr>";
+		html +=			"</tbody>";
+		html +=			"<tfoot>";
+		html +=				"<tr>";
+		html +=					"<th scope='row' colspan='2'>합계</th>";
+		html +=					"<td class='center'>" + numberFormat(detailData.orderSum) + "</td>";
+		html +=				"</tr>";
+		html +=			"</tfoot>";
+		html +=		"</table>";
+		html +=	"</div>";
+		html +=	"<div class='list'>";
+		html +=		"<h4>- 결제내역</h4>";
+		html +=		"<div>";
+		html +=			"<dl>";
+		html +=				"<dt class='two_line'>거래<br> 고유 번호</dt>";
+		html +=				"<dd>" + detailData.payment.impUid + "</dd>";
+		html +=			"</dl>";
+		html +=			"<dl>";
+		html +=				"<dt>결제 수단</dt>";
+		html +=				"<dd>" + detailData.payment.payMehtod + "</dd>";
+		html +=			"</dl>";
+		html +=			"<dl>";
+		html +=				"<dt>결제금액</dt>";
+		html +=				"<dd>" + detailData.payment.payment + "</dd>";
+		html +=			"</dl>";
+		html +=			"<dl>";
+		html +=				"<dt>승인일시</dt>";
+		html +=				"<dd>" + detailData.payment.paidAt + "</dd>";
+		html +=			"</dl>";
+		html +=			"<dl>";
+		html +=				"<dt>결제상태</dt>";
+		html +=				"<dd>" + detailData.payment.status + "</dd>";
+		html +=			"</dl>";
+		html +=		"</div>";
+		html +=	"</div>";
+		html +=	"<div class='list'>";
+		html +=		"<h4>- 배송정보</h4>";
+		html +=		"<div>";
+		html +=			"<dl>";
+		html +=				"<dt>이름</dt>";
+		html +=				"<dd>" + detailData.delivery.name + "</dd>";
+		html +=			"</dl>";
+		html +=			"<dl>";
+		html +=				"<dt>연락처</dt>";
+		html +=				"<dd>" + phoneFormat(detailData.delivery.phone) + "</dd>";
+		html +=			"</dl>";
+		html +=			"<dl>";
+		html +=				"<dt>주소</dt>";
+		html +=				"<dd class='two_line'>" + detailData.delivery.address + "</dd>";
+		html +=			"</dl>";
+		html +=			"<dl>";
+		html +=				"<dt class='two_line'>배송시<br>요청사항</dt>";
+		html +=				"<dd class='two_line'>" + detailData.delivery.request + "</dd>";
+		html +=			"</dl>";
+		html +=		"</div>";
+		html +=	"</div>";
+
+		payMentInner.insertAdjacentHTML("beforeend", html);
 	}
 
 	function selectRow(input) {

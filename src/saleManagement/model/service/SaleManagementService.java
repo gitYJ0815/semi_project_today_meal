@@ -32,5 +32,14 @@ public class SaleManagementService {
 		return map;
 	}
 
+	public Receipt selectReceipt(int rno) {
+		Connection conn = getConnection();
+		Receipt receipt = smd.selectReceipt(conn, rno);
+		
+		close(conn);
+		
+		return receipt;
+	}
+
 
 }
