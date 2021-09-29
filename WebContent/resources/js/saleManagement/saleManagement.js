@@ -12,6 +12,8 @@
 		endYear = searchArea.querySelector("#end_year"),
 		endMonth = searchArea.querySelector("#end_month"),
 		endDay = searchArea.querySelector("#end_day"),
+		startInput = searchArea.querySelector("#start_date"),
+		endInput = searchArea.querySelector("#end_date"),
 		idInput = searchArea.querySelector("#id"),
 		orderNumberInput = searchArea.querySelector("#orderNumber"),
 		searchButton = searchArea.querySelector(".search_button");
@@ -58,6 +60,8 @@
 		}
 
 		if(status) {
+			startInput.setAttribute("value", startYear.value + (startMonth.value < 10 ? "0" : "") + startMonth.value + (startDay.value < 10 ? "0" : "") + startDay.value);
+			endInput.setAttribute("value", endYear.value + (endMonth.value < 10 ? "0" : "") + endMonth.value + (endDay.value < 10 ? "0" : "") + endDay.value);
 			searchArea.submit();
 		}
 	}

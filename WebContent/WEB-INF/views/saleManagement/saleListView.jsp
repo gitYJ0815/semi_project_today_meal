@@ -20,51 +20,47 @@
 		<div class="contents">
 			<div class="contents_inner">
 				<h2>판매 관리</h2>
-				<form class="search_area">
+				<form class="search_area" method="GET">
 					<div>
 						<div>
 							<label for="startYear">기간 : </label>
-							<%
-							  Calendar today = new GregorianCalendar();
-							  pageContext.setAttribute("year", today.get(Calendar.YEAR));
-							  pageContext.setAttribute("month", today.get(Calendar.MONTH));
-							  pageContext.setAttribute("day", today.get(Calendar.DATE));
-							  pageContext.setAttribute("lastDay", today.getActualMaximum(Calendar.DATE));
-							%>
-							<select id="start_year" name="start_year" class="year">
-							<c:forEach var="i" begin="0" end="${ year - 2020 }">
-								<option value="${ year - i }" <c:if test="${ i == 0 }">selected</c:if>>${ year - i }</option>
+							<input type="hidden" id="start_date" name="start_date" value="${ startDate.date }">
+							<input type="hidden" id="end_date" name="end_date" value="${ endDate.date }">
+							<select id="start_year" class="year">
+							<c:forEach var="i" begin="0" end="${ startDate.year - 2020 }">
+								<option value="${ startDate.year - i }" <c:if test="${ i == 0 }">selected</c:if>>${ startDate.year - i }</option>
 							</c:forEach>
 							</select>
 							<span>년</span>
-							<select id="start_month" name="start_month" class="month">
+							<select id="start_month" class="month">
 							<c:forEach var="i" begin="1" end="12">
-								<option value="${ i }" <c:if test="${ i-1 == month }">selected</c:if> <c:if test="${ i-1 > month }">disabled</c:if>>${ i }</option>
+								<option value="${ i }" <c:if test="${ i == startDate.month }">selected</c:if> <c:if test="${ !((startDate.year < today.year) || ( startDate.year == today.year && i <= today.month )) }">disabled</c:if>>${ i }</option>
 							</c:forEach>
 							</select>
 							<span>월</span>
-							<select id="start_day" name="start_day">
-							<c:forEach var="i" begin="1" end="${ lastDay }">
-								<option value="${ i }" <c:if test="${ i == day }">selected</c:if> <c:if test="${ i > day }">disabled</c:if>>${ i }</option>
+							<select id="start_day">
+							<c:forEach var="i" begin="1" end="${ startDate.lastDay }">
+								<option value="${ i }" <c:if test="${ i == startDate.day }">selected</c:if> <c:if test="${ !((startDate.year < today.year) || ( startDate.year == today.year && startDate.month < today.month) || (startDate.year == today.year && startDate.month <= today.month && i <= today.day)) }">disabled</c:if>>${ i }</option>
 							</c:forEach>
 							</select>
 							<span class="except_margin">일</span>
 							<span class="except_margin">~</span>
-							<select id="end_year" name="end_year" class="year">
-								<c:forEach var="i" begin="0" end="${ year - 2020 }">
-									<option value="${ year - i }" <c:if test="${ i == 0 }">selected</c:if>>${ year - i }</option>
+							<select id="end_year" class="year">
+								<c:forEach var="i" begin="0" end="${ endDate.year - 2020 }">
+									<option value="${ endDate.year - i }" <c:if test="${ i == 0 }">selected</c:if>>${ endDate.year - i }</option>
 								</c:forEach>
 							</select>
 							<span>년</span>
-							<select id="end_month" name="end_month" class="month">
+							
+							<select id="end_month" class="month">
 							<c:forEach var="i" begin="1" end="12">
-								<option value="${ i }" <c:if test="${ i-1 == month }">selected</c:if> <c:if test="${ i-1 > month }">disabled</c:if>>${ i }</option>
+								<option value="${ i }" <c:if test="${ i == endDate.month }">selected</c:if> <c:if test="${ !((endDate.year < today.year) || ( endDate.year == today.year && i <= today.month )) }">disabled</c:if>>${ i }</option>
 							</c:forEach>
 							</select>
 							<span>월</span>
-							<select id="end_day" name="end_day">
-							<c:forEach var="i" begin="1" end="${ lastDay }">
-								<option value="${ i }" <c:if test="${ i == day }">selected</c:if> <c:if test="${ i > day }">disabled</c:if>>${ i }</option>
+							<select id="end_day">
+							<c:forEach var="i" begin="1" end="${ endDate.lastDay }">
+								<option value="${ i }" <c:if test="${ i == endDate.day }">selected</c:if> <c:if test="${ i == endDate.day }">selected</c:if> <c:if test="${ !((endDate.year < today.year) || ( endDate.year == today.year && endDate.month < today.month) || (endDate.year == today.year && endDate.month <= today.month && i <= today.day)) }">disabled</c:if>>${ i }</option>
 							</c:forEach>
 							</select>
 							<span class="except_margin">일</span>
@@ -136,9 +132,17 @@
 						</tbody>
 					</table>
 					<div class="paging">
+						<c:choose>
+							<c:when test="${ empty param }">
+								<c:set var="addQueryParam" value=""/>
+							</c:when>
+							<c:otherwise>
+								<c:set var="addQueryParam" value="&start_date=${ param.start_date }&end_date=${ param.end_date }&id=${ param.id }&orderNumber=${ param.orderNumber }"/>
+							</c:otherwise>
+						</c:choose>
 						<jsp:include page="/WEB-INF/views/common/paging/paging.jsp">
 							<jsp:param name="url" value="${ contextPath }/sale/list?"/>
-							<jsp:param name="searchParam" value=""/>
+							<jsp:param name="searchParam" value="${ addQueryParam }"/>
 						</jsp:include>
 					</div>
 				</div>
