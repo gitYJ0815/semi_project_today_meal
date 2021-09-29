@@ -72,7 +72,6 @@ public class ProductSelectServlet extends HttpServlet {
 			return;
 			
 		} else {
-			
 			OrderBasket obPost = null;
 			List<OptionBasket> optListPost = new ArrayList<>();
 			
@@ -105,7 +104,7 @@ public class ProductSelectServlet extends HttpServlet {
 			}
 			
 			request.setAttribute("orderBasket", obPost);
-			request.getRequestDispatcher("/WEB-INF/views/payment/payment.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/views/payment/paymentView.jsp").forward(request, response);
 		}
 		
 		

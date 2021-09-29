@@ -10,7 +10,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Today_Meal</title>
 <!-- 외부 스타일 시트 -->
-<link href="<%= request.getContextPath() %>/resources/css/productSelect/productSelect.css?ver=1.1112" rel="stylesheet">
+<link href="<%= request.getContextPath() %>/resources/css/productSelect/productSelect.css?ver=1.1113" rel="stylesheet">
 <!-- 구글 웹 폰트 -->
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
 
