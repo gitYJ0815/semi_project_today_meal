@@ -36,7 +36,7 @@ public class saleListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int page = request.getParameter("page") == null ? 1 : Integer.parseInt(request.getParameter("page"));
-		String userid = request.getParameter("id") == null ? "" : request.getParameter("id");
+		String userId = request.getParameter("id") == null ? "" : request.getParameter("id");
 		String orderNumber = request.getParameter("orderNumber") == null ? "" : request.getParameter("orderNumber");
 		SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
 		
@@ -60,7 +60,7 @@ public class saleListServlet extends HttpServlet {
 			endDate.set(Calendar.MONTH, Integer.parseInt(endDateString.substring(4, 6))-1);
 			endDate.set(Calendar.DATE, Integer.parseInt(endDateString.substring(6, 8)));
 		}
-		Map<String, Object> map = new SaleManagementService().selectList(page, startDate.getTime(), endDate.getTime());
+		Map<String, Object> map = new SaleManagementService().selectList(page, startDate.getTime(), endDate.getTime(), userId, orderNumber);
 
 		todayMap.put("year", today.get(Calendar.YEAR));
 		todayMap.put("month", today.get(Calendar.MONTH)+1);

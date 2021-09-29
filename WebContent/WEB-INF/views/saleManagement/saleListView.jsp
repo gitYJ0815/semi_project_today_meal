@@ -68,11 +68,11 @@
 						<div>
 							<div>
 								<label for="id">아이디 :</label>
-								<input type="text" name="id" id="id" maxLength="12" placeholder="아이디 입력">
+								<input type="text" name="id" id="id" maxLength="12" placeholder="아이디 입력" value="${ param.id }">
 							</div>
 							<div>
 								<label for="orderNumber">주문 번호 : </label>
-								<input type="number" name="orderNumber" id="orderNumber" placeholder="주문번호 입력">
+								<input type="number" name="orderNumber" id="orderNumber" placeholder="주문번호 입력" value="${ param.orderNumber }">
 							</div>
 						</div>
 					</div>

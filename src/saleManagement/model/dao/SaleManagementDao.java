@@ -31,17 +31,35 @@ public class SaleManagementDao {
 		}
 	}
 	
-	public int getListCount(Connection conn, Date startDate, Date endDate) {
+	public int getListCount(Connection conn, Date startDate, Date endDate, String userId, String orderNumber) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = query.getProperty("listCount");
 		int result = 0;
 		
 		try {
+			int parameterIndex = 1;
+
+			if(userId.equals("")) {
+				sql = sql.replace("AND USER_ID = ?", "");
+			}
+			
+			if(orderNumber.equals("")) {
+				sql = sql.replace("AND ORDER_NO = ?", "");
+			}
+			
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setString(1, (new java.sql.Date(startDate.getTime())).toString());
-			pstmt.setString(2, (new java.sql.Date(endDate.getTime())).toString());
+			pstmt.setString(parameterIndex++, (new java.sql.Date(startDate.getTime())).toString());
+			pstmt.setString(parameterIndex++, (new java.sql.Date(endDate.getTime())).toString());
+			
+			if(!userId.equals("")) {
+				pstmt.setString(parameterIndex++, userId);
+			}
+			
+			if(!orderNumber.equals("")) {
+				pstmt.setInt(parameterIndex++, Integer.parseInt(orderNumber));
+			}
 			
 			rset = pstmt.executeQuery();
 			
@@ -58,21 +76,40 @@ public class SaleManagementDao {
 		return result;
 	}
 
-	public List<Receipt> selectList(Connection conn, PageInfo pi, Date startDate, Date endDate) {
+	public List<Receipt> selectList(Connection conn, PageInfo pi, Date startDate, Date endDate, String userId, String orderNumber) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		List<Receipt> receiptList = new ArrayList<>();
 		String sql = query.getProperty("selectList");
 
 		try {
+			int parameterIndex = 1;
 			int startItem = (pi.getPage() - 1) * pi.getItemLimit() + 1;
 			int endItem = startItem + pi.getItemLimit() - 1;
+
+			if(userId.equals("")) {
+				sql = sql.replace("AND USER_ID = ?", "");
+			}
+			
+			if(orderNumber.equals("")) {
+				sql = sql.replace("AND ORDER_NO = ?", "");
+			}
+
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setString(1, (new java.sql.Date(startDate.getTime())).toString());
-			pstmt.setString(2, (new java.sql.Date(endDate.getTime())).toString());
-			pstmt.setInt(3, startItem);
-			pstmt.setInt(4, endItem);
+			pstmt.setString(parameterIndex++, (new java.sql.Date(startDate.getTime())).toString());
+			pstmt.setString(parameterIndex++, (new java.sql.Date(endDate.getTime())).toString());
+			
+			if(!userId.equals("")) {
+				pstmt.setString(parameterIndex++, userId);
+			}
+			
+			if(!orderNumber.equals("")) {
+				pstmt.setInt(parameterIndex++, Integer.parseInt(orderNumber));
+			}
+			
+			pstmt.setInt(parameterIndex++, startItem);
+			pstmt.setInt(parameterIndex++, endItem);
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
