@@ -1,7 +1,5 @@
 package salesAnalysis.model.service;
-
-import static common.JDBCTemplate.close;
-import static common.JDBCTemplate.getConnection;
+import static common.JDBCTemplate.*;
 
 import java.sql.Connection;
 import java.util.HashMap;
@@ -59,6 +57,19 @@ public class ReceiptService {
 		close(conn);
 		
 		return rankingList;
+	}
+
+	public int cancelProduct(int orderNo) {
+		Connection conn = getConnection();
+		int result = rd.cancelProduct(conn, orderNo);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		return result;
 	}
 
 }

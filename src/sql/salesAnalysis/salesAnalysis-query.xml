@@ -648,4 +648,10 @@
 		  JOIN PRODUCT_CATEGORY AI ON(AI.CATEGORY_NO = AG.CATEGORY_NO))
 		 WHERE RANKING BETWEEN 1 AND 5
 	</entry>
+	<entry key="cancelProduct">
+		UPDATE
+		       RECEIPT
+		   SET PRODUCT_NO = 2
+		 WHERE ORDER_NO = ?
+	</entry>
 </properties>

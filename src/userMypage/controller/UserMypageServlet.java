@@ -32,6 +32,20 @@ public class UserMypageServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		String orderInfo = request.getParameter("orderNo");
+		if(orderInfo != null) {
+			int orderNo = Integer.parseInt(orderInfo);
+			
+			int result = new ReceiptService().cancelProduct(orderNo);
+			
+			if(result > 0) {
+				String sOrderNo = Integer.toString(orderNo);
+				request.setAttribute("cancelMsg", sOrderNo);
+			}
+			
+		}
+		
+		
 		
 		int userNo = ((Member)request.getSession().getAttribute("loginUser")).getUserNo();
 		
