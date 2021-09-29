@@ -14,6 +14,7 @@ import java.util.Properties;
 import static common.JDBCTemplate.*;
 
 import product.model.vo.Option;
+import product.model.vo.OptionType;
 import product.model.vo.Product;
 
 public class ProductDao {
@@ -204,49 +205,34 @@ public class ProductDao {
 		return result;
 	}
 
-	// 옵션 타입 insert
-	public int insertOptionType(Connection conn, List<String> optionTypeList) {
+	// optionType 등록
+	public int insertOption(Connection conn, List<OptionType> optionTypeList) {
 		PreparedStatement pstmt = null;
-		int result = 0;
+		int result1 = 0;
+		int result2 = 0;
 		String sql = query.getProperty("insertOptionType");
+		String sql2 = query.getProperty("insertOption");
 		try {
 			
 			for(int i = 0; i< optionTypeList.size(); i++) {
-				String ot = optionTypeList.get(i);
-				
-				pstmt = conn.prepareStatement(sql);
-				
-				pstmt.setString(1, ot);
-				
-				result += pstmt.executeUpdate();
-			}
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-		}
-		
-		return result;
-	}
+				OptionType ot = optionTypeList.get(i);
 
-	public int insertOpt(Connection conn, List<Option> optionList) {
-		PreparedStatement pstmt = null;
-		int result = 0;
-		String sql = query.getProperty("insertOption");
-		
-		try {
-			
-			for(int i =0; i < optionList.size(); i++) {
-				Option o = optionList.get(i);
-	
 				pstmt = conn.prepareStatement(sql);
 				
-				pstmt.setString(1, o.getOptionName());
-				pstmt.setInt(2, o.getOptionPrice());
-	
-				result += pstmt.executeUpdate();
+				pstmt.setString(1, ot.getOptionType());
 				
+				result1 += pstmt.executeUpdate();
+				
+				for(int j =0; j < ot.getOptionList().size(); j++) {
+					Option o = ot.getOptionList().get(j);
+		
+					pstmt = conn.prepareStatement(sql2);
+					
+					pstmt.setString(1, o.getOptionName());
+					pstmt.setInt(2, o.getOptionPrice());
+		
+					result2 += pstmt.executeUpdate();
+				}		
 			}
 			
 		} catch (SQLException e) {
@@ -254,7 +240,8 @@ public class ProductDao {
 		} finally {
 			close(pstmt);
 		}
-		return result;
+		
+		return result1 + result2;
 	}
 
 	// 상품 1개 조회
@@ -282,12 +269,10 @@ public class ProductDao {
 					p.setpDetail(rset.getString("product_detail"));
 					p.setcNo(rset.getInt("category_no"));	
 				}
-				p.getOptionTypeList().add(rset.getString("option_type"));
-				/*
-				 * OptionType ot = new OptionType();
-				 * ot.setOptionType(rset.getString("option_type"));
-				 * p.getOptionTypeList().add(ot);
-				 */
+				OptionType ot = new OptionType();
+				ot.setOptionTypeNo(rset.getInt("option_type_no"));
+				ot.setOptionType(rset.getString("option_type"));
+				p.getOptionTypeList().add(ot);
 				
 				Option o = new Option();
 				o.setOptionName(rset.getString("option_name"));
@@ -297,6 +282,9 @@ public class ProductDao {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
 		}
 		
 		return p;
@@ -304,21 +292,154 @@ public class ProductDao {
 
 	// 상품 수정
 	public int updateProduct(Connection conn, Product p) {
-		// TODO Auto-generated method stub
-		return 0;
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = query.getProperty("updateProduct");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, p.getpName());
+			pstmt.setString(2, p.getpImg());
+			pstmt.setInt(3, p.getpPrice());
+			pstmt.setString(4, p.getpDetail());
+			pstmt.setInt(5, p.getcNo());
+			pstmt.setInt(6, p.getpNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
-
-	// 상품 옵션명 수정
-	public int updateOptionType(Connection conn, List<String> optionTypeList) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	// 상품 옵션값, 옵션가격 수정
-	public int updateOpt(Connection conn, List<Option> optionList) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
 	
+	// 상품 optionType 삭제
+	public int deleteOptionType(Connection conn, String[] deleteOtarr) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = query.getProperty("deleteOptionType");
+		String deleteOptNo = "";
+		try {
+			
+			for(int i = 0; i < deleteOtarr.length; i++) {
+				
+				if(!deleteOptNo.equals(deleteOtarr[i])) {
+					
+					pstmt = conn.prepareStatement(sql);
+					
+					pstmt.setInt(1, Integer.parseInt(deleteOtarr[i]));
+					
+					result += pstmt.executeUpdate();
+					deleteOptNo = deleteOtarr[i];
+				}
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	// 상품 option 삭제
+	public int deleteOpt(Connection conn, String[] deleteOtarr) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = query.getProperty("deleteOpt");
+		String deleteOptNo = "";
+		try {
+			
+			for(int i = 0; i < deleteOtarr.length; i++) {
+				if(!deleteOptNo.equals(deleteOtarr[i])) {
+					pstmt = conn.prepareStatement(sql);
+					
+					pstmt.setInt(1, Integer.parseInt(deleteOtarr[i]));
+					
+					result += pstmt.executeUpdate();
+					
+					deleteOptNo = deleteOtarr[i];
+				}
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	// 상품 수정 시 optionType insert
+	public int insertAddedOption(Connection conn, Product p, List<OptionType> optionTypeList) {
+		PreparedStatement pstmt = null;
+		int result1 = 0;
+		int result2 = 0;
+		String sql = query.getProperty("insertAddedOptionType");
+		String sql2 = query.getProperty("insertAddedOption");
+		try {
+			
+			for(int i = 0; i< optionTypeList.size(); i++) {
+				OptionType ot = optionTypeList.get(i);
+
+				pstmt = conn.prepareStatement(sql);
+				
+				pstmt.setString(1, ot.getOptionType());
+				pstmt.setInt(2, p.getpNo());
+				
+				result1 += pstmt.executeUpdate();
+				
+				for(int j =0; j < ot.getOptionList().size(); j++) {
+					Option o = ot.getOptionList().get(j);
+		
+					pstmt = conn.prepareStatement(sql2);
+					
+					pstmt.setString(1, o.getOptionName());
+					pstmt.setInt(2, o.getOptionPrice());
+		
+					result2 += pstmt.executeUpdate();	
+				}		
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result1 + result2;
+	}
+
+	// 상품 수정 시 option insert
+	public int insertAddedOpt(Connection conn, List<Option> optionList) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = query.getProperty("insertAddedOption");
+		
+		try {
+			
+			for(int i =0; i < optionList.size(); i++) {
+				Option o = optionList.get(i);
+	
+				pstmt = conn.prepareStatement(sql);
+				
+				pstmt.setString(1, o.getOptionName());
+				pstmt.setInt(2, o.getOptionPrice());
+	
+				result += pstmt.executeUpdate();		
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
 }

@@ -2,8 +2,11 @@ package product.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Enumeration;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,6 +21,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import product.model.service.ProductService;
 import product.model.vo.Option;
+import product.model.vo.OptionType;
 import product.model.vo.Product;
 
 /**
@@ -61,7 +65,7 @@ public class ProductUpdateServlet extends HttpServlet {
 	      
 	      // 2. 웹  서버 컨테이너 경로 추출
 	      String root = request.getSession().getServletContext().getRealPath("/");
-	      System.out.println(root);
+	      // System.out.println(root);
 	      
 	      // 3. 파일 실제 저장 경로 
 	      String savePath = root + "resources\\uploadFiles\\product\\";
@@ -77,26 +81,17 @@ public class ProductUpdateServlet extends HttpServlet {
 	      String pImg = multi.getFilesystemName(fname2);
 		  String pDetail = multi.getFilesystemName(fname1);
 		  
-		  
+		  int pNo = Integer.parseInt(multi.getParameter("pNo"));
 	      int cNo = Integer.parseInt(multi.getParameter("category"));
 	      String pName = multi.getParameter("title");
 	      int pPrice = Integer.parseInt(multi.getParameter("price"));
 	      
+	      // 기존 옵션 삭제
+	      String[] deleteOtarr = multi.getParameterValues("deleteOtNo");
 	      String[] opType = multi.getParameterValues("opType");
-	      
-	      List<String> optionTypeList = new ArrayList<>();
-	      List<Option> optionList = new ArrayList<>();
-	      
-	      if(opType != null) {
-	    	  for(String str : opType){
-	              if(!optionTypeList.contains(str)) {	// optionType 중복 제거
-	            	  optionTypeList.add(str);
-	              }
-	          }	
-	      }
-	      
-	      String[] opName = multi.getParameterValues("opName");
 	      String[] arr = multi.getParameterValues("opPrice");		// Values는 String 타입으로만 받아올 수 있으므로 받아와서 형변환 처리
+	      List<OptionType> optionTypeList = new ArrayList<>();
+	      
 	      int[] opPrice = null;
 	      if(arr != null) {
 	    	  opPrice = new int[arr.length];
@@ -105,24 +100,43 @@ public class ProductUpdateServlet extends HttpServlet {
 	    	  }
 	      }
 	      
-	      if(opName != null && opPrice != null) {
-	    	  for(int i = 0; i < opName.length; i++) {
-	    		  	Option o = new Option();
-		    		o.setOptionName(opName[i]);
-		    		o.setOptionPrice(opPrice[i]);
-		    		optionList.add(o);
-		    	} 
+	      String optionType = "";
+	      int count = 0;
+	      int index = 0;
+	      if(opType != null) {
+	    	  for(int i = 0; i < opType.length; i++) {
+	    		  if(!optionType.equals(opType[i])){
+	    			  OptionType ot = new OptionType();
+		    		  ot.setOptionType(opType[i]);
+		    		  
+		    		  String[] opName = multi.getParameterValues("opName" + index++);
+		    		  System.out.println(Arrays.toString(opName));
+		    	      if(opName != null && opPrice != null) {
+		    	    	  List<Option> optionList = new ArrayList<>();
+		    	    	  for(int j = 0; j < opName.length; j++) {
+		    	    		  	Option o = new Option();
+		    		    		o.setOptionName(opName[j]);
+		    		    		o.setOptionPrice(opPrice[count++]);
+		    		    		optionList.add(o);
+		    		    		ot.setOptionList(optionList);
+		    		    	} 
+		    	      }
+		    	      optionTypeList.add(ot);
+		    	      optionType = opType[i];
+	    		  }
+	    	  }
 	      }
 	      
-	      Product p = new Product(cNo, pName, pImg, pPrice, optionTypeList, optionList, pDetail);
+	      Product p = new Product(pNo, cNo, pName, pImg, pPrice, optionTypeList, pDetail);
 	      
-	      int result = new ProductService().updateProduct(p);
-	      System.out.println(result);
+	      int result = new ProductService().updateProduct(p, deleteOtarr);
+	      System.out.println("result : " + result);
 	      System.out.println(p);
+	      
 	      if(result > 0) {
 	    	  response.sendRedirect(request.getContextPath() + "/product/listView");
 	      } else {
-	    	  request.setAttribute("msg", "상품 등록에 실패하였습니다.");
+	    	  request.setAttribute("msg", "상품 수정에 실패하였습니다.");
 	    	  request.getRequestDispatcher("WEB/INF/views/common/errorpage.jsp").forward(request, response);
 	      }
 	}

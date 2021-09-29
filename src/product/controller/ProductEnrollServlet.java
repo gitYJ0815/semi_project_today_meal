@@ -2,6 +2,7 @@ package product.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.List;
 
@@ -62,7 +63,7 @@ public class ProductEnrollServlet extends HttpServlet {
 	      
 	      // 2. 웹  서버 컨테이너 경로 추출
 	      String root = request.getSession().getServletContext().getRealPath("/");
-	      System.out.println(root);
+	      // System.out.println(root);
 	      
 	      // 3. 파일 실제 저장 경로 
 	      String savePath = root + "resources\\uploadFiles\\product\\";
@@ -85,18 +86,8 @@ public class ProductEnrollServlet extends HttpServlet {
 	      
 	      String[] opType = multi.getParameterValues("opType");
 	      
-	      List<String> optionTypeList = new ArrayList<>();
-	      List<Option> optionList = new ArrayList<>();
+	      List<OptionType> optionTypeList = new ArrayList<>();
 	      
-	      if(opType != null) {
-	    	  for(String str : opType){
-	              if(!optionTypeList.contains(str)) {	// optionType 중복 제거
-	            	  optionTypeList.add(str);
-	              }
-	          }	
-	      }
-	      
-	      String[] opName = multi.getParameterValues("opName");
 	      String[] arr = multi.getParameterValues("opPrice");		// Values는 String 타입으로만 받아올 수 있으므로 받아와서 형변환 처리
 	      int[] opPrice = null;
 	      if(arr != null) {
@@ -106,16 +97,34 @@ public class ProductEnrollServlet extends HttpServlet {
 	    	  }
 	      }
 	      
-	      if(opName != null && opPrice != null) {
-	    	  for(int i = 0; i < opName.length; i++) {
-	    		  	Option o = new Option();
-		    		o.setOptionName(opName[i]);
-		    		o.setOptionPrice(opPrice[i]);
-		    		optionList.add(o);
-		    	} 
+	      String optionType = "";
+	      int count = 0;
+	      int index = 0;
+	      if(opType != null) {
+	    	  for(int i = 0; i < opType.length; i++) {
+	    		  if(!optionType.equals(opType[i])){
+	    			  OptionType ot = new OptionType();
+		    		  ot.setOptionType(opType[i]);
+		    		  
+		    		  String[] opName = multi.getParameterValues("opName" + index++);
+		    		  System.out.println(Arrays.toString(opName));
+		    	      if(opName != null && opPrice != null) {
+		    	    	  List<Option> optionList = new ArrayList<>();
+		    	    	  for(int j = 0; j < opName.length; j++) {
+		    	    		  	Option o = new Option();
+		    		    		o.setOptionName(opName[j]);
+		    		    		o.setOptionPrice(opPrice[count++]);
+		    		    		optionList.add(o);
+		    		    		 ot.setOptionList(optionList);
+		    		    	} 
+		    	      }
+		    	      optionTypeList.add(ot);
+		    	      optionType = opType[i];
+	    		  }
+	    	  }
 	      }
 	      
-	      Product p = new Product(cNo, pName, pImg, pPrice, optionTypeList, optionList, pDetail);
+	      Product p = new Product(cNo, pName, pImg, pPrice, optionTypeList, pDetail);
 	      
 	      int result = new ProductService().insertProduct(p);
 	      System.out.println(result);

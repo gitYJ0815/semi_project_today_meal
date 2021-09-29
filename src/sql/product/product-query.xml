@@ -100,14 +100,12 @@
 			OPTION_NO,
 			OPTION_NAME,
 			OPTION_PRICE,
-			STATUS,
 			OPTION_TYPE_NO)
 		VALUES 
 		(
 			SEQ_ONO.NEXTVAL,
 			?,
 			?,
-			DEFAULT,
 			SEQ_TNO.CURRVAL
 		)
 	</entry>
@@ -120,6 +118,7 @@
 		     , PRODUCT_PRICE
 		     , PRODUCT_DETAIL
 		     , CATEGORY_NO
+		     , OPTION_TYPE_NO
 		     , OPTION_TYPE
 		     , OPTION_NAME
 		     , OPTION_PRICE
@@ -128,7 +127,6 @@
 		  JOIN OPT O USING(OPTION_TYPE_NO)
 		 WHERE PRODUCT_NO = ?
 		   AND P.STATUS = 'Y'
-		   AND O.STATUS = 'Y'
 		 ORDER BY OPTION_TYPE_NO
 	</entry>
 	
@@ -142,16 +140,44 @@
 		 WHERE PRODUCT_NO = ?
 	</entry>
 	
-	<entry key="updateOptionType">
-		UPDATE OPTION_TYPE
-		   SET OPTION_TYPE = ?
-		 WHERE PRODUCT_NO = SEQ_PNO.CURRVAL
+	<entry key="deleteOptionType">
+		DELETE FROM OPTION_TYPE 
+		 WHERE OPTION_TYPE_NO = ?
 	</entry>
 	
-	<entry key="updateOpt">
-		UPDATE OPT
-		   SET OPTION_NAME = ?
-		     , OPTION_PRICE = ?
-		 WHERE OPTION_TYPE_NO = SEQ_TNO.CURRVAL
+	<entry key="deleteOpt">
+		DELETE FROM OPT 
+		 WHERE OPTION_TYPE_NO = ?
+	</entry>
+	
+	<entry key="insertAddedOptionType">
+		INSERT 
+		INTO OPTION_TYPE
+		(
+			OPTION_TYPE_NO,
+			OPTION_TYPE,
+			PRODUCT_NO)
+		VALUES 
+		(
+			SEQ_TNO.NEXTVAL,
+			?,
+			?
+		)
+	</entry>
+	<entry key="insertAddedOption">
+		INSERT 
+		INTO OPT
+		(
+			OPTION_NO,
+			OPTION_NAME,
+			OPTION_PRICE,
+			OPTION_TYPE_NO)
+		VALUES 
+		(
+			SEQ_ONO.NEXTVAL,
+			?,
+			?,
+			SEQ_TNO.CURRVAL
+		)
 	</entry>
 </properties>

@@ -16,7 +16,10 @@ public class Product {
 	private int cNo;
 	private String status;
 	private String cName;
-	private List<String> optionTypeList = new ArrayList<>();
+	private List<OptionType> deleteOtList = new ArrayList<>();
+	private List<Option> deleteOList = new ArrayList<>();
+	// private List<String> optionTypeList = new ArrayList<>();
+	private List<OptionType> optionTypeList = new ArrayList<>();
 	private List<Option> optionList = new ArrayList<>();
 	/*
 	 * private String[] opType; private String[] opName; private int[] opPrice;
@@ -63,13 +66,24 @@ public class Product {
 		this.status = status;
 	}
 	
-	public Product(int cNo, String pName, String pImg, int pPrice, List<String> optionTypeList, List<Option> optionList, String pDetail) {
+	public Product(int cNo, String pName, String pImg, int pPrice, List<OptionType> optionTypeList, String pDetail) {
 		super();
 		this.cNo = cNo;
 		this.pName = pName;
 		this.pImg = pImg;
 		this.pPrice = pPrice;
-		this.optionList = optionList;
+		this.optionTypeList = optionTypeList;
+		this.pDetail = pDetail;
+	}
+	
+	public Product(int pNo, int cNo, String pName, String pImg, int pPrice, 
+					List<OptionType> optionTypeList, String pDetail) {
+		super();
+		this.pNo = pNo;
+		this.cNo = cNo;
+		this.pName = pName;
+		this.pImg = pImg;
+		this.pPrice = pPrice;
 		this.optionTypeList = optionTypeList;
 		this.pDetail = pDetail;
 	}
@@ -146,11 +160,27 @@ public class Product {
 		this.cName = cName;
 	}
 	
-	public List<String> getOptionTypeList() {
+	public List<OptionType> getDeleteOtList() {
+		return deleteOtList;
+	}
+
+	public void setDeleteOtList(List<OptionType> deleteOtList) {
+		this.deleteOtList = deleteOtList;
+	}
+
+	public List<Option> getDeleteOList() {
+		return deleteOList;
+	}
+
+	public void setDeleteOList(List<Option> deleteOList) {
+		this.deleteOList = deleteOList;
+	}
+
+	public List<OptionType> getOptionTypeList() {
 		return optionTypeList;
 	}
 	
-	public void setOptionTypeList(List<String> optionTypeList) {
+	public void setOptionTypeList(List<OptionType> optionTypeList) {
 		this.optionTypeList = optionTypeList;
 	}
 
@@ -166,7 +196,8 @@ public class Product {
 	public String toString() {
 		return "Product [pNo=" + pNo + ", pName=" + pName + ", pImg=" + pImg + ", pPrice=" + pPrice + ", pDetail="
 				+ pDetail + ", pDate=" + pDate + ", cNo=" + cNo + ", status=" + status + ", cName=" + cName
-				+ ", optionTypeList=" + optionTypeList + ", optionList=" + optionList + "]";
+				+ ", deleteOtList=" + deleteOtList + ", deleteOList=" + deleteOList + ", optionTypeList="
+				+ optionTypeList + ", optionList=" + optionList + "]";
 	}
 
 }
