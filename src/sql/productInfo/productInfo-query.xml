@@ -13,13 +13,15 @@
 		REVIEW_TEXT,
 		REVIEW_IMAGE,
 		REVIEW_REGISTER,
-		USER_NO,
-		PRODUCT_NO,
-		ORDER_NO,
-		STATUS
-		FROM REVIEW 
+		R.USER_NO,
+		R.PRODUCT_NO,
+		R.ORDER_NO,
+		R.STATUS,
+		USER_NAME
+		FROM REVIEW R
+		JOIN MEMBER M ON (M.USER_NO = R.USER_NO)
 		WHERE PRODUCT_NO = 1
-		AND STATUS = 'Y'
+		AND R.STATUS = 'Y'
 		ORDER BY REVIEW_REGISTER DESC, REVIEW_NO
 </entry>
 <!-- 로그인한 사용자의 리뷰만 조회 -->
@@ -36,7 +38,7 @@
 		STATUS
 	FROM review
 	WHERE STATUS = 'Y'
-	AND user_no = 1
+	AND user_no = ?
 	ORDER BY review_register DESC
 </entry>
 <entry key="selectReviewPointList">

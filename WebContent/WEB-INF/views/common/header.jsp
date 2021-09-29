@@ -10,7 +10,7 @@
 <meta charset="UTF-8">
 <title>header</title>
 <link href="<%= request.getContextPath() %>/resources/css/common/reset.css" rel="stylesheet">
-<link href="<%= request.getContextPath() %>/resources/css/common/header.css?ver=1.7" rel="stylesheet">
+<link href="<%= request.getContextPath() %>/resources/css/common/header.css?ver=1.9" rel="stylesheet">
 <% if(session.getAttribute("msg") != null) { %>
 <script>
     alert('<%= session.getAttribute("msg")%>');
@@ -21,6 +21,7 @@
 %>
 
 </head>
+
 <body>
 <c:set var="contextPath" value="${ pageContext.servletContext.contextPath }" scope="application"/>
 <div class="wrapper">
@@ -40,12 +41,21 @@
             <a href="<%= request.getContextPath() %>/login">로그인</a>
             <a href="<%= request.getContextPath() %>/memberjoin">회원가입</a>
             <a href="<%= request.getContextPath() %>/faq/list">FAQ</a>
-            <a href="#">장바구니</a>
+            <a href="#">장바구니</a>  
+                 
             <% } else { %>
+            <c:if test="${ !empty loginUser && loginUser.userId != 'admin0' }">
             <a href="<%= request.getContextPath() %>/logout">로그아웃</a>
-            <a href="#">마이페이지</a>
-            <a href="#">FAQ</a>
+            <a href="<%= request.getContextPath() %>/user/mypage">마이페이지</a>
+            <a href="<%= request.getContextPath() %>/faq/list">FAQ</a>
             <a href="#">장바구니</a>
+            </c:if>
+            <c:if test="${ !empty loginUser && loginUser.userId == 'admin0' }">
+			<a href="<%= request.getContextPath() %>/logout">로그아웃</a>
+            <a href="#">관리자페이지</a>
+            <a href="<%= request.getContextPath() %>/faq/list">FAQ</a>
+            <a href="#">장바구니</a>
+			</c:if>
             <% } %>
         </div>
     </header>

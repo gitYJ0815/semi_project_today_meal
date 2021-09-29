@@ -44,7 +44,7 @@ public class EventDao {
 										  rset.getString("content"),
 										  rset.getString("term"),
 										  rset.getInt("count"),
-										  rset.getString("USER_ID"),
+										  rset.getInt("user_no"),
 										  rset.getString("status")));
 			}
 			
@@ -97,7 +97,7 @@ public class EventDao {
 							  rset.getString("content"),
 							  rset.getString("term"),
 							  rset.getInt("count"),
-							  rset.getString("USER_ID"),
+							  rset.getInt("user_no"),
 							  rset.getString("status"));
 			}
 			
@@ -123,7 +123,7 @@ public class EventDao {
 			pstmt.setString(1, ev.getEvent_title());
 			pstmt.setString(2, ev.getContent());
 			pstmt.setString(3, ev.getTerm());
-			//pstmt.setString(4, ev.getUserId());
+			pstmt.setInt(4, ev.getUserNo());
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -183,33 +183,27 @@ public class EventDao {
 	}
 
 	// 검색 목록
-	public List<Event> selectList(Connection conn, String searchCondition, String searchValue) {
+	public List<Event> selectList(Connection conn, String searchValue) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		List<Event> eventList = new ArrayList<>();
 		// 기본 sql문 : 검색과 무관한 전체 요청
-		String sql = query.getProperty("selectList");
-		
-		if(searchCondition.equals("event_title")) {
-			// 제목으로 검색할 경우 수행할 sql문으로 변경
-			sql = query.getProperty("selectTitleList");
-		}
+		String sql = query.getProperty("selectTitleList");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-			if(searchCondition.equals("event_title"))
-				pstmt.setString(1, searchValue);
+			pstmt.setString(1, searchValue);
 			
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
-				eventList.add(new Event(rset.getInt("eno"),
-										  rset.getString("event_title"),
+				eventList.add(new Event(rset.getInt("EVNET_NO"),
+										  rset.getString("EVNET_TITLE"),
 										  rset.getString("content"),
 										  rset.getString("term"),
 										  rset.getInt("count"),
-										  rset.getString("user_id"),
+										  rset.getInt("user_no"),
 										  rset.getString("status")));
 			}
 			

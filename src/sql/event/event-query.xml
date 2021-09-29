@@ -9,7 +9,7 @@
 		CONTENT,
 		TERM,
 		COUNT,
-		USER_ID,
+		USER_NO,
 		STATUS
 	FROM EVENT_BOARD
 	WHERE STATUS = 'Y'
@@ -22,12 +22,13 @@
 		CONTENT,
 		TERM,
 		COUNT,
-		USER_ID,
+		USER_NO,
 		STATUS
 	FROM EVENT_BOARD
 	WHERE STATUS = 'Y'
 	AND EVNET_NO = ?
 </entry>
+<!-- 조회수 증가 -->
 <entry key="increaseCount">
 	UPDATE EVENT_BOARD
 		SET COUNT = COUNT + 1
@@ -43,7 +44,7 @@
 			CONTENT,
 			TERM,
 			COUNT,
-			USER_ID,
+			USER_NO,
 			STATUS
 		)
 		VALUES
@@ -53,7 +54,7 @@
 			?,
 			?,
 			0,
-			1,
+			?,
 			DEFAULT
 		)
 </entry>
@@ -76,7 +77,7 @@
 		CONTENT,
 		TERM,
 		COUNT,
-		USER_ID,
+		USER_NO,
 		STATUS
 	FROM EVENT_BOARD
 	WHERE EVNET_TITLE LIKE '%' || ? || '%'

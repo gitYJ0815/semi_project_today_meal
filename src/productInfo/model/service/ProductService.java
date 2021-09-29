@@ -27,13 +27,13 @@ public class ProductService {
 	}
 	
 	// 로그인한 사용자의 상품 상세 조회
-		public Product selectMyProduct() {
+		public Product selectMyProduct(int userNo) {
 			Connection conn = getConnection();
 			
 			Product p = pd.selectProduct(conn);
 			
 			// 해당 사용자 마이페이지에 대한 리뷰 리스트 조회 추가
-			 p.setReviewList(pd.selectMyReviewList(conn));
+			 p.setReviewList(pd.selectMyReviewList(conn,userNo));
 			
 			close(conn);
 			

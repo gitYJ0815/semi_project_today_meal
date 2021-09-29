@@ -19,10 +19,13 @@ width : 1100px;
 width: 220px;
 height: 80px;
 }
+ * {
+font-family: 'Noto Sans KR', sans-serif;
+}
 #header .search {
 display: block;
-width: 445px;
-height: 38px;
+width: 450px;
+height: 42px;
 margin : 20px;
 line-height: 45px;
 border: 1px solid #294401;
@@ -35,10 +38,11 @@ width : 320px;
 padding: 10px;
 border: 0px;
 outline: none;
+background : none;
 float: left;
 }
 #searchBtn{
-width: 78px;
+width: 83px;
 height: 100%;
 border: 0px;
 background: #294401;
@@ -46,7 +50,6 @@ outline: none;
 float: right;
 color: #FFFFFF;
 }
-
 button {
    background: inherit;
    border:none;
@@ -64,14 +67,13 @@ button {
 }
 
 #header .btnArea a {
-	font-family: Roboto;
 	font-weight : normal;
 	font-size: 12px;
 	text-decoration:none;
 	display:block;
 	margin : 10px;
 	color: #294401;
-	width : 60px;
+	width : 67px;
 	text-align : center;
 	
  line-height: 45px;
@@ -100,7 +102,6 @@ button {
 #nav a {
 	text-decoration:none;
 	color : #294401;
-	font-family: Roboto;
 	font-weight : bold;
 	display:block;
 	width : 120px;

@@ -35,13 +35,12 @@ public class EventListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		String searchCondition = request.getParameter("searchCondition");
 		String searchValue = request.getParameter("searchValue");
 		List<Event> eventList;
 		
-		if(searchCondition != null && searchValue != null) {
+		if(searchValue != null) {
 			// 검색 된 리스트 조회
-			eventList = new EventService().selectList(searchCondition, searchValue);
+			eventList = new EventService().selectList(searchValue);
 		} else {
 			// 공지사항 게시글에 대한 목록 요청(넘어온 값 없으므로 파라미터 없이 바로 요청)
 			eventList = new EventService().selectList();
