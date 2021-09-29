@@ -26,7 +26,7 @@ public class ProductDao {
 		}
 	}
 	
-	// 상품 조회
+	// 모든 상품 조회
 	public Product selectProduct(Connection conn) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -63,7 +63,7 @@ public class ProductDao {
 	
 
 	// 상품에 대한 리뷰 조회
-	public List<Review> selectReviewList(Connection conn) {
+	public List<Review> selectReviewList(Connection conn, int pno) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		List<Review> reviewList = new ArrayList<>();
@@ -71,7 +71,7 @@ public class ProductDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			//pstmt.setInt(1, pno);
+			pstmt.setInt(1, pno);
 			
 			rset = pstmt.executeQuery();
 			
@@ -166,7 +166,7 @@ public class ProductDao {
 	}
 
 	// 마이페이지 리뷰 상품명 내림차순 정렬
-	public List<Review> selectReviewNameDesc(Connection conn) {
+	public List<Review> selectReviewNameDesc(Connection conn, int userNo) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		List<Review> reviewList = new ArrayList<>();
@@ -174,7 +174,7 @@ public class ProductDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			//pstmt.setInt(1, pno);
+			pstmt.setInt(1, userNo);
 			
 			rset = pstmt.executeQuery();
 			
@@ -197,6 +197,73 @@ public class ProductDao {
 		}
 		
 		return reviewList;
+	}
+
+	// 마이페이지 리뷰 오름차순 정렬
+	public List<Review> selectReviewNameAsc(Connection conn, int userNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<Review> reviewList = new ArrayList<>();
+		String sql = query.getProperty("selectReviewNameAsc");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, userNo);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				reviewList.add(new Review(rset.getInt("review_no"),
+											rset.getDouble("point"),
+											rset.getString("review_text"),
+											rset.getString("review_image"),
+											rset.getDate("review_register"),
+											rset.getInt("user_no"),
+											rset.getInt("product_no"),
+											rset.getInt("order_no"),
+											rset.getString("status")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return reviewList;
+	}
+
+	// 상품상세페이지 상품정보
+	public Product selectProductDetail(Connection conn, int pno) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Product p = null;
+		String sql = query.getProperty("selectProductDetail");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, pno);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				p = new Product(rset.getInt("product_no"),
+								rset.getString("product_name"),
+								rset.getString("product_img"),
+								rset.getInt("product_price"),
+								rset.getString("product_detail"),
+								rset.getDate("product_date"),
+								rset.getInt("category_no"),
+								rset.getString("status"));
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return p;
 	}
 	
 

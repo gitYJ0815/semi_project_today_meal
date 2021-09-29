@@ -6,11 +6,14 @@ import static common.JDBCTemplate.getConnection;
 import static common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import event.model.dao.EventDao;
 import event.model.vo.Event;
 
+import common.paging.model.vo.PageInfo;
 
 public class EventService {
 	private EventDao ed = new EventDao();
@@ -109,6 +112,28 @@ public class EventService {
 		return result;
 	}
 
+	public Map<String, Object> selectListPage(int page, String searchValue) {
+		Connection conn = getConnection();
+		
+		// 1. 게시글 총 개수 구하기
+		int listCount = ed.getListCountPage(conn, searchValue);
+		//System.out.println("listCount : " + listCount);
+		
+		// 2. PageInfo 객체 만들기
+		PageInfo pi = new PageInfo(page, listCount, 8, 10);
+		//System.out.println("pi : " + pi);
+		
+		// 3. 페이징 처리가 된 게시글 목록 조회
+		List<Event> eventlist = ed.selectListPage(conn, pi, searchValue);
+		
+		// 리턴용 Map 선언
+		Map<String, Object> returnMap = new HashMap<>();
+		
+		returnMap.put("pi", pi);
+		returnMap.put("eventlist", eventlist);
+		
+		return returnMap;
+	}
 	
 
 }

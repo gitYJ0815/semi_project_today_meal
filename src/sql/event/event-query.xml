@@ -84,4 +84,17 @@
 	AND STATUS = 'Y'
 	ORDER BY EVNET_NO DESC
 </entry>
+<entry key="getListCountPage">
+	SELECT
+		COUNT(*)
+	FROM EVENT
+	AND STATUS = 'Y'
+</entry>
+<entry key="getTitleListCount">
+	SELECT
+		COUNT(*)
+	FROM EVENT
+	WHERE STATUS = 'Y'
+	AND EVNET_TITLE LIKE '%' || ? || '%'
+</entry>
 </properties>

@@ -239,9 +239,9 @@
                 </div>
                 <div class="reivew_sort" id="sort">
                     <ul class="sort_list">
-                        <li class="recentList">최신순 </li>
-                        <li class="nameDesc">| 상품명 내림차순 | </li>
-                        <li class="nameAsc">상품명 오름차순</li>
+                        <li class="recentList"><a>최신순</a> </li>
+                        <li class="nameDesc">| <a href="${contextPath }/mypage/reviewDesc" style="text-decoration-line : none; color:black;">상품명 내림차순</a> | </li>
+                        <li class="nameAsc"><a href="${contextPath }/mypage/reviewAsc" style="text-decoration-line : none; color:black;">상품명 오름차순</a></li>
                     </ul>
                 </div>
                 <div class="review_list">
