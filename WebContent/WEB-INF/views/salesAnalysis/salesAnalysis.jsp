@@ -28,7 +28,7 @@
             	<c:forEach var="ranking" items="${ rankingList }" varStatus="status">
             		<div class="rankBox">
             			<img src="<%= request.getContextPath() %>/resources/images/salesAnalysis/top${ status.count }.png">
-            			<img src="#">
+            			<img src="<%= request.getContextPath() %>/resources/uploadFiles/product/${ ranking.productImg }">
             			<p>
 	                        [<c:out value="${ ranking.category }"/>]&nbsp;<c:out value="${ ranking.productName }"/><br>
 				                       판매수량 : <fmt:formatNumber value="${ ranking.salesQuantity }"  groupingUsed="true"/>개<br>
