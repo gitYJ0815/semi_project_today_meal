@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+
 import common.paging.model.vo.PageInfo;
 import event.model.vo.Event;
 
@@ -302,6 +303,72 @@ public class EventDao {
 			close(pstmt);
 		}
 		return eventlist;
+	}
+
+	//0930
+	public int getListCount(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int listCount = 0;
+		String sql = query.getProperty("getListCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return listCount;
+	}
+
+	//0930
+	public List<Event> selectList(Connection conn, PageInfo pi) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<Event> eventList = new ArrayList<>();
+		String sql = query.getProperty("selectPageList");
+		
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getPage() - 1) * pi.getItemLimit() + 1;
+			int endRow = startRow + pi.getItemLimit() - 1;
+			int paramIndex = 1;
+			
+			
+			pstmt.setInt(paramIndex++, startRow);
+			pstmt.setInt(paramIndex++, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				eventList.add(new Event(rset.getInt("evnet_no"),
+										rset.getString("evnet_title"),
+										rset.getString("content"),
+										rset.getString("term"),
+										rset.getInt("count"),
+										rset.getInt("user_no"),
+										rset.getString("status")));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return eventList;
 	}
 	
 }

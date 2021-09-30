@@ -87,14 +87,37 @@
 <entry key="getListCountPage">
 	SELECT
 		COUNT(*)
-	FROM EVENT
+	FROM EVENT_BOARD
 	AND STATUS = 'Y'
 </entry>
 <entry key="getTitleListCount">
 	SELECT
 		COUNT(*)
-	FROM EVENT
+	FROM EVENT_BOARD
 	WHERE STATUS = 'Y'
 	AND EVNET_TITLE LIKE '%' || ? || '%'
+</entry>
+<entry key="getListCount">
+	SELECT
+		COUNT(*)
+	FROM EVENT_BOARD
+	WHERE STATUS = 'Y'
+</entry>
+<entry key="selectPageList">
+	SELECT 
+	  	EVNET_NO,
+		EVNET_TITLE,
+		CONTENT,
+		TERM,
+		COUNT,
+		USER_NO,
+		STATUS
+	FROM(SELECT ROWNUM RNUM, BLIST.*
+                FROM (SELECT
+                         *
+                         FROM EVENT_BOARD  
+                         WHERE STATUS = 'Y'
+                         ORDER BY EVNET_NO DESC) BLIST)
+	WHERE RNUM BETWEEN ? AND ?
 </entry>
 </properties>

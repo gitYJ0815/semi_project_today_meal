@@ -134,6 +134,31 @@ public class EventService {
 		
 		return returnMap;
 	}
+
+	// 페이징처리
+	public Map<String, Object> selectList(int page) {
+		Connection conn = getConnection();
+		
+		// 1. 게시글 총 개수 구하기
+		int listCount = ed.getListCount(conn);
+		//System.out.println("listCount : " + listCount);
+		
+		// 2. PageInfo 객체 만들기
+		PageInfo pi = new PageInfo(page, listCount, 10, 8);
+		//System.out.println("pi : " + pi);
+		
+		// 3. 페이징 처리가 된 게시글 목록 조회
+		List<Event> eventList = ed.selectList(conn, pi);
+		//System.out.println("boardList : " + boardList);
+		
+		// 리턴용 Map 선언
+		Map<String, Object> returnMap = new HashMap<>();
+		
+		returnMap.put("pi", pi);
+		returnMap.put("eventList", eventList);
+		
+		return returnMap;
+	}
 	
 
 }
