@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="login.model.vo.Member"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>      
 <%
 	Member loginUser = (Member)session.getAttribute("loginUser");
 %>
@@ -27,30 +28,40 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
 							상품정보
 						</div>
 			 			<div class="date">
-			 				배송 : <span>2021-08-30</span>도착(배송일 지정)
+			 				배송 : <span>${ orderBasket.delivery }</span>&nbsp;도착(배송일 지정)
 			 			</div>
 			 			<div class="product">
 			 				<div class="img_area">
-			 					<img src="<%= request.getContextPath() %>/resources/images/faq/Q.png" class="pro_thumb">
+			 					<img src="<%= request.getContextPath() %>/resources/uploadFiles/product/${ orderBasket.productImg }" class="pro_thumb">
 			 				</div>
 			 				<div class="pro_name">
-			 					<p class="goods">백리향 백짬뽕</p>
-			 					<p>1개(12,900원)</p>
+			 					<p class="goods">${ orderBasket.productName }</p>
+			 					<p>${ orderBasket.productQty }개(${ orderBasket.total }원)</p>
 			 				</div>
 			 				<div class="pro_info">
 			 					<table class="info">
 			 						<tr>
 			 							<td>상품금액</td>
-			 							<td class="info_price">1개(12,900원)</td>
+			 							<td class="info_price">${ orderBasket.productQty }개(${ orderBasket.total }원)</td>
 			 						</tr>
+			 						
+			 						<c:set var = "total" value = "0" />
+			 						<c:forEach var="o" items="${ orderBasket.optionBasketList }">
 			 						<tr>
-			 							<td>우동사리</td>
-			 							<td class="info_price">2개(3,000원)</td>
+			 							<c:set var="productPrice" value="${ orderBasket.total }"/>	
+			 							<c:set var="optionPrice" value="${ o.optCalcPrice }"/>
+			 							<c:set var="result" value="${ productPrice }"/>
+			 							
+			 							<td>${ o.optionName }</td>
+			 							<td class="info_price">${ o.optionQty }개(${ o.optCalcPrice }원)</td>
 			 						</tr>
+			 						<c:set var="total" value="${ total + o.optCalcPrice }"/>
+			 						</c:forEach>
+			 						
 			 						<tfoot>
 			 							<tr>
 			 								<td>총 금액</td>
-			 								<td>15,900원</td>
+			 								<td>${ result + total }원</td>
 			 							</tr>
 			 						</tfoot>
 			 					</table>
@@ -65,27 +76,27 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
 			 			<table cellspacing="10">
 			 				<tr>
 			 					<td>우편번호<b>*</b></td>
-			 					<td><input type="text" name="address" class="postcodify_postcode5" value="${ loginUser.address1 }" readonly required></td>
+			 					<td><input type="text" id="address1" name="address" class="postcodify_postcode5" value="${ loginUser.address1 }" readonly required></td>
 			 					<td><button id="postcodify_search_button" type="button">검색</button></td>			 							
 			 				</tr>
 			 				<tr>
 			 					<td>도로명주소<b>*</b></td>
-			 					<td colspan="3"><input type="text" name="address" class="postcodify_address" value="${ loginUser.address2 }" readonly required></td>
+			 					<td colspan="3"><input type="text" id="address2" name="address" class="postcodify_address" value="${ loginUser.address2 }" readonly required></td>
 			 				</tr>
 			 				<tr>
 			 					<td>상세주소<b>*</b></td>
-			 					<td colspan="3"><input type="text" name="address" class="postcodify_details" value="${ loginUser.address3 }" required></td>
+			 					<td colspan="3"><input type="text" id="address3" name="address" class="postcodify_details" value="${ loginUser.address3 }" required></td>
 			 				</tr>
 			 				<tr>
 			 					<td>받는 분<b>*</b></td>
-			 					<td colspan="2"><input type="text" name="member" value="${ loginUser.userName }" required></td>
+			 					<td colspan="2"><input type="text" id="name" name="member" value="${ loginUser.userName }" required></td>
 			 				</tr>
 			 				<tr>
 			 					<td>연락처<b>*</b></td>
-			 					<td colspan="2"><input type="text" name="member" value="${ loginUser.phone }" required></td>
+			 					<td colspan="2"><input type="text" id="phone" name="member" value="${ loginUser.phone }" required></td>
 			 				</tr>
 			 				<tr>
-			 					<td colspan="3"><input type="text" name="msg" class="delivery_msg" 
+			 					<td colspan="3"><input type="text" id="deleveryMsg" name="msg" class="delivery_msg" 
 			 						placeholder="배송 메시지를 입력해주세요"></td>
 			 				</tr>
 			 			</table>
@@ -111,8 +122,9 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
 								<div class="payment_subject">
 									결제금액
 								</div>
-								<span id="final_price">18,900</span>원<br>
-								주문금액 <span>15,900</span>원 - 할인금액 <span>0</span>원 + 배송비 <span>3,000</span>원 
+								<c:set var="c" value=""/>
+								<span id="final_price">18900</span>원<br>
+								주문금액 <span id="productPrice">${ result + total }</span>원 - 할인금액 <span id="useCoin">0</span>원 + 배송비 <span id="deliveryFee">3000</span>원 
 							</div>
 							<div class="pay_method">
 								신용카드 결제
@@ -128,63 +140,97 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 	
-	<!-- 우편번호 검색 -->
+	<!-- 우편번호 검색  -->
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
     <script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
-    
+   
   	<!-- 아임포트 -->
-  	<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+  	<!-- <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script> -->
   	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 
 	<script>
 		// 우편번호 검색
 		$(function(){ 
 			$("#postcodify_search_button").postcodifyPopUp(); 
-		});
+		}); 
 		
-		// 적립금 전액사용
+		var productPrice = parseInt($("#productPrice").text());
+		var deliveryFee = parseInt($("#deliveryFee").text());
+		console.log(productPrice);
+		console.log(deliveryFee);
+		// 적립금 전액사용 버튼
 		let chk = $("input[id=coin]");
-
+		
 		chk.on("click", function(){
 		  if($(this).is(":checked")){
-		    $("#use").val(${ loginUser.coin});
+		    $("#use").val(${ loginUser.coin });
+		    console.log($("#use").val());	// string 타입
 		  }else
-		 	 $("#use").val("");
+		 	 $("#use").val(0);
+		  	console.log($("#use").val());
+		  	 $("#final_price").text(productPrice + deliveryFee);  
 		});
 		
+		// 적립금이 보유 코인보다 많게 적을 경우
+		 use.addEventListener('change', function(){
+			if(use.value > ${ loginUser.coin }){
+				alert("보유 적립금보다 클 수 없습니다.");
+				use.focus();
+				use.value = "";
+
+				document.getElementById("useCoin").innerText = "0";
+			}
+		});
+		
+		/*
+		// 적립금 적을 시 할인금액에 표시
+		$("#use").on("change", function(){
+			$("#useCoin").text(coin);
+			$("#final_price").text(productPrice - (parseInt($("#useCoin").text())) + deliveryFee);
+			console.log(parseInt($("#final_price").text()));
+		}); */
+		
+		
+		// 최종 결제 금액
+		$("#useCoin").on("change", function(){
+			$("#final_price").val(productPrice - useCoin + deliveryFee);
+			console.log(productPrice - useCoin + deliveryFee);
+			console.log(useCoin);
+		});
+		
+		
+		console.log($("#final_price").text());
+		
 		// 아임포트 API 연동 -----------------------------------------------------------------------
-		var IMP = window.IMP;
-	    IMP.init("{imp24190117}");
-	    
+	    var IMP = window.IMP;
+		IMP.init("imp24190117");
+		var email = "${ loginUser.email }";
+		var price = parseInt($("#final_price").text());
 	    function requestPay() {
-	        // IMP.request_pay(param, callback) 결제창 호출
+	        
 	        IMP.request_pay({ // param
-	            pg: "html5_inicis",		// PG사 선택
+	            pg: "inicis",		// PG사 선택 html5_inicis
 	            pay_method: "card",		// 지불 수단
-	            merchant_uid: "ORD20180131-0000011",	// 고유한 id
-	            name: "노르웨이 회전 의자",	// 상품명
-	            amount: 64900,			// 가격
-	            buyer_email: "gildong@gmail.com",	// 구매자 이메일
-	            buyer_name: "홍길동",		// 구매자 이름
-	            buyer_tel: "010-4242-4242",		// 구매자 연락처
-	            buyer_addr: "서울특별시 강남구 신사동",	// 구매자 주소
-	            buyer_postcode: "01181"			// 구매자 우편번호
-	        }, function (rsp) { // callback
+	            merchant_uid: 'merchant_' + new Date().getTime(),	// 고유한 id
+	            amount: price,			// 가격
+	            buyer_email: email,
+	            buyer_name: $("#name").val(),
+	            buyer_tel: $("#phone").val(),
+	            
+	        }, function (rsp) { 
+	        	console.log(rsp);
 	            if (rsp.success) { // 결제 성공 시: 결제 승인 또는 가상계좌 발급에 성공한 경우
-	                $.ajax({
-	                	url: "{서버의 결제 정보를 받는 endpoint}", // 예: https://www.myservice.com/payments/complete
-	                    method: "POST",
-	                    headers: { "Content-Type": "application/json" },
-	                    data: {
-	                        imp_uid: rsp.imp_uid,
-	                        merchant_uid: rsp.merchant_uid
-	                    }
-	                }).done(function (data) {
-	                  // 가맹점 서버 결제 API 성공시 로직
-	                })
-	              } else {
-	                alert("결제에 실패하였습니다. 에러 내용: " +  rsp.error_msg);
-	              }
+	            	var msg = "오늘의 밀 결제가 완료되었습니다.";
+	            	msg += "결제 금액 : " + rsp.paid_amount + "입니다. 감사합니다.";
+
+	            	location.href='<%= request.getContextPath() %>/user/mypage';
+	            	
+	            } else {
+	            	var msg = "오늘의 밀 결제에 실패하였습니다.";
+	            	msg += "에러 내용 : " + rsp.error_msg;
+	            }
+	            alert(msg);
+	            
 	            });
 	      }
 	</script>

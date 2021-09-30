@@ -116,7 +116,7 @@
 	
 	.date {
 		padding-top: 10px;
-		width: 638px;
+		width: 600px;
 		height: 50px;
 		background: #E9E9E9;
 		border: 1px solid #767676;
@@ -124,8 +124,7 @@
 	}
 	
 	.product {
-		width: 638px;
-		
+		width: 600px;
 		background: #FFFFFF;
 		border: 1px solid #767676;
 		box-sizing: border-box;
@@ -149,7 +148,7 @@
 	}
 	
 	.pro_info {
-		margin-left: 230px;
+		margin-left: 200px;
 	}
 	
 	.info {
@@ -163,4 +162,8 @@
 	
 	.product_info, .delivery_info, .discount, .payment_info {
 		margin-bottom: 30px;
+	}
+	
+	#useCoin {
+		work-break: break-all;
 	}
