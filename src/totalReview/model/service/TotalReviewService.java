@@ -21,19 +21,19 @@ public class TotalReviewService {
 		return result;
 	}
 
-	public List<Review> selectList(int page, List<Integer> categoryList, String st, String keyword) {
+	public List<Review> selectList(int page, List<Integer> categoryList, String st, String keyword, int userNo) {
 		Connection conn = getConnection();
-		List<Review> reviewList = trd.selectList(conn, page, categoryList, st, keyword);
+		List<Review> reviewList = trd.selectList(conn, page, categoryList, st, keyword, userNo);
 		
 		close(conn);
 		
 		return reviewList;
 	}
 
-	public Review selectReview(int rno) {
+	public Review selectReview(int rno, int userNo) {
 		Connection conn = getConnection();
 
-		Review review = trd.selectReview(conn, rno);
+		Review review = trd.selectReview(conn, rno, userNo);
 
 		close(conn);
 		

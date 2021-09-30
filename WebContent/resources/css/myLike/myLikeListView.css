@@ -1,15 +1,5 @@
 @charset "UTF-8";
 
-button {
-	background: inherit;
-	border:none;
-	box-shadow:none;
-	border-radius:7px;
-	padding:0;
-	overflow:visible;
-	cursor:pointer
-}
-
 input {
 	-webkit-appearance: none;
 	-moz-appearance: none;
@@ -33,7 +23,7 @@ body.modal_open {
 
 #container {
 	max-width : 1100px;
-	margin:0 auto;
+	margin:61px auto 0;
 	display: flex;
 	flex-wrap : nowrap;
 	justify-content: space-between;
@@ -322,10 +312,7 @@ body.modal_open {
 
 #modal > .modal_inner .button_area .confirm_button {
 	background-color: #294401;
-}
-
-#modal.cart .cart_inner {
-	display: block;
+	border-radius: 7px;
 }
 
 #modal.delete .delete_inner {

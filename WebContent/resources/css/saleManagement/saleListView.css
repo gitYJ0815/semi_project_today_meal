@@ -1,5 +1,15 @@
 @charset "UTF-8";
 
+button {
+	background: inherit;
+	border:none;
+	box-shadow:none;
+	border-radius:7px;
+	padding:0;
+	overflow:visible;
+	cursor:pointer
+}
+
 input {
 	-webkit-appearance: none;
 	-moz-appearance: none;
@@ -287,11 +297,11 @@ body.modal_open {
 	margin-bottom: 36px;
 }
 
-.payment > .modal_inner .payment_inner > div:first-of-type {
+.payment > .modal_inner .payment_inner > div > div:first-of-type {
 	margin-bottom: 20px;
 }
 
-.payment > .modal_inner .payment_inner > div:not(:first-of-type) {
+.payment > .modal_inner .payment_inner > div > div:not(:first-of-type) {
 	margin-bottom: 53px;
 }
 
@@ -483,4 +493,5 @@ body.modal_open {
 
 .change > .modal_inner .change_inner div.button_area .confirm_button {
 	background-color: #294401;
+	border-radius: 7px;
 }

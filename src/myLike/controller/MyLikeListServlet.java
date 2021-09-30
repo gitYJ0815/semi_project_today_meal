@@ -1,30 +1,31 @@
-package totalReview.controller;
+package myLike.controller;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
 import login.model.vo.Member;
-import totalReview.model.service.TotalReviewService;
-import totalReview.model.vo.Review;
+import myLike.model.service.MyLikeService;
+import myLike.model.vo.MyLike;
+import subpage.model.service.ProductService;
 
 /**
- * Servlet implementation class TotalReviewDetailModalServlet
+ * Servlet implementation class MyLikeList
  */
-@WebServlet("/totalReview/detailModal")
-public class TotalReviewDetailModalServlet extends HttpServlet {
+@WebServlet("/myLike/list")
+public class MyLikeListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public TotalReviewDetailModalServlet() {
+    public MyLikeListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,21 +34,26 @@ public class TotalReviewDetailModalServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int page = 1;
+		int userNo = ((Member)request.getSession().getAttribute("loginUser")).getUserNo();
 		
+		if(request.getParameter("page") != null) {
+			page = Integer.parseInt(request.getParameter("page"));
+		}
+		
+		Map<String, Object> map = new MyLikeService().selectList(page, userNo);
+		
+		request.setAttribute("myLikeList", map.get("myLikeList"));
+		request.setAttribute("pi", map.get("pi"));
+		request.getRequestDispatcher("/WEB-INF/views/myLike/myLikeListView.jsp").forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int rno = Integer.parseInt(request.getParameter("rno"));
-		int userNo = request.getSession().getAttribute("loginUser") != null ? ((Member)request.getSession().getAttribute("loginUser")).getUserNo() : 0;
-		
-		Review r = new TotalReviewService().selectReview(rno, userNo);
-		
-		response.setContentType("application/json; charset=utf-8");
-		Gson gson = new GsonBuilder().setDateFormat("yyyy.MM.dd").create();
-		gson.toJson(r, response.getWriter());
+		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
 
 }

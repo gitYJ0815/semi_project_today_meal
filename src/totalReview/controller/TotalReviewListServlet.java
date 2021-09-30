@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import login.model.vo.Member;
 import totalReview.common.TotalReviewCommon;
 import totalReview.model.service.TotalReviewService;
 import totalReview.model.vo.Review;
@@ -38,6 +39,7 @@ public class TotalReviewListServlet extends HttpServlet {
 		int page = 1;
 		int listCount = 0;
 		String keyword = request.getParameter("keyword") == null ? "" : request.getParameter("keyword");
+		int userNo = request.getSession().getAttribute("loginUser") != null ? ((Member)request.getSession().getAttribute("loginUser")).getUserNo() : 0;
 		TotalReviewService trs = new TotalReviewService();
 		
 		String categoryParameter = request.getParameter("categoryList");
@@ -54,7 +56,7 @@ public class TotalReviewListServlet extends HttpServlet {
 			listCount = trs.getListCount(categoryNumberList, keyword);
 		}
 		
-		List<Review> reviewList = trs.selectList(page, categoryNumberList, "recent", keyword);
+		List<Review> reviewList = trs.selectList(page, categoryNumberList, "recent", keyword, userNo);
 		Map<String, Integer> categoryCountMap = new HashMap<>();
 
 		if(categoryList != null) {

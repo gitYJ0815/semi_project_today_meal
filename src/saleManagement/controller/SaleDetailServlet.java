@@ -1,6 +1,7 @@
-package totalReview.controller;
+package saleManagement.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,21 +11,20 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import login.model.vo.Member;
-import totalReview.model.service.TotalReviewService;
-import totalReview.model.vo.Review;
+import saleManagement.model.service.SaleManagementService;
+import saleManagement.model.vo.Receipt;
 
 /**
- * Servlet implementation class TotalReviewDetailModalServlet
+ * Servlet implementation class SaleDetailServlet
  */
-@WebServlet("/totalReview/detailModal")
-public class TotalReviewDetailModalServlet extends HttpServlet {
+@WebServlet("/sale/detail")
+public class SaleDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public TotalReviewDetailModalServlet() {
+    public SaleDetailServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -41,13 +41,12 @@ public class TotalReviewDetailModalServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int rno = Integer.parseInt(request.getParameter("rno"));
-		int userNo = request.getSession().getAttribute("loginUser") != null ? ((Member)request.getSession().getAttribute("loginUser")).getUserNo() : 0;
 		
-		Review r = new TotalReviewService().selectReview(rno, userNo);
+		Receipt receipt = new SaleManagementService().selectReceipt(rno);
 		
 		response.setContentType("application/json; charset=utf-8");
-		Gson gson = new GsonBuilder().setDateFormat("yyyy.MM.dd").create();
-		gson.toJson(r, response.getWriter());
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+		gson.toJson(receipt, response.getWriter());
 	}
 
 }
