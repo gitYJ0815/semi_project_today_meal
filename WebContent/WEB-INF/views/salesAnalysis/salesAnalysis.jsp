@@ -181,8 +181,8 @@
                                 <th>영수건수</th>
                                 <th>총매출액</th>
                                 <th>실 매출액</th>
-                                <th>반품액</th>
                                 <th>취소액</th>
+                                <th>반품액</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -264,8 +264,8 @@
                                 <th>영수건수</th>
                                 <th>총 매출액</th>
                                 <th>실 매출액</th>
-                                <th>반품액</th>
                                 <th>취소액</th>
+                                <th>반품액</th>
                             </tr>
                         </thead>
                         <tbody>
