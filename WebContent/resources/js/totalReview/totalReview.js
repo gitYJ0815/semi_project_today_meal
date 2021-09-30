@@ -223,7 +223,7 @@
 		let html = "";
 
 		html += '<div class="image_area">';
-		html += 	'<img src="../' + (detailData.reviewImagePath == undefined ? detailData.product.representationImage : detailData.reviewImagePath) + '" alt="리뷰 대표 이미지">';
+		html += 	'<img src="../resources/uploadFiles/review/' + (detailData.reviewImagePath == undefined ? detailData.product.representationImage : detailData.reviewImagePath) + '" alt="리뷰 대표 이미지">';
 		html += '</div>';
 		html += '<div class="info_area">';
 		html +=		'<div class="star_info">';
@@ -345,7 +345,7 @@
 			cardHtml += 		'<button data-review-no="' + cardInformation.rno + '" ' + (userNo > 0 && cardInformation.liked ? 'class="active"' : "") + '>' + (userNo > 0 && cardInformation.liked ? '좋아요 해제 버튼' : '좋아요 버튼') + '</button>';
 			cardHtml += 	'</div>';
 			cardHtml +=		'<div class="image_area">';
-			cardHtml += 		'<img src="../' + (cardInformation.reviewImagePath == undefined ? cardInformation.product.representationImage : cardInformation.reviewImagePath) + '" alt="리뷰 대표 이미지">';
+			cardHtml += 		'<img src="../resources/uploadFiles/review/' + (cardInformation.reviewImagePath == undefined ? cardInformation.product.representationImage : cardInformation.reviewImagePath) + '" alt="리뷰 대표 이미지">';
 			cardHtml +=		'</div>';
 			cardHtml +=		'<div class="info_area">';
 			cardHtml += 		'<div class="star_area">';
