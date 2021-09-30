@@ -36,7 +36,7 @@ public class ProductListServlet extends HttpServlet {
 		String st = "recent";
 		
 		if(cName == null) {
-			request.getSession().setAttribute("msg", "잘못된 접근입니다.");
+			request.setAttribute("msg", "잘못된 접근입니다.");
 			request.getRequestDispatcher("/WEB-INF/views/common/errorpage.jsp").forward(request, response);
 		} else {
 			if(request.getParameter("page") != null) {
