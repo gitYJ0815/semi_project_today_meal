@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <title>통합 리뷰</title>
 <link href="<%= request.getContextPath() %>/resources/css/totalReview/reviewListView.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>

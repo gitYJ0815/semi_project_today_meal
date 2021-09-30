@@ -618,6 +618,7 @@ body.modal_open {
 }
 
 #modal > .modal_inner > .cart_inner > .button_area .confirm_button {
+	border-radius: 7px;
 	background-color: #294401;
 }
 
