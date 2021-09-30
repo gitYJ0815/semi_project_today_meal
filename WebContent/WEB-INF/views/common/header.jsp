@@ -51,7 +51,7 @@
             </c:if>
             <c:if test="${ !empty loginUser && loginUser.userId == 'admin0' }">
 			<a href="<%= request.getContextPath() %>/logout">로그아웃</a>
-            <a href="#">관리자페이지</a>
+            <a href="<%= request.getContextPath() %>/sale/list">관리자페이지</a>
             <a href="<%= request.getContextPath() %>/faq/list">FAQ</a>
             <a href="#">장바구니</a>
 			</c:if>
