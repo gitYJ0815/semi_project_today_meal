@@ -167,72 +167,72 @@ public class ProductDao {
 	}
 
 	// 마이페이지 리뷰 상품명 내림차순 정렬
-//	public List<Review> selectReviewNameDesc(Connection conn, int userNo) {
-//		PreparedStatement pstmt = null;
-//		ResultSet rset = null;
-//		List<Review> reviewList = new ArrayList<>();
-//		String sql = query.getProperty("selectReviewNameDesc");
-//		
-//		try {
-//			pstmt = conn.prepareStatement(sql);
-//			pstmt.setInt(1, userNo);
-//			
-//			rset = pstmt.executeQuery();
-//			
-//			while(rset.next()) {
-//				reviewList.add(new Review(rset.getInt("review_no"),
-//											rset.getDouble("point"),
-//											rset.getString("review_text"),
-//											rset.getString("review_image"),
-//											rset.getDate("review_register"),
-//											rset.getInt("user_no"),
-//											rset.getInt("product_no"),
-//											rset.getInt("order_no"),
-//											rset.getString("status")));
-//			}
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		} finally {
-//			close(rset);
-//			close(pstmt);
-//		}
-//		
-//		return reviewList;
-//	}
-//
-//	// 마이페이지 리뷰 오름차순 정렬
-//	public List<Review> selectReviewNameAsc(Connection conn, int userNo) {
-//		PreparedStatement pstmt = null;
-//		ResultSet rset = null;
-//		List<Review> reviewList = new ArrayList<>();
-//		String sql = query.getProperty("selectReviewNameAsc");
-//		
-//		try {
-//			pstmt = conn.prepareStatement(sql);
-//			pstmt.setInt(1, userNo);
-//			
-//			rset = pstmt.executeQuery();
-//			
-//			while(rset.next()) {
-//				reviewList.add(new Review(rset.getInt("review_no"),
-//											rset.getDouble("point"),
-//											rset.getString("review_text"),
-//											rset.getString("review_image"),
-//											rset.getDate("review_register"),
-//											rset.getInt("user_no"),
-//											rset.getInt("product_no"),
-//											rset.getInt("order_no"),
-//											rset.getString("status")));
-//			}
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		} finally {
-//			close(rset);
-//			close(pstmt);
-//		}
-//		
-//		return reviewList;
-//	}
+	public List<Review> selectReviewNameDesc(Connection conn, int userNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<Review> reviewList = new ArrayList<>();
+		String sql = query.getProperty("selectReviewNameDesc");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, userNo);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				reviewList.add(new Review(rset.getInt("review_no"),
+											rset.getDouble("point"),
+											rset.getString("review_text"),
+											rset.getString("review_image"),
+											rset.getDate("review_register"),
+											rset.getInt("user_no"),
+											rset.getInt("product_no"),
+											rset.getInt("order_no"),
+											rset.getString("status")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return reviewList;
+	}
+
+	// 마이페이지 리뷰 오름차순 정렬
+	public List<Review> selectReviewNameAsc(Connection conn, int userNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<Review> reviewList = new ArrayList<>();
+		String sql = query.getProperty("selectReviewNameAsc");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, userNo);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				reviewList.add(new Review(rset.getInt("review_no"),
+											rset.getDouble("point"),
+											rset.getString("review_text"),
+											rset.getString("review_image"),
+											rset.getDate("review_register"),
+											rset.getInt("user_no"),
+											rset.getInt("product_no"),
+											rset.getInt("order_no"),
+											rset.getString("status")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return reviewList;
+	}
 
 	// 상품상세페이지 상품정보
 	public Product selectProductDetail(Connection conn, int pno) {
