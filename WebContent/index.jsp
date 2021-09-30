@@ -112,10 +112,25 @@ margin-top: 320px;
 	width : 150px;
 	text-align : center;
 }
-#top5 {
-width: 170px;
-height: 170px;
+
+ img {
+max-width: 100%;
 }
+.top5  {
+ width: 170px;
+height: 170px;
+  position: relative
+}
+
+.top5B {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  display: none;
+}
+ .top5:hover .top5B {
+        display: block;
+      }
 .salesTop5{
 	width: 1000px;
 	margin : 0 auto;
@@ -123,10 +138,21 @@ height: 170px;
 	justify-content: space-around; 
 	margin-top: 120px;
 }
-#new3 {
-width: 260px;
+.new3  {
+ width: 260px;
 height: 260px;
+  position: relative
 }
+
+.new3B {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  display: none;
+}
+ .new3:hover .new3B {
+        display: block;
+      }
 .newMenu{
 	width: 900px;
 	margin : 0 auto;
@@ -163,11 +189,26 @@ height: 260px;
              <p id="p1">TOP 5</p>
              <p id="p2">매출 순위로 보는 인기 메뉴, 매출 순위 TOP 5!</p>
              <div class="salesTop5">
-             <img id="top5" src="<%= request.getContextPath() %>/resources/images/mainpage/food.png">
-             <img id="top5" src="<%= request.getContextPath() %>/resources/images/mainpage/food.png">
-             <img id="top5" src="<%= request.getContextPath() %>/resources/images/mainpage/food.png">
-             <img id="top5" src="<%= request.getContextPath() %>/resources/images/mainpage/food.png">
-             <img id="top5" src="<%= request.getContextPath() %>/resources/images/mainpage/food.png">
+               <div class ="top5">
+                 <img class="top5A" src="<%= request.getContextPath() %>/resources/images/mainpage/food.png">
+                 <img class="top5B" src="<%= request.getContextPath() %>/resources/images/mainpage/food2.png">
+               </div>
+               <div class ="top5">
+                 <img class="top5A" src="<%= request.getContextPath() %>/resources/images/mainpage/food.png">
+                 <img class="top5B" src="<%= request.getContextPath() %>/resources/images/mainpage/food2.png">
+               </div>
+               <div class ="top5">
+                 <img class="top5A" src="<%= request.getContextPath() %>/resources/images/mainpage/food.png">
+                 <img class="top5B" src="<%= request.getContextPath() %>/resources/images/mainpage/food2.png">
+               </div>
+               <div class ="top5">
+                 <img class="top5A" src="<%= request.getContextPath() %>/resources/images/mainpage/food.png">
+                 <img class="top5B" src="<%= request.getContextPath() %>/resources/images/mainpage/food2.png">
+               </div>               
+               <div class ="top5">
+                 <img class="top5A" src="<%= request.getContextPath() %>/resources/images/mainpage/food.png">
+                 <img class="top5B" src="<%= request.getContextPath() %>/resources/images/mainpage/food2.png">
+               </div>                                           
              </div>
             <div class="square">
              <p id="p3">신메뉴</p>
@@ -189,9 +230,18 @@ height: 260px;
                       </ul>
                  </nav>
                  <div class="newMenu">
-                 <img id="new3" src="<%= request.getContextPath() %>/resources/images/mainpage/food.png">
-                 <img id="new3" src="<%= request.getContextPath() %>/resources/images/mainpage/food.png">
-                 <img id="new3" src="<%= request.getContextPath() %>/resources/images/mainpage/food.png">
+                    <div class ="new3">
+                      <img class="new3A" src="<%= request.getContextPath() %>/resources/images/mainpage/food.png">
+                      <img class="new3B" src="<%= request.getContextPath() %>/resources/images/mainpage/food2.png">
+                    </div>
+                    <div class ="new3">
+                      <img class="new3A" src="<%= request.getContextPath() %>/resources/images/mainpage/food.png">
+                      <img class="new3B" src="<%= request.getContextPath() %>/resources/images/mainpage/food2.png">
+                    </div>
+                    <div class ="new3">
+                      <img class="new3A" src="<%= request.getContextPath() %>/resources/images/mainpage/food.png">
+                      <img class="new3B" src="<%= request.getContextPath() %>/resources/images/mainpage/food2.png">
+                    </div>                                       
                  </div>
             </div>
        </div>

@@ -107,8 +107,8 @@ border: 0px;
       
       <div class="outer">
         <p id="p1">비밀번호 찾기</p>
-	      <p id="p2">회원님의 비밀번호는 <%=pwd%> 입니다.</p>
-	     
+	      <p id="p2">회원님의 비밀번호는 <%= pwd.substring(0,4) %> * * * *
+	       입니다.</p>
 	     <span class="input_area">
  		    <input type="button" id="btnLogin" value="로그인" onclick="location.href='<%= request.getContextPath() %>/login';"/>
        	</span>

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="login.model.vo.Member, login.model.service.MemberService"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -125,6 +125,9 @@ width: 416px;
 height: 48px;
 
 }
+#kakaologout {
+color: white;
+}
 
 </style>
 
@@ -153,9 +156,18 @@ height: 48px;
                <input id="find" type="button" value="아이디 찾기" onclick="location.href='<%= request.getContextPath() %>/findId';">
                <input id="find" type="button" value="비밀번호 찾기" onclick="location.href='<%= request.getContextPath() %>/findPwd';">
                </div>
-               <a href="<%= request.getContextPath() %>/kakaologin">
+          <ul>
+           <li onclick="kakaoLogin();">
+              <a href="javascript:void(0)">
                   <img id="kakaologin" src="<%= request.getContextPath() %>/resources/images/login/kakaologin.png">
                </a>
+	        </li>
+	        <li onclick="kakaoLogout();">
+      <a href="javascript:void(0)" id="kakaologout">로그아웃
+      </a>
+	</li>
+	       </ul>  
+	            
            </form>
        </div>
     </div>
