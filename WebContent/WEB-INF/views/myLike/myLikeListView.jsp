@@ -33,7 +33,7 @@
 						<c:forEach var="like" items="${ myLikeList }">
 						<div class="item">
 							<div><input type="checkbox" name="select_row" data-like-no=${ like.lno }></div>
-							<div class="image_area"><img src="${ contextPath }/${ like.review.product.representationImage }" alt="음식 대표 사진"></div>
+							<div class="image_area"><img src="${ contextPath }/resources/uploadFiles/product/${ like.review.product.representationImage }" alt="음식 대표 사진"></div>
 							<div class="description_area <c:if test="${ like.review.product.optionList.size() == 0 }">no_option</c:if>">
 								<h4>${ like.review.product.pname }</h4>
 								<p>수량 : <span>${ like.review.product.buyQuantity }</span>개</p>

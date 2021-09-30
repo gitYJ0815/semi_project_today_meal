@@ -24,7 +24,7 @@ public class MyLikeDao {
 	private Properties query = new Properties();
 
 	public MyLikeDao() {
-		String fileName = ProductDao.class.getResource("/sql/myLike/myLike-query.xml").getPath();
+		String fileName = MyLikeDao.class.getResource("/sql/myLike/myLike-query.xml").getPath();
 
 		try {
 			query.loadFromXML(new FileInputStream(fileName));
