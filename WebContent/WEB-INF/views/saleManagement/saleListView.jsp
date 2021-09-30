@@ -106,7 +106,8 @@
 											<option value="pickup" data-order-state="2" <c:if test="${ param.orderStatus == 'pickup' }">selected</c:if>>배송 대기</option>
 											<option value="transit" data-order-state="3" <c:if test="${ param.orderStatus == 'transit' }">selected</c:if>>배송중</option>
 											<option value="delivered" data-order-state="4" <c:if test="${ param.orderStatus == 'delivered' }">selected</c:if>>배송 완료</option>
-											<option value="cancelled" data-order-state="5" <c:if test="${ param.orderStatus == 'cancelled' }">selected</c:if>>취소/환불</option>
+											<option value=requestCancel data-order-state="5" <c:if test="${ param.orderStatus == 'requestCancel' }">selected</c:if>>환불 요청</option>
+											<option value="cancelled" data-order-state="6" <c:if test="${ param.orderStatus == 'cancelled' }">selected</c:if>>취소/환불</option>
 										</select>
 									</form>
 								</th>
@@ -180,7 +181,8 @@
 								<option value="pickup" data-order-state="2">배송 대기</option>
 								<option value="transit" data-order-state="3">배송중</option>
 								<option value="delivered" data-order-state="4">배송 완료</option>
-								<option value="cancelled" data-order-state="5">취소/환불</option>
+								<option value=requestCancel data-order-state="5">환불 요청</option>
+								<option value="cancelled" data-order-state="6">취소/환불</option>
 							</select>
 						</div>
 						<div class="button_area">
