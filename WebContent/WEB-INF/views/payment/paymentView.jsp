@@ -16,6 +16,7 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+	<jsp:include page="/WEB-INF/views/common/top.jsp" />
 	<div id="container">
 		<div class="contents">
 			<div class="inner">
@@ -109,7 +110,7 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
 			 			<div class="discount_div">
 				 			적립금 <input type="text" id="use" value="">&nbsp;&nbsp;/&nbsp;&nbsp;<span>${ loginUser.coin }</span>
 				 			<form class="full_use">
-				 				<input type="checkbox" id="coin" name="" value="">
+				 				<input type="checkbox" id="coin">
 								<label for="coin">전액사용</label>
 				 			</form>
 			 			</div>
@@ -122,8 +123,8 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
 								<div class="payment_subject">
 									결제금액
 								</div>
-								<c:set var="c" value=""/>
-								<span id="final_price">18900</span>원<br>
+								<c:set var="fee" value="3000"/>
+								<span id="final_price">${ result + total + fee }</span>원<br>
 								주문금액 <span id="productPrice">${ result + total }</span>원 - 할인금액 <span id="useCoin">0</span>원 + 배송비 <span id="deliveryFee">3000</span>원 
 							</div>
 							<div class="pay_method">
@@ -154,52 +155,48 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
 			$("#postcodify_search_button").postcodifyPopUp(); 
 		}); 
 		
-		var productPrice = parseInt($("#productPrice").text());
-		var deliveryFee = parseInt($("#deliveryFee").text());
-		console.log(productPrice);
-		console.log(deliveryFee);
 		// 적립금 전액사용 버튼
 		let chk = $("input[id=coin]");
 		
 		chk.on("click", function(){
 		  if($(this).is(":checked")){
 		    $("#use").val(${ loginUser.coin });
-		    console.log($("#use").val());	// string 타입
-		  }else
-		 	 $("#use").val(0);
-		  	console.log($("#use").val());
-		  	 $("#final_price").text(productPrice + deliveryFee);  
+		    $("#useCoin").text(${ loginUser.coin });
+		   
+		  } else {
+			 $("#use").val(0);
+		  	 $("#useCoin").text(0);
+  	 
+		  } 	 
+			let productPrice = parseInt($("#productPrice").text());
+			let useCoin = parseInt($("#useCoin").text());
+			let deliveryFee = parseInt(3000);
+			
+			$("#final_price").text(productPrice - useCoin + deliveryFee);
 		});
 		
-		// 적립금이 보유 코인보다 많게 적을 경우
+		// 적립금 작성 할 경우
+		let use = document.getElementById("use");
 		 use.addEventListener('change', function(){
 			if(use.value > ${ loginUser.coin }){
 				alert("보유 적립금보다 클 수 없습니다.");
 				use.focus();
 				use.value = "";
-
 				document.getElementById("useCoin").innerText = "0";
+			} else {
+				document.getElementById("useCoin").innerText = use.value;
+				console.log(use.value);
 			}
 		});
 		
-		/*
-		// 적립금 적을 시 할인금액에 표시
-		$("#use").on("change", function(){
-			$("#useCoin").text(coin);
-			$("#final_price").text(productPrice - (parseInt($("#useCoin").text())) + deliveryFee);
-			console.log(parseInt($("#final_price").text()));
-		}); */
-		
-		
-		// 최종 결제 금액
-		$("#useCoin").on("change", function(){
-			$("#final_price").val(productPrice - useCoin + deliveryFee);
-			console.log(productPrice - useCoin + deliveryFee);
-			console.log(useCoin);
+		$("#use").change(function(){
+			let productPrice = parseInt($("#productPrice").text());
+			let useCoin = parseInt($("#useCoin").text());
+			let deliveryFee = parseInt(3000);
+			
+			$("#final_price").text(productPrice - useCoin + deliveryFee);
 		});
 		
-		
-		console.log($("#final_price").text());
 		
 		// 아임포트 API 연동 -----------------------------------------------------------------------
 	    var IMP = window.IMP;
