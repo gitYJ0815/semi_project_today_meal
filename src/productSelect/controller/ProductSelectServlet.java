@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -36,9 +37,14 @@ public class ProductSelectServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int product_no = Integer.parseInt(request.getParameter("pno"));
 		
-		//int product_no = 3; test
+		if(request.getSession().getAttribute("loginUser") == null) { // 세션에 로그인 요저 객체가 없다면
+			request.setAttribute("msg", "올바르지 않은 요청입니다.");
+			request.getRequestDispatcher("/WEB-INF/views/common/errorpage.jsp").forward(request, response);
+			return;
+		}
+		
+		int product_no = Integer.parseInt(request.getParameter("pno"));
 		
 		OrderBasket ob = new ProductSelectService().selectProduct(product_no);
 		
