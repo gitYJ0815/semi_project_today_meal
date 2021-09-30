@@ -40,8 +40,6 @@
             <a href="<%= request.getContextPath() %>/memberjoin">회원가입</a>
             <a href="<%= request.getContextPath() %>/faq/list">FAQ</a>
             <a href="#">장바구니</a>
-            
-                    
             <% } else { %>
             <c:if test="${ !empty loginUser && loginUser.userId != 'admin0' }">
             <a href="<%= request.getContextPath() %>/logout">로그아웃</a>
@@ -56,8 +54,6 @@
             <a href="#">장바구니</a>
 			</c:if>
             <% } %> 
-           
-          
         </div>
     </header>
     <nav id="nav">
@@ -74,54 +70,5 @@
         </ul>
     </nav>
 </div>
-<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-<script>
-
-Kakao.init('1e8f882bb483b14f8ef45b0c4a808623'); //발급받은 키 중 javascript키를 사용해준다.
-console.log(Kakao.isInitialized()); // sdk초기화여부판단
-//카카오로그인
-function kakaoLogin() {
-    Kakao.Auth.login({
-      success: function (response) {
-        Kakao.API.request({
-          url: '/v2/user/me',
-          success: function (response) {
-              var userName = response.properties.nickname;
-        	  
-        	  console.log("userName", userName);
-        	  location.href="<%= request.getContextPath() %>";
-          },
-          fail: function (error) {
-            console.log(error)
-          },
-        })
-        var apiToken = response.access_token;
-        console.log("apiToken", apiToken);
-      
-      },
-      fail: function (error) {
-        console.log(error)
-      },
-    })
-  }
-
-
-//카카오로그아웃  
-function kakaoLogout() {
-    if (Kakao.Auth.getAccessToken()) {
-      Kakao.API.request({
-        url: '/v1/user/unlink',
-        success: function (response) {
-        	console.log(response)
-        },
-        fail: function (error) {
-          console.log(error)
-        },
-      })
-      Kakao.Auth.setAccessToken(undefined)
-    }
-  }  
-</script>
-
 </body>
 </html>

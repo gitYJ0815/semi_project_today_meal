@@ -11,6 +11,7 @@ import java.util.Map;
 import common.paging.model.vo.PageInfo;
 import subpage.model.dao.ProductDao;
 import subpage.model.vo.Product;
+import subpage.model.vo.Search;
 
 public class ProductService {
 	private ProductDao pd = new ProductDao();
@@ -24,6 +25,7 @@ public class ProductService {
 		
 		return result;
 	}
+
 
 	public Map<String, Object> selectList(int page, int cno, String st) {
 		Connection conn = getConnection();
@@ -39,5 +41,22 @@ public class ProductService {
 		
 		return map;
 	}
+	//================================================================
+	public Map<String, Object> searchList(int page, int cno, String st, Search s) {
+		Connection conn = getConnection();
+		Map<String, Object> map = new HashMap<>();
+		int itemCount = pd.getSearchListCount(conn, cno, s);
+		PageInfo pi = new PageInfo(page, itemCount, 10, 20);
+		List<Product> productList = pd.searchList(conn, pi, cno, st, s);
+		
+		map.put("pi", pi);
+		map.put("productList", productList);
+		
+		close(conn);
+		
+		return map;
+	}
+	
+
 
 }
