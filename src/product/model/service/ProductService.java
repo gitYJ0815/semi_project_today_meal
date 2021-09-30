@@ -88,9 +88,7 @@ public class ProductService {
 	// 상품 등록
 	public int insertProduct(Product p) {
 		Connection conn = getConnection();
-		System.out.println("p : " + p);
 		int result1 = pd.insertProduct(conn, p);
-		System.out.println(result1);
 		int result2 = pd.insertOption(conn, p.getOptionTypeList());
 		int optionCnt = 0;
 		for(OptionType ot : p.getOptionTypeList()) {
@@ -137,15 +135,10 @@ public class ProductService {
 		} else {
 			rollback(conn);
 		}
-		// commit(conn);
+		
 		close(conn);
-		System.out.println("result2 : " + result2);
-		System.out.println("result3 : " + result3);
+		
 		return result;
 	}
 
-
-
-
-	
 }
