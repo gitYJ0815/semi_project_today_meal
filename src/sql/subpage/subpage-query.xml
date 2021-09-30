@@ -105,4 +105,10 @@
 						 ORDER BY PRODUCT_PRICE ASC, PRODUCT_NAME ASC) P)
 		WHERE RNUM BETWEEN ? AND ?
 	</entry>
+	<entry key="getListSearch">
+		SELECT
+			   COUNT(*)
+		  FROM PRODUCT_LIST
+		 WHERE PRODUCT_NAME LIKE '%' || ? || '%'
+	</entry>
 </properties>

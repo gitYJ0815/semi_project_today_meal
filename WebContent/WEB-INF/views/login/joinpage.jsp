@@ -255,7 +255,7 @@ height: 30px;
             input.focus();
             return false;
 
-        }
+        } 
     
     $("#idCheck").click(function(){
     	var userId = $("[name=userId]");

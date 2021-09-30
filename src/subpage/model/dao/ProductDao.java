@@ -14,6 +14,7 @@ import java.util.Properties;
 
 import common.paging.model.vo.PageInfo;
 import subpage.model.vo.Product;
+import subpage.model.vo.Search;
 
 
 public class ProductDao {
@@ -53,7 +54,7 @@ public class ProductDao {
 		
 		return result;
 	}
-
+	
 	// product 총 개수 
 	public int getListCount(Connection conn, int cno) {
 		PreparedStatement pstmt = null;
@@ -130,6 +131,101 @@ public class ProductDao {
 		
 		return productList;
 	}
+	
+	//=======================================================================================================================
+	public int getSearchListCount(Connection conn, int cno, Search s) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = query.getProperty("getListCount");
+		int result = 0;
+		
+		
+		// search
+		if(s.getSearchBox() != null) {
+			sql = query.getProperty("getListSearch");
+		} 
+		
+		
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, cno);
+			//  search
+			if(s.getSearchBox() != null) {
+				pstmt.setString(1, s.getSearchBox());
+			} 
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+
+		return result;
+	}
+
+	
+	public List<Product> searchList(Connection conn, PageInfo pi, int cno, String st, Search s) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<Product> productList = new ArrayList<>();
+		String sql = null;
+		
+		if(st.equals("recent")) {
+			sql = query.getProperty("selectRecentList");
+		}else if(st.equals("satisfaction")) {
+			sql = query.getProperty("selectSatisfactionList");
+		}else if(st.equals("hightprice")) {
+			sql = query.getProperty("selectHightpriceList");
+		}else if(st.equals("lowprice")) {
+			sql = query.getProperty("selectLowpriceList");
+		}
+		
+		
+		try {
+			int parameterIndex = 1;
+
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(parameterIndex++, cno);
+			// search
+			if(s.getSearchBox() != null) {
+				pstmt.setString(1, s.getSearchBox());
+			} 
+
+			int startItem = (pi.getPage() - 1) * pi.getItemLimit() + 1;
+			int endItem = startItem + pi.getItemLimit() - 1;
+			
+			pstmt.setInt(parameterIndex++, startItem);
+			pstmt.setInt(parameterIndex++, endItem);
+			
+			rset = pstmt.executeQuery();
+
+			while(rset.next()) {
+				Product p = new Product(rset.getInt("PRODUCT_NO"),
+										rset.getString("PRODUCT_NAME"),
+										rset.getString("PRODUCT_IMG"),
+										rset.getInt("PRODUCT_PRICE"),
+										rset.getDate("PRODUCT_DATE"),
+										rset.getString("SOLD_OUT"));
+
+				productList.add(p);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return productList;
+	}
+	
 
 	
 }
