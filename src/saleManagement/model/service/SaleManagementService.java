@@ -15,13 +15,13 @@ import saleManagement.model.vo.Receipt;
 public class SaleManagementService {
 	private SaleManagementDao smd = new SaleManagementDao();
 
-	public Map<String, Object> selectList(int page, Date startDate, Date endDate, String userId, String orderNumber) {
+	public Map<String, Object> selectList(int page, Date startDate, Date endDate, String userId, String orderNumber, int orderStatus) {
 		Connection conn = getConnection();
 		Map<String, Object> map = new HashMap<>();
-		int itemCount = smd.getListCount(conn, startDate, endDate, userId, orderNumber);
+		int itemCount = smd.getListCount(conn, startDate, endDate, userId, orderNumber, orderStatus);
 
 		PageInfo pi = new PageInfo(page, itemCount, 10, 20);
-		List<Receipt> receiptList = smd.selectList(conn, pi, startDate, endDate, userId, orderNumber);
+		List<Receipt> receiptList = smd.selectList(conn, pi, startDate, endDate, userId, orderNumber, orderStatus);
 		
 		map.put("pi", pi);
 		map.put("receiptList", receiptList);

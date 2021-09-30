@@ -46,7 +46,7 @@ public class SaleManagementDao {
 		return sb.toString();
 	}
 
-	public int getListCount(Connection conn, Date startDate, Date endDate, String userId, String orderNumber) {
+	public int getListCount(Connection conn, Date startDate, Date endDate, String userId, String orderNumber, int orderStatus) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = query.getProperty("listCount");
@@ -63,6 +63,10 @@ public class SaleManagementDao {
 				sql = sql.replace("AND ORDER_NO = ?", "");
 			}
 			
+			if(orderStatus == 0) {
+				sql = sql.replace("AND ORDER_STATE_NO = ?", "");
+			}
+			
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setString(parameterIndex++, (new java.sql.Date(startDate.getTime())).toString());
@@ -74,6 +78,10 @@ public class SaleManagementDao {
 			
 			if(!orderNumber.equals("")) {
 				pstmt.setInt(parameterIndex++, Integer.parseInt(orderNumber));
+			}
+			
+			if(orderStatus != 0) {
+				pstmt.setInt(parameterIndex++, orderStatus);
 			}
 			
 			rset = pstmt.executeQuery();
@@ -91,7 +99,7 @@ public class SaleManagementDao {
 		return result;
 	}
 
-	public List<Receipt> selectList(Connection conn, PageInfo pi, Date startDate, Date endDate, String userId, String orderNumber) {
+	public List<Receipt> selectList(Connection conn, PageInfo pi, Date startDate, Date endDate, String userId, String orderNumber, int orderStatus) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		List<Receipt> receiptList = new ArrayList<>();
@@ -109,6 +117,10 @@ public class SaleManagementDao {
 			if(orderNumber.equals("")) {
 				sql = sql.replace("AND ORDER_NO = ?", "");
 			}
+			
+			if(orderStatus == 0) {
+				sql = sql.replace("AND ORDER_STATE_NO = ?", "");
+			}
 
 			pstmt = conn.prepareStatement(sql);
 			
@@ -121,6 +133,10 @@ public class SaleManagementDao {
 			
 			if(!orderNumber.equals("")) {
 				pstmt.setInt(parameterIndex++, Integer.parseInt(orderNumber));
+			}
+			
+			if(orderStatus != 0) {
+				pstmt.setInt(parameterIndex++, orderStatus);
 			}
 			
 			pstmt.setInt(parameterIndex++, startItem);

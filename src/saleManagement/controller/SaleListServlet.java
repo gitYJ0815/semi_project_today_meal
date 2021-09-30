@@ -3,7 +3,6 @@ package saleManagement.controller;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import saleManagement.common.SaleManagementCommon;
 import saleManagement.model.service.SaleManagementService;
 
 /**
@@ -38,6 +38,7 @@ public class SaleListServlet extends HttpServlet {
 		int page = request.getParameter("page") == null ? 1 : Integer.parseInt(request.getParameter("page"));
 		String userId = request.getParameter("id") == null ? "" : request.getParameter("id");
 		String orderNumber = request.getParameter("orderNumber") == null ? "" : request.getParameter("orderNumber");
+		String orderStatus = request.getParameter("orderStatus") == null || request.getParameter("orderStatus").equals("") ? "default" : request.getParameter("orderStatus");
 		SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
 		
 		Calendar today = new GregorianCalendar();
@@ -60,7 +61,7 @@ public class SaleListServlet extends HttpServlet {
 			endDate.set(Calendar.MONTH, Integer.parseInt(endDateString.substring(4, 6))-1);
 			endDate.set(Calendar.DATE, Integer.parseInt(endDateString.substring(6, 8)));
 		}
-		Map<String, Object> map = new SaleManagementService().selectList(page, startDate.getTime(), endDate.getTime(), userId, orderNumber);
+		Map<String, Object> map = new SaleManagementService().selectList(page, startDate.getTime(), endDate.getTime(), userId, orderNumber, SaleManagementCommon.ORDER_STATUS_MAP.get(orderStatus));
 
 		todayMap.put("year", today.get(Calendar.YEAR));
 		todayMap.put("month", today.get(Calendar.MONTH)+1);

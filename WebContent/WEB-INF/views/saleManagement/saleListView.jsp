@@ -95,14 +95,20 @@
 								<th scope="col">주문상품 목록</th>
 								<th scope="col">결제내역</th>
 								<th scope="col">
-									<select name="orderStatus">
-										<option value="default" selected>주문 상태</option>
-										<option value="processing">주문 완료</option>
-										<option value="pickup">배송 대기</option>
-										<option value="transit">배송중</option>
-										<option value="delivered">배송 완료</option>
-										<option value="cancelled">취소/환불</option>
-									</select>
+									<form method="get">
+										<input type="hidden" name="start_date" value="${ startDate.date }">
+										<input type="hidden" name="end_date" value="${ endDate.date }">
+										<input type="hidden" name="id" value="${ param.id }">
+										<input type="hidden" name="orderNumber" value="${ param.orderNumber }">
+										<select name="orderStatus" class="orderStatus">
+											<option value="default" data-order-state="0" <c:if test="${ empty param.orderStatus || param.orderStatus == 'default' }">selected</c:if>>주문 상태</option>
+											<option value="processing" data-order-state="1" <c:if test="${ param.orderStatus == 'processing' }">selected</c:if>>주문 완료</option>
+											<option value="pickup" data-order-state="2" <c:if test="${ param.orderStatus == 'pickup' }">selected</c:if>>배송 대기</option>
+											<option value="transit" data-order-state="3" <c:if test="${ param.orderStatus == 'transit' }">selected</c:if>>배송중</option>
+											<option value="delivered" data-order-state="4" <c:if test="${ param.orderStatus == 'delivered' }">selected</c:if>>배송 완료</option>
+											<option value="cancelled" data-order-state="5" <c:if test="${ param.orderStatus == 'cancelled' }">selected</c:if>>취소/환불</option>
+										</select>
+									</form>
 								</th>
 								<th scope="col">상세 보기</th>
 							</tr>
@@ -137,7 +143,15 @@
 								<c:set var="addQueryParam" value=""/>
 							</c:when>
 							<c:otherwise>
-								<c:set var="addQueryParam" value="&start_date=${ param.start_date }&end_date=${ param.end_date }&id=${ param.id }&orderNumber=${ param.orderNumber }"/>
+								<c:choose>
+									<c:when test="${ !empty param.orderStatus }">
+										<c:set var="orderStatus" value="&orderStatus=default"/>
+									</c:when>
+									<c:otherwise>
+										<c:set var="orderStatus" value="&orderStatus=${ param.orderStatus }"/>
+									</c:otherwise>
+								</c:choose>
+								<c:set var="addQueryParam" value="&start_date=${ param.start_date }&end_date=${ param.end_date }&id=${ param.id }&orderNumber=${ param.orderNumber }&orderStatus=${ param.orderStatus }${ orderStatus }"/>
 							</c:otherwise>
 						</c:choose>
 						<jsp:include page="/WEB-INF/views/common/paging/paging.jsp">

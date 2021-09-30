@@ -12,6 +12,7 @@
 		 WHERE SALE_DATE BETWEEN TO_DATE(?) AND TO_DATE(?)+0.9999
 		   AND USER_ID = ?
 		   AND ORDER_NO = ?
+		   AND ORDER_STATE_NO = ?
 		 ORDER BY SALE_DATE
 	</entry>
 	<entry key="selectList">
@@ -40,6 +41,7 @@
 		                 WHERE SALE_DATE BETWEEN TO_DATE(?) AND TO_DATE(?)+0.9999
 		                   AND USER_ID = ?
 		   				   AND ORDER_NO = ?
+		   				   AND ORDER_STATE_NO = ?
 		                 ORDER BY ORDER_NO DESC) S)
 		 WHERE RUNM BETWEEN ? AND ?
 	</entry>

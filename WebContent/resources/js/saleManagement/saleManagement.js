@@ -29,6 +29,8 @@
 		selectAllInput = resultOption.querySelector("#select_all"),
 		changeStatusButton = resultOption.querySelector("button"),
 		resultTable = resultArea.querySelector("table"), 
+		orderStatusSelect = resultTable.querySelector(".orderStatus"),
+		orderStatusForm = orderStatusSelect.closest("form"),
 		resultBody = resultTable.querySelector("tbody"), 
 		resultCount = resultBody.querySelectorAll("tr").length,
 		checkBoxes = resultBody.querySelectorAll("input[type=checkbox]");
@@ -43,6 +45,7 @@
 		selectAllInput.addEventListener("change", selectAllChangeEventHandler);
 		changeStatusButton.addEventListener("click", changeStatusButtonClickEventHandler);
 		resultTable.addEventListener("click", resultTableClickEventHandler);
+		orderStatusSelect.addEventListener("change", orderstatusSelectChangeEventHandler);
 		searchArea.addEventListener("change", searchAreaChangeEventHandler);
 		modal.addEventListener("click", modalClickEventListener);
 	}
@@ -175,6 +178,10 @@
 				selectRow(e.target);
 			}
 		}
+	}
+
+	function orderstatusSelectChangeEventHandler() {
+		orderStatusForm.submit();
 	}
 	
 	function createQuery(query, key, value) {
