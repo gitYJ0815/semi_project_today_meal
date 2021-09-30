@@ -98,13 +98,13 @@
 						<div class="image_area">
 							<c:choose>
 								<c:when test="${ empty r.reviewImagePath }">
-									<c:set var="imagePath" value="${ r.product.representationImage }"/>
+									<c:set var="imagePath" value="product/${r.product.representationImage }"/>
 								</c:when>
 								<c:otherwise>
-									<c:set var="imagePath" value="${ r.reviewImagePath }"/>
+									<c:set var="imagePath" value="review/${ r.reviewImagePath }"/>
 								</c:otherwise>
 							</c:choose>
-							<img src="${ contextPath }/resources/uploadFiles/review/${ imagePath }" alt="리뷰 대표 이미지">
+							<img src="${ contextPath }/resources/uploadFiles/${ imagePath }" alt="리뷰 대표 이미지">
 						</div>
 						<div class="info_area">
 							<div class="star_area">
