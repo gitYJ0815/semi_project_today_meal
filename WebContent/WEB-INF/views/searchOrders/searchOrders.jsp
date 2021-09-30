@@ -204,14 +204,17 @@
                                     
                                     <td rowspan="${ receipt.orderCount }"><fmt:formatNumber value="${ receipt.orderSum }" groupingUsed="true"/>원</td>
                                     <td rowspan="${ receipt.orderCount }">
-                                        <c:if test="${ receipt.orderStateNo == 1 }">
-                                            	결제완료
-                                        </c:if>
-                                        <c:if test="${ receipt.orderStateNo == 2 }">
-                                            	배송중
+                                        <c:if test="${ receipt.orderStateNo == 1 || receipt.orderStateNo == 2}">
+                                            	주문완료
                                         </c:if>
                                         <c:if test="${ receipt.orderStateNo == 3 }">
+                                            	배송중
+                                        </c:if>
+                                        <c:if test="${ receipt.orderStateNo == 4 }">
                                             	배송완료
+                                        </c:if>
+                                        <c:if test="${ receipt.orderStateNo == 5 }">
+                                            	취소/환불
                                         </c:if>
                                     </td>
                                 </tr>
