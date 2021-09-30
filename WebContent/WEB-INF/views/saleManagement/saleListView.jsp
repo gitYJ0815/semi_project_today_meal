@@ -187,13 +187,14 @@
 							<button type="button" class="green_button">취소</button>
 							<button type="button" class="confirm_button">확인</button>
 						</div>
-						<form name="deleteForm" method="post"></form>
+						<form method="post"></form>
 					</div>
 				</div>
 				<button type="button" class="close_button"></button>
 			</div>
 		</div>
 	</div>
+	<jsp:include page="/WEB-INF/views/common/top.jsp" />
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 	<script src="${ contextPath }/resources/js/saleManagement/saleManagement.js"></script>
 </body>
