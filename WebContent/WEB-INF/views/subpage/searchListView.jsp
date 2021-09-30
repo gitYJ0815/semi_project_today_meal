@@ -29,7 +29,7 @@
 					<c:when test="${ p.soldOutStatus.equals('Y') }">
 					<li class="card sold_out">
 						<a href="${ contextPath }/product/info?pno=${ p.pno }">
-							<img src="${ contextPath }${ p.representationImage }" alt="${ p.pname } 대표 이미지">
+							<img src="${ contextPath }/resources/uploadFiles/product/${ p.representationImage }" alt="${ p.pname } 대표 이미지">
 							<div>
 								<em>품절</em>
 							</div>
@@ -65,6 +65,7 @@
 			</div>
 		</div>
 	</div>
+	<jsp:include page="/WEB-INF/views/common/top.jsp" />
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
 </html>

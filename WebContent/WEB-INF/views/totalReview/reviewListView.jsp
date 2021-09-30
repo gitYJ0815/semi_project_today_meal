@@ -169,6 +169,8 @@
 			</div>
 		</div>
 	</div>
+	<jsp:include page="/WEB-INF/views/common/top.jsp" />
+	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 	<script src="${ contextPath }/resources/js/totalReview/totalReview.js"></script>
 </body>
 </html>

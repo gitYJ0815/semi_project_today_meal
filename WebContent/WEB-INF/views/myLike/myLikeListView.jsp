@@ -99,6 +99,7 @@
 			</div>
 		</div>
 	</div>
+	<jsp:include page="/WEB-INF/views/common/top.jsp" />
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 	<script src="${ contextPath }/resources/js/myLike/myLike.js"></script>
 </body>
