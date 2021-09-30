@@ -204,4 +204,105 @@ private Properties query = new Properties();
 	}
 
 	
+
+	public List<Review> selectMyReviewProductList(Connection conn, int userNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<Review> r = new ArrayList<>();
+		String sql = query.getProperty("selectMyReviewListTest");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, userNo);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				r.add(new Review(rset.getInt("REVIEW_NO"),
+								rset.getDouble("POINT"),
+								rset.getString("REVIEW_TEXT"),
+								rset.getString("REVIEW_IMAGE"),
+								rset.getDate("REVIEW_REGISTER"),
+								rset.getInt("USER_NO"),
+								rset.getInt("ORDER_NO"),
+								rset.getString("STATUS"),
+								rset.getString("PRODUCT_NAME")));
+				System.out.println(r);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return r;
+	}
+
+	public List<Review> selectMyReviewProductListDesc(Connection conn, int userNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<Review> r = new ArrayList<>();
+		String sql = query.getProperty("selectMyReviewProductListDesc");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, userNo);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				r.add(new Review(rset.getInt("REVIEW_NO"),
+								rset.getDouble("POINT"),
+								rset.getString("REVIEW_TEXT"),
+								rset.getString("REVIEW_IMAGE"),
+								rset.getDate("REVIEW_REGISTER"),
+								rset.getInt("USER_NO"),
+								rset.getInt("ORDER_NO"),
+								rset.getString("STATUS"),
+								rset.getString("PRODUCT_NAME")));
+				System.out.println(r);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return r;
+	}
+
+	public List<Review> selectMyReviewProductListAsc(Connection conn, int userNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<Review> r = new ArrayList<>();
+		String sql = query.getProperty("selectMyReviewProductListAsc");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, userNo);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				r.add(new Review(rset.getInt("REVIEW_NO"),
+								rset.getDouble("POINT"),
+								rset.getString("REVIEW_TEXT"),
+								rset.getString("REVIEW_IMAGE"),
+								rset.getDate("REVIEW_REGISTER"),
+								rset.getInt("USER_NO"),
+								rset.getInt("ORDER_NO"),
+								rset.getString("STATUS"),
+								rset.getString("PRODUCT_NAME")));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return r;
+	}
+
+
+	
 }

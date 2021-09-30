@@ -35,12 +35,12 @@ public class MypageReviewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 매개변수로 로그인한 사용자 아이디 보내기
-		//List<Review> reviewList = new ReviewService().selectMyReviewList();
 		int userNo = ((Member)request.getSession().getAttribute("loginUser")).getUserNo();
-		Product product = new ProductService().selectMyProduct(userNo);
 		
-		request.setAttribute("product", product);
-		//System.out.println(product);
+		List<Review> review = new ReviewService().selectMyReviewProductList(userNo);
+		request.setAttribute("review", review);
+		System.out.println(review);
+		
 		request.getRequestDispatcher("/WEB-INF/views/review_management/review_management.jsp").forward(request, response);
 	}
 

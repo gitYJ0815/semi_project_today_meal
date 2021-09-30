@@ -14,6 +14,9 @@ public class Product {
 	private Date productDate;
 	private int categoryNo;
 	private String status;
+	private String reviewText;
+	private String reviewImage;
+	private Date reviewRegister;
 	private List<Review> reviewList;
 	
 	public Product() {}
@@ -21,6 +24,26 @@ public class Product {
 	
 	
 	
+	public Product(int productNo, String productName, String productImg, int productPrice, String productDetail,
+			Date productDate, int categoryNo, String status, String reviewText, String reviewImage,
+			Date reviewRegister) {
+		super();
+		this.productNo = productNo;
+		this.productName = productName;
+		this.productImg = productImg;
+		this.productPrice = productPrice;
+		this.productDetail = productDetail;
+		this.productDate = productDate;
+		this.categoryNo = categoryNo;
+		this.status = status;
+		this.reviewText = reviewText;
+		this.reviewImage = reviewImage;
+		this.reviewRegister = reviewRegister;
+	}
+
+
+
+
 	public Product(int productNo, String productName, String productImg, int productPrice, String productDetail,
 			Date productDate, int categoryNo, String status) {
 		super();
@@ -122,13 +145,62 @@ public class Product {
 	public void setReviewList(List<Review> reviewList) {
 		this.reviewList = reviewList;
 	}
+	
+	
+
+	public String getReviewText() {
+		return reviewText;
+	}
+
+
+
+
+	public void setReviewText(String reviewText) {
+		this.reviewText = reviewText;
+	}
+
+
+
+
+	public String getReviewImage() {
+		return reviewImage;
+	}
+
+
+
+
+	public void setReviewImage(String reviewImage) {
+		this.reviewImage = reviewImage;
+	}
+
+
+
+
+	public Date getReviewRegister() {
+		return reviewRegister;
+	}
+
+
+
+
+	public void setReviewRegister(Date reviewRegister) {
+		this.reviewRegister = reviewRegister;
+	}
+
+
+
 
 	@Override
 	public String toString() {
 		return "Product [productNo=" + productNo + ", productName=" + productName + ", productImg=" + productImg
 				+ ", productPrice=" + productPrice + ", productDetail=" + productDetail + ", productDate=" + productDate
-				+ ", categoryNo=" + categoryNo + ", status=" + status + ", reviewList=" + reviewList + "]";
+				+ ", categoryNo=" + categoryNo + ", status=" + status + ", reviewText=" + reviewText + ", reviewImage="
+				+ reviewImage + ", reviewRegister=" + reviewRegister + ", reviewList=" + reviewList + "]";
 	}
 
+
+
+
+	
 	
 }

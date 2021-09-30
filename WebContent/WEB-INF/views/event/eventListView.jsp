@@ -14,6 +14,10 @@
 * {
 	font-family: 'Noto Sans KR', sans-serif;
 	}
+.onmouseover {
+	background: #f3f5f7;
+	cursor: pointer;
+}
 </style>
 </head>
 <body>
@@ -58,5 +62,30 @@
                location.href='${contextPath}/event/detail?eno=' + eno; 
             }
          </script>
+         <script>
+		// 게시글 목록에 mouseover/mouseout 시 onmouseover 클래스 추가/제거 처리
+		const boardList = document.querySelector(".board_list");
+		
+		boardList.addEventListener('mouseover', function(){
+			console.log('mouseover');
+			console.log(event.target);
+			
+			if(event.target.classList.contains('board_ul')) //ul이라면
+				event.target.classList.add('onmouseover');	//클래스 추가
+			else if(event.target.parentNode.classList.contains('board_ul'))
+				event.target.parentNode.classList.add('onmouseover');
+		});
+		
+		boardList.addEventListener('mouseout', function(){
+			console.log('mouseout');
+			console.log(event.target);
+			
+			if(event.target.classList.contains('board_ul'))
+				event.target.classList.remove('onmouseover');
+			else if(event.target.parentNode.classList.contains('board_ul'))
+				event.target.parentNode.classList.remove('onmouseover');
+		});
+	
+	</script>
 </body>
 </html>

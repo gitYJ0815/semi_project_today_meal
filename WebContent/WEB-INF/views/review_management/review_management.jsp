@@ -17,6 +17,10 @@
     	* {
     	font-family: 'Noto Sans KR', sans-serif;
     	}
+    	.onmouseover {
+			background: #f3f5f7;
+			cursor: pointer;
+		}
         #container {
             width: 1100px;
             margin: 0 auto;
@@ -112,7 +116,7 @@
         .review_ul {
             display: inline-block;
         }
-
+        
         .title1,
         .insert_date1 {
             padding-top: 30px;
@@ -223,6 +227,10 @@
         	padding-left : 300px;
         	margin-top : 10px;
         }
+        
+        .recentList:hover {
+        	cursor : pointer;
+        }
     </style>
 </head>
 
@@ -250,9 +258,9 @@
                         <li class="review_content">리뷰내용</li>
                         <li class="insert_date">작성일</li>
                     </ul>
-                    <c:forEach var="r" items="${product.reviewList }">
-                    <div style="display:inline-block; width:776px;"><ul class="review_ul" onclick="openModal(this)" style="height: 80px; display: flex; justify-content: space-around;">
-	                        <li class="title title1" style="text-align:center;">${product.productName}</li>
+                    <c:forEach var="r" items="${review }">
+                    <div class="ReviewDiv" style="display:inline-block; width:776px;"><ul class="review_ul" onclick="openModal(this)" style="height: 80px; display: flex; justify-content: space-around;">
+	                        <li class="title title1" style="text-align:center;">${r.productName}</li>
 	                        <li class="review_content" style="margin:0px; padding: 0px; padding-top:27px; text-align:center; word-break:break-all;">
 	                            <span>${r.reviewText}</span>
 	                        </li>
@@ -460,10 +468,34 @@
     $(function(){
 		 $(".recentList").click(function(){
 				location.href="${contextPath}/mypage/review";
-				 $(this).addClass('selected');
 			});
 		});
     </script>
+    <script>
+		// 게시글 목록에 mouseover/mouseout 시 onmouseover 클래스 추가/제거 처리
+		const review_list = document.querySelector(".review_list");
+		
+		review_list.addEventListener('mouseover', function(){
+			console.log('mouseover');
+			console.log(event.target);
+			
+			if(event.target.classList.contains('review_ul')) //ul이라면
+				event.target.classList.add('onmouseover');	//클래스 추가
+			else if(event.target.parentNode.classList.contains('review_ul'))
+				event.target.parentNode.classList.add('onmouseover');
+		});
+		
+		review_list.addEventListener('mouseout', function(){
+			console.log('mouseout');
+			console.log(event.target);
+			
+			if(event.target.classList.contains('review_ul'))
+				event.target.classList.remove('onmouseover');
+			else if(event.target.parentNode.classList.contains('review_ul'))
+				event.target.parentNode.classList.remove('onmouseover');
+		});
+	
+	</script>
 </body>
 
 </html>

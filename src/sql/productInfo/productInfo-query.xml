@@ -97,4 +97,11 @@
 	SELECT * FROM PRODUCT
 	WHERE PRODUCT_NO = ?
 </entry>
+<entry key="selectMyReveiwProduct">
+	SELECT
+		*
+	FROM PRODUCT 
+	JOIN REVIEW R USING (PRODUCT_NO)
+	WHERE R.USER_NO = ?
+</entry>
 </properties>

@@ -1,6 +1,9 @@
 package review.model.vo;
 
 import java.util.Date;
+import java.util.List;
+
+import productInfo.model.vo.Product;
 
 public class Review {
 	private int reviewNo;
@@ -12,8 +15,9 @@ public class Review {
 	private int productNo;
 	private int orderNo;
 	private String status;
-	private String productName;
 	private String userName;
+	private String productName;
+	private List<Product> productList;
 	
 	/*
 	 * review_no	number		NOT NULL,
@@ -28,7 +32,27 @@ public class Review {
 	 * */
 	
 	public Review() {}
-	
+
+
+
+	public Review(int reviewNo, double point, String reviewText, String reviewImage, Date reviewRegister, int userNo,
+			int productNo, int orderNo, String status, String userName, List<Product> productList) {
+		super();
+		this.reviewNo = reviewNo;
+		this.point = point;
+		this.reviewText = reviewText;
+		this.reviewImage = reviewImage;
+		this.reviewRegister = reviewRegister;
+		this.userNo = userNo;
+		this.productNo = productNo;
+		this.orderNo = orderNo;
+		this.status = status;
+		this.userName = userName;
+		this.productList = productList;
+	}
+
+
+
 	public Review(int reviewNo, double point, String reviewText, String reviewImage, Date reviewRegister, int userNo,
 			int productNo, int orderNo, String status, String userName) {
 		super();
@@ -96,6 +120,34 @@ public class Review {
 //		this.reviewText = reviewText;
 //		this.reviewImage = reviewImage;
 //	}
+
+
+
+	public Review(int reviewNo, double point, String reviewText, String reviewImage, Date reviewRegister, int userNo,
+			int orderNo, String status, String productName) {
+		super();
+		this.reviewNo = reviewNo;
+		this.point = point;
+		this.reviewText = reviewText;
+		this.reviewImage = reviewImage;
+		this.reviewRegister = reviewRegister;
+		this.userNo = userNo;
+		this.orderNo = orderNo;
+		this.status = status;
+		this.productName = productName;
+	}
+
+
+
+	public String getProductName() {
+		return productName;
+	}
+
+
+
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
 
 
 
@@ -215,13 +267,26 @@ public class Review {
 
 
 
+	public List<Product> getProductList() {
+		return productList;
+	}
+
+
+
+	public void setProductList(List<Product> productList) {
+		this.productList = productList;
+	}
+
+
+
 	@Override
 	public String toString() {
 		return "Review [reviewNo=" + reviewNo + ", point=" + point + ", reviewText=" + reviewText + ", reviewImage="
 				+ reviewImage + ", reviewRegister=" + reviewRegister + ", userNo=" + userNo + ", productNo=" + productNo
-				+ ", orderNo=" + orderNo + ", status=" + status + ", productName=" + productName + ", userName="
-				+ userName + "]";
+				+ ", orderNo=" + orderNo + ", status=" + status + ", userName=" + userName + ", productName="
+				+ productName + ", productList=" + productList + "]";
 	}
+
 
 
 
