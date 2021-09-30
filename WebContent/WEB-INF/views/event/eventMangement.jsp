@@ -50,10 +50,13 @@
 					
                     </c:forEach>
                 </div>
+                <div class="paging">
+					<jsp:include page="/WEB-INF/views/common/paging/paging.jsp">	
+						<jsp:param name="url" value="${ contextPath }/admin/eventlist?"/>
+					</jsp:include>
 			</div>
-			<div class="paging">
-					<jsp:include page="/WEB-INF/views/common/paging/paging.jsp"/>	
-			    </div>
+			</div>
+			
 		</div>
 	</div>
 	
