@@ -44,9 +44,9 @@
                  <c:set var="cnt_complete" value="0"/>
                  
                  <c:forEach var="receipt" items="${ receiptList }">
-                     <c:if test="${receipt.orderStateNo == 1 }"><c:set var="cnt_payment" value="${cnt_payment+1 }"></c:set></c:if>
-                     <c:if test="${receipt.orderStateNo == 2 }"><c:set var="cnt_shipping" value="${cnt_shipping+1 }"></c:set></c:if>
-                     <c:if test="${receipt.orderStateNo == 3 }"><c:set var="cnt_complete" value="${cnt_complete+1 }"></c:set></c:if>
+                     <c:if test="${receipt.orderStateNo == 1 || receipt.orderStateNo == 2 }"><c:set var="cnt_payment" value="${cnt_payment+1 }"></c:set></c:if>
+                     <c:if test="${receipt.orderStateNo == 3 }"><c:set var="cnt_shipping" value="${cnt_shipping+1 }"></c:set></c:if>
+                     <c:if test="${receipt.orderStateNo == 4 }"><c:set var="cnt_complete" value="${cnt_complete+1 }"></c:set></c:if>
                  </c:forEach>
                  
                  <c:if test="${cnt_payment != 0 }"><span id="mpCount1"><c:out value="${ cnt_payment }"/></span></c:if>
@@ -103,32 +103,35 @@
                                         	<input type="hidden" name="pNo" value="${ receipt.productList[0].pNo }">
                                         	<button class="reviewBtn" type="button" onclick="reviewInsert(${ receipt.orderNo },${ receipt.productList[0].pNo });">리뷰작성</button>
                                         </form>
-                                        <!-- <button class="reviewBtn" type="button" onclick="reviewInsert();">리뷰작성</button> -->
                                         </div>
                                     </td>
                                     
                                     <td rowspan="${ receipt.orderCount }"><fmt:formatNumber value="${ receipt.orderSum }" groupingUsed="true"/>원</td>
                                     <td rowspan="${ receipt.orderCount }">
-                                        <c:if test="${ receipt.orderStateNo == 1 }">
-                                            	결제완료
+                                        <c:if test="${ receipt.orderStateNo == 1 || receipt.orderStateNo == 2}">
+                                        	
+                                         	주문완료
                                             <c:if test="${ receipt.productNo == 1 }">
                                                 <button class="tableBtn" type="button" onclick="productStatusModify(${ receipt.orderNo });">취소하기</button>
-                                            </c:if>
-                                            <c:if test="${ receipt.productNo == 2 }"><span style="color:red;">[취소처리중]</span></c:if>
-                                        </c:if>
-                                        <c:if test="${ receipt.orderStateNo == 2 }">
-                                            	배송중
-                                            <c:if test="${ receipt.productNo == 1 }">
-                                                <button class="tableBtn" type="button" onclick="productStatusModify(${ receipt.orderNo });">반품하기</button>
-                                            </c:if>
-                                            <c:if test="${ receipt.productNo == 2 }"><span style="color:red;">[취소처리중]</span></c:if>
+                                           </c:if>
+                                           <c:if test="${ receipt.productNo == 2 }"><span style="color:red;">[취소처리중]</span></c:if>
                                         </c:if>
                                         <c:if test="${ receipt.orderStateNo == 3 }">
-                                            	배송완료
+                                         	배송중
+                                            <c:if test="${ receipt.productNo == 1 }">
+                                                <button class="tableBtn" type="button" onclick="productStatusModify(${ receipt.orderNo });">반품하기</button>
+                                           </c:if>
+                                           <c:if test="${ receipt.productNo == 2 }"><span style="color:red;">[취소처리중]</span></c:if>
+                                        </c:if>
+                                        <c:if test="${ receipt.orderStateNo == 4 }">
+                                         	배송완료
                                             <c:if test="${ receipt.productNo == 1 }">
                                                 <button class="tableBtn" type="button" onclick="productStatusModify(${ receipt.orderNo });">반품하기</button>
                                             </c:if>
                                             <c:if test="${ receipt.productNo == 2 }"><span style="color:red;">[취소처리중]</span></c:if>
+                                        </c:if>
+                                        <c:if test="${ receipt.orderStateNo == 5 }">
+                                        	취소/환불
                                         </c:if>
                                     </td>
                                 </tr>
@@ -160,7 +163,6 @@
                                         	<input type="hidden" name="productName" value="${ product.pNo }">
                                         	<button class="reviewBtn" type="button" onclick="reviewInsert(${ receipt.orderNo },${ product.pNo });">리뷰작성</button>
                                         </form>
-                                         <!-- <button class="reviewBtn" type="button" onclick="reviewInsert();">리뷰작성</button> -->
                                          </div>
                                      </td>
                                      
