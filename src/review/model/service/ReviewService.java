@@ -94,4 +94,34 @@ public class ReviewService {
 		return r;
 	}
 
+	public List<Review> selectMyReviewProductList(int userNo) {
+		Connection conn = getConnection();
+		
+		List<Review> r = new ReviewDao().selectMyReviewProductList(conn,userNo);
+		
+		close(conn);
+		
+		return r;
+	}
+	
+	public List<Review> selectMyReviewProductListDesc(int userNo) {
+		Connection conn = getConnection();
+		
+		List<Review> r = new ReviewDao().selectMyReviewProductListDesc(conn,userNo);
+		
+		close(conn);
+		
+		return r;
+	}
+
+	public List<Review> selectMyReviewProductListAsc(int userNo) {
+		Connection conn = getConnection();
+		
+		List<Review> r = new ReviewDao().selectMyReviewProductListAsc(conn,userNo);
+		
+		close(conn);
+		
+		return r;
+	}
+
 }

@@ -64,7 +64,7 @@
                 reader.readAsDataURL(this.files[0]);
                 reader.onload = function(){
                     console.log(reader.result);
-                    document.getElementById('event_img').innerHTML = "<img src='" + reader.result + "'>";
+                    document.getElementById('event_img').innerHTML = "<img src='" + reader.result + "' style='width:900px; height:1000px'>";
                 }
             }
         });

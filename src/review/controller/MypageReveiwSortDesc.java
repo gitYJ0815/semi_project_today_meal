@@ -1,6 +1,8 @@
 package review.controller;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import login.model.vo.Member;
 import productInfo.model.service.ProductService;
 import productInfo.model.vo.Product;
+import review.model.service.ReviewService;
+import review.model.vo.Review;
 
 /**
  * Servlet implementation class MypageReveiwSortDesc
@@ -31,13 +35,13 @@ public class MypageReveiwSortDesc extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 매개변수로 로그인한 사용자 아이디 보내기
-			//List<Review> reviewList = new ReviewService().selectMyReviewList();
-			int userNo = ((Member)request.getSession().getAttribute("loginUser")).getUserNo();
-			Product product = new ProductService().selectMyProductDesc(userNo);
-			
-			request.setAttribute("product", product);
-			System.out.println(product);
-			request.getRequestDispatcher("/WEB-INF/views/review_management/review_management.jsp").forward(request, response);
+		int userNo = ((Member)request.getSession().getAttribute("loginUser")).getUserNo();
+		
+		List<Review> review = new ReviewService().selectMyReviewProductListDesc(userNo);
+		request.setAttribute("review", review);
+		System.out.println(review);
+		
+		request.getRequestDispatcher("/WEB-INF/views/review_management/review_management.jsp").forward(request, response);
 	}
 
 	/**
