@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원가입</title>
+<title>회원가입</title>   
 <style>
 .outer {
 	width: 70%;
@@ -63,13 +63,47 @@ border-radius: 10px;
           <p id="p1">회원가입</p>
           
           <input id="join" type="button" value="일반 회원가입" onclick="location.href='<%= request.getContextPath() %>/join';">
-          <a href="<%= request.getContextPath() %>/kakaojoin">
-                  <img id="startkakao" src="<%= request.getContextPath() %>/resources/images/login/startkakao.png">
-          </a>
+          <ul>
+           <li onclick="kakaoLogin();">
+              <a href="javascript:void(0)">
+              <img id="startkakao" src="<%= request.getContextPath() %>/resources/images/login/startkakao.png">
+              </a>
+	        </li>
+	      </ul>
+                  
     </form>
     </div>
     </div>
-    <jsp:include page="/WEB-INF/views/common/footer.jsp" />
+    <jsp:include page="/WEB-INF/views/common/footer.jsp" />  
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script>
+Kakao.init('1e8f882bb483b14f8ef45b0c4a808623'); //발급받은 키 중 javascript키를 사용해준다.
+console.log(Kakao.isInitialized()); // sdk초기화여부판단
+//카카오로그인
+function kakaoLogin() {
+    Kakao.Auth.login({
+      success: function (response) {
+        Kakao.API.request({
+          url: '/v2/user/me',
+          success: function (response) {
+              var userName = response.properties.nickname;
+        	  
+        	  console.log("userName", userName);
+        	  location.href="<%= request.getContextPath() %>";
+          },
+          fail: function (error) {
+            console.log(error)
+          },
+        })
+        var apiToken = response.access_token;
+        console.log("apiToken", apiToken);
+      },
+      fail: function (error) {
+        console.log(error)
+      },
+    })
+  }
 
+</script>
 </body>
 </html>

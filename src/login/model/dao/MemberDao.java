@@ -96,7 +96,7 @@ public class MemberDao {
 		}
 		return id;
 	}
-	//아이디 찾기
+	//비밀번호 찾기
 	public String findPwd(String id, String phone, String Qno, String Qanswer) {
 		Connection conn = getConnection();
 		String pwd = null;
@@ -181,6 +181,4 @@ public class MemberDao {
 		}
 		return result;
 	}
-		
-
 }

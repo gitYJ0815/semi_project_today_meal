@@ -258,16 +258,13 @@ height: 30px;
         }
     
     $("#idCheck").click(function(){
-    	// input userId 변수
     	var userId = $("[name=userId]");
-    	// 아이디 중복 시 false, 아이디 사용 가능 시 true
     	var isUsable = false;
         
     	if(!userId || userId.val().length < 6){
     		alert('아이디는 영문 소문자, 숫자 포함하여 6~12자 입력하세요.');
     		userId.focus();
     	} else {
-    		// 4자리 이상의 userId 값을 입력했을 경우 중복 확인을 위해 ajax 통신 요청
     		$.ajax({
     			url : "${ contextPath }/idCheck",
     			type : "post",
@@ -279,18 +276,14 @@ height: 30px;
     					userId.focus();
     				} else {
     					if(confirm('사용 가능한 아이디 입니다. 사용하시겠습니까?')){
-    						// 더 이상 id 입력 공간을 수정할 수 없도록 readonly 처리
     						userId.attr('readonly', true);
-    						isUsable = true;   // 사용가능한 아이디라는 flag 값
+    						isUsable = true;   
     					} else {
-    						// confirm 창에서 취소를 누를 경우 (처음, 또는 반복해서) 다시 id 수정 가능하도록
     						userId.attr('readonly', false);
     						userId.focus();
-    						isUsable = false;    // 사용 불가능한 아이디라는 flag 값
+    						isUsable = false;    
     					}
     				}
-    				// 아이디 중복 체크 후 중복이 아니며 사용하겠다고 선택한 경우에만
-    				// joinBtn disabled 제거
     				if(isUsable){
     					$("#joinBtn").removeAttr("disabled");
     				} else {
