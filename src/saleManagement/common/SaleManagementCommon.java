@@ -12,6 +12,7 @@ public class SaleManagementCommon {
 		ORDER_STATUS_MAP.put("pickup", 2);
 		ORDER_STATUS_MAP.put("transit", 3);
 		ORDER_STATUS_MAP.put("delivered", 4);
-		ORDER_STATUS_MAP.put("cancelled", 5);
+		ORDER_STATUS_MAP.put("requestCancel", 5);
+		ORDER_STATUS_MAP.put("cancelled", 6);
 	}
 }

@@ -12,6 +12,7 @@
 		 WHERE SALE_DATE BETWEEN TO_DATE(?) AND TO_DATE(?)+0.9999
 		   AND USER_ID = ?
 		   AND ORDER_NO = ?
+		   AND RECEIPT.PRODUCT_NO = 2
 		   AND ORDER_STATE_NO = ?
 		 ORDER BY SALE_DATE
 	</entry>
@@ -41,6 +42,7 @@
 		                 WHERE SALE_DATE BETWEEN TO_DATE(?) AND TO_DATE(?)+0.9999
 		                   AND USER_ID = ?
 		   				   AND ORDER_NO = ?
+		   				   AND RECEIPT.PRODUCT_NO = 2
 		   				   AND ORDER_STATE_NO = ?
 		                 ORDER BY ORDER_NO DESC) S)
 		 WHERE RUNM BETWEEN ? AND ?

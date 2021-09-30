@@ -63,8 +63,12 @@ public class SaleManagementDao {
 				sql = sql.replace("AND ORDER_NO = ?", "");
 			}
 			
-			if(orderStatus == 0) {
+			if(orderStatus == 0 || orderStatus == 5) {
 				sql = sql.replace("AND ORDER_STATE_NO = ?", "");
+			}
+			
+			if(orderStatus != 5) {
+				sql = sql.replace("AND RECEIPT.PRODUCT_NO = 2", "");
 			}
 			
 			pstmt = conn.prepareStatement(sql);
@@ -80,7 +84,7 @@ public class SaleManagementDao {
 				pstmt.setInt(parameterIndex++, Integer.parseInt(orderNumber));
 			}
 			
-			if(orderStatus != 0) {
+			if(orderStatus != 0 && orderStatus != 5) {
 				pstmt.setInt(parameterIndex++, orderStatus);
 			}
 			
@@ -118,8 +122,12 @@ public class SaleManagementDao {
 				sql = sql.replace("AND ORDER_NO = ?", "");
 			}
 			
-			if(orderStatus == 0) {
+			if(orderStatus == 0 || orderStatus == 5) {
 				sql = sql.replace("AND ORDER_STATE_NO = ?", "");
+			}
+			
+			if(orderStatus != 5) {
+				sql = sql.replace("AND RECEIPT.PRODUCT_NO = 2", "");
 			}
 
 			pstmt = conn.prepareStatement(sql);
@@ -135,7 +143,8 @@ public class SaleManagementDao {
 				pstmt.setInt(parameterIndex++, Integer.parseInt(orderNumber));
 			}
 			
-			if(orderStatus != 0) {
+			
+			if(orderStatus != 0 && orderStatus != 5) {
 				pstmt.setInt(parameterIndex++, orderStatus);
 			}
 			
@@ -154,7 +163,11 @@ public class SaleManagementDao {
 											 , rset.getInt("ORDER_STATE_NO")
 											 , rset.getString("ORDER_STATE_NAME")
 											);
-				
+				if(orderStatus == 5) {
+					receipt.setOrderState("환불 요청");
+					receipt.setOrderStateNo(5);
+				}
+
 				receiptList.add(receipt);
 			}
 			
