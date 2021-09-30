@@ -48,14 +48,14 @@ public class SaleListServlet extends HttpServlet {
 		Map<String, Object> startMap = new HashMap<>();
 		Map<String, Object> endMap = new HashMap<>();
 		
-		if(request.getParameter("start_date") != null) {
+		if(request.getParameter("start_date") != null && request.getParameter("start_date").length() > 0) {
 			String startDateString = request.getParameter("start_date");
 			startDate.set(Calendar.YEAR, Integer.parseInt(startDateString.substring(0, 4)));
 			startDate.set(Calendar.MONTH, Integer.parseInt(startDateString.substring(4, 6))-1);
 			startDate.set(Calendar.DATE, Integer.parseInt(startDateString.substring(6, 8)));
 		}
 		
-		if(request.getParameter("end_date") != null) {
+		if(request.getParameter("end_date") != null && request.getParameter("end_date").length() > 0) {
 			String endDateString = request.getParameter("end_date");
 			endDate.set(Calendar.YEAR, Integer.parseInt(endDateString.substring(0, 4)));
 			endDate.set(Calendar.MONTH, Integer.parseInt(endDateString.substring(4, 6))-1);
