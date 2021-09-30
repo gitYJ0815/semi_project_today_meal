@@ -40,7 +40,7 @@
 					</c:when>
 					<c:otherwise>
 					<li class="card">
-						<a href="${ contextPath }/product/info?pno=${ p.pno }"><img src="${ contextPath }${ p.representationImage }" alt="${ p.pname } 대표 이미지"></a>
+						<a href="${ contextPath }/product/info?pno=${ p.pno }"><img src="${ contextPath }/resources/uploadFiles/product/${ p.representationImage }" alt="${ p.pname } 대표 이미지"></a>
 						<p>${ p.pname }</p>
 						<p><fmt:formatNumber value="${ p.price }" type="number" groupingUsed="true"/></p>
 					</li>

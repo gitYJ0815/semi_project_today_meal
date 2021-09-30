@@ -103,7 +103,7 @@
 									<c:set var="imagePath" value="${ r.reviewImagePath }"/>
 								</c:otherwise>
 							</c:choose>
-							<img src="${ contextPath }${ imagePath }" alt="리뷰 대표 이미지">
+							<img src="${ contextPath }/resources/uploadFiles/review/${ imagePath }" alt="리뷰 대표 이미지">
 						</div>
 						<div class="info_area">
 							<div class="star_area">
