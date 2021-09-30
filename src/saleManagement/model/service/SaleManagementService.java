@@ -1,7 +1,6 @@
 package saleManagement.model.service;
 
-import static common.JDBCTemplate.close;
-import static common.JDBCTemplate.getConnection;
+import static common.JDBCTemplate.*;
 
 import java.sql.Connection;
 import java.util.Date;
@@ -39,6 +38,22 @@ public class SaleManagementService {
 		close(conn);
 		
 		return receipt;
+	}
+
+	public int changeStatus(String[] receiptNos, int chageStatus) {
+		Connection conn = getConnection();
+		
+		int result = smd.changeStatus(conn, receiptNos, chageStatus);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
 	}
 
 

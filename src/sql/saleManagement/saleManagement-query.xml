@@ -21,6 +21,7 @@
 		     , USER_ID
 		     , PRODUCT_NAME
 		     , ORDER_SUM
+		     , ORDER_STATE_NO
 		     , ORDER_STATE_NAME
 		  FROM (SELECT ROWNUM RUNM, S.*
 		          FROM (SELECT
@@ -29,6 +30,7 @@
 		                     , USER_ID
 		                     , PRODUCT_NAME
 		                     , ORDER_SUM
+		                     , ORDER_STATE_NO
 		                     , ORDER_STATE_NAME
 		                  FROM RECEIPT
 		                  JOIN ORDER_STATE USING(ORDER_STATE_NO)
@@ -72,5 +74,10 @@
 		  JOIN ORDER_STATE USING(ORDER_STATE_NO)
 		  JOIN DELIVERY USING(ORDER_NO)
 		 WHERE ORDER_NO = ?
+	</entry>
+	<entry key="changeStatus">
+		UPDATE RECEIPT
+		   SET ORDER_STATE_NO = ?
+		 WHERE ORDER_NO IN (RECEIPT_NO_ARRAY)
 	</entry>
 </properties>

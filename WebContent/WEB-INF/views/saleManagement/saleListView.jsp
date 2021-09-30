@@ -117,7 +117,7 @@
 							<c:otherwise>
 							<c:forEach var="receipt" items="${ receiptList }">
 							<tr>
-								<td><input type="checkbox" name="select_row" data-receipt-no="${ receipt.ono }"></td>
+								<td><input type="checkbox" name="select_row" data-receipt-no="${ receipt.ono }" data-order-state="${ receipt.orderStateNo }"></td>
 								<td><fmt:formatDate value="${ receipt.saleDate }" pattern="yyyy-MM-dd"/></td>
 								<td>${ receipt.ono }</td>
 								<td>${ receipt.userId }</td>
@@ -161,19 +161,19 @@
 						<div class="change_area">
 							<p class="prev_status">주문 완료</p>
 							<span></span>
-							<select name="change_status">
-								<option value="default" selected>주문 상태</option>
-								<option value="processing">주문 완료</option>
-								<option value="pickup">배송 대기</option>
-								<option value="transit">배송중</option>
-								<option value="delivered">배송 완료</option>
-								<option value="cancelled">취소/환불</option>
+							<select name="change_status" class="change_status">
+								<option value="processing" data-order-state="1">주문 완료</option>
+								<option value="pickup" data-order-state="2">배송 대기</option>
+								<option value="transit" data-order-state="3">배송중</option>
+								<option value="delivered" data-order-state="4">배송 완료</option>
+								<option value="cancelled" data-order-state="5">취소/환불</option>
 							</select>
 						</div>
 						<div class="button_area">
 							<button type="button" class="green_button">취소</button>
 							<button type="button" class="confirm_button">확인</button>
 						</div>
+						<form name="deleteForm" method="post"></form>
 					</div>
 				</div>
 				<button type="button" class="close_button"></button>

@@ -2,10 +2,14 @@
 	let body = document.querySelector("body"),
 		container = document.querySelector("#container"),
 		dimmed = body.querySelector(".dimmed"),
-		modal = dimmed.querySelector("#modal"),
-		closeButton = modal.querySelector(".close_button");
+		modal = dimmed.querySelector("#modal");
 	
-	let payMentInner = modal.querySelector(".payment_inner").querySelector("div");
+	let payMentInner = modal.querySelector(".payment_inner").querySelector("div"),
+		changeInner = modal.querySelector(".change_inner"),
+		prevStatus = changeInner.querySelector(".prev_status"),
+		changeStatusSelect = changeInner.querySelector(".change_status"),
+		changeStatusList = changeStatusSelect.querySelectorAll("option"),
+		changeInnerForm = changeInner.querySelector("form");
 
 	let searchArea = container.querySelector(".search_area"),
 		startYear = searchArea.querySelector("#start_year"),
@@ -31,6 +35,8 @@
 
 	let checkCount = 0;
 	let today = new Date();
+	let selectItem = [];
+	let orderState = 0;
 
 	function init() {
 		searchButton.addEventListener("click", searchButtonClickEventHandler);
@@ -38,7 +44,7 @@
 		changeStatusButton.addEventListener("click", changeStatusButtonClickEventHandler);
 		resultTable.addEventListener("click", resultTableClickEventHandler);
 		searchArea.addEventListener("change", searchAreaChangeEventHandler);
-		closeButton.addEventListener("click", closeModal);
+		modal.addEventListener("click", modalClickEventListener);
 	}
 
 	function searchButtonClickEventHandler() {
@@ -77,12 +83,34 @@
 	}
 
 	function selectAll() {
-		selectAllInput.classList.add("active");
-		changeStatusButton.removeAttribute("disabled");
-		checkCount = resultCount;
+		let isSameState = true;
+		
+		if(selectItem.length == 0) {
+			orderState = checkBoxes[0].getAttribute("data-order-state");
+		}
 
 		for(let checkBox of checkBoxes) {
-			checkBox.classList.add("active");
+			if(orderState != checkBox.getAttribute("data-order-state")) {
+				isSameState = false;
+				break;
+			}
+		}
+
+		if(isSameState) {
+			selectAllInput.classList.add("active");
+			changeStatusButton.removeAttribute("disabled");
+			checkCount = resultCount;
+
+			for(let checkBox of checkBoxes) {
+				checkBox.classList.add("active");
+				
+				let receiptNo = checkBox.getAttribute("data-receipt-no");
+				if(selectItem.indexOf(receiptNo) < 0) {
+					selectItem.push(receiptNo);
+				}
+			}
+		} else {
+			alert("전체 선택을 하기 위해서는 주문이 동일한 주문 상태여야 합니다.");
 		}
 	}
 
@@ -90,13 +118,35 @@
 		selectAllInput.classList.remove("active");
 		changeStatusButton.setAttribute("disabled", true);
 		checkCount = 0;
+		orderState = 0;
 
 		for(let checkBox of checkBoxes) {
 			checkBox.classList.remove("active");
 		}
+		selectItem.length = 0;
 	}
 
 	function changeStatusButtonClickEventHandler() {
+		changeInnerForm.innerHTML = "";
+
+		for(let select of selectItem) {
+			changeInnerForm.insertAdjacentHTML("beforeend", "<input type='hidden' name='rno' value='" + select + "'>");
+		}
+
+		let status = false;
+		for(let changeStatus of changeStatusList) {
+			if(status) {
+				changeStatus.removeAttribute("disabled");
+			} else {
+				changeStatus.setAttribute("disabled", true);
+			}
+			if(changeStatus.getAttribute("data-order-state") == orderState) {
+				prevStatus.innerText = changeStatus.textContent;
+				changeStatus.nextElementSibling.setAttribute("selected", true);
+				status = true;
+			}
+		}
+
 		openModal();
 		modal.classList.add("change");
 	}
@@ -161,8 +211,6 @@
 
 		openModal();
 		modal.classList.add("payment");
-
-		modal.querySelector(".check_button").addEventListener("click", closeModal);
 	}
 	
 	function numberFormat(number) {
@@ -282,11 +330,23 @@
 	}
 
 	function selectRow(input) {
-		input.classList.add("active");
-		changeStatusButton.removeAttribute("disabled");
+		let isSameState = true;
 
-		if(++checkCount == resultCount) {
-			selectAllInput.classList.add("active");
+		if(selectItem.length != 0 && orderState != input.getAttribute("data-order-state")) {
+			isSameState = false;
+		}
+		
+		if(isSameState) {
+			input.classList.add("active");
+			changeStatusButton.removeAttribute("disabled");
+			selectItem.push(input.getAttribute("data-receipt-no"));
+			orderState = input.getAttribute("data-order-state");
+
+			if(++checkCount == resultCount) {
+				selectAllInput.classList.add("active");
+			}
+		} else {
+			alert("선택하신 주문의 상태가 기존에 선택된 주문 상태와 동일하지 않아 선택하실 수 없습니다.");
 		}
 	}
 
@@ -296,9 +356,12 @@
 		if(--checkCount != resultCount) {
 			selectAllInput.classList.remove("active");
 		}
+		
+		selectItem.splice(selectItem.indexOf(input.getAttribute("data-receipt-no")), 1);
 
 		if(checkCount == 0) {
 			changeStatusButton.setAttribute("disabled", true);
+			orderState = 0;
 		}
 	}
 
@@ -377,6 +440,17 @@
 				monthTarget.querySelector("option[value='" + month + "']").setAttribute("selected", true);
 				initDaySelect(Number(year), Number(month), dayTarget);
 			}
+		}
+	}
+
+	function modalClickEventListener(e) {
+		if(e.target.tagName == "BUTTON") {
+			if(modal.classList.contains("change") && e.target.classList.contains("confirm_button")) {
+				changeInnerForm.insertAdjacentHTML("beforeend", "<input type='hidden' name='chageStatus' value='" + changeStatusSelect.options[changeStatusSelect.selectedIndex].getAttribute("data-order-state") + "'>");
+				changeInnerForm.action = "/today_meal/sale/changeStatus" + window.location.href.substring(window.location.href.indexOf("?"));
+				changeInnerForm.submit();
+			}
+			closeModal();
 		}
 	}
 

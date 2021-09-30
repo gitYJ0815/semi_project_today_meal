@@ -10,6 +10,7 @@ public class Receipt {
 	private int orderSum;
 	private String userId;
 	private Product product;
+	private int orderStateNo;
 	private String orderState;
 	private Delivery delivery;
 	private Payment payment;
@@ -17,7 +18,7 @@ public class Receipt {
 	public Receipt() {}
 
 	public Receipt(int ono, Date saleDate, int coin, Date deliveryDate, int orderSum, String userId, Product product,
-			String orderState, Delivery delivery, Payment payment) {
+			int orderStateNo, String orderState, Delivery delivery, Payment payment) {
 		super();
 		this.ono = ono;
 		this.saleDate = saleDate;
@@ -26,18 +27,20 @@ public class Receipt {
 		this.orderSum = orderSum;
 		this.userId = userId;
 		this.product = product;
+		this.orderStateNo = orderStateNo;
 		this.orderState = orderState;
 		this.delivery = delivery;
 		this.payment = payment;
 	}
-	
-	public Receipt(int ono, Date saleDate, int orderSum, String userId, Product product, String orderState) {
+
+	public Receipt(int ono, Date saleDate, int orderSum, String userId, Product product, int orderStateNo, String orderState) {
 		super();
 		this.ono = ono;
 		this.saleDate = saleDate;
 		this.orderSum = orderSum;
 		this.userId = userId;
 		this.product = product;
+		this.orderStateNo = orderStateNo;
 		this.orderState = orderState;
 	}
 
@@ -111,6 +114,14 @@ public class Receipt {
 		this.product = product;
 	}
 
+	public int getOrderStateNo() {
+		return orderStateNo;
+	}
+
+	public void setOrderStateNo(int orderStateNo) {
+		this.orderStateNo = orderStateNo;
+	}
+
 	public String getOrderState() {
 		return orderState;
 	}
@@ -138,9 +149,8 @@ public class Receipt {
 	@Override
 	public String toString() {
 		return "Receipt [ono=" + ono + ", saleDate=" + saleDate + ", coin=" + coin + ", deliveryDate=" + deliveryDate
-				+ ", orderSum=" + orderSum + ", userId=" + userId + ", product=" + product + ", orderState="
-				+ orderState + ", delivery=" + delivery + ", payment=" + payment + "]";
+				+ ", orderSum=" + orderSum + ", userId=" + userId + ", product=" + product + ", orderStateNo="
+				+ orderStateNo + ", orderState=" + orderState + ", delivery=" + delivery + ", payment=" + payment + "]";
 	}
-	
-	
+
 }

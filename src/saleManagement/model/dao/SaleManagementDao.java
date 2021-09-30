@@ -33,6 +33,19 @@ public class SaleManagementDao {
 		}
 	}
 	
+	public String getReceiptNoArrayString(String[] receiptNo) {
+		StringBuilder sb = new StringBuilder();
+		
+		for(int i=0; i<receiptNo.length; i++) {
+			if(i != 0) {
+				sb.append(",");
+			}
+			sb.append(Integer.parseInt(receiptNo[i]));
+		}
+		
+		return sb.toString();
+	}
+
 	public int getListCount(Connection conn, Date startDate, Date endDate, String userId, String orderNumber) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -122,6 +135,7 @@ public class SaleManagementDao {
 											 , rset.getInt("ORDER_SUM")
 											 , rset.getString("USER_ID")
 											 , product
+											 , rset.getInt("ORDER_STATE_NO")
 											 , rset.getString("ORDER_STATE_NAME")
 											);
 				
@@ -200,6 +214,27 @@ public class SaleManagementDao {
 		}
 		
 		return receipt;
+	}
+
+	public int changeStatus(Connection conn, String[] receiptNos, int changeStatus) {
+		PreparedStatement pstmt = null;
+		String sql = query.getProperty("changeStatus");
+		int result = 0;
+		
+		try {
+			sql = sql.replace("RECEIPT_NO_ARRAY", getReceiptNoArrayString(receiptNos));
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, changeStatus);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 
 }
