@@ -13,6 +13,7 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+	<jsp:include page="/WEB-INF/views/common/top.jsp" />
 	<div id="container">
 		<nav class="snb">
 			<jsp:include page="/WEB-INF/views/common/adminPage/subMenu.jsp"/>
