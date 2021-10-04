@@ -139,7 +139,7 @@
 						</div>
 						<div class="button_area">
 							<button type="button" class="detail_button" data-review-no="${ r.rno }">자세히 보기</button>
-							<button type="button" class="green_button buy_button" <c:if test="${ r.status == false }">disabled</c:if>>이 구성 구매하기</button>
+							<button type="button" class="green_button buy_button" data-review-no="${ r.rno }" <c:if test="${ r.status == false }">disabled</c:if>>이 구성 구매하기</button>
 						</div>
 					</li>
 					</c:forEach>
@@ -158,7 +158,7 @@
 
 					</div>
 					<div class="cart_inner">
-						<h3>장바구니에 담으시겠습니까?</h3>
+						<h3>구매하시겠습니까?</h3>
 						<div class="button_area">
 							<button type="button" class="green_button">확인</button>
 							<button type="button" class="confirm_button">바로구매</button>

@@ -184,7 +184,8 @@ public class MyLikeDao {
 										, rset.getInt("PRODUCT_BUY_QUANTITY")
 										);
 		
-					review = new Review(rset.getInt("ORDER_SUM")
+					review = new Review(rset.getInt("REVIEW_NO")
+									  , rset.getInt("ORDER_SUM")
 									  , product
 									  );
 					myLike = new MyLike(rset.getInt("LIKE_NO")

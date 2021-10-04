@@ -72,5 +72,47 @@ public class ProductSelectDao {
 		
 		return ob;
 	}
+	public OrderBasket selectReview(Connection conn, int rno) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		OrderBasket orderBasket = null;
+		String sql = query.getProperty("selectReview");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, rno);
+			pstmt.setInt(2, rno);
+			
+			rset = pstmt.executeQuery();
+			
+			int total = 0;
+			while(rset.next()) {
+				if(orderBasket == null) {
+					List<OptionBasket> optionBasketList = new ArrayList<>();
+					orderBasket = new OrderBasket(rset.getString("PRODUCT_NAME")
+												, rset.getString("PRODUCT_IMG")
+												, rset.getInt("PRODUCT_PRICE")
+												, optionBasketList);
+					total += rset.getInt("PRODUCT_PRICE");
+				}
+				
+				orderBasket.getOptionBasketList().add(new OptionBasket(rset.getString("OPTION_NAME")
+																	 , rset.getInt("OPTION_BUY_QUANTITY")
+																	 , rset.getInt("OPTION_PRICE")));
+				if(rset.getInt("OPTION_BUY_QUANTITY") > 0) {
+					total += rset.getInt("OPTION_PRICE") * rset.getInt("OPTION_BUY_QUANTITY");	
+				}
+			}
+			orderBasket.setTotal(total);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		return orderBasket;
+	}
 
 }

@@ -18,5 +18,15 @@ public class ProductSelectService {
 		
 		return ob;
 	}
+
+	public OrderBasket selectReview(int rno) {
+		Connection conn = getConnection();
+		
+		OrderBasket ob = pd.selectReview(conn, rno);
+		
+		close(conn);
+		
+		return ob;
+	}
 	
 }

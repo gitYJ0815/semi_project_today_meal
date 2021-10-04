@@ -58,8 +58,9 @@ public class Review {
 		this.likeCount = likeCount;
 	}
 	
-	public Review(int sum, Product product) {
+	public Review(int rno, int sum, Product product) {
 		super();
+		this.rno = rno;
 		this.sum = sum;
 		this.product = product;
 	}

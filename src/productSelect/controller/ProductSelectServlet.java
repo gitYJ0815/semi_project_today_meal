@@ -44,12 +44,18 @@ public class ProductSelectServlet extends HttpServlet {
 			return;
 		}
 		
-		int product_no = Integer.parseInt(request.getParameter("pno"));
+		OrderBasket ob = null;
 		
-		OrderBasket ob = new ProductSelectService().selectProduct(product_no);
-		
+		if(request.getParameter("pno") != null) {
+			int product_no = Integer.parseInt(request.getParameter("pno"));
+			ob = new ProductSelectService().selectProduct(product_no);
+		} else if(request.getParameter("rno") != null) {
+			int rno = Integer.parseInt(request.getParameter("rno"));
+			ob = new ProductSelectService().selectReview(rno);
+		}
+
+
 		request.setAttribute("orderBasket", ob);
-		
 		request.getRequestDispatcher("/WEB-INF/views/productSelect/productSelect.jsp").forward(request, response);
 	}
 
