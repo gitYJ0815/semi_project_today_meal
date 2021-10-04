@@ -182,7 +182,7 @@
 			if(e.target.classList.contains("detail_button")) {
 				detailButtonClickEventHandler(e.target);
 			} else if(e.target.classList.contains("buy_button")) {
-				buyButtonClickEventHandler();
+				buyButtonClickEventHandler(e.target);
 			} else if(e.target.classList.contains("more_button")) {
 				moreButtonClickEventHandler();
 			} else {
@@ -273,14 +273,15 @@
 		html +=			'<span>' + detailData.likeCount + '</span>';
 		html +=		'</div>';
 		html += '</div>';
-		html += '<button class="green_button buy_button"' + (detailData.status ? "" : "disabled") + '>이 구성 구매하기</button>';
+		html += '<button class="green_button buy_button" data-review-no="' + detailData.rno + '"'+ (detailData.status ? "" : "disabled") + '>이 구성 구매하기</button>';
 
 		detailReviewInner.insertAdjacentHTML("beforeend", html);
 	}
 
-	function buyButtonClickEventHandler() {
+	function buyButtonClickEventHandler(button) {
 		openModal();
 		modal.classList.add("cart");
+		modal.querySelector(".confirm_button").setAttribute("data-review-no", button.getAttribute("data-review-no"));
 	}
 	
 	function moreButtonClickEventHandler() {
@@ -381,7 +382,7 @@
 			cardHtml +=		'</div>';
 			cardHtml +=		'<div class="button_area">';
 			cardHtml +=			'<button type="button" class="detail_button" data-review-no="' + cardInformation.rno + '">자세히 보기</button>';
-			cardHtml +=			'<button type="button" class="green_button buy_button" ' + (cardInformation.status ? "" : "disabled") + '>이 구성 구매하기</button>';
+			cardHtml +=			'<button type="button" class="green_button buy_button" data-review-no="' + cardInformation.rno + '"' + (cardInformation.status ? "" : "disabled") + '>이 구성 구매하기</button>';
 			cardHtml +=		'</div>';
 			cardHtml +=	'</li>';
 			
@@ -449,7 +450,9 @@
 				closeModal();
 			} else if(e.target.closest(".detail_review_inner")) {
 				if(e.target.classList.contains("buy_button")) {
-					closeModal();
+					modal.classList.remove("detail_review");
+					modal.classList.add("cart");
+					modal.querySelector(".confirm_button").setAttribute("data-review-no", e.target.getAttribute("data-review-no"));
 				} else if(e.target.classList.contains("option")) {
 					optionButtonToggleEventHandler(e.target);
 				} else if(e.target.closest(".like_area")){
@@ -457,7 +460,7 @@
 				}
 			} else if(e.target.closest(".cart_inner")) {
 				if(e.target.classList.contains("confirm_button")) {
-
+					location.href='/today_meal/product/select?rno=' + e.target.getAttribute("data-review-no");
 				} else {
 					closeModal();
 				}

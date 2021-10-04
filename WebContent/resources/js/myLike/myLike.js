@@ -92,7 +92,7 @@
 			if(e.target.classList.contains("option")) {
 				optionButtonToggleEventHandler(e.target);
 			} else if(e.target.classList.contains("cart")) {
-				
+				location.href='/today_meal/product/select?rno=' + e.target.getAttribute("data-review-no");
 			} else if(e.target.classList.contains("delete")) {
 				deleteButtonClickEventHandler(e.target);
 			}

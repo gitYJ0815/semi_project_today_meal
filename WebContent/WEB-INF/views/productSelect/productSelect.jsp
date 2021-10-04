@@ -47,6 +47,14 @@
     	<img src="<%= request.getContextPath() %>/resources/images/productSelect/plusButton.png">
 	</div>
 	<div id="optSelect" style="width: 370px;">
+	<c:forEach var="option" items="${ orderBasket.optionBasketList }">
+	<c:if test="${ option.optionQty > 0 }">
+	<div class="optL">
+		<div>${ option.optionName } * ${ option.optionQty }개</div>
+		<div>${ option.optionPrice * option.optionQty }원</div>
+	</div>
+	</c:if>
+	</c:forEach>
 	</div>
 </div>
 
@@ -64,7 +72,7 @@
 
 <div id="priceInfo">
     <span id="totalPrice">총 상품금액 : </span>
-    <span id="visiblePrice">${ orderBasket.productPrice }</span>원
+    <span id="visiblePrice">${ orderBasket.total == 0 ? orderBasket.productPrice : orderBasket.total}</span>원
 </div>
 
 
@@ -77,6 +85,17 @@
 	<input type="hidden" name="productQty">
 	<input type="hidden" name="delivery">
 	<div id="dynamicBox">
+	<c:set var="limCnt" value="0"></c:set>
+	<c:forEach var="option" items="${ orderBasket.optionBasketList }">
+	<c:if test="${ option.optionQty > 0 }">
+		<input type="hidden" name="optionName${ limCnt }" value="${ option.optionName }">
+		<input type="hidden" name="optionQty${ limCnt }" value="${ option.optionQty }">
+		<input type="hidden" name="optionPrice${ limCnt }" value="${ option.optionPrice }">
+		<input type="hidden" name="optCalcPrice${ limCnt }" value="${ option.optionPrice * option.optionQty }">
+		<c:set var="limCnt" value="${ limCnt+1 }"/>
+	</c:if>
+	</c:forEach>
+	<input type="hidden" name="limCnt" value="${ limCnt }">
 	</div>
 	<button id="purchaseBtn">결제하기</button>
 	</form>
@@ -100,7 +119,7 @@
                 <span class="opt1_1">${ option.optionName }</span>
                 <span>
                 	{ <fmt:formatNumber value="${ option.optionPrice }" groupingUsed="true"/>원 }
-                	수량 : <input class="opInputNum" type="number" id="optId${status.index }" name="option${status.index }" min="0" max="99">
+                	수량 : <input class="opInputNum" type="number" id="optId${status.index }" name="option${status.index }" min="0" max="99" <c:if test="${ option.optionQty != 0 }">value=${ option.optionQty }</c:if>>
                 </span>
             </div>
         </c:forEach>

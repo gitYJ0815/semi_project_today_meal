@@ -58,7 +58,7 @@
 							</div>
 							<div class="button_area">
 								<div>
-									<button type="button" class="green_button cart" <c:if test="${ !like.review.status }">disabled</c:if>>구매하기</button>
+									<button type="button" class="green_button cart" data-review-no=${ like.review.rno } <c:if test="${ !like.review.status }">disabled</c:if>>구매하기</button>
 									<button type="button" class="green_button delete" data-like-no=${ like.lno }>삭제하기</button>
 								</div>
 							</div>
