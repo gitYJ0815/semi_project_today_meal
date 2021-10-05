@@ -5,7 +5,6 @@
 		SELECT 
 		        REVIEW_INFORMATION.REVIEW_NO
 		      , LIKE_NO
-		      , REVIEW_NO
 		      , ORDER_SUM
 		      , PRODUCT_IMG
 		      , PRODUCT_NAME
