@@ -16,7 +16,9 @@
 
 ### 링크
 [ERD](https://www.erdcloud.com/d/Pmk7rgYc7SgbgoeJJ) <br>
-[피그마](https://www.figma.com/file/2TryVHEbmxdu4EdGAwIfHb/%EC%83%98%ED%94%8C?node-id=0%3A1)
+[피그마](https://www.figma.com/file/2TryVHEbmxdu4EdGAwIfHb/%EC%83%98%ED%94%8C?node-id=0%3A1) <br>
+[노션](https://www.notion.so/3-414a8a50c9cb49348862cc0417fab4ff)
+
 
 ### 구현 기능
 + 마이페이지 <br><br>
