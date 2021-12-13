@@ -14,6 +14,9 @@
 ### 프로젝트 시 활용해본 대표 기술
           Servlet / jQuery / Ajax
 
+### 링크
+[링크](https://www.erdcloud.com/d/Pmk7rgYc7SgbgoeJJ)
+
 ### 구현 기능
 + 마이페이지 <br><br>
 ![image](https://user-images.githubusercontent.com/83938898/145149409-77422e54-a9d9-4d79-a80b-d3a9a7287a38.png)
