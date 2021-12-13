@@ -15,7 +15,8 @@
           Servlet / jQuery / Ajax
 
 ### 링크
-[링크](https://www.erdcloud.com/d/Pmk7rgYc7SgbgoeJJ)
+[ERD](https://www.erdcloud.com/d/Pmk7rgYc7SgbgoeJJ)
+[피그마](https://www.figma.com/file/2TryVHEbmxdu4EdGAwIfHb/%EC%83%98%ED%94%8C?node-id=0%3A1)
 
 ### 구현 기능
 + 마이페이지 <br><br>
